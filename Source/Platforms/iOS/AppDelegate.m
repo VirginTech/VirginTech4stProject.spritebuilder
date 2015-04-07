@@ -29,6 +29,7 @@
 #import "CCBuilderReader.h"
 
 #import "TitleScene.h"
+#import "GameManager.h"
 
 @implementation AppController
 
@@ -61,6 +62,18 @@
 
 - (CCScene*) startScene
 {
+    //デバイス登録
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    if(screenBounds.size.height==568 || screenBounds.size.width==568){ //iPhone5,6 (568,320px)
+        [GameManager setDevice:1];
+    }else if(screenBounds.size.height==480 || screenBounds.size.width==480){ //iPhone4 (480,320px)
+        [GameManager setDevice:2];
+    }else if(screenBounds.size.height==1024 || screenBounds.size.width==1024){ //iPad2 (1024,768px)
+        [GameManager setDevice:3];
+    }else{
+        [GameManager setDevice:0];
+    }
+    
     //return [CCBReader loadAsScene:@"MainScene"];
     return [TitleScene scene];
 }

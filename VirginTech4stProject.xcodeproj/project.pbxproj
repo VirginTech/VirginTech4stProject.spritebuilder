@@ -94,6 +94,14 @@
 		BC5399DA1A44DCC90063F482 /* GLActivityKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC5399D51A44DCC90063F482 /* GLActivityKit.framework */; };
 		BC5399DB1A44DCC90063F482 /* JavaFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC5399D61A44DCC90063F482 /* JavaFoundation.framework */; };
 		BC5399DC1A44DCC90063F482 /* JavaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC5399D71A44DCC90063F482 /* JavaKit.framework */; };
+		CF7CC4C81AD377F700D16EF9 /* Ball.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7CC4C51AD377F700D16EF9 /* Ball.m */; };
+		CF7CC4C91AD377F700D16EF9 /* Ground.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7CC4C71AD377F700D16EF9 /* Ground.m */; };
+		CF7CC4CC1AD385F200D16EF9 /* Pin.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7CC4CB1AD385F200D16EF9 /* Pin.m */; };
+		CF7CC4CF1AD3939000D16EF9 /* InitManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7CC4CE1AD3939000D16EF9 /* InitManager.m */; };
+		CF7CC4D21AD3BF2A00D16EF9 /* Corner.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7CC4D11AD3BF2A00D16EF9 /* Corner.m */; };
+		CF7CC4D51AD3DF0E00D16EF9 /* Wall.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7CC4D41AD3DF0E00D16EF9 /* Wall.m */; };
+		CF7CC4D81AD3E23000D16EF9 /* Piston.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7CC4D71AD3E23000D16EF9 /* Piston.m */; };
+		CF7CC4DC1AD3E7C300D16EF9 /* GameManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7CC4DB1AD3E7C300D16EF9 /* GameManager.m */; };
 		CFAF84F71AD0D670009FB98F /* TitleScene.m in Sources */ = {isa = PBXBuildFile; fileRef = CFAF84F61AD0D670009FB98F /* TitleScene.m */; };
 		CFAF84FC1AD0D738009FB98F /* StageScene.m in Sources */ = {isa = PBXBuildFile; fileRef = CFAF84FB1AD0D738009FB98F /* StageScene.m */; };
 /* End PBXBuildFile section */
@@ -214,6 +222,22 @@
 		BC5399D51A44DCC90063F482 /* GLActivityKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLActivityKit.framework; path = "../../../../Library/Application Support/Developer/Shared/Xcode/Platforms/Android.platform/Developer/SDKs/SBAndroid.sdk/System/Library/Frameworks/GLActivityKit.framework"; sourceTree = "<group>"; };
 		BC5399D61A44DCC90063F482 /* JavaFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaFoundation.framework; path = "../../../../Library/Application Support/Developer/Shared/Xcode/Platforms/Android.platform/Developer/SDKs/SBAndroid.sdk/System/Library/Frameworks/JavaFoundation.framework"; sourceTree = "<group>"; };
 		BC5399D71A44DCC90063F482 /* JavaKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaKit.framework; path = "../../../../Library/Application Support/Developer/Shared/Xcode/Platforms/Android.platform/Developer/SDKs/SBAndroid.sdk/System/Library/Frameworks/JavaKit.framework"; sourceTree = "<group>"; };
+		CF7CC4C41AD377F700D16EF9 /* Ball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ball.h; sourceTree = "<group>"; };
+		CF7CC4C51AD377F700D16EF9 /* Ball.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ball.m; sourceTree = "<group>"; };
+		CF7CC4C61AD377F700D16EF9 /* Ground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ground.h; sourceTree = "<group>"; };
+		CF7CC4C71AD377F700D16EF9 /* Ground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ground.m; sourceTree = "<group>"; };
+		CF7CC4CA1AD385F200D16EF9 /* Pin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pin.h; sourceTree = "<group>"; };
+		CF7CC4CB1AD385F200D16EF9 /* Pin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pin.m; sourceTree = "<group>"; };
+		CF7CC4CD1AD3939000D16EF9 /* InitManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitManager.h; sourceTree = "<group>"; };
+		CF7CC4CE1AD3939000D16EF9 /* InitManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitManager.m; sourceTree = "<group>"; };
+		CF7CC4D01AD3BF2A00D16EF9 /* Corner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Corner.h; sourceTree = "<group>"; };
+		CF7CC4D11AD3BF2A00D16EF9 /* Corner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Corner.m; sourceTree = "<group>"; };
+		CF7CC4D31AD3DF0E00D16EF9 /* Wall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wall.h; sourceTree = "<group>"; };
+		CF7CC4D41AD3DF0E00D16EF9 /* Wall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Wall.m; sourceTree = "<group>"; };
+		CF7CC4D61AD3E23000D16EF9 /* Piston.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Piston.h; sourceTree = "<group>"; };
+		CF7CC4D71AD3E23000D16EF9 /* Piston.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Piston.m; sourceTree = "<group>"; };
+		CF7CC4DA1AD3E7C300D16EF9 /* GameManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameManager.h; sourceTree = "<group>"; };
+		CF7CC4DB1AD3E7C300D16EF9 /* GameManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameManager.m; sourceTree = "<group>"; };
 		CFAF84F51AD0D670009FB98F /* TitleScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleScene.h; sourceTree = "<group>"; };
 		CFAF84F61AD0D670009FB98F /* TitleScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleScene.m; sourceTree = "<group>"; };
 		CFAF84FA1AD0D738009FB98F /* StageScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StageScene.h; sourceTree = "<group>"; };
@@ -449,6 +473,8 @@
 				CFAF84F61AD0D670009FB98F /* TitleScene.m */,
 				CFAF84FA1AD0D738009FB98F /* StageScene.h */,
 				CFAF84FB1AD0D738009FB98F /* StageScene.m */,
+				CF7CC4D91AD3E79A00D16EF9 /* Manager */,
+				CF7CC4C11AD377CE00D16EF9 /* Object */,
 				D352B48019EC608A00829775 /* MetalShaders */,
 			);
 			name = Source;
@@ -547,6 +573,36 @@
 				B73789861807631A0076A88C /* Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CF7CC4C11AD377CE00D16EF9 /* Object */ = {
+			isa = PBXGroup;
+			children = (
+				CF7CC4C41AD377F700D16EF9 /* Ball.h */,
+				CF7CC4C51AD377F700D16EF9 /* Ball.m */,
+				CF7CC4C61AD377F700D16EF9 /* Ground.h */,
+				CF7CC4C71AD377F700D16EF9 /* Ground.m */,
+				CF7CC4CA1AD385F200D16EF9 /* Pin.h */,
+				CF7CC4CB1AD385F200D16EF9 /* Pin.m */,
+				CF7CC4D01AD3BF2A00D16EF9 /* Corner.h */,
+				CF7CC4D11AD3BF2A00D16EF9 /* Corner.m */,
+				CF7CC4D31AD3DF0E00D16EF9 /* Wall.h */,
+				CF7CC4D41AD3DF0E00D16EF9 /* Wall.m */,
+				CF7CC4D61AD3E23000D16EF9 /* Piston.h */,
+				CF7CC4D71AD3E23000D16EF9 /* Piston.m */,
+			);
+			name = Object;
+			sourceTree = "<group>";
+		};
+		CF7CC4D91AD3E79A00D16EF9 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				CF7CC4CD1AD3939000D16EF9 /* InitManager.h */,
+				CF7CC4CE1AD3939000D16EF9 /* InitManager.m */,
+				CF7CC4DA1AD3E7C300D16EF9 /* GameManager.h */,
+				CF7CC4DB1AD3E7C300D16EF9 /* GameManager.m */,
+			);
+			name = Manager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -826,11 +882,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF7CC4D81AD3E23000D16EF9 /* Piston.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
+				CF7CC4CF1AD3939000D16EF9 /* InitManager.m in Sources */,
 				7A046D8C19E8A20E004C4763 /* MainScene.m in Sources */,
+				CF7CC4D51AD3DF0E00D16EF9 /* Wall.m in Sources */,
+				CF7CC4C81AD377F700D16EF9 /* Ball.m in Sources */,
+				CF7CC4D21AD3BF2A00D16EF9 /* Corner.m in Sources */,
 				5B121038197487F2004C1E1D /* AppDelegate.m in Sources */,
 				CFAF84F71AD0D670009FB98F /* TitleScene.m in Sources */,
+				CF7CC4DC1AD3E7C300D16EF9 /* GameManager.m in Sources */,
 				CFAF84FC1AD0D738009FB98F /* StageScene.m in Sources */,
+				CF7CC4C91AD377F700D16EF9 /* Ground.m in Sources */,
+				CF7CC4CC1AD385F200D16EF9 /* Pin.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
