@@ -6,6 +6,7 @@
 //  Copyright 2015年 Apportable. All rights reserved.
 //
 
+#import <CoreMotion/CoreMotion.h>
 #import "StageScene.h"
 #import "TitleScene.h"
 #import "Ball.h"
@@ -16,11 +17,13 @@
 #import "Wall.h"
 #import "Piston.h"
 #import "GameManager.h"
+#import "Basket.h"
 
 @implementation StageScene
 
 CGSize winSize;
 
+CMMotionManager *motionManager;
 CCPhysicsNode* physicWorld;
 
 Ball* ball;
@@ -29,6 +32,7 @@ Corner* corner;
 Pin* pin;
 Wall* wall;
 Piston* piston;
+Basket* basket;
 
 int ballTimingCnt;
 
@@ -103,12 +107,31 @@ int ballTimingCnt;
         [physicWorld addChild:pin];
     }
 
+    //バスケット生成
+    basket=[Basket createBasket:ccp(winSize.width/2,70)];
+    [physicWorld addChild:basket];
+    
     //ボール生成
     ball=[Ball createBall:ccp(0,0)];
     ball.position=ccp(winSize.width-(ball.contentSize.width*ball.scale)/2,winSize.height/2-50);
     [physicWorld addChild:ball];
 
+    //ボール発射スケジュール
     [self schedule:@selector(ball_Launch_Schedule:)interval:0.01];
+    
+    //ジャイロセンサー
+    CMMotionManager *manager = [[CMMotionManager alloc] init];
+    motionManager = manager;
+    motionManager.deviceMotionUpdateInterval = 1.0 / 30.0;
+    
+    NSOperationQueue *queueMotion = [[NSOperationQueue alloc] init];
+    [motionManager startDeviceMotionUpdatesToQueue:queueMotion
+                                       withHandler:^(CMDeviceMotion *data, NSError *error) {
+                                           dispatch_async(dispatch_get_main_queue(), ^{
+                                               [self moveBasket:data.gravity];
+                                           });
+                                       }];
+
 }
 
 - (void)onExit
@@ -117,13 +140,30 @@ int ballTimingCnt;
     [super onExit];
 }
 
+- (void)moveBasket: (CMAcceleration)gravity
+{
+    int adjustValue = 20;
+    float gravityX = gravity.x * adjustValue;
+    //float gravityY = gravity.y * adjustValue;
+    
+    CGPoint tmpPos=ccpAdd(basket.position,ccp(gravityX,0.0));
+    if(tmpPos.x>basket.contentSize.width/2 && tmpPos.x<winSize.width-basket.contentSize.width/2)
+    {
+        //タイヤ回転
+        [basket tire_Rotation:gravityX*5];
+        //バスケット移動
+        basket.position = tmpPos;
+        //[basket.physicsBody applyForce:ccpAdd(basket.position,ccp(gravityX,0.0))];
+    }
+}
+
 -(void)ball_Launch_Schedule:(CCTime)dt
 {
     ballTimingCnt++;
     
     if(ballTimingCnt>300){
         if(piston.position.y<winSize.height/2){
-            piston.position=ccp(piston.position.x,piston.position.y+7.0);
+            piston.position=ccp(piston.position.x,piston.position.y+6.5);
         }else{
             ballTimingCnt=0;
             //下降

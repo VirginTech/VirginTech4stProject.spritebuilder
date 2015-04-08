@@ -94,6 +94,8 @@
 		BC5399DA1A44DCC90063F482 /* GLActivityKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC5399D51A44DCC90063F482 /* GLActivityKit.framework */; };
 		BC5399DB1A44DCC90063F482 /* JavaFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC5399D61A44DCC90063F482 /* JavaFoundation.framework */; };
 		BC5399DC1A44DCC90063F482 /* JavaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC5399D71A44DCC90063F482 /* JavaKit.framework */; };
+		CF3635271AD4C17B00EFA58D /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF3635261AD4C17B00EFA58D /* CoreMotion.framework */; };
+		CF5C24B81AD4BF7F00390A50 /* Basket.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5C24B71AD4BF7F00390A50 /* Basket.m */; };
 		CF7CC4C81AD377F700D16EF9 /* Ball.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7CC4C51AD377F700D16EF9 /* Ball.m */; };
 		CF7CC4C91AD377F700D16EF9 /* Ground.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7CC4C71AD377F700D16EF9 /* Ground.m */; };
 		CF7CC4CC1AD385F200D16EF9 /* Pin.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7CC4CB1AD385F200D16EF9 /* Pin.m */; };
@@ -222,6 +224,9 @@
 		BC5399D51A44DCC90063F482 /* GLActivityKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLActivityKit.framework; path = "../../../../Library/Application Support/Developer/Shared/Xcode/Platforms/Android.platform/Developer/SDKs/SBAndroid.sdk/System/Library/Frameworks/GLActivityKit.framework"; sourceTree = "<group>"; };
 		BC5399D61A44DCC90063F482 /* JavaFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaFoundation.framework; path = "../../../../Library/Application Support/Developer/Shared/Xcode/Platforms/Android.platform/Developer/SDKs/SBAndroid.sdk/System/Library/Frameworks/JavaFoundation.framework"; sourceTree = "<group>"; };
 		BC5399D71A44DCC90063F482 /* JavaKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaKit.framework; path = "../../../../Library/Application Support/Developer/Shared/Xcode/Platforms/Android.platform/Developer/SDKs/SBAndroid.sdk/System/Library/Frameworks/JavaKit.framework"; sourceTree = "<group>"; };
+		CF3635261AD4C17B00EFA58D /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		CF5C24B61AD4BF7F00390A50 /* Basket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Basket.h; sourceTree = "<group>"; };
+		CF5C24B71AD4BF7F00390A50 /* Basket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Basket.m; sourceTree = "<group>"; };
 		CF7CC4C41AD377F700D16EF9 /* Ball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ball.h; sourceTree = "<group>"; };
 		CF7CC4C51AD377F700D16EF9 /* Ball.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ball.m; sourceTree = "<group>"; };
 		CF7CC4C61AD377F700D16EF9 /* Ground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ground.h; sourceTree = "<group>"; };
@@ -286,6 +291,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF3635271AD4C17B00EFA58D /* CoreMotion.framework in Frameworks */,
 				7A97911819E631CD001FFC4D /* libcocos2d.a in Frameworks */,
 				8392007A18EE8E3300B6C429 /* GLKit.framework in Frameworks */,
 				B77F1B3217B978D7009739AE /* QuartzCore.framework in Frameworks */,
@@ -526,6 +532,7 @@
 		B77F1B3017B978D7009739AE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CF3635261AD4C17B00EFA58D /* CoreMotion.framework */,
 				BC5399D31A44DCC90063F482 /* AndroidKit.framework */,
 				BC5399D41A44DCC90063F482 /* CoreJava.framework */,
 				BC5399D51A44DCC90063F482 /* GLActivityKit.framework */,
@@ -590,6 +597,8 @@
 				CF7CC4D41AD3DF0E00D16EF9 /* Wall.m */,
 				CF7CC4D61AD3E23000D16EF9 /* Piston.h */,
 				CF7CC4D71AD3E23000D16EF9 /* Piston.m */,
+				CF5C24B61AD4BF7F00390A50 /* Basket.h */,
+				CF5C24B71AD4BF7F00390A50 /* Basket.m */,
 			);
 			name = Object;
 			sourceTree = "<group>";
@@ -887,6 +896,7 @@
 				CF7CC4CF1AD3939000D16EF9 /* InitManager.m in Sources */,
 				7A046D8C19E8A20E004C4763 /* MainScene.m in Sources */,
 				CF7CC4D51AD3DF0E00D16EF9 /* Wall.m in Sources */,
+				CF5C24B81AD4BF7F00390A50 /* Basket.m in Sources */,
 				CF7CC4C81AD377F700D16EF9 /* Ball.m in Sources */,
 				CF7CC4D21AD3BF2A00D16EF9 /* Corner.m in Sources */,
 				5B121038197487F2004C1E1D /* AppDelegate.m in Sources */,

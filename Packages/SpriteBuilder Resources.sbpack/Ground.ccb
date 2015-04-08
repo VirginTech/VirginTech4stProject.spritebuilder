@@ -68,7 +68,7 @@
 			<key>dynamic</key>
 			<false/>
 			<key>elasticity</key>
-			<real>0.5</real>
+			<real>0.60000002384185791</real>
 			<key>friction</key>
 			<real>0.30000001192092896</real>
 			<key>points</key>
@@ -82,11 +82,11 @@
 					<real>64</real>
 				</array>
 				<array>
-					<real>2048</real>
+					<real>500</real>
 					<real>64</real>
 				</array>
 				<array>
-					<real>2048</real>
+					<real>500</real>
 					<real>0.0</real>
 				</array>
 			</array>
@@ -94,11 +94,11 @@
 			<array>
 				<array>
 					<array>
-						<real>2048</real>
+						<real>500</real>
 						<real>0.0</real>
 					</array>
 					<array>
-						<real>2048</real>
+						<real>500</real>
 						<real>64</real>
 					</array>
 					<array>

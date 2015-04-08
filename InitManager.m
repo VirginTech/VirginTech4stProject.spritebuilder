@@ -24,18 +24,24 @@ CGSize winSize;
     int xOff=0;
     int yOff=0;
     int row;
+    int col;
     
     if([GameManager getDevice]==3){//iPad
-        sPoint=ccp(25.0,winSize.height*0.90);
+        sPoint=ccp(5.0,winSize.height*0.90);
+        col=7;
+    }else if([GameManager getDevice]==2){//iPhone4
+        sPoint=ccp(-30.0,winSize.height*0.90);
+        col=7;
     }else{
-        sPoint=ccp(0.0,winSize.height*0.90);
+        sPoint=ccp(-30.0,winSize.height*0.90);
+        col=8;
     }
     
-    for(int i=0;i<8;i++)
+    for(int i=0;i<col;i++)
     {
         yOff=yOff-40;
         if(i%2==0){
-            xOff=20;
+            xOff=25;
             row=5;
         }else{
             xOff=0;
@@ -43,7 +49,7 @@ CGSize winSize;
         }
         for(int j=0;j<row;j++)
         {
-            xOff=xOff+40;
+            xOff=xOff+50;
             pos=ccp(sPoint.x+xOff,sPoint.y+yOff);
             value=[NSValue valueWithCGPoint:pos];
             [pinArray addObject:value];
