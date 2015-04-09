@@ -9,9 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-@interface Ball : CCSprite {
-    
+@interface Ball : CCSprite
+{
+    bool stateFlg;
 }
+
+@property bool stateFlg;
 
 +(id)createBall:(CGPoint)pos;
 

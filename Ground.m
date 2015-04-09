@@ -13,11 +13,14 @@
 
 -(id)initWithGround:(CGPoint)pos
 {
-    self=(id)[CCBReader load:@"Ground"];
-    self.position=pos;
-    self.rotation=0.0;
-    self.scale=1.0;
-    
+    if(self=[super init]){
+
+        self=(id)[CCBReader load:@"Ground"];
+        self.position=pos;
+        self.rotation=0.0;
+        self.scale=1.0;
+        self.physicsBody.collisionType = @"ground";
+    }
     return self;
 }
 

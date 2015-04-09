@@ -24,17 +24,25 @@ CGSize winSize;
     int xOff=0;
     int yOff=0;
     int row;
+    int row1;
+    int row2;
     int col;
     
     if([GameManager getDevice]==3){//iPad
         sPoint=ccp(5.0,winSize.height*0.90);
         col=7;
+        row1=5;
+        row2=6;
     }else if([GameManager getDevice]==2){//iPhone4
-        sPoint=ccp(-30.0,winSize.height*0.90);
+        sPoint=ccp(-10.0,winSize.height*0.90);
         col=7;
+        row1=4;
+        row2=5;
     }else{
-        sPoint=ccp(-30.0,winSize.height*0.90);
+        sPoint=ccp(-10.0,winSize.height*0.90);
         col=8;
+        row1=4;
+        row2=5;
     }
     
     for(int i=0;i<col;i++)
@@ -42,10 +50,10 @@ CGSize winSize;
         yOff=yOff-40;
         if(i%2==0){
             xOff=25;
-            row=5;
+            row=row1;
         }else{
             xOff=0;
-            row=6;
+            row=row2;
         }
         for(int j=0;j<row;j++)
         {

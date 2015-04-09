@@ -13,10 +13,12 @@
 
 -(id)initWithPiston:(CGPoint)pos
 {
-    self=(id)[CCBReader load:@"Piston"];
-    self.position=pos;
-    self.scale=1.0;
-    
+    if(self=[super init]){
+
+        self=(id)[CCBReader load:@"Piston"];
+        self.position=pos;
+        self.scale=1.0;
+    }
     return self;
 }
 

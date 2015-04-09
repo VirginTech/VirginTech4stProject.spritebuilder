@@ -11,12 +11,19 @@
 
 @implementation Ball
 
+@synthesize stateFlg;
+
 -(id)initWithBall:(CGPoint)pos
 {
-    self=(id)[CCBReader load:@"Ball"];
-    self.position=pos;
-    self.scale=0.3;
+    if(self=[super init]){
+        
+        self=(id)[CCBReader load:@"Ball"];
+        self.position=pos;
+        self.scale=0.3;
+        self.physicsBody.collisionType = @"ball";
     
+        stateFlg=true;
+    }
     return self;
 }
 

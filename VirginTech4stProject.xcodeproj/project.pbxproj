@@ -95,6 +95,7 @@
 		BC5399DB1A44DCC90063F482 /* JavaFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC5399D61A44DCC90063F482 /* JavaFoundation.framework */; };
 		BC5399DC1A44DCC90063F482 /* JavaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC5399D71A44DCC90063F482 /* JavaKit.framework */; };
 		CF3635271AD4C17B00EFA58D /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF3635261AD4C17B00EFA58D /* CoreMotion.framework */; };
+		CF51C7B91AD66EDF0024AC6B /* Information.m in Sources */ = {isa = PBXBuildFile; fileRef = CF51C7B81AD66EDF0024AC6B /* Information.m */; };
 		CF5C24B81AD4BF7F00390A50 /* Basket.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5C24B71AD4BF7F00390A50 /* Basket.m */; };
 		CF7CC4C81AD377F700D16EF9 /* Ball.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7CC4C51AD377F700D16EF9 /* Ball.m */; };
 		CF7CC4C91AD377F700D16EF9 /* Ground.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7CC4C71AD377F700D16EF9 /* Ground.m */; };
@@ -225,6 +226,8 @@
 		BC5399D61A44DCC90063F482 /* JavaFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaFoundation.framework; path = "../../../../Library/Application Support/Developer/Shared/Xcode/Platforms/Android.platform/Developer/SDKs/SBAndroid.sdk/System/Library/Frameworks/JavaFoundation.framework"; sourceTree = "<group>"; };
 		BC5399D71A44DCC90063F482 /* JavaKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaKit.framework; path = "../../../../Library/Application Support/Developer/Shared/Xcode/Platforms/Android.platform/Developer/SDKs/SBAndroid.sdk/System/Library/Frameworks/JavaKit.framework"; sourceTree = "<group>"; };
 		CF3635261AD4C17B00EFA58D /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		CF51C7B71AD66EDF0024AC6B /* Information.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Information.h; sourceTree = "<group>"; };
+		CF51C7B81AD66EDF0024AC6B /* Information.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Information.m; sourceTree = "<group>"; };
 		CF5C24B61AD4BF7F00390A50 /* Basket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Basket.h; sourceTree = "<group>"; };
 		CF5C24B71AD4BF7F00390A50 /* Basket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Basket.m; sourceTree = "<group>"; };
 		CF7CC4C41AD377F700D16EF9 /* Ball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ball.h; sourceTree = "<group>"; };
@@ -479,6 +482,7 @@
 				CFAF84F61AD0D670009FB98F /* TitleScene.m */,
 				CFAF84FA1AD0D738009FB98F /* StageScene.h */,
 				CFAF84FB1AD0D738009FB98F /* StageScene.m */,
+				CF51C7B41AD66EBE0024AC6B /* Layer */,
 				CF7CC4D91AD3E79A00D16EF9 /* Manager */,
 				CF7CC4C11AD377CE00D16EF9 /* Object */,
 				D352B48019EC608A00829775 /* MetalShaders */,
@@ -580,6 +584,15 @@
 				B73789861807631A0076A88C /* Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CF51C7B41AD66EBE0024AC6B /* Layer */ = {
+			isa = PBXGroup;
+			children = (
+				CF51C7B71AD66EDF0024AC6B /* Information.h */,
+				CF51C7B81AD66EDF0024AC6B /* Information.m */,
+			);
+			name = Layer;
 			sourceTree = "<group>";
 		};
 		CF7CC4C11AD377CE00D16EF9 /* Object */ = {
@@ -893,6 +906,7 @@
 			files = (
 				CF7CC4D81AD3E23000D16EF9 /* Piston.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
+				CF51C7B91AD66EDF0024AC6B /* Information.m in Sources */,
 				CF7CC4CF1AD3939000D16EF9 /* InitManager.m in Sources */,
 				7A046D8C19E8A20E004C4763 /* MainScene.m in Sources */,
 				CF7CC4D51AD3DF0E00D16EF9 /* Wall.m in Sources */,

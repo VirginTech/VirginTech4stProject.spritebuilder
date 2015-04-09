@@ -13,10 +13,12 @@
 
 -(id)initWithBasket:(CGPoint)pos
 {
-    self=(id)[CCBReader load:@"Basket"];
-    self.position=pos;
-    self.scale=1.0;
-    
+    if(self=[super init]){
+
+        self=(id)[CCBReader load:@"Basket"];
+        self.position=pos;
+        self.scale=1.0;
+    }
     return self;
 }
 

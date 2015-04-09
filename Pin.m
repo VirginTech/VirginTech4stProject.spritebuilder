@@ -13,10 +13,12 @@
 
 -(id)initWithPin:(CGPoint)pos
 {
-    self=(id)[CCBReader load:@"Pin"];
-    self.position=pos;
-    self.scale=0.2;
-    
+    if(self=[super init]){
+
+        self=(id)[CCBReader load:@"Pin"];
+        self.position=pos;
+        self.scale=0.2;
+    }
     return self;
 }
 
