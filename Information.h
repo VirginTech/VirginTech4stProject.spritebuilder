@@ -16,6 +16,8 @@
 + (Information *)scene;
 - (id)init;
 
-+(void)failureLabelUpdata;
++(void)scoreUpdata;
++(void)highScoreUpdata;
++(void)pointCountUpdata;
 
 @end

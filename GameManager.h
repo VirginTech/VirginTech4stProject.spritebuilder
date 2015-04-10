@@ -13,7 +13,16 @@
 +(int)getDevice;
 +(void)setDevice:(int)type;// 1:iPhone5,6 2:iPhone4 3:iPad2
 
-+(void)setFailurePoint:(int)point;
-+(int)getFailurePoint;
-    
++(void)setScore:(int)point;
++(int)getScore;
++(void)setPointCount:(int)count;
++(int)getPointCount;
++(void)setPause:(bool)flg;
++(bool)getPause;
+
++(void)initialize_Save_Data;
+
++(void)save_High_Score:(long)value;
++(long)load_High_Score;
+
 @end

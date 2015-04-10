@@ -18,6 +18,9 @@
         self=(id)[CCBReader load:@"Basket"];
         self.position=pos;
         self.scale=1.0;
+        
+        catch_point.physicsBody.collisionType=@"catch_point";
+        catch_point.physicsBody.sensor = TRUE;
     }
     return self;
 }

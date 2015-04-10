@@ -13,6 +13,7 @@
     
     CCSprite* tire1;//CCB定義
     CCSprite* tire2;//CCB定義
+    CCNode* catch_point;//CCB定義（キャッチ判定用）
 }
 
 +(id)createBasket:(CGPoint)pos;

@@ -19,6 +19,7 @@
 #import "GameManager.h"
 #import "Basket.h"
 #import "Information.h"
+#import "NaviLayer.h"
 
 @implementation StageScene
 
@@ -43,6 +44,8 @@ float force;
 NSMutableArray* ballArray;
 NSMutableArray* removeBallArray;
 
+NaviLayer* naviLayer;
+
 + (StageScene *)scene
 {
     return [[self alloc] init];
@@ -60,10 +63,12 @@ NSMutableArray* removeBallArray;
     ballTimingCnt=0;
     force=((arc4random()%41)+60)*0.1;
     ballArray=[[NSMutableArray alloc]init];
+    [GameManager setScore:0];
+    [GameManager setPause:false];
     
     //インフォメーションレイヤー
     Information* infoLayer=[[Information alloc]init];
-    [self addChild:infoLayer];
+    [self addChild:infoLayer z:1];
     
     CCButton* titleBtn=[CCButton buttonWithTitle:@"[タイトル]"];
     titleBtn.position=ccp(winSize.width-titleBtn.contentSize.width/2,titleBtn.contentSize.height/2+50);
@@ -176,7 +181,7 @@ NSMutableArray* removeBallArray;
     //float gravityY = gravity.y * adjustValue;
     
     CGPoint tmpPos=ccpAdd(basket.position,ccp(gravityX,0.0));
-    if(tmpPos.x>basket.contentSize.width/2 && tmpPos.x<winSize.width-basket.contentSize.width/2)
+    if(tmpPos.x>basket.contentSize.width/3 && tmpPos.x<winSize.width-basket.contentSize.width/3)
     {
         //タイヤ回転
         [basket tire_Rotation:gravityX*5];
@@ -188,6 +193,11 @@ NSMutableArray* removeBallArray;
 
 -(void)ball_Launch_Schedule:(CCTime)dt
 {
+    //ポーズ脱出
+    if([GameManager getPause]){
+        return;
+    }
+    
     //初期化
     removeBallArray=[[NSMutableArray alloc]init];
     
@@ -234,15 +244,44 @@ NSMutableArray* removeBallArray;
     }
 }
 
--(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair ground:(Ground*)ground ball:(Ball*)ball
+-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair catch_point:(Ground*)catch_point ball:(Ball*)ball
 {
-    if(ball.stateFlg){
-        ball.stateFlg=false;
-        //失敗点登録
-        [GameManager setFailurePoint:1];
-        [Information failureLabelUpdata];
+    [physicWorld removeChild:ball cleanup:YES];
+    [ballArray removeObject:ball];
+    
+    if(![GameManager getPause]){
+        [GameManager setScore:[GameManager getScore]+1];
+        [Information scoreUpdata];
     }
     return TRUE;
+}
+
+-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair ground:(Ground*)ground ball:(Ball*)ball
+{
+    if(![GameManager getPause]){
+        if(ball.stateFlg){
+            ball.stateFlg=false;
+            [GameManager setPointCount:[GameManager getPointCount]-1];
+            [Information pointCountUpdata];
+            
+            if([GameManager getPointCount]<=0){
+                [self gameEnd];
+            }
+        }
+    }
+    return TRUE;
+}
+
+-(void)gameEnd
+{
+    [GameManager setPause:true];
+    naviLayer=[[NaviLayer alloc]init];
+    [self addChild:naviLayer z:2];
+    //ハイスコア保存
+    if([GameManager load_High_Score]<[GameManager getScore]){
+        [GameManager save_High_Score:[GameManager getScore]];
+        [Information highScoreUpdata];
+    }
 }
 
 - (void)onTitltClicked:(id)sender
