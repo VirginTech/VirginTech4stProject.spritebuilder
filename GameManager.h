@@ -19,6 +19,8 @@
 +(int)getPointCount;
 +(void)setPause:(bool)flg;
 +(bool)getPause;
++(void)setStageLavel:(int)level;
++(int)getStageLevel;
 
 +(void)initialize_Save_Data;
 

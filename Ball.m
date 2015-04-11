@@ -22,7 +22,7 @@
         self.scale=0.3;
         self.physicsBody.collisionType = @"ball";
     
-        stateFlg=true;
+        stateFlg=false;
     }
     return self;
 }

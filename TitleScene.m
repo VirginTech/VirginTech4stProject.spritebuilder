@@ -52,6 +52,8 @@ CGSize winSize;
 
 - (void)onPlayClicked:(id)sender
 {
+    [GameManager setStageLavel:1];
+    [GameManager setScore:0];
     [[CCDirector sharedDirector] replaceScene:[StageScene scene]
                                withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
     

@@ -14,6 +14,7 @@ int deviceType;// 1:iPhone5,6 2:iPhone4 3:iPad2
 int scorePoint;//スコア
 int pointCount;//持ち点
 bool pauseFlg;//ポーズ
+int stageLavel;//現在ステージレヴェル
 
 //デバイス取得／登録
 +(void)setDevice:(int)type{
@@ -42,6 +43,13 @@ bool pauseFlg;//ポーズ
 }
 +(bool)getPause{
     return pauseFlg;
+}
+//現在ステージレヴェル
++(void)setStageLavel:(int)level{
+    stageLavel=level;
+}
++(int)getStageLevel{
+    return stageLavel;
 }
 
 //=======================

@@ -38,13 +38,22 @@ Wall* wall_m;
 Piston* piston;
 Basket* basket;
 
-int ballTimingCnt;
+int ballCount;//発射ボール数
+int ballTimingCnt;//ボール発射間隔
+int maxBallCount;//最大ボール数
+int doneBallCount;//処理済みボール数
+bool lastBallFlg;//最終ボール
 float force;
 
 NSMutableArray* ballArray;
 NSMutableArray* removeBallArray;
 
 NaviLayer* naviLayer;
+
+//デバッグラベル
+CCLabelTTF* maxBallCount_lbl;
+CCLabelTTF* ballCount_lbl;
+CCLabelTTF* doneBallCount_lbl;
 
 + (StageScene *)scene
 {
@@ -60,11 +69,14 @@ NaviLayer* naviLayer;
     winSize=[[CCDirector sharedDirector]viewSize];
     
     //初期化
+    maxBallCount=5;
+    doneBallCount=0;
+    ballCount=0;
     ballTimingCnt=0;
     force=((arc4random()%41)+60)*0.1;
     ballArray=[[NSMutableArray alloc]init];
-    [GameManager setScore:0];
     [GameManager setPause:false];
+    lastBallFlg=false;
     
     //インフォメーションレイヤー
     Information* infoLayer=[[Information alloc]init];
@@ -74,6 +86,23 @@ NaviLayer* naviLayer;
     titleBtn.position=ccp(winSize.width-titleBtn.contentSize.width/2,titleBtn.contentSize.height/2+50);
     [titleBtn setTarget:self selector:@selector(onTitltClicked:)];
     [self addChild:titleBtn];
+    
+    //デバッグラベル
+    maxBallCount_lbl=[CCLabelTTF labelWithString:[NSString stringWithFormat:
+                            @"MaxBallCount:%03d",maxBallCount] fontName:@"Verdana-Bold" fontSize:10];
+    maxBallCount_lbl.position=ccp(maxBallCount_lbl.contentSize.width/2,winSize.height-50);
+    [self addChild:maxBallCount_lbl z:1];
+
+    ballCount_lbl=[CCLabelTTF labelWithString:[NSString stringWithFormat:
+                                                  @"BallCount:%03d",ballCount] fontName:@"Verdana-Bold" fontSize:10];
+    ballCount_lbl.position=ccp(ballCount_lbl.contentSize.width/2,winSize.height-60);
+    [self addChild:ballCount_lbl z:1];
+
+    doneBallCount_lbl=[CCLabelTTF labelWithString:[NSString stringWithFormat:
+                                               @"DoneBallCount:%03d",doneBallCount] fontName:@"Verdana-Bold" fontSize:10];
+    doneBallCount_lbl.position=ccp(doneBallCount_lbl.contentSize.width/2,winSize.height-70);
+    [self addChild:doneBallCount_lbl z:1];
+
     
     return self;
 }
@@ -133,7 +162,7 @@ NaviLayer* naviLayer;
     
     //ピン生成
     CGPoint pos;
-    NSMutableArray* array=[InitManager init_Pin_Pattern:1];
+    NSMutableArray* array=[InitManager init_Pin_Pattern:[GameManager getStageLevel]];
     for(int i=0;i<array.count;i++){
         pos=[[array objectAtIndex:i]CGPointValue];
         pin=[Pin createPin:pos];
@@ -145,6 +174,8 @@ NaviLayer* naviLayer;
     [physicWorld addChild:basket];
     
     //ボール生成
+    ballCount++;
+    ballCount_lbl.string=[NSString stringWithFormat:@"BallCount:%03d",ballCount];
     ball=[Ball createBall:ccp(0,0)];
     ball.position=ccp(winSize.width-(ball.contentSize.width*ball.scale)/2,winSize.height/2-50);
     [physicWorld addChild:ball];
@@ -201,25 +232,49 @@ NaviLayer* naviLayer;
     //初期化
     removeBallArray=[[NSMutableArray alloc]init];
     
+    //ボール発射
     ballTimingCnt++;
-    if(ballTimingCnt>300){
-        if(piston.position.y<winSize.height/2){
-            piston.position=ccp(piston.position.x,piston.position.y+force);
-        }else{
-            ballTimingCnt=0;
-            force=((arc4random()%41)+60)*0.1;
-            //NSLog(@"Force=%f",force);
-            //下降
-            piston.position=ccp(piston.position.x,winSize.height/2-100);
-            //ボール生成
-            ball=[Ball createBall:ccp(0,0)];
-            ball.position=ccp(winSize.width-(ball.contentSize.width*ball.scale)/2,winSize.height/2-50);
-            [physicWorld addChild:ball];
-            //配列追加
-            [ballArray addObject:ball];
+    if(!lastBallFlg){
+        if(ballTimingCnt>300){
+            if(piston.position.y<winSize.height/2){
+                //ピストン上昇
+                piston.position=ccp(piston.position.x,piston.position.y+force);
+            }else{
+                //発射後TRUEにする
+                ball.stateFlg=true;
+                
+                ballTimingCnt=0;
+                force=((arc4random()%41)+60)*0.1;
+                //NSLog(@"Force=%f",force);
+                //下降
+                piston.position=ccp(piston.position.x,winSize.height/2-100);
+                //ボール生成
+                ballCount++;
+                if(ballCount<=maxBallCount){
+                    ballCount_lbl.string=[NSString stringWithFormat:@"BallCount:%03d",ballCount];
+                    ball=[Ball createBall:ccp(0,0)];
+                    ball.position=ccp(winSize.width-(ball.contentSize.width*ball.scale)/2,winSize.height/2-50);
+                    [physicWorld addChild:ball];
+                    //配列追加
+                    [ballArray addObject:ball];
+                }else{
+                    lastBallFlg=true;
+                }
+            }
         }
     }
-    
+    //ボール静止判定
+    for(Ball* _ball in ballArray){
+        if(_ball.stateFlg){
+            if(_ball.physicsBody.sleeping){
+                doneBallCount++;
+                doneBallCount_lbl.string=[NSString stringWithFormat:@"DoneBallCount:%03d",doneBallCount];
+                _ball.stateFlg=false;
+                //終了判定
+                [self isEnd];
+            }
+        }
+    }
     //画面外ボール判定
     [self ball_Screen_Out];
     //画面外ボール削除
@@ -229,8 +284,15 @@ NaviLayer* naviLayer;
 -(void)removeBall
 {
     for(Ball* _ball in removeBallArray){
+        if(_ball.stateFlg){
+            doneBallCount++;
+            doneBallCount_lbl.string=[NSString stringWithFormat:@"DoneBallCount:%03d",doneBallCount];
+        }
         [ballArray removeObject:_ball];
         [physicWorld removeChild:_ball cleanup:YES];
+        
+        //終了判定
+        [self isEnd];
     }
 }
 
@@ -246,13 +308,24 @@ NaviLayer* naviLayer;
 
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair catch_point:(Ground*)catch_point ball:(Ball*)ball
 {
+    if(![GameManager getPause]){
+        if(ball.stateFlg){
+            doneBallCount++;
+            doneBallCount_lbl.string=[NSString stringWithFormat:@"DoneBallCount:%03d",doneBallCount];
+            //[GameManager setScore:[GameManager getScore]+1];
+            //[Information scoreUpdata];
+        }
+    }
+    //スコアリング
+    [GameManager setScore:[GameManager getScore]+1];
+    [Information scoreUpdata];
+
     [physicWorld removeChild:ball cleanup:YES];
     [ballArray removeObject:ball];
     
-    if(![GameManager getPause]){
-        [GameManager setScore:[GameManager getScore]+1];
-        [Information scoreUpdata];
-    }
+    //終了判定
+    [self isEnd];
+    
     return TRUE;
 }
 
@@ -261,22 +334,42 @@ NaviLayer* naviLayer;
     if(![GameManager getPause]){
         if(ball.stateFlg){
             ball.stateFlg=false;
+            doneBallCount++;
+            doneBallCount_lbl.string=[NSString stringWithFormat:@"DoneBallCount:%03d",doneBallCount];
             [GameManager setPointCount:[GameManager getPointCount]-1];
             [Information pointCountUpdata];
             
-            if([GameManager getPointCount]<=0){
-                [self gameEnd];
-            }
+            //終了判定
+            [self isEnd];
         }
     }
     return TRUE;
 }
 
--(void)gameEnd
+-(void)isEnd
+{
+    //終了判定
+    if([GameManager getPointCount]<=0){//ゲームオーバー
+        [self gameEnd:false];
+    }else if(lastBallFlg && maxBallCount==doneBallCount){//ステージクリア
+        [self gameEnd:true];
+    }
+}
+
+-(void)gameEnd:(bool)flg
 {
     [GameManager setPause:true];
-    naviLayer=[[NaviLayer alloc]init];
-    [self addChild:naviLayer z:2];
+    
+    if(flg){//ステージクリア
+        //ネクストステージへ
+        [GameManager setStageLavel:[GameManager getStageLevel]+1];
+        [[CCDirector sharedDirector] replaceScene:[StageScene scene]
+                                   withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
+    }else{//ゲームオーバー
+        naviLayer=[[NaviLayer alloc]init];
+        [self addChild:naviLayer z:2];
+    }
+    
     //ハイスコア保存
     if([GameManager load_High_Score]<[GameManager getScore]){
         [GameManager save_High_Score:[GameManager getScore]];
