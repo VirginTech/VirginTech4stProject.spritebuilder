@@ -100,6 +100,7 @@
 		CF61D54C1AD786BD0062F223 /* info_default.plist in Resources */ = {isa = PBXBuildFile; fileRef = CF61D54A1AD786BD0062F223 /* info_default.plist */; };
 		CF61D54D1AD786BD0062F223 /* info_default.png in Resources */ = {isa = PBXBuildFile; fileRef = CF61D54B1AD786BD0062F223 /* info_default.png */; };
 		CF61D5501AD796B00062F223 /* NaviLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = CF61D54F1AD796B00062F223 /* NaviLayer.m */; };
+		CF6E24CB1ADA1F8900AA94D0 /* MsgLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6E24CA1ADA1F8900AA94D0 /* MsgLayer.m */; };
 		CF7CC4C81AD377F700D16EF9 /* Ball.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7CC4C51AD377F700D16EF9 /* Ball.m */; };
 		CF7CC4C91AD377F700D16EF9 /* Ground.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7CC4C71AD377F700D16EF9 /* Ground.m */; };
 		CF7CC4CC1AD385F200D16EF9 /* Pin.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7CC4CB1AD385F200D16EF9 /* Pin.m */; };
@@ -237,6 +238,8 @@
 		CF61D54B1AD786BD0062F223 /* info_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info_default.png; sourceTree = "<group>"; };
 		CF61D54E1AD796B00062F223 /* NaviLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NaviLayer.h; sourceTree = "<group>"; };
 		CF61D54F1AD796B00062F223 /* NaviLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NaviLayer.m; sourceTree = "<group>"; };
+		CF6E24C91ADA1F8900AA94D0 /* MsgLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgLayer.h; sourceTree = "<group>"; };
+		CF6E24CA1ADA1F8900AA94D0 /* MsgLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgLayer.m; sourceTree = "<group>"; };
 		CF7CC4C41AD377F700D16EF9 /* Ball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ball.h; sourceTree = "<group>"; };
 		CF7CC4C51AD377F700D16EF9 /* Ball.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ball.m; sourceTree = "<group>"; };
 		CF7CC4C61AD377F700D16EF9 /* Ground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ground.h; sourceTree = "<group>"; };
@@ -597,6 +600,8 @@
 		CF51C7B41AD66EBE0024AC6B /* Layer */ = {
 			isa = PBXGroup;
 			children = (
+				CF6E24C91ADA1F8900AA94D0 /* MsgLayer.h */,
+				CF6E24CA1ADA1F8900AA94D0 /* MsgLayer.m */,
 				CF51C7B71AD66EDF0024AC6B /* Information.h */,
 				CF51C7B81AD66EDF0024AC6B /* Information.m */,
 				CF61D54E1AD796B00062F223 /* NaviLayer.h */,
@@ -932,6 +937,7 @@
 				CF7CC4CF1AD3939000D16EF9 /* InitManager.m in Sources */,
 				7A046D8C19E8A20E004C4763 /* MainScene.m in Sources */,
 				CF7CC4D51AD3DF0E00D16EF9 /* Wall.m in Sources */,
+				CF6E24CB1ADA1F8900AA94D0 /* MsgLayer.m in Sources */,
 				CF5C24B81AD4BF7F00390A50 /* Basket.m in Sources */,
 				CF7CC4C81AD377F700D16EF9 /* Ball.m in Sources */,
 				CF7CC4D21AD3BF2A00D16EF9 /* Corner.m in Sources */,

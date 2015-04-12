@@ -20,6 +20,7 @@
 #import "Basket.h"
 #import "Information.h"
 #import "NaviLayer.h"
+#import "MsgLayer.h"
 
 @implementation StageScene
 
@@ -34,6 +35,7 @@ Corner* corner;
 Pin* pin;
 Wall* wall_r;
 Wall* wall_l;
+Wall* wall_u;
 Wall* wall_m;
 Piston* piston;
 Basket* basket;
@@ -86,6 +88,12 @@ CCLabelTTF* doneBallCount_lbl;
     titleBtn.position=ccp(winSize.width-titleBtn.contentSize.width/2,titleBtn.contentSize.height/2+50);
     [titleBtn setTarget:self selector:@selector(onTitltClicked:)];
     [self addChild:titleBtn];
+    
+    //開始メッセージ
+    MsgLayer* msg=[[MsgLayer alloc]initWithMsg:[NSString stringWithFormat:@"Lv.%d Start!",
+                                                [GameManager getStageLevel]] nextFlg:false];
+    [self addChild:msg z:2];
+    
     
     //デバッグラベル
     maxBallCount_lbl=[CCLabelTTF labelWithString:[NSString stringWithFormat:
@@ -155,6 +163,13 @@ CCLabelTTF* doneBallCount_lbl;
     wall_l.position=ccp(-(wall_l.contentSize.width*wall_l.scale)/2,winSize.height/2+30);
     [physicWorld addChild:wall_l];
     
+    //天井壁
+    wall_u=[Wall createWall:ccp(0,0)];
+    wall_u.scale=1.5;
+    wall_u.position=ccp(winSize.width/2,winSize.height+(wall_u.contentSize.width*wall_u.scale)/2);
+    wall_u.rotation=90;
+    [physicWorld addChild:wall_u];
+    
     //ピストン
     piston=[Piston createPiston:ccp(0,0)];
     piston.position=ccp(winSize.width-piston.contentSize.width/2,winSize.height/2-100);
@@ -182,7 +197,7 @@ CCLabelTTF* doneBallCount_lbl;
     [ballArray addObject:ball];
     
     //ボール発射スケジュール
-    [self schedule:@selector(ball_Launch_Schedule:)interval:0.01];
+    [self schedule:@selector(ball_Launch_Schedule:)interval:0.01 repeat:CCTimerRepeatForever delay:1.5];
     
     //ジャイロセンサー
     CMMotionManager *manager = [[CMMotionManager alloc] init];
@@ -362,9 +377,8 @@ CCLabelTTF* doneBallCount_lbl;
     
     if(flg){//ステージクリア
         //ネクストステージへ
-        [GameManager setStageLavel:[GameManager getStageLevel]+1];
-        [[CCDirector sharedDirector] replaceScene:[StageScene scene]
-                                   withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
+        MsgLayer* msg=[[MsgLayer alloc]initWithMsg:@"Good Job!" nextFlg:true];
+        [self addChild:msg z:2];
     }else{//ゲームオーバー
         naviLayer=[[NaviLayer alloc]init];
         [self addChild:naviLayer z:2];
