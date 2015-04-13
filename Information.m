@@ -43,7 +43,7 @@ CCLabelTTF* highscoreLabel;
     [self addChild:scoreLabel];
     
     //ハイスコアラベル
-    highscoreLabel=[CCLabelTTF labelWithString:[NSString stringWithFormat:@"HighScore:%05ld",
+    highscoreLabel=[CCLabelTTF labelWithString:[NSString stringWithFormat:@"HighScore:%05d",
                                     [GameManager load_High_Score]] fontName:@"Verdana-Bold" fontSize:15];
     highscoreLabel.position=ccp(winSize.width-highscoreLabel.contentSize.width/2,
                                                         winSize.height-highscoreLabel.contentSize.height/2);
@@ -88,7 +88,7 @@ CCLabelTTF* highscoreLabel;
 
 +(void)highScoreUpdata
 {
-    highscoreLabel.string=[NSString stringWithFormat:@"HighScore:%05ld",[GameManager load_High_Score]];
+    highscoreLabel.string=[NSString stringWithFormat:@"HighScore:%05d",[GameManager load_High_Score]];
 }
 
 - (void)dealloc

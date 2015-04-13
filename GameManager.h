@@ -24,7 +24,9 @@
 
 +(void)initialize_Save_Data;
 
-+(void)save_High_Score:(long)value;
-+(long)load_High_Score;
++(void)save_High_Score:(int)value;
++(int)load_High_Score;
++(void)save_Stage_Level:(int)value;
++(int)load_Stage_Level;
 
 @end

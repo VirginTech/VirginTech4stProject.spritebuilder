@@ -44,6 +44,11 @@ bool nextFlg;
 
 -(void)show_Message_Schedule:(CCTime)dt
 {
+    //ポーズ脱出
+    if([GameManager getPause]){
+        return;
+    }
+
     if(cnt<=20){
         msg.opacity+=0.05f;
     }else if(cnt>=30){

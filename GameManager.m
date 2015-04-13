@@ -63,12 +63,15 @@ int stageLavel;//現在ステージレヴェル
     if([dict valueForKey:@"highscore"]==nil){
         [self save_High_Score:0];
     }
+    if([dict valueForKey:@"stagelevel"]==nil){
+        [self save_Stage_Level:0];
+    }
 }
 
 //====================
 //ハイスコアの保存
 //====================
-+(void)save_High_Score:(long)value
++(void)save_High_Score:(int)value
 {
     NSUserDefaults  *userDefault=[NSUserDefaults standardUserDefaults];
     NSNumber* score=[NSNumber numberWithLong:value];
@@ -78,11 +81,30 @@ int stageLavel;//現在ステージレヴェル
 //====================
 //ハイスコアの取得
 //====================
-+(long)load_High_Score
++(int)load_High_Score
 {
     NSUserDefaults  *userDefault=[NSUserDefaults standardUserDefaults];
-    long score=[[userDefault objectForKey:@"highscore"]longValue];
+    int score=[[userDefault objectForKey:@"highscore"]intValue];
     return score;
+}
+//====================
+//レヴェルの保存
+//====================
++(void)save_Stage_Level:(int)value
+{
+    NSUserDefaults  *userDefault=[NSUserDefaults standardUserDefaults];
+    NSNumber* level=[NSNumber numberWithInt:value];
+    [userDefault setObject:level forKey:@"stagelevel"];
+    [userDefault synchronize];
+}
+//====================
+//レヴェルの取得
+//====================
++(int)load_Stage_Level
+{
+    NSUserDefaults  *userDefault=[NSUserDefaults standardUserDefaults];
+    int level=[[userDefault objectForKey:@"stagelevel"]intValue];
+    return level;
 }
 
 @end

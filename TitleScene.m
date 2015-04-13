@@ -46,7 +46,12 @@ CGSize winSize;
     startBtn.position=ccp(winSize.width/2,winSize.height/2-50);
     [startBtn setTarget:self selector:@selector(onPlayClicked:)];
     [self addChild:startBtn];
-    
+
+    CCButton* continueBtn=[CCButton buttonWithTitle:@"[コンティニュー]" fontName:@"Verdana-Bold" fontSize:15];
+    continueBtn.position=ccp(winSize.width/2,startBtn.position.y-25);
+    [continueBtn setTarget:self selector:@selector(onContinueClicked:)];
+    [self addChild:continueBtn];
+
     return self;
 }
 
@@ -54,6 +59,15 @@ CGSize winSize;
 {
     [GameManager setStageLavel:1];
     [GameManager setScore:0];
+    [[CCDirector sharedDirector] replaceScene:[StageScene scene]
+                               withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
+    
+}
+
+- (void)onContinueClicked:(id)sender
+{
+    [GameManager setStageLavel:[GameManager load_Stage_Level]+1];
+    [GameManager setScore:[GameManager load_High_Score]];
     [[CCDirector sharedDirector] replaceScene:[StageScene scene]
                                withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
     

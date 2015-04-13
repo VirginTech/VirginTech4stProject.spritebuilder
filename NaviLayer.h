@@ -9,9 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-@interface NaviLayer : CCScene {
-    
+@interface NaviLayer : CCScene
+{
+    CCLabelTTF* gameOverLabel;
 }
+
+@property CCLabelTTF* gameOverLabel;
 
 + (NaviLayer *)scene;
 - (id)init;

@@ -8,8 +8,12 @@
 
 #import "NaviLayer.h"
 #import "TitleScene.h"
+#import "GameManager.h"
+#import "StageScene.h"
 
 @implementation NaviLayer
+
+@synthesize gameOverLabel;
 
 CGSize winSize;
 CCNodeColor *background;
@@ -30,11 +34,20 @@ CCNodeColor *background;
     background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:0.7f]];
     [self addChild:background];
     
-    CCButton* titleButton=[CCButton buttonWithTitle:@"タイトル" fontName:@"Verdana-Bold" fontSize:20];
+    //ゲームオーバーラベル
+    gameOverLabel=[CCLabelTTF labelWithString:@"" fontName:@"Verdana-Bold" fontSize:30];
+    gameOverLabel.position=ccp(winSize.width/2,winSize.height/2);
+    [self addChild:gameOverLabel];
+    
+    CCButton* titleButton=[CCButton buttonWithTitle:@"[タイトル]" fontName:@"Verdana-Bold" fontSize:15];
     titleButton.position=ccp(winSize.width/2,winSize.height/2-50);
     [titleButton setTarget:self selector:@selector(onTitleClicked:)];
     [self addChild:titleButton];
     
+    CCButton* continueBtn=[CCButton buttonWithTitle:@"[コンティニュー]" fontName:@"Verdana-Bold" fontSize:15];
+    continueBtn.position=ccp(winSize.width/2,titleButton.position.y-25);
+    [continueBtn setTarget:self selector:@selector(onContinueClicked:)];
+    [self addChild:continueBtn];
     return self;
 }
 
@@ -42,6 +55,16 @@ CCNodeColor *background;
 {
     [[CCDirector sharedDirector] replaceScene:[TitleScene scene]
                                withTransition:[CCTransition transitionCrossFadeWithDuration:1.0]];
+}
+
+- (void)onContinueClicked:(id)sender
+{
+    [GameManager setPointCount:5];
+    [GameManager setStageLavel:[GameManager load_Stage_Level]+1];
+    [GameManager setScore:[GameManager load_High_Score]];
+    [[CCDirector sharedDirector] replaceScene:[StageScene scene]
+                               withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
+    
 }
 
 @end

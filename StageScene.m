@@ -44,13 +44,15 @@ int ballCount;//発射ボール数
 int ballTimingCnt;//ボール発射間隔
 int maxBallCount;//最大ボール数
 int doneBallCount;//処理済みボール数
-bool lastBallFlg;//最終ボール
-float force;
+bool lastBallFlg;//最終ボールフラグ
+float force;//ボール打ち上げフォース
 
 NSMutableArray* ballArray;
 NSMutableArray* removeBallArray;
 
 NaviLayer* naviLayer;
+CCButton* pauseBtn;
+CCButton* resumeBtn;
 
 //デバッグラベル
 CCLabelTTF* maxBallCount_lbl;
@@ -84,14 +86,27 @@ CCLabelTTF* doneBallCount_lbl;
     Information* infoLayer=[[Information alloc]init];
     [self addChild:infoLayer z:1];
     
-    CCButton* titleBtn=[CCButton buttonWithTitle:@"[タイトル]"];
-    titleBtn.position=ccp(winSize.width-titleBtn.contentSize.width/2,titleBtn.contentSize.height/2+50);
-    [titleBtn setTarget:self selector:@selector(onTitltClicked:)];
-    [self addChild:titleBtn];
+    //ポーズレイヤー
+    naviLayer=[[NaviLayer alloc]init];
+    [self addChild:naviLayer z:2];
+    naviLayer.visible=false;
+    
+    //ポーズボタン
+    pauseBtn=[CCButton buttonWithTitle:@"[ポーズ]"];
+    pauseBtn.position=ccp(winSize.width-pauseBtn.contentSize.width/2,pauseBtn.contentSize.height/2+50);
+    [pauseBtn setTarget:self selector:@selector(onPauseClicked:)];
+    [self addChild:pauseBtn z:3];
+    
+    //レジュームボタン
+    resumeBtn=[CCButton buttonWithTitle:@"[レジューム]"];
+    resumeBtn.position=ccp(winSize.width-resumeBtn.contentSize.width/2,resumeBtn.contentSize.height/2+50);
+    [resumeBtn setTarget:self selector:@selector(onResumeClicked:)];
+    [self addChild:resumeBtn z:3];
+    resumeBtn.visible=false;
     
     //開始メッセージ
     MsgLayer* msg=[[MsgLayer alloc]initWithMsg:[NSString stringWithFormat:@"Lv.%d Start!",
-                                                [GameManager getStageLevel]] nextFlg:false];
+                                                            [GameManager getStageLevel]] nextFlg:false];
     [self addChild:msg z:2];
     
     
@@ -132,6 +147,10 @@ CCLabelTTF* doneBallCount_lbl;
     
     //衝突判定デリゲート設定
     physicWorld.collisionDelegate = self;
+    
+    //バスケット生成
+    basket=[Basket createBasket:ccp(winSize.width/2,70)];
+    [physicWorld addChild:basket];
     
     //地面生成
     ground=[Ground createGround:ccp(winSize.width/2,10.0)];
@@ -184,10 +203,6 @@ CCLabelTTF* doneBallCount_lbl;
         [physicWorld addChild:pin];
     }
 
-    //バスケット生成
-    basket=[Basket createBasket:ccp(winSize.width/2,70)];
-    [physicWorld addChild:basket];
-    
     //ボール生成
     ballCount++;
     ballCount_lbl.string=[NSString stringWithFormat:@"BallCount:%03d",ballCount];
@@ -197,13 +212,11 @@ CCLabelTTF* doneBallCount_lbl;
     [ballArray addObject:ball];
     
     //ボール発射スケジュール
-    [self schedule:@selector(ball_Launch_Schedule:)interval:0.01 repeat:CCTimerRepeatForever delay:1.5];
+    [self schedule:@selector(ball_State_Schedule:)interval:0.01 repeat:CCTimerRepeatForever delay:1.5];
     
-    //ジャイロセンサー
-    CMMotionManager *manager = [[CMMotionManager alloc] init];
-    motionManager = manager;
-    motionManager.deviceMotionUpdateInterval = 1.0 / 30.0;
-    
+    //ジャイロセンサー開始
+    motionManager = [[CMMotionManager alloc] init];
+    motionManager.deviceMotionUpdateInterval = 1.0 / 60.0;
     NSOperationQueue *queueMotion = [[NSOperationQueue alloc] init];
     [motionManager startDeviceMotionUpdatesToQueue:queueMotion
                                        withHandler:^(CMDeviceMotion *data, NSError *error) {
@@ -222,7 +235,7 @@ CCLabelTTF* doneBallCount_lbl;
 
 - (void)moveBasket: (CMAcceleration)gravity
 {
-    int adjustValue = 20;
+    int adjustValue = 25;
     float gravityX = gravity.x * adjustValue;
     //float gravityY = gravity.y * adjustValue;
     
@@ -237,7 +250,7 @@ CCLabelTTF* doneBallCount_lbl;
     }
 }
 
--(void)ball_Launch_Schedule:(CCTime)dt
+-(void)ball_State_Schedule:(CCTime)dt
 {
     //ポーズ脱出
     if([GameManager getPause]){
@@ -286,13 +299,12 @@ CCLabelTTF* doneBallCount_lbl;
                 doneBallCount_lbl.string=[NSString stringWithFormat:@"DoneBallCount:%03d",doneBallCount];
                 _ball.stateFlg=false;
                 //終了判定
-                [self isEnd];
+                [self exit_Judgment];
             }
         }
     }
-    //画面外ボール判定
-    [self ball_Screen_Out];
     //画面外ボール削除
+    [self ball_Screen_Out];
     [self removeBall];
 }
 
@@ -303,11 +315,12 @@ CCLabelTTF* doneBallCount_lbl;
             doneBallCount++;
             doneBallCount_lbl.string=[NSString stringWithFormat:@"DoneBallCount:%03d",doneBallCount];
         }
+        //ボール削除
         [ballArray removeObject:_ball];
         [physicWorld removeChild:_ball cleanup:YES];
         
         //終了判定
-        [self isEnd];
+        [self exit_Judgment];
     }
 }
 
@@ -335,11 +348,12 @@ CCLabelTTF* doneBallCount_lbl;
     [GameManager setScore:[GameManager getScore]+1];
     [Information scoreUpdata];
 
+    //ボール削除
     [physicWorld removeChild:ball cleanup:YES];
     [ballArray removeObject:ball];
     
     //終了判定
-    [self isEnd];
+    [self exit_Judgment];
     
     return TRUE;
 }
@@ -355,13 +369,13 @@ CCLabelTTF* doneBallCount_lbl;
             [Information pointCountUpdata];
             
             //終了判定
-            [self isEnd];
+            [self exit_Judgment];
         }
     }
     return TRUE;
 }
 
--(void)isEnd
+-(void)exit_Judgment
 {
     //終了判定
     if([GameManager getPointCount]<=0){//ゲームオーバー
@@ -373,17 +387,22 @@ CCLabelTTF* doneBallCount_lbl;
 
 -(void)gameEnd:(bool)flg
 {
-    [GameManager setPause:true];
+    [motionManager stopDeviceMotionUpdates];//ジャイロセンサー停止
+    physicWorld.paused=YES;
     
     if(flg){//ステージクリア
+        //ステージレヴェル保存
+        [GameManager save_Stage_Level:[GameManager getStageLevel]];
         //ネクストステージへ
-        MsgLayer* msg=[[MsgLayer alloc]initWithMsg:@"Good Job!" nextFlg:true];
+        MsgLayer* msg=[[MsgLayer alloc]initWithMsg:@"  Stage\nComplete!" nextFlg:true];
         [self addChild:msg z:2];
     }else{//ゲームオーバー
-        naviLayer=[[NaviLayer alloc]init];
-        [self addChild:naviLayer z:2];
+        [GameManager setPause:true];
+        naviLayer.visible=true;
+        naviLayer.gameOverLabel.string=@"Game Over!";
+        pauseBtn.visible=false;
+        resumeBtn.visible=false;
     }
-    
     //ハイスコア保存
     if([GameManager load_High_Score]<[GameManager getScore]){
         [GameManager save_High_Score:[GameManager getScore]];
@@ -391,11 +410,38 @@ CCLabelTTF* doneBallCount_lbl;
     }
 }
 
-- (void)onTitltClicked:(id)sender
+-(void)onPauseClicked:(id)sender
 {
-    [[CCDirector sharedDirector] replaceScene:[TitleScene scene]
-                               withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
+    [GameManager setPause:true];
+    [motionManager stopDeviceMotionUpdates];//ジャイロセンサー停止
+    physicWorld.paused=YES;//物理ワールド停止
     
+    //ポーズレイヤー表示
+    naviLayer.visible=true;
+    pauseBtn.visible=false;
+    resumeBtn.visible=true;
+}
+
+-(void)onResumeClicked:(id)sender
+{
+    [GameManager setPause:false];
+    physicWorld.paused=NO;//物理ワールド再開
+
+    //ジャイロセンサー再開
+    //motionManager = [[CMMotionManager alloc] init];
+    //motionManager.deviceMotionUpdateInterval = 1.0 / 60.0;
+    NSOperationQueue *queueMotion = [[NSOperationQueue alloc] init];
+    [motionManager startDeviceMotionUpdatesToQueue:queueMotion
+                                       withHandler:^(CMDeviceMotion *data, NSError *error) {
+                                           dispatch_async(dispatch_get_main_queue(), ^{
+                                               [self moveBasket:data.gravity];
+                                           });
+                                       }];
+    //ポーズレイヤー非表示
+    naviLayer.visible=false;
+    pauseBtn.visible=true;
+    resumeBtn.visible=false;
+
 }
 
 @end
