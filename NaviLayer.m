@@ -36,7 +36,7 @@ CCNodeColor *background;
     
     //ゲームオーバーラベル
     gameOverLabel=[CCLabelTTF labelWithString:@"" fontName:@"Verdana-Bold" fontSize:30];
-    gameOverLabel.position=ccp(winSize.width/2,winSize.height/2);
+    gameOverLabel.position=ccp(winSize.width/2,winSize.height/2+50);
     [self addChild:gameOverLabel];
     
     CCButton* titleButton=[CCButton buttonWithTitle:@"[タイトル]" fontName:@"Verdana-Bold" fontSize:15];
@@ -44,10 +44,16 @@ CCNodeColor *background;
     [titleButton setTarget:self selector:@selector(onTitleClicked:)];
     [self addChild:titleButton];
     
-    CCButton* continueBtn=[CCButton buttonWithTitle:@"[コンティニュー]" fontName:@"Verdana-Bold" fontSize:15];
-    continueBtn.position=ccp(winSize.width/2,titleButton.position.y-25);
+    CCButton* startBtn=[CCButton buttonWithTitle:@"[はじめから]" fontName:@"Verdana-Bold" fontSize:15];
+    startBtn.position=ccp(winSize.width/2,titleButton.position.y-25);
+    [startBtn setTarget:self selector:@selector(onPlayClicked:)];
+    [self addChild:startBtn];
+
+    CCButton* continueBtn=[CCButton buttonWithTitle:@"[続きから]" fontName:@"Verdana-Bold" fontSize:15];
+    continueBtn.position=ccp(winSize.width/2,startBtn.position.y-25);
     [continueBtn setTarget:self selector:@selector(onContinueClicked:)];
     [self addChild:continueBtn];
+    
     return self;
 }
 
@@ -55,6 +61,15 @@ CCNodeColor *background;
 {
     [[CCDirector sharedDirector] replaceScene:[TitleScene scene]
                                withTransition:[CCTransition transitionCrossFadeWithDuration:1.0]];
+}
+
+- (void)onPlayClicked:(id)sender
+{
+    [GameManager setStageLavel:1];
+    [GameManager setScore:0];
+    [[CCDirector sharedDirector] replaceScene:[StageScene scene]
+                               withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
+    
 }
 
 - (void)onContinueClicked:(id)sender

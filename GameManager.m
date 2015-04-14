@@ -10,12 +10,20 @@
 
 @implementation GameManager
 
+float osVersion;//OSバージョン
 int deviceType;// 1:iPhone5,6 2:iPhone4 3:iPad2
 int scorePoint;//スコア
 int pointCount;//持ち点
 bool pauseFlg;//ポーズ
 int stageLavel;//現在ステージレヴェル
 
+//OSバージョン
++(void)setOsVersion:(float)version{
+    osVersion=version;
+}
++(float)getOsVersion{
+    return osVersion;
+}
 //デバイス取得／登録
 +(void)setDevice:(int)type{
     deviceType=type;

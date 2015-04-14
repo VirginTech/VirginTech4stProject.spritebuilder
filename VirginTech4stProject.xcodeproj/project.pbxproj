@@ -111,6 +111,13 @@
 		CF7CC4DC1AD3E7C300D16EF9 /* GameManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7CC4DB1AD3E7C300D16EF9 /* GameManager.m */; };
 		CFAF84F71AD0D670009FB98F /* TitleScene.m in Sources */ = {isa = PBXBuildFile; fileRef = CFAF84F61AD0D670009FB98F /* TitleScene.m */; };
 		CFAF84FC1AD0D738009FB98F /* StageScene.m in Sources */ = {isa = PBXBuildFile; fileRef = CFAF84FB1AD0D738009FB98F /* StageScene.m */; };
+		CFB11D0A1ADCD25A0072B6CC /* CreditScene.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB11D091ADCD25A0072B6CC /* CreditScene.m */; };
+		CFB11D0D1ADCD51D0072B6CC /* PreferencesScene.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB11D0C1ADCD51D0072B6CC /* PreferencesScene.m */; };
+		CFB11D101ADCD6F00072B6CC /* ShopScene.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB11D0F1ADCD6F00072B6CC /* ShopScene.m */; };
+		CFB11D131ADD06480072B6CC /* title_default.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFB11D111ADD06480072B6CC /* title_default.plist */; };
+		CFB11D141ADD06480072B6CC /* title_default.png in Resources */ = {isa = PBXBuildFile; fileRef = CFB11D121ADD06480072B6CC /* title_default.png */; };
+		CFB11D181ADD0B560072B6CC /* GKitController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB11D171ADD0B560072B6CC /* GKitController.m */; };
+		CFB11D1A1ADD0B830072B6CC /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFB11D191ADD0B830072B6CC /* GameKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -260,6 +267,17 @@
 		CFAF84F61AD0D670009FB98F /* TitleScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleScene.m; sourceTree = "<group>"; };
 		CFAF84FA1AD0D738009FB98F /* StageScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StageScene.h; sourceTree = "<group>"; };
 		CFAF84FB1AD0D738009FB98F /* StageScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StageScene.m; sourceTree = "<group>"; };
+		CFB11D081ADCD25A0072B6CC /* CreditScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditScene.h; sourceTree = "<group>"; };
+		CFB11D091ADCD25A0072B6CC /* CreditScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditScene.m; sourceTree = "<group>"; };
+		CFB11D0B1ADCD51D0072B6CC /* PreferencesScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesScene.h; sourceTree = "<group>"; };
+		CFB11D0C1ADCD51D0072B6CC /* PreferencesScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesScene.m; sourceTree = "<group>"; };
+		CFB11D0E1ADCD6F00072B6CC /* ShopScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopScene.h; sourceTree = "<group>"; };
+		CFB11D0F1ADCD6F00072B6CC /* ShopScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopScene.m; sourceTree = "<group>"; };
+		CFB11D111ADD06480072B6CC /* title_default.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = title_default.plist; sourceTree = "<group>"; };
+		CFB11D121ADD06480072B6CC /* title_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = title_default.png; sourceTree = "<group>"; };
+		CFB11D161ADD0B560072B6CC /* GKitController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKitController.h; sourceTree = "<group>"; };
+		CFB11D171ADD0B560072B6CC /* GKitController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKitController.m; sourceTree = "<group>"; };
+		CFB11D191ADD0B830072B6CC /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		D352B48019EC608A00829775 /* MetalShaders */ = {isa = PBXFileReference; lastKnownFileType = folder; name = MetalShaders; path = Source/MetalShaders; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -304,6 +322,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFB11D1A1ADD0B830072B6CC /* GameKit.framework in Frameworks */,
 				CF3635271AD4C17B00EFA58D /* CoreMotion.framework in Frameworks */,
 				7A97911819E631CD001FFC4D /* libcocos2d.a in Frameworks */,
 				8392007A18EE8E3300B6C429 /* GLKit.framework in Frameworks */,
@@ -493,6 +512,8 @@
 				CFAF84F61AD0D670009FB98F /* TitleScene.m */,
 				CFAF84FA1AD0D738009FB98F /* StageScene.h */,
 				CFAF84FB1AD0D738009FB98F /* StageScene.m */,
+				CFB11D151ADD0B360072B6CC /* Lib */,
+				CFB11D071ADCD1F60072B6CC /* OptionScene */,
 				CF51C7B41AD66EBE0024AC6B /* Layer */,
 				CF7CC4D91AD3E79A00D16EF9 /* Manager */,
 				CF7CC4C11AD377CE00D16EF9 /* Object */,
@@ -547,6 +568,7 @@
 		B77F1B3017B978D7009739AE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CFB11D191ADD0B830072B6CC /* GameKit.framework */,
 				CF3635261AD4C17B00EFA58D /* CoreMotion.framework */,
 				BC5399D31A44DCC90063F482 /* AndroidKit.framework */,
 				BC5399D41A44DCC90063F482 /* CoreJava.framework */,
@@ -613,6 +635,8 @@
 		CF61D5471AD7867E0062F223 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				CFB11D111ADD06480072B6CC /* title_default.plist */,
+				CFB11D121ADD06480072B6CC /* title_default.png */,
 				CF61D54A1AD786BD0062F223 /* info_default.plist */,
 				CF61D54B1AD786BD0062F223 /* info_default.png */,
 			);
@@ -649,6 +673,28 @@
 				CF7CC4DB1AD3E7C300D16EF9 /* GameManager.m */,
 			);
 			name = Manager;
+			sourceTree = "<group>";
+		};
+		CFB11D071ADCD1F60072B6CC /* OptionScene */ = {
+			isa = PBXGroup;
+			children = (
+				CFB11D081ADCD25A0072B6CC /* CreditScene.h */,
+				CFB11D091ADCD25A0072B6CC /* CreditScene.m */,
+				CFB11D0B1ADCD51D0072B6CC /* PreferencesScene.h */,
+				CFB11D0C1ADCD51D0072B6CC /* PreferencesScene.m */,
+				CFB11D0E1ADCD6F00072B6CC /* ShopScene.h */,
+				CFB11D0F1ADCD6F00072B6CC /* ShopScene.m */,
+			);
+			name = OptionScene;
+			sourceTree = "<group>";
+		};
+		CFB11D151ADD0B360072B6CC /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				CFB11D161ADD0B560072B6CC /* GKitController.h */,
+				CFB11D171ADD0B560072B6CC /* GKitController.m */,
+			);
+			name = Lib;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -846,10 +892,12 @@
 				B71F5912188484E7003F4D28 /* iPad-old@2x.png in Resources */,
 				B71F5916188484E7003F4D28 /* iPhone-old@2x.png in Resources */,
 				B737893B180761570076A88C /* Published-iOS in Resources */,
+				CFB11D131ADD06480072B6CC /* title_default.plist in Resources */,
 				B71F591A188484E7003F4D28 /* Settings@2x.png in Resources */,
 				B7378976180762440076A88C /* Default-Landscape~ipad.png in Resources */,
 				B71F5915188484E7003F4D28 /* iPhone-old.png in Resources */,
 				B71F5917188484E7003F4D28 /* iPhone.png in Resources */,
+				CFB11D141ADD06480072B6CC /* title_default.png in Resources */,
 				B7378975180762440076A88C /* Default-568h@2x.png in Resources */,
 				CF61D54D1AD786BD0062F223 /* info_default.png in Resources */,
 				CF61D54C1AD786BD0062F223 /* info_default.plist in Resources */,
@@ -931,17 +979,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF7CC4D81AD3E23000D16EF9 /* Piston.m in Sources */,
+				CFB11D0A1ADCD25A0072B6CC /* CreditScene.m in Sources */,
 				CF61D5501AD796B00062F223 /* NaviLayer.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
+				CFB11D0D1ADCD51D0072B6CC /* PreferencesScene.m in Sources */,
 				CF51C7B91AD66EDF0024AC6B /* Information.m in Sources */,
 				CF7CC4CF1AD3939000D16EF9 /* InitManager.m in Sources */,
 				7A046D8C19E8A20E004C4763 /* MainScene.m in Sources */,
 				CF7CC4D51AD3DF0E00D16EF9 /* Wall.m in Sources */,
 				CF6E24CB1ADA1F8900AA94D0 /* MsgLayer.m in Sources */,
+				CFB11D101ADCD6F00072B6CC /* ShopScene.m in Sources */,
 				CF5C24B81AD4BF7F00390A50 /* Basket.m in Sources */,
 				CF7CC4C81AD377F700D16EF9 /* Ball.m in Sources */,
 				CF7CC4D21AD3BF2A00D16EF9 /* Corner.m in Sources */,
 				5B121038197487F2004C1E1D /* AppDelegate.m in Sources */,
+				CFB11D181ADD0B560072B6CC /* GKitController.m in Sources */,
 				CFAF84F71AD0D670009FB98F /* TitleScene.m in Sources */,
 				CF7CC4DC1AD3E7C300D16EF9 /* GameManager.m in Sources */,
 				CFAF84FC1AD0D738009FB98F /* StageScene.m in Sources */,

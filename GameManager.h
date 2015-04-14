@@ -10,6 +10,8 @@
 
 @interface GameManager : NSObject
 
++(float)getOsVersion;
++(void)setOsVersion:(float)version;
 +(int)getDevice;
 +(void)setDevice:(int)type;// 1:iPhone5,6 2:iPhone4 3:iPad2
 
