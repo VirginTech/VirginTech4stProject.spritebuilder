@@ -65,6 +65,7 @@ CCNodeColor *background;
 
 - (void)onPlayClicked:(id)sender
 {
+    [GameManager setPointCount:5];
     [GameManager setStageLavel:1];
     [GameManager setScore:0];
     [[CCDirector sharedDirector] replaceScene:[StageScene scene]

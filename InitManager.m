@@ -28,7 +28,7 @@ CGSize winSize;
     int row2;
     int col;
     
-    if([GameManager getDevice]==3){//iPad
+    if([GameManager getDevice]==1){//iPad
         sPoint=ccp(5.0,winSize.height*0.90);
         col=7;
         row1=5;
@@ -38,7 +38,7 @@ CGSize winSize;
         col=7;
         row1=4;
         row2=5;
-    }else{
+    }else{//iPhone5,6
         sPoint=ccp(-10.0,winSize.height*0.90);
         col=8;
         row1=4;

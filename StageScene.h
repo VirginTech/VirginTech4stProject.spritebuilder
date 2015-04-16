@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-@interface StageScene : CCScene <CCPhysicsCollisionDelegate> {
+@interface StageScene : CCScene <CCPhysicsCollisionDelegate>
+{
     
 }
 

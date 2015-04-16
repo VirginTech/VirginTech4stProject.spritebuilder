@@ -41,11 +41,14 @@ Piston* piston;
 Basket* basket;
 
 int ballCount;//発射ボール数
-int ballTimingCnt;//ボール発射間隔
+int ballTimingCnt;//ボール間隔経過タイム
+int ballLaunchCnt;//ボール発射間隔
 int maxBallCount;//最大ボール数
 int doneBallCount;//処理済みボール数
 bool lastBallFlg;//最終ボールフラグ
 float force;//ボール打ち上げフォース
+
+int adjustValue;//バスケット調整値
 
 NSMutableArray* ballArray;
 NSMutableArray* removeBallArray;
@@ -73,7 +76,7 @@ CCLabelTTF* doneBallCount_lbl;
     winSize=[[CCDirector sharedDirector]viewSize];
     
     //初期化
-    maxBallCount=5;
+    maxBallCount=10;
     doneBallCount=0;
     ballCount=0;
     ballTimingCnt=0;
@@ -81,6 +84,30 @@ CCLabelTTF* doneBallCount_lbl;
     ballArray=[[NSMutableArray alloc]init];
     [GameManager setPause:false];
     lastBallFlg=false;
+    
+    //ジャイロセンサー初期化
+    motionManager = [[CMMotionManager alloc] init];
+    motionManager.deviceMotionUpdateInterval = 1.0 / 60.0;
+    
+    //バスケット調整値
+    if([GameManager getDevice]==1){//iPad
+        adjustValue = 45;
+    }else if([GameManager getDevice]==2){//iPhone4
+        adjustValue = 25;
+    }else if([GameManager getDevice]==3){//iPhone5
+        adjustValue = 25;
+    }else if([GameManager getDevice]==4){//iPhone6
+        adjustValue = 40;
+    }else{
+        adjustValue = 25;
+    }
+    
+    //ボール発射間隔
+    ballLaunchCnt=300-((([GameManager getStageLevel]-1)/10)*10);//10ステージごとに-10
+    if(ballLaunchCnt<50){
+        ballLaunchCnt=50;//50を下回ったら50を維持
+    }
+    //NSLog(@"BallLaunchCnt=%d",ballLaunchCnt);
     
     //インフォメーションレイヤー
     Information* infoLayer=[[Information alloc]init];
@@ -148,10 +175,6 @@ CCLabelTTF* doneBallCount_lbl;
     //衝突判定デリゲート設定
     physicWorld.collisionDelegate = self;
     
-    //バスケット生成
-    basket=[Basket createBasket:ccp(winSize.width/2,70)];
-    [physicWorld addChild:basket];
-    
     //地面生成
     ground=[Ground createGround:ccp(winSize.width/2,10.0)];
     [physicWorld addChild:ground];
@@ -203,6 +226,10 @@ CCLabelTTF* doneBallCount_lbl;
         [physicWorld addChild:pin];
     }
 
+    //バスケット生成
+    basket=[Basket createBasket:ccp(winSize.width/2,70)];
+    [physicWorld addChild:basket];
+    
     //ボール生成
     ballCount++;
     ballCount_lbl.string=[NSString stringWithFormat:@"BallCount:%03d",ballCount];
@@ -214,17 +241,8 @@ CCLabelTTF* doneBallCount_lbl;
     //ボール発射スケジュール
     [self schedule:@selector(ball_State_Schedule:)interval:0.01 repeat:CCTimerRepeatForever delay:1.5];
     
-    //ジャイロセンサー開始
-    motionManager = [[CMMotionManager alloc] init];
-    motionManager.deviceMotionUpdateInterval = 1.0 / 60.0;
-    NSOperationQueue *queueMotion = [[NSOperationQueue alloc] init];
-    [motionManager startDeviceMotionUpdatesToQueue:queueMotion
-                                       withHandler:^(CMDeviceMotion *data, NSError *error) {
-                                           dispatch_async(dispatch_get_main_queue(), ^{
-                                               [self moveBasket:data.gravity];
-                                           });
-                                       }];
-
+    //ジャイロセンサー開始タイムウェイト
+    [self schedule:@selector(basket_Start_Schedule:)interval:1.0 repeat:0 delay:2.0];
 }
 
 - (void)onExit
@@ -233,9 +251,23 @@ CCLabelTTF* doneBallCount_lbl;
     [super onExit];
 }
 
+-(void)basket_Start_Schedule:(CCTime)dt
+{
+    //ジャイロセンサー開始
+    if(![GameManager getPause]){
+        NSOperationQueue *queueMotion = [[NSOperationQueue alloc] init];
+        [motionManager startDeviceMotionUpdatesToQueue:queueMotion
+                                           withHandler:^(CMDeviceMotion *data, NSError *error) {
+                                               dispatch_async(dispatch_get_main_queue(), ^{
+                                                   [self moveBasket:data.gravity];
+                                               });
+                                           }];
+    }
+}
+
 - (void)moveBasket: (CMAcceleration)gravity
 {
-    int adjustValue = 25;
+    //int adjustValue = 45;
     float gravityX = gravity.x * adjustValue;
     //float gravityY = gravity.y * adjustValue;
     
@@ -263,7 +295,7 @@ CCLabelTTF* doneBallCount_lbl;
     //ボール発射
     ballTimingCnt++;
     if(!lastBallFlg){
-        if(ballTimingCnt>300){
+        if(ballTimingCnt>ballLaunchCnt){
             if(piston.position.y<winSize.height/2){
                 //ピストン上昇
                 piston.position=ccp(piston.position.x,piston.position.y+force);
@@ -272,7 +304,7 @@ CCLabelTTF* doneBallCount_lbl;
                 ball.stateFlg=true;
                 
                 ballTimingCnt=0;
-                force=((arc4random()%41)+60)*0.1;
+                force=((arc4random()%21)+60)*0.1;//6.0〜8.0
                 //NSLog(@"Force=%f",force);
                 //下降
                 piston.position=ccp(piston.position.x,winSize.height/2-100);
@@ -392,7 +424,9 @@ CCLabelTTF* doneBallCount_lbl;
     
     if(flg){//ステージクリア
         //ステージレヴェル保存
-        [GameManager save_Stage_Level:[GameManager getStageLevel]];
+        if([GameManager load_Stage_Level]<[GameManager getStageLevel]){
+            [GameManager save_Stage_Level:[GameManager getStageLevel]];
+        }
         //ネクストステージへ
         MsgLayer* msg=[[MsgLayer alloc]initWithMsg:@"  Stage\nComplete!" nextFlg:true];
         [self addChild:msg z:2];
@@ -428,8 +462,6 @@ CCLabelTTF* doneBallCount_lbl;
     physicWorld.paused=NO;//物理ワールド再開
 
     //ジャイロセンサー再開
-    //motionManager = [[CMMotionManager alloc] init];
-    //motionManager.deviceMotionUpdateInterval = 1.0 / 60.0;
     NSOperationQueue *queueMotion = [[NSOperationQueue alloc] init];
     [motionManager startDeviceMotionUpdatesToQueue:queueMotion
                                        withHandler:^(CMDeviceMotion *data, NSError *error) {

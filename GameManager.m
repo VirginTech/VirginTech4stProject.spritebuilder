@@ -11,7 +11,7 @@
 @implementation GameManager
 
 float osVersion;//OSバージョン
-int deviceType;// 1:iPhone5,6 2:iPhone4 3:iPad2
+int deviceType;// 1:iPad2 2:iPhone4 3:iPhone5 4:iPhone6
 int scorePoint;//スコア
 int pointCount;//持ち点
 bool pauseFlg;//ポーズ

@@ -28,6 +28,7 @@
 #import "AppDelegate.h"
 #import "CCBuilderReader.h"
 
+#import <sys/utsname.h>
 #import "TitleScene.h"
 #import "GameManager.h"
 
@@ -85,20 +86,34 @@
     return YES;
 }
 
+-(NSString*)getDeviceName
+{
+    struct utsname systemInfo;
+    uname(&systemInfo);
+    
+    return [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
+}
+
 - (CCScene*) startScene
 {
     //デバイス登録
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
     if(screenBounds.size.height==568 || screenBounds.size.width==568){ //iPhone5,6 (568,320px)
-        [GameManager setDevice:1];
+        NSString* deviceName =[self getDeviceName];
+        if([deviceName hasPrefix:@"iPhone5,"] || [deviceName hasPrefix:@"iPhone6,"])
+        {
+            [GameManager setDevice:3];//iPhone5シリーズ
+        }else{
+            [GameManager setDevice:4];//iPhone6シリーズ
+        }
     }else if(screenBounds.size.height==480 || screenBounds.size.width==480){ //iPhone4 (480,320px)
         [GameManager setDevice:2];
     }else if(screenBounds.size.height==1024 || screenBounds.size.width==1024){ //iPad2 (1024,768px)
-        [GameManager setDevice:3];
+        [GameManager setDevice:1];
     }else{
-        [GameManager setDevice:0];
+        [GameManager setDevice:0];//判別不能
     }
-    
+    //NSLog(@"Device=%d",[GameManager getDevice]);
     //return [CCBReader loadAsScene:@"MainScene"];
     return [TitleScene scene];
 }
