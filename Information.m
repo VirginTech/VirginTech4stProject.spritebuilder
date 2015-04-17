@@ -57,13 +57,15 @@ CCLabelTTF* highscoreLabel;
         star.position=ccp(10+i*20,scoreLabel.position.y-scoreLabel.contentSize.height/2-(star.contentSize.height*star.scale)/2);
         [self addChild:star];
     }
-    for(int i=0;i<[GameManager getPointCount];i++){
+    for(int i=0;i<5;i++){
         star=[CCSprite spriteWithSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"star_G.png"]];
         star.scale=0.15;
         star.position=ccp(10+i*20,scoreLabel.position.y-scoreLabel.contentSize.height/2-(star.contentSize.height*star.scale)/2);
         [self addChild:star];
         [starArray addObject:star];
     }
+    //持ち点更新
+    [Information pointCountUpdata];
     
     return self;
 }

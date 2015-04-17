@@ -118,6 +118,8 @@
 		CFB11D141ADD06480072B6CC /* title_default.png in Resources */ = {isa = PBXBuildFile; fileRef = CFB11D121ADD06480072B6CC /* title_default.png */; };
 		CFB11D181ADD0B560072B6CC /* GKitController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB11D171ADD0B560072B6CC /* GKitController.m */; };
 		CFB11D1A1ADD0B830072B6CC /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFB11D191ADD0B830072B6CC /* GameKit.framework */; };
+		CFDD1AEF1AE0CB1100A221F3 /* object_default.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFDD1AED1AE0CB1100A221F3 /* object_default.plist */; };
+		CFDD1AF01AE0CB1100A221F3 /* object_default.png in Resources */ = {isa = PBXBuildFile; fileRef = CFDD1AEE1AE0CB1100A221F3 /* object_default.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -278,6 +280,8 @@
 		CFB11D161ADD0B560072B6CC /* GKitController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKitController.h; sourceTree = "<group>"; };
 		CFB11D171ADD0B560072B6CC /* GKitController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKitController.m; sourceTree = "<group>"; };
 		CFB11D191ADD0B830072B6CC /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		CFDD1AED1AE0CB1100A221F3 /* object_default.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = object_default.plist; sourceTree = "<group>"; };
+		CFDD1AEE1AE0CB1100A221F3 /* object_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = object_default.png; sourceTree = "<group>"; };
 		D352B48019EC608A00829775 /* MetalShaders */ = {isa = PBXFileReference; lastKnownFileType = folder; name = MetalShaders; path = Source/MetalShaders; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -635,6 +639,8 @@
 		CF61D5471AD7867E0062F223 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				CFDD1AED1AE0CB1100A221F3 /* object_default.plist */,
+				CFDD1AEE1AE0CB1100A221F3 /* object_default.png */,
 				CFB11D111ADD06480072B6CC /* title_default.plist */,
 				CFB11D121ADD06480072B6CC /* title_default.png */,
 				CF61D54A1AD786BD0062F223 /* info_default.plist */,
@@ -886,6 +892,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B71F5919188484E7003F4D28 /* Settings.png in Resources */,
+				CFDD1AEF1AE0CB1100A221F3 /* object_default.plist in Resources */,
 				B7378978180762440076A88C /* Default@2x.png in Resources */,
 				B71F5914188484E7003F4D28 /* iPad@2x.png in Resources */,
 				B71F5913188484E7003F4D28 /* iPad.png in Resources */,
@@ -896,6 +903,7 @@
 				B71F591A188484E7003F4D28 /* Settings@2x.png in Resources */,
 				B7378976180762440076A88C /* Default-Landscape~ipad.png in Resources */,
 				B71F5915188484E7003F4D28 /* iPhone-old.png in Resources */,
+				CFDD1AF01AE0CB1100A221F3 /* object_default.png in Resources */,
 				B71F5917188484E7003F4D28 /* iPhone.png in Resources */,
 				CFB11D141ADD06480072B6CC /* title_default.png in Resources */,
 				B7378975180762440076A88C /* Default-568h@2x.png in Resources */,

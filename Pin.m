@@ -11,6 +11,8 @@
 
 @implementation Pin
 
+@synthesize axis;
+
 -(id)initWithPin:(CGPoint)pos
 {
     if(self=[super init]){
@@ -18,6 +20,8 @@
         self=(id)[CCBReader load:@"Pin"];
         self.position=pos;
         self.scale=0.2;
+        
+        pinBody.physicsBody.collisionType = @"pinBody";
     }
     return self;
 }

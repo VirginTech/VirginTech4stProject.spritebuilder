@@ -9,9 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-@interface Pin : CCSprite {
-    
+@interface Pin : CCSprite
+{
+    CCSprite* axis;//CCB定義
+    CCSprite* pinBody;//CCB定義
 }
+
+@property CCSprite* axis;
 
 +(id)createPin:(CGPoint)pos;
 

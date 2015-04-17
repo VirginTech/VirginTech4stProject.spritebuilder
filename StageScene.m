@@ -48,6 +48,9 @@ int doneBallCount;//処理済みボール数
 bool lastBallFlg;//最終ボールフラグ
 float force;//ボール打ち上げフォース
 
+int angelBall;//天使ボール
+int devilBall;//悪魔ボール
+
 int adjustValue;//バスケット調整値
 
 NSMutableArray* ballArray;
@@ -84,6 +87,10 @@ CCLabelTTF* doneBallCount_lbl;
     ballArray=[[NSMutableArray alloc]init];
     [GameManager setPause:false];
     lastBallFlg=false;
+    
+    //天使・悪魔ボール取得
+    angelBall=[self special_Ball_Num:0];
+    devilBall=[self special_Ball_Num:angelBall];
     
     //ジャイロセンサー初期化
     motionManager = [[CMMotionManager alloc] init];
@@ -233,7 +240,13 @@ CCLabelTTF* doneBallCount_lbl;
     //ボール生成
     ballCount++;
     ballCount_lbl.string=[NSString stringWithFormat:@"BallCount:%03d",ballCount];
-    ball=[Ball createBall:ccp(0,0)];
+    if(ballCount==angelBall){
+        ball=[Ball createBall:ccp(0,0) type:2];//天使ボール
+    }else if(ballCount==devilBall){
+        ball=[Ball createBall:ccp(0,0) type:3];//悪魔ボール
+    }else{
+        ball=[Ball createBall:ccp(0,0) type:1];//ノーマルボール
+    }
     ball.position=ccp(winSize.width-(ball.contentSize.width*ball.scale)/2,winSize.height/2-50);
     [physicWorld addChild:ball];
     [ballArray addObject:ball];
@@ -282,6 +295,20 @@ CCLabelTTF* doneBallCount_lbl;
     }
 }
 
+-(int)special_Ball_Num:(int)value
+{
+    int num;
+    bool flg=true;
+
+    while(flg){
+        num=(arc4random()%9)+1;//1〜9
+        if(num!=value){
+            flg=false;
+        }
+    }
+    return num;
+}
+
 -(void)ball_State_Schedule:(CCTime)dt
 {
     //ポーズ脱出
@@ -312,7 +339,13 @@ CCLabelTTF* doneBallCount_lbl;
                 ballCount++;
                 if(ballCount<=maxBallCount){
                     ballCount_lbl.string=[NSString stringWithFormat:@"BallCount:%03d",ballCount];
-                    ball=[Ball createBall:ccp(0,0)];
+                    if(ballCount==angelBall){
+                        ball=[Ball createBall:ccp(0,0) type:2];//天使ボール
+                    }else if(ballCount==devilBall){
+                        ball=[Ball createBall:ccp(0,0) type:3];//悪魔ボール
+                    }else{
+                        ball=[Ball createBall:ccp(0,0) type:1];//ノーマルボール
+                    }
                     ball.position=ccp(winSize.width-(ball.contentSize.width*ball.scale)/2,winSize.height/2-50);
                     [physicWorld addChild:ball];
                     //配列追加
@@ -380,6 +413,14 @@ CCLabelTTF* doneBallCount_lbl;
     [GameManager setScore:[GameManager getScore]+1];
     [Information scoreUpdata];
 
+    //天使ボール（回復）
+    if(ball.ballType==2){
+        if([GameManager getPointCount]<5){
+            [GameManager setPointCount:[GameManager getPointCount]+1];
+            [Information pointCountUpdata];
+        }
+    }
+    
     //ボール削除
     [physicWorld removeChild:ball cleanup:YES];
     [ballArray removeObject:ball];
@@ -405,6 +446,19 @@ CCLabelTTF* doneBallCount_lbl;
         }
     }
     return TRUE;
+}
+
+-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair pinBody:(CCSprite*)pinBody ball:(Ball*)ball
+{
+    //悪魔ボール
+    if(ball.ballType==3)
+    {
+        Pin* _pin=(Pin*)[pinBody parent];//親Pinオブジェクトを代入
+        [_pin.axis.physicsBody setType:CCPhysicsBodyTypeDynamic];//動的物体にして落とす
+    
+        //[physicWorld removeChild:_pin cleanup:YES];//削除するなら
+    }
+    return true;
 }
 
 -(void)exit_Judgment

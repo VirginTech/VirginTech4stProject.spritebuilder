@@ -163,8 +163,6 @@
 					</array>
 				</dict>
 			</array>
-			<key>selected</key>
-			<true/>
 		</dict>
 	</array>
 	<key>jsControlled</key>
@@ -185,9 +183,9 @@
 				<key>customClass</key>
 				<string></string>
 				<key>displayName</key>
-				<string>feather</string>
+				<string>pinBody</string>
 				<key>memberVarAssignmentName</key>
-				<string></string>
+				<string>pinBody</string>
 				<key>memberVarAssignmentType</key>
 				<integer>1</integer>
 				<key>physicsBody</key>
@@ -327,9 +325,9 @@
 				<key>customClass</key>
 				<string></string>
 				<key>displayName</key>
-				<string>pin</string>
+				<string>axis</string>
 				<key>memberVarAssignmentName</key>
-				<string></string>
+				<string>axis</string>
 				<key>memberVarAssignmentType</key>
 				<integer>1</integer>
 				<key>physicsBody</key>
@@ -458,10 +456,12 @@
 						<array/>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
-		<string></string>
+		<string>Pin</string>
 		<key>displayName</key>
 		<string>CCSprite</string>
 		<key>memberVarAssignmentName</key>
