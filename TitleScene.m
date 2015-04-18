@@ -38,15 +38,30 @@ CGSize winSize;
     [GameManager initialize_Save_Data];
     
     //インフォメーションレイヤー
-    Information* infoLayer=[[Information alloc]init];
-    [self addChild:infoLayer z:1];
+    //Information* infoLayer=[[Information alloc]init];
+    //[self addChild:infoLayer z:1];
     
     //画像読み込み
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"title_default.plist"];
     
+    //タイトル
     CCLabelTTF* titleLogo=[CCLabelTTF labelWithString:@"4st Project" fontName:@"Verdana-Bold" fontSize:30];
     titleLogo.position=ccp(winSize.width/2,winSize.height/2);
     [self addChild:titleLogo];
+    
+    //レヴェル表示
+    CCLabelTTF* levelLabel=[CCLabelTTF labelWithString:[NSString stringWithFormat:@"Level:%03d",
+                                            [GameManager load_Stage_Level]] fontName:@"Verdana-Bold" fontSize:15];
+    levelLabel.position=ccp(levelLabel.contentSize.width/2,winSize.height-levelLabel.contentSize.height/2);
+    [self addChild:levelLabel];
+    
+    //ハイスコア表示
+    CCLabelTTF* highscoreLabel=[CCLabelTTF labelWithString:[NSString stringWithFormat:@"HighScore:%05d",
+                                                [GameManager load_High_Score]] fontName:@"Verdana-Bold" fontSize:15];
+    highscoreLabel.position=ccp(winSize.width-highscoreLabel.contentSize.width/2,
+                                winSize.height-highscoreLabel.contentSize.height/2);
+    [self addChild:highscoreLabel];
+    
     
     //プレイボタン
     CCButton* startBtn=[CCButton buttonWithTitle:@"[はじめから]" fontName:@"Verdana-Bold" fontSize:15];

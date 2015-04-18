@@ -79,7 +79,7 @@ CCLabelTTF* doneBallCount_lbl;
     winSize=[[CCDirector sharedDirector]viewSize];
     
     //初期化
-    maxBallCount=10;
+    maxBallCount=12;
     doneBallCount=0;
     ballCount=0;
     ballTimingCnt=0;
@@ -264,6 +264,9 @@ CCLabelTTF* doneBallCount_lbl;
     [super onExit];
 }
 
+//================================
+//　ジャイロセンサー始動（タイムウェイト）
+//================================
 -(void)basket_Start_Schedule:(CCTime)dt
 {
     //ジャイロセンサー開始
@@ -278,6 +281,9 @@ CCLabelTTF* doneBallCount_lbl;
     }
 }
 
+//================================
+//　バスケット移動
+//================================
 - (void)moveBasket: (CMAcceleration)gravity
 {
     //int adjustValue = 45;
@@ -295,13 +301,16 @@ CCLabelTTF* doneBallCount_lbl;
     }
 }
 
+//================================
+//　ボール種別生成
+//================================
 -(int)special_Ball_Num:(int)value
 {
     int num;
     bool flg=true;
 
     while(flg){
-        num=(arc4random()%9)+1;//1〜9
+        num=(arc4random()%(maxBallCount-5))+1;//Max=12 → 1〜7
         if(num!=value){
             flg=false;
         }
@@ -309,6 +318,9 @@ CCLabelTTF* doneBallCount_lbl;
     return num;
 }
 
+//================================
+//　メインループ
+//================================
 -(void)ball_State_Schedule:(CCTime)dt
 {
     //ポーズ脱出
@@ -373,6 +385,9 @@ CCLabelTTF* doneBallCount_lbl;
     [self removeBall];
 }
 
+//================================
+//　ボール削除
+//================================
 -(void)removeBall
 {
     for(Ball* _ball in removeBallArray){
@@ -389,6 +404,9 @@ CCLabelTTF* doneBallCount_lbl;
     }
 }
 
+//================================
+//　ボール画面外判定
+//================================
 -(void)ball_Screen_Out
 {
     for(Ball* _ball in ballArray){
@@ -399,6 +417,9 @@ CCLabelTTF* doneBallCount_lbl;
     }
 }
 
+//================================
+//　ボールキャッチ判定
+//================================
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair catch_point:(Ground*)catch_point ball:(Ball*)ball
 {
     if(![GameManager getPause]){
@@ -410,7 +431,13 @@ CCLabelTTF* doneBallCount_lbl;
         }
     }
     //スコアリング
-    [GameManager setScore:[GameManager getScore]+1];
+    if(ball.ballType==2){//天使
+        [GameManager setScore:[GameManager getScore]+50];
+    }else if(ball.ballType==3){//悪魔
+        [GameManager setScore:[GameManager getScore]+30];
+    }else{
+        [GameManager setScore:[GameManager getScore]+10];
+    }
     [Information scoreUpdata];
 
     //天使ボール（回復）
@@ -431,6 +458,35 @@ CCLabelTTF* doneBallCount_lbl;
     return TRUE;
 }
 
+//================================
+//　ピンキャッチ判定
+//================================
+-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair catch_point:(Ground*)catch_point pinBody:(CCSprite*)pinBody
+{
+    Pin* _pin=(Pin*)[pinBody parent];//親Pinオブジェクトを特定、代入
+    [physicWorld removeChild:_pin cleanup:YES];//削除
+    
+    //スコアリング
+    [GameManager setScore:[GameManager getScore]+100];
+    [Information scoreUpdata];
+    
+    return TRUE;
+}
+
+//================================
+//　ピン＆地上当たり判定
+//================================
+-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair ground:(Ground*)ground pinBody:(CCSprite*)pinBody
+{
+    Pin* _pin=(Pin*)[pinBody parent];//親Pinオブジェクトを特定、代入
+    [physicWorld removeChild:_pin cleanup:YES];//削除
+    
+    return TRUE;
+}
+
+//================================
+//　ボール＆地上当たり判定
+//================================
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair ground:(Ground*)ground ball:(Ball*)ball
 {
     if(![GameManager getPause]){
@@ -448,12 +504,15 @@ CCLabelTTF* doneBallCount_lbl;
     return TRUE;
 }
 
+//================================
+//　ボール＆ピン当たり判定
+//================================
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair pinBody:(CCSprite*)pinBody ball:(Ball*)ball
 {
     //悪魔ボール
     if(ball.ballType==3)
     {
-        Pin* _pin=(Pin*)[pinBody parent];//親Pinオブジェクトを代入
+        Pin* _pin=(Pin*)[pinBody parent];//親Pinオブジェクトを特定、代入
         [_pin.axis.physicsBody setType:CCPhysicsBodyTypeDynamic];//動的物体にして落とす
     
         //[physicWorld removeChild:_pin cleanup:YES];//削除するなら
@@ -461,6 +520,9 @@ CCLabelTTF* doneBallCount_lbl;
     return true;
 }
 
+//================================
+//　終了判定
+//================================
 -(void)exit_Judgment
 {
     //終了判定
@@ -471,6 +533,9 @@ CCLabelTTF* doneBallCount_lbl;
     }
 }
 
+//================================
+//　ゲーム終了
+//================================
 -(void)gameEnd:(bool)flg
 {
     [motionManager stopDeviceMotionUpdates];//ジャイロセンサー停止
@@ -498,6 +563,9 @@ CCLabelTTF* doneBallCount_lbl;
     }
 }
 
+//================================
+//　ポーズ
+//================================
 -(void)onPauseClicked:(id)sender
 {
     [GameManager setPause:true];
@@ -510,6 +578,9 @@ CCLabelTTF* doneBallCount_lbl;
     resumeBtn.visible=true;
 }
 
+//================================
+//　レジューム
+//================================
 -(void)onResumeClicked:(id)sender
 {
     [GameManager setPause:false];
