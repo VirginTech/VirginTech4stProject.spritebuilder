@@ -1,0 +1,22 @@
+/* 
+  Localizable.strings
+  VirginTech4stProject
+
+  Created by VirginTech LLC. on 2015/04/19.
+  Copyright (c) 2015年 Apportable. All rights reserved.
+*/
+
+//ボタン
+"Yes"="はい";
+"No"="いいえ";
+"Ok"="OK";
+
+//アプリ内課金
+"NotNetwork" = "ネットワーク接続がありません。";
+"Error" = "エラー";
+"Completed" = "完了しました。";
+"InAppBillingIslimited" = "アプリ内課金が制限されています。";
+"ItemIdIsInvalid" = "アイテムIDが無効です。";
+"Purchase" = "を購入しました。";
+"Restored" = "リストア完了。";
+"Processing" = "購入処理中... ";

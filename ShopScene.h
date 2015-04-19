@@ -8,12 +8,17 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import <StoreKit/StoreKit.h>
+#import "PaymentManager.h"
 
-@interface ShopScene : CCScene {
-    
+@interface ShopScene : CCScene <SKProductsRequestDelegate>
+{
+    UIActivityIndicatorView* indicator;
 }
 
 + (ShopScene *)scene;
 - (id)init;
+
++(void)ticket_Update;
 
 @end

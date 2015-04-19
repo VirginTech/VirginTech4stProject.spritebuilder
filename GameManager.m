@@ -74,6 +74,9 @@ int stageLavel;//現在ステージレヴェル
     if([dict valueForKey:@"stagelevel"]==nil){
         [self save_Stage_Level:0];
     }
+    if([dict valueForKey:@"ticket"]==nil){
+        [self save_Continue_Ticket:0];
+    }
 }
 
 //====================
@@ -113,6 +116,24 @@ int stageLavel;//現在ステージレヴェル
     NSUserDefaults  *userDefault=[NSUserDefaults standardUserDefaults];
     int level=[[userDefault objectForKey:@"stagelevel"]intValue];
     return level;
+}
+//===========================
+//　コンティニューチケットの取得
+//===========================
++(int)load_Continue_Ticket
+{
+    NSUserDefaults  *userDefault=[NSUserDefaults standardUserDefaults];
+    int ticket=[[userDefault objectForKey:@"ticket"]intValue];
+    return ticket;
+}
+//===========================
+//　コンティニューチケットの保存
+//===========================
++(void)save_Continue_Ticket:(int)value
+{
+    NSUserDefaults  *userDefault=[NSUserDefaults standardUserDefaults];
+    NSNumber* ticket=[NSNumber numberWithInt:value];
+    [userDefault setObject:ticket forKey:@"ticket"];
 }
 
 @end

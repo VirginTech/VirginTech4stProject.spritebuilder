@@ -1,0 +1,22 @@
+/* 
+  Localizable.strings
+  VirginTech4stProject
+
+  Created by VirginTech LLC. on 2015/04/19.
+  Copyright (c) 2015年 Apportable. All rights reserved.
+*/
+
+//ボタン
+"Yes"="YES";
+"No"="NO";
+"Ok"="OK";
+
+//アプリ内課金
+"Notnetwork" = "No network connection.";
+"Error" = "Error";
+"Completed" = "Completed";
+"InAppBillingIslimited" = "In-App Purchase is restrictions.";
+"ItemIdIsInvalid" = "Item ID is invalid.";
+"Purchase" = " Get!";
+"Restored" = "Restored ";
+"Processing" = "Purchase processing... ";

@@ -9,8 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "GKitController.h"
+#import <StoreKit/StoreKit.h>
+#import "MessageLayer.h"
 
-@interface TitleScene : CCScene
+@interface TitleScene : CCScene <MsgLayerDelegate>
 {
     GKitController* gkc;
 }

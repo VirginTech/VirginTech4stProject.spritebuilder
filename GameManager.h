@@ -30,5 +30,7 @@
 +(int)load_High_Score;
 +(void)save_Stage_Level:(int)value;
 +(int)load_Stage_Level;
++(int)load_Continue_Ticket;
++(void)save_Continue_Ticket:(int)value;
 
 @end

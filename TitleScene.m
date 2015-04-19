@@ -13,10 +13,12 @@
 #import "CreditScene.h"
 #import "PreferencesScene.h"
 #import "ShopScene.h"
+#import "Reachability.h"
 
 @implementation TitleScene
 
 CGSize winSize;
+MessageLayer* msgBox;
 
 + (TitleScene *)scene
 {
@@ -30,9 +32,6 @@ CGSize winSize;
     if (!self) return(nil);
     
     winSize=[[CCDirector sharedDirector]viewSize];
-    
-    //初期化
-    [GameManager setPointCount:5];
     
     //初回時データ初期化
     [GameManager initialize_Save_Data];
@@ -62,6 +61,19 @@ CGSize winSize;
                                 winSize.height-highscoreLabel.contentSize.height/2);
     [self addChild:highscoreLabel];
     
+    //コンティニューチケット
+    CCSprite* ticket=[CCSprite spriteWithSpriteFrame:
+                      [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"ticket.png"]];
+    ticket.scale=0.2;
+    ticket.position=ccp((ticket.contentSize.width*ticket.scale)/2,
+                        levelLabel.position.y-levelLabel.contentSize.height/2-(ticket.contentSize.height*ticket.scale)/2);
+    [self addChild:ticket];
+    
+    //コンティニューチケット枚数
+    CCLabelTTF* ticketLabel=[CCLabelTTF labelWithString:[NSString stringWithFormat:@" ×%03d",
+                                    [GameManager load_Continue_Ticket]] fontName:@"Verdana-Bold" fontSize:15];
+    ticketLabel.position=ccp(ticket.position.x+ticketLabel.contentSize.width/2,ticket.position.y);
+    [self addChild:ticketLabel];
     
     //プレイボタン
     CCButton* startBtn=[CCButton buttonWithTitle:@"[はじめから]" fontName:@"Verdana-Bold" fontSize:15];
@@ -139,8 +151,17 @@ CGSize winSize;
     return self;
 }
 
+//=====================
+// デリゲートメソッド
+//=====================
+-(void)onMessageLayerBtnClocked:(int)btnNum procNum:(int)procNum
+{
+    
+}
+
 - (void)onPlayClicked:(id)sender
 {
+    [GameManager setPointCount:5];
     [GameManager setStageLavel:1];
     [GameManager setScore:0];
     [[CCDirector sharedDirector] replaceScene:[StageScene scene]
@@ -150,6 +171,7 @@ CGSize winSize;
 
 - (void)onContinueClicked:(id)sender
 {
+    [GameManager setPointCount:5];
     [GameManager setStageLavel:[GameManager load_Stage_Level]+1];
     [GameManager setScore:[GameManager load_High_Score]];
     [[CCDirector sharedDirector] replaceScene:[StageScene scene]
@@ -177,8 +199,49 @@ CGSize winSize;
 
 -(void)onInAppPurchaseClicked:(id)sender
 {
-    [[CCDirector sharedDirector] replaceScene:[ShopScene scene]
-                               withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
+    if (![SKPaymentQueue canMakePayments]){//ダメ
+        //カスタムアラートメッセージ
+        msgBox=[[MessageLayer alloc]initWithTitle:NSLocalizedString(@"Error",NULL)
+                                                msg:NSLocalizedString(@"InAppBillingIslimited",NULL)
+                                                pos:ccp(winSize.width/2,winSize.height/2)
+                                                size:CGSizeMake(200, 100)
+                                                modal:true
+                                                rotation:false
+                                                type:0
+                                                procNum:0];//処理なし
+        msgBox.delegate=self;//デリゲートセット
+        [self addChild:msgBox z:3];
+        
+        return;
+        
+    }else{
+        
+        //ネット接続できるか確認
+        Reachability *internetReach = [Reachability reachabilityForInternetConnection];
+        //[internetReach startNotifier];
+        NetworkStatus netStatus = [internetReach currentReachabilityStatus];
+        if(netStatus == NotReachable)//ダメ
+        {
+            //カスタムアラートメッセージ
+            msgBox=[[MessageLayer alloc]initWithTitle:NSLocalizedString(@"Error",NULL)
+                                                    msg:NSLocalizedString(@"NotNetwork",NULL)
+                                                    pos:ccp(winSize.width/2,winSize.height/2)
+                                                    size:CGSizeMake(200, 100)
+                                                    modal:true
+                                                    rotation:false
+                                                    type:0
+                                                    procNum:0];//処理なし
+            msgBox.delegate=self;//デリゲートセット
+            [self addChild:msgBox z:3];
+            
+            return;
+            
+        }else{//ネットワークOK!
+            [[CCDirector sharedDirector] replaceScene:[ShopScene scene]
+                                   withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
+        }
+    }
+        
 }
 
 -(void)onPreferencesButtonClicked:(id)sender
