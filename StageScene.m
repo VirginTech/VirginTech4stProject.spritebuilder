@@ -48,8 +48,8 @@ int doneBallCount;//処理済みボール数
 bool lastBallFlg;//最終ボールフラグ
 float force;//ボール打ち上げフォース
 
-int angelBall;//天使ボール
-int devilBall;//悪魔ボール
+NSMutableIndexSet* angelBall;//天使ボール
+NSMutableIndexSet* devilBall;//悪魔ボール
 
 int adjustValue;//バスケット調整値
 
@@ -87,10 +87,14 @@ CCLabelTTF* doneBallCount_lbl;
     ballArray=[[NSMutableArray alloc]init];
     [GameManager setPause:false];
     lastBallFlg=false;
+    angelBall=[[NSMutableIndexSet alloc]init];
+    devilBall=[[NSMutableIndexSet alloc]init];
     
     //天使・悪魔ボール取得
-    angelBall=[self special_Ball_Num:0];
-    devilBall=[self special_Ball_Num:angelBall];
+    angelBall=[self special_Ball_Num:1];//１個分
+    devilBall=[self special_Ball_Num:2];//２個分
+    //NSLog(@"AngelBall=%@",angelBall);
+    //NSLog(@"DevilBall=%@",devilBall);
     
     //ジャイロセンサー初期化
     motionManager = [[CMMotionManager alloc] init];
@@ -240,9 +244,9 @@ CCLabelTTF* doneBallCount_lbl;
     //ボール生成
     ballCount++;
     ballCount_lbl.string=[NSString stringWithFormat:@"BallCount:%03d",ballCount];
-    if(ballCount==angelBall){
+    if([angelBall containsIndex:ballCount]){
         ball=[Ball createBall:ccp(0,0) type:2];//天使ボール
-    }else if(ballCount==devilBall){
+    }else if([devilBall containsIndex:ballCount]){
         ball=[Ball createBall:ccp(0,0) type:3];//悪魔ボール
     }else{
         ball=[Ball createBall:ccp(0,0) type:1];//ノーマルボール
@@ -304,18 +308,22 @@ CCLabelTTF* doneBallCount_lbl;
 //================================
 //　ボール種別生成
 //================================
--(int)special_Ball_Num:(int)value
+-(NSMutableIndexSet*)special_Ball_Num:(int)cnt
 {
+    NSMutableIndexSet* tmpIndex=[[NSMutableIndexSet alloc]init];
+    int i=0;
     int num;
-    bool flg=true;
 
-    while(flg){
-        num=(arc4random()%(maxBallCount-5))+1;//Max=12 → 1〜7
-        if(num!=value){
-            flg=false;
+    while(i<cnt){
+        num=(arc4random()%(maxBallCount-3))+1;//Max=12 → 1〜9
+        if(![angelBall containsIndex:num] && ![tmpIndex containsIndex:num]){
+            i++;
+            [tmpIndex addIndex:num];
         }
     }
-    return num;
+    //NSLog(@"Index=%lu",(unsigned long)[tmpIndex indexGreaterThanIndex:0]);
+    
+    return tmpIndex;
 }
 
 //================================
@@ -351,9 +359,9 @@ CCLabelTTF* doneBallCount_lbl;
                 ballCount++;
                 if(ballCount<=maxBallCount){
                     ballCount_lbl.string=[NSString stringWithFormat:@"BallCount:%03d",ballCount];
-                    if(ballCount==angelBall){
+                    if([angelBall containsIndex:ballCount]){
                         ball=[Ball createBall:ccp(0,0) type:2];//天使ボール
-                    }else if(ballCount==devilBall){
+                    }else if([devilBall containsIndex:ballCount]){
                         ball=[Ball createBall:ccp(0,0) type:3];//悪魔ボール
                     }else{
                         ball=[Ball createBall:ccp(0,0) type:1];//ノーマルボール

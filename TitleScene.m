@@ -19,6 +19,7 @@
 
 CGSize winSize;
 MessageLayer* msgBox;
+CCLabelTTF* ticketLabel;
 
 + (TitleScene *)scene
 {
@@ -35,6 +36,30 @@ MessageLayer* msgBox;
     
     //初回時データ初期化
     [GameManager initialize_Save_Data];
+    
+    //初回起動時ウェルカムメッセージ
+    //NSDate* currentDate= [NSDate dateWithTimeIntervalSinceNow:[[NSTimeZone systemTimeZone] secondsFromGMT]];
+    NSDate* currentDate=[NSDate date];//GMTで貫く
+    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+    NSDictionary *dict = [[NSUserDefaults standardUserDefaults] persistentDomainForName:appDomain];
+    if([dict valueForKey:@"LoginDate"]==nil){//初回なら
+        [GameManager save_login_Date:currentDate];
+        
+        //カスタムアラートメッセージ
+        msgBox=[[MessageLayer alloc]initWithTitle:NSLocalizedString(@"Welcome",NULL)
+                                                msg:NSLocalizedString(@"FirstLogin",NULL)
+                                                pos:ccp(winSize.width/2,winSize.height/2)
+                                                size:CGSizeMake(250, 200)
+                                                modal:true
+                                                rotation:false
+                                                type:0
+                                                procNum:2];//初回ログインボーナスメッセージへ
+        msgBox.delegate=self;//デリゲートセット
+        [self addChild:msgBox z:3];
+    }
+
+    //日付変更監視スケジュール(デイリーボーナス)
+    [self schedule:@selector(status_Schedule:) interval:1.0];
     
     //インフォメーションレイヤー
     //Information* infoLayer=[[Information alloc]init];
@@ -70,7 +95,7 @@ MessageLayer* msgBox;
     [self addChild:ticket];
     
     //コンティニューチケット枚数
-    CCLabelTTF* ticketLabel=[CCLabelTTF labelWithString:[NSString stringWithFormat:@" ×%03d",
+    ticketLabel=[CCLabelTTF labelWithString:[NSString stringWithFormat:@" ×%03d",
                                     [GameManager load_Continue_Ticket]] fontName:@"Verdana-Bold" fontSize:15];
     ticketLabel.position=ccp(ticket.position.x+ticketLabel.contentSize.width/2,ticket.position.y);
     [self addChild:ticketLabel];
@@ -151,12 +176,86 @@ MessageLayer* msgBox;
     return self;
 }
 
+//===================
+// 状態監視スケジュール
+//===================
+-(void)status_Schedule:(CCTime)dt
+{
+    //デイリー・ボーナス
+    NSDate* recentDate=[GameManager load_Login_Date];
+    NSDate* currentDate=[NSDate date];//GMTで貫く
+    //日付のみに変換
+    NSCalendar *calen = [NSCalendar currentCalendar];
+    unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit;
+    NSDateComponents *comps = [calen components:unitFlags fromDate:currentDate];
+    //[comps setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];//GMTで貫く
+    currentDate = [calen dateFromComponents:comps];
+    
+    if([currentDate compare:recentDate]==NSOrderedDescending){//日付が変わってるなら「1」
+        [GameManager save_login_Date:currentDate];
+        
+        //カスタムアラートメッセージ
+        msgBox=[[MessageLayer alloc]initWithTitle:NSLocalizedString(@"BonusGet",NULL)
+                                                msg:NSLocalizedString(@"DailyBonus",NULL)
+                                                pos:ccp(winSize.width/2,winSize.height/2)
+                                                size:CGSizeMake(200, 100)
+                                                modal:true
+                                                rotation:false
+                                                type:0
+                                                procNum:4];//デイリーボーナス付与
+        msgBox.delegate=self;//デリゲートセット
+        [self addChild:msgBox z:3];
+    }
+}
+
 //=====================
 // デリゲートメソッド
 //=====================
 -(void)onMessageLayerBtnClocked:(int)btnNum procNum:(int)procNum
 {
-    
+    if(procNum==0){
+
+    }
+    //コンティニューチケット使用
+    else if(procNum==1){
+        if(btnNum==2){//Yes
+            [GameManager setPointCount:5];
+            [GameManager setStageLavel:[GameManager load_Stage_Level]+1];
+            [GameManager setScore:[GameManager load_High_Score]];
+            //チケット
+            [GameManager save_Continue_Ticket:[GameManager load_Continue_Ticket]-1];
+            [TitleScene ticket_Update];
+            
+            [[CCDirector sharedDirector] replaceScene:[StageScene scene]
+                                   withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
+        }
+    }
+    //初回ボーナス（メッセージ）
+    else if(procNum==2){
+        //カスタムアラートメッセージ
+        msgBox=[[MessageLayer alloc]initWithTitle:NSLocalizedString(@"BonusGet",NULL)
+                                                msg:NSLocalizedString(@"FirstBonus",NULL)
+                                                pos:ccp(winSize.width/2,winSize.height/2)
+                                                size:CGSizeMake(200, 100)
+                                                modal:true
+                                                rotation:false
+                                                type:0
+                                                procNum:3];//初回ログインボーナス付与
+        msgBox.delegate=self;//デリゲートセット
+        [self addChild:msgBox z:3];
+    }
+    //初回ボーナス（付与）
+    else if(procNum==3){
+        [GameManager save_Continue_Ticket:[GameManager load_Continue_Ticket]+30];
+        [TitleScene ticket_Update];
+        msgBox.delegate=nil;//デリゲート解除
+    }
+    //デイリーボーナス
+    else if(procNum==4){
+        [GameManager save_Continue_Ticket:[GameManager load_Continue_Ticket]+1];
+        [TitleScene ticket_Update];
+        msgBox.delegate=nil;//デリゲート解除
+    }
 }
 
 - (void)onPlayClicked:(id)sender
@@ -166,17 +265,52 @@ MessageLayer* msgBox;
     [GameManager setScore:0];
     [[CCDirector sharedDirector] replaceScene:[StageScene scene]
                                withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
-    
 }
 
 - (void)onContinueClicked:(id)sender
 {
-    [GameManager setPointCount:5];
-    [GameManager setStageLavel:[GameManager load_Stage_Level]+1];
-    [GameManager setScore:[GameManager load_High_Score]];
-    [[CCDirector sharedDirector] replaceScene:[StageScene scene]
-                               withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
-    
+    if([GameManager load_Stage_Level]>0){
+        if([GameManager load_Continue_Ticket]>0){
+            //カスタムアラートメッセージ
+            msgBox=[[MessageLayer alloc]initWithTitle:NSLocalizedString(@"Continue",NULL)
+                                                    msg:NSLocalizedString(@"Ticket_Use",NULL)
+                                                    pos:ccp(winSize.width/2,winSize.height/2)
+                                                    size:CGSizeMake(200, 100)
+                                                    modal:true
+                                                    rotation:false
+                                                    type:1
+                                                    procNum:1];
+            msgBox.delegate=self;//デリゲートセット
+            [self addChild:msgBox z:3];
+            return;
+        }else{
+            //カスタムアラートメッセージ
+            msgBox=[[MessageLayer alloc]initWithTitle:NSLocalizedString(@"Continue",NULL)
+                                                    msg:NSLocalizedString(@"Ticket_Shortage",NULL)
+                                                    pos:ccp(winSize.width/2,winSize.height/2)
+                                                    size:CGSizeMake(200, 100)
+                                                    modal:true
+                                                    rotation:false
+                                                    type:0
+                                                    procNum:0];
+            msgBox.delegate=self;//デリゲートセット
+            [self addChild:msgBox z:3];
+            return;
+        }
+    }else{
+        //カスタムアラートメッセージ
+        msgBox=[[MessageLayer alloc]initWithTitle:NSLocalizedString(@"Continue",NULL)
+                                                msg:NSLocalizedString(@"NotContinue",NULL)
+                                                pos:ccp(winSize.width/2,winSize.height/2)
+                                                size:CGSizeMake(200, 100)
+                                                modal:true
+                                                rotation:false
+                                                type:0
+                                                procNum:0];
+        msgBox.delegate=self;//デリゲートセット
+        [self addChild:msgBox z:3];
+        return;
+    }
 }
 
 -(void)onGameCenterClicked:(id)sender
@@ -260,6 +394,11 @@ MessageLayer* msgBox;
 {
     NSURL* url = [NSURL URLWithString:@"https://itunes.apple.com/jp/artist/virgintech-llc./id869207880"];
     [[UIApplication sharedApplication]openURL:url];
+}
+
++(void)ticket_Update
+{
+    ticketLabel.string=[NSString stringWithFormat:@" ×%03d",[GameManager load_Continue_Ticket]];
 }
 
 @end

@@ -33,4 +33,7 @@
 +(int)load_Continue_Ticket;
 +(void)save_Continue_Ticket:(int)value;
 
++(NSDate*)load_Login_Date;
++(void)save_login_Date:(NSDate*)date;
+
 @end

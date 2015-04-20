@@ -17,6 +17,7 @@
 
 CGSize winSize;
 CCNodeColor *background;
+MessageLayer* msgBox;
 
 + (NaviLayer *)scene
 {
@@ -75,12 +76,70 @@ CCNodeColor *background;
 
 - (void)onContinueClicked:(id)sender
 {
-    [GameManager setPointCount:5];
-    [GameManager setStageLavel:[GameManager load_Stage_Level]+1];
-    [GameManager setScore:[GameManager load_High_Score]];
-    [[CCDirector sharedDirector] replaceScene:[StageScene scene]
-                               withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
-    
+    if([GameManager load_Stage_Level]>0){
+        if([GameManager load_Continue_Ticket]>0){
+            //カスタムアラートメッセージ
+            msgBox=[[MessageLayer alloc]initWithTitle:NSLocalizedString(@"Continue",NULL)
+                                                    msg:NSLocalizedString(@"Ticket_Use",NULL)
+                                                    pos:ccp(winSize.width/2,winSize.height/2)
+                                                    size:CGSizeMake(200, 100)
+                                                    modal:true
+                                                    rotation:false
+                                                    type:1
+                                                    procNum:1];
+            msgBox.delegate=self;//デリゲートセット
+            [self addChild:msgBox z:3];
+            return;
+        }else{
+            //カスタムアラートメッセージ
+            msgBox=[[MessageLayer alloc]initWithTitle:NSLocalizedString(@"Continue",NULL)
+                                                    msg:NSLocalizedString(@"Ticket_Shortage",NULL)
+                                                    pos:ccp(winSize.width/2,winSize.height/2)
+                                                    size:CGSizeMake(200, 100)
+                                                    modal:true
+                                                    rotation:false
+                                                    type:0
+                                                    procNum:0];
+            msgBox.delegate=self;//デリゲートセット
+            [self addChild:msgBox z:3];
+            return;
+        }
+    }else{
+        //カスタムアラートメッセージ
+        msgBox=[[MessageLayer alloc]initWithTitle:NSLocalizedString(@"Continue",NULL)
+                                                msg:NSLocalizedString(@"NotContinue",NULL)
+                                                pos:ccp(winSize.width/2,winSize.height/2)
+                                                size:CGSizeMake(200, 100)
+                                                modal:true
+                                                rotation:false
+                                                type:0
+                                                procNum:0];
+        msgBox.delegate=self;//デリゲートセット
+        [self addChild:msgBox z:3];
+        return;
+    }
+}
+
+//=====================
+// デリゲートメソッド
+//=====================
+-(void)onMessageLayerBtnClocked:(int)btnNum procNum:(int)procNum
+{
+    if(procNum==0){
+        
+    }else if(procNum==1){
+        if(btnNum==2){//Yes
+            [GameManager setPointCount:5];
+            [GameManager setStageLavel:[GameManager load_Stage_Level]+1];
+            [GameManager setScore:[GameManager load_High_Score]];
+            //チケット
+            [GameManager save_Continue_Ticket:[GameManager load_Continue_Ticket]-1];
+            //[TitleScene ticket_Update];
+            
+            [[CCDirector sharedDirector] replaceScene:[StageScene scene]
+                                       withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
+        }
+    }
 }
 
 @end

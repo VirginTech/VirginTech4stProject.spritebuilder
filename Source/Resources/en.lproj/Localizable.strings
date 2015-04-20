@@ -20,3 +20,19 @@
 "Purchase" = " Get!";
 "Restored" = "Restored ";
 "Processing" = "Purchase processing... ";
+
+//コンティニューチケット
+"Continue"="Continue";
+"Ticket_Use"="Use a 1 ticket. Is it OK ?";
+"Ticket_Shortage"="Ticket is not enough. Can be bought at the ticket shop.";
+"NotContinue"="You can not continue.";
+
+//ウェルカムメッセージ
+"Welcome"="Welcome!";
+"FirstLogin"="Thank you for downloading. \nIt doesn’t cost anything to play \nthis game, but some of the items \nhave to be paid. \nPlease make sure that children won’t \npurchase any items without \ntheir parents supervision.";
+
+//ログインボーナス
+"BonusGet"="Got a bonus!";
+"FirstBonus"="Thank you for the very first \nlog-in. Free 'Ticket' 30 set \nare yours now!";
+"DailyBonus"="Free daily 'Ticket' 1 set!";
+
