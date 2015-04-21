@@ -21,6 +21,7 @@
 #import "Information.h"
 #import "NaviLayer.h"
 #import "MsgLayer.h"
+#import "BallShadow.h"
 
 @implementation StageScene
 
@@ -60,6 +61,10 @@ NaviLayer* naviLayer;
 CCButton* pauseBtn;
 CCButton* resumeBtn;
 
+//シャドーボール
+BallShadow* ballShadow;
+NSMutableArray* ballShadowArray;
+
 //デバッグラベル
 CCLabelTTF* maxBallCount_lbl;
 CCLabelTTF* ballCount_lbl;
@@ -78,6 +83,10 @@ CCLabelTTF* doneBallCount_lbl;
     
     winSize=[[CCDirector sharedDirector]viewSize];
     
+    //Create a colored background (Dark Grey)
+    CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.5f green:0.0f blue:0.5f alpha:1.0f]];
+    [self addChild:background];
+
     //初期化
     maxBallCount=12;
     doneBallCount=0;
@@ -85,6 +94,7 @@ CCLabelTTF* doneBallCount_lbl;
     ballTimingCnt=0;
     force=((arc4random()%41)+60)*0.1;
     ballArray=[[NSMutableArray alloc]init];
+    ballShadowArray=[[NSMutableArray alloc]init];
     [GameManager setPause:false];
     lastBallFlg=false;
     angelBall=[[NSMutableIndexSet alloc]init];
@@ -245,15 +255,21 @@ CCLabelTTF* doneBallCount_lbl;
     ballCount++;
     ballCount_lbl.string=[NSString stringWithFormat:@"BallCount:%03d",ballCount];
     if([angelBall containsIndex:ballCount]){
-        ball=[Ball createBall:ccp(0,0) type:2];//天使ボール
+        ball=[Ball createBall:ccp(0,0) type:2 cnt:ballCount];//天使ボール
     }else if([devilBall containsIndex:ballCount]){
-        ball=[Ball createBall:ccp(0,0) type:3];//悪魔ボール
+        ball=[Ball createBall:ccp(0,0) type:3 cnt:ballCount];//悪魔ボール
     }else{
-        ball=[Ball createBall:ccp(0,0) type:1];//ノーマルボール
+        ball=[Ball createBall:ccp(0,0) type:1 cnt:ballCount];//ノーマルボール
     }
     ball.position=ccp(winSize.width-(ball.contentSize.width*ball.scale)/2,winSize.height/2-50);
-    [physicWorld addChild:ball];
+    [physicWorld addChild:ball z:1];
     [ballArray addObject:ball];
+    
+    //シャドーボール
+    ballShadow=[BallShadow createBall:ballCount];
+    //ballShadow.position=ball.position;
+    [physicWorld addChild:ballShadow z:0];
+    [ballShadowArray addObject:ballShadow];
     
     //ボール発射スケジュール
     [self schedule:@selector(ball_State_Schedule:)interval:0.01 repeat:CCTimerRepeatForever delay:1.5];
@@ -360,22 +376,40 @@ CCLabelTTF* doneBallCount_lbl;
                 if(ballCount<=maxBallCount){
                     ballCount_lbl.string=[NSString stringWithFormat:@"BallCount:%03d",ballCount];
                     if([angelBall containsIndex:ballCount]){
-                        ball=[Ball createBall:ccp(0,0) type:2];//天使ボール
+                        ball=[Ball createBall:ccp(0,0) type:2 cnt:ballCount];//天使ボール
                     }else if([devilBall containsIndex:ballCount]){
-                        ball=[Ball createBall:ccp(0,0) type:3];//悪魔ボール
+                        ball=[Ball createBall:ccp(0,0) type:3 cnt:ballCount];//悪魔ボール
                     }else{
-                        ball=[Ball createBall:ccp(0,0) type:1];//ノーマルボール
+                        ball=[Ball createBall:ccp(0,0) type:1 cnt:ballCount];//ノーマルボール
                     }
                     ball.position=ccp(winSize.width-(ball.contentSize.width*ball.scale)/2,winSize.height/2-50);
-                    [physicWorld addChild:ball];
+                    [physicWorld addChild:ball z:1];
                     //配列追加
                     [ballArray addObject:ball];
+                    
+                    //シャドーボール
+                    ballShadow=[BallShadow createBall:ballCount];
+                    ballShadow.position=ball.position;
+                    [physicWorld addChild:ballShadow z:0];
+                    [ballShadowArray addObject:ballShadow];
+                    
                 }else{
                     lastBallFlg=true;
                 }
             }
         }
     }
+    
+    //シャドーボール移動
+    for(Ball* _ball in ballArray){
+        for(BallShadow* _ballShadow in ballShadowArray){
+            if(_ball.ball_Id == _ballShadow.ball_Id){
+                _ballShadow.position=_ball.position;
+                break;
+            }
+        }
+    }
+    
     //ボール静止判定
     for(Ball* _ball in ballArray){
         if(_ball.stateFlg){
@@ -403,6 +437,18 @@ CCLabelTTF* doneBallCount_lbl;
             doneBallCount++;
             doneBallCount_lbl.string=[NSString stringWithFormat:@"DoneBallCount:%03d",doneBallCount];
         }
+        
+        //シャドーボール削除
+        BallShadow* removeBallShadow;
+        for(BallShadow* _shadow in ballShadowArray){
+            if(_shadow.ball_Id==_ball.ball_Id){
+                removeBallShadow=_shadow;
+                break;
+            }
+        }
+        [physicWorld removeChild:removeBallShadow cleanup:YES];
+        [ballShadowArray removeObject:removeBallShadow];
+
         //ボール削除
         [ballArray removeObject:_ball];
         [physicWorld removeChild:_ball cleanup:YES];
@@ -455,6 +501,18 @@ CCLabelTTF* doneBallCount_lbl;
             [Information pointCountUpdata];
         }
     }
+    
+    //シャドーボール削除
+    BallShadow* removeBallShadow;
+    for(BallShadow* _shadow in ballShadowArray){
+        if(_shadow.ball_Id==ball.ball_Id){
+            removeBallShadow=_shadow;
+            break;
+        }
+    }
+    [physicWorld removeChild:removeBallShadow cleanup:YES];
+    [ballShadowArray removeObject:removeBallShadow];
+
     
     //ボール削除
     [physicWorld removeChild:ball cleanup:YES];

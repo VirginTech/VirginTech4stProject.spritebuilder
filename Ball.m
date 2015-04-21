@@ -11,10 +11,11 @@
 
 @implementation Ball
 
+@synthesize ball_Id;
 @synthesize stateFlg;
 @synthesize ballType;//1:ノーマル 2:天使 3:悪魔
 
--(id)initWithBall:(CGPoint)pos type:(int)type
+-(id)initWithBall:(CGPoint)pos type:(int)type cnt:(int)cnt
 {
     if(self=[super init]){
         
@@ -39,6 +40,7 @@
         self.physicsBody.elasticity=0.5;
         */
         
+        self.ball_Id=cnt;
         self.position=pos;
         self.scale=0.3;
         self.physicsBody.collisionType = @"ball";
@@ -49,9 +51,9 @@
     return self;
 }
 
-+(id)createBall:(CGPoint)pos type:(int)type
++(id)createBall:(CGPoint)pos type:(int)type cnt:(int)cnt
 {
-    return [[self alloc] initWithBall:pos type:type];
+    return [[self alloc] initWithBall:pos type:type cnt:cnt];
 }
 
 @end

@@ -34,6 +34,10 @@ CCLabelTTF* ticketLabel;
     
     winSize=[[CCDirector sharedDirector]viewSize];
     
+    //Create a colored background (Dark Grey)
+    CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.0f green:0.4f blue:0.0f alpha:1.0f]];
+    [self addChild:background];
+    
     //初回時データ初期化
     [GameManager initialize_Save_Data];
     
@@ -70,7 +74,7 @@ CCLabelTTF* ticketLabel;
     
     //タイトル
     CCLabelTTF* titleLogo=[CCLabelTTF labelWithString:@"4st Project" fontName:@"Verdana-Bold" fontSize:30];
-    titleLogo.position=ccp(winSize.width/2,winSize.height/2);
+    titleLogo.position=ccp(winSize.width/2,winSize.height/2+100);
     [self addChild:titleLogo];
     
     //レヴェル表示
@@ -101,17 +105,37 @@ CCLabelTTF* ticketLabel;
     [self addChild:ticketLabel];
     
     //プレイボタン
-    CCButton* startBtn=[CCButton buttonWithTitle:@"[はじめから]" fontName:@"Verdana-Bold" fontSize:15];
-    startBtn.position=ccp(winSize.width/2,winSize.height/2-100);
+    //CCButton* startBtn=[CCButton buttonWithTitle:@"[はじめから]" fontName:@"Verdana-Bold" fontSize:15];
+    CCButton* startBtn=[CCButton buttonWithTitle:@""
+                spriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"play01.png"]
+                highlightedSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"play02.png"]
+                disabledSpriteFrame:nil];
+    startBtn.scale=0.5;
+    startBtn.position=ccp(winSize.width/2-(startBtn.contentSize.width*startBtn.scale)/2-20,winSize.height/2-50);
     [startBtn setTarget:self selector:@selector(onPlayClicked:)];
     [self addChild:startBtn];
-
+    
+    //プレイボタンラベル
+    CCLabelTTF* startLabel=[CCLabelTTF labelWithString:@"はじめから" fontName:@"Verdana-Bold" fontSize:20];
+    startLabel.position=ccp(startBtn.contentSize.width/2,-(startBtn.contentSize.height*startBtn.scale)/2);
+    [startBtn addChild:startLabel];
+    
     //コンティニューボタン
-    CCButton* continueBtn=[CCButton buttonWithTitle:@"[続きから]" fontName:@"Verdana-Bold" fontSize:15];
-    continueBtn.position=ccp(winSize.width/2,startBtn.position.y-25);
+    //CCButton* continueBtn=[CCButton buttonWithTitle:@"[続きから]" fontName:@"Verdana-Bold" fontSize:15];
+    CCButton* continueBtn=[CCButton buttonWithTitle:@""
+                spriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"continue01.png"]
+                highlightedSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"continue02.png"]
+                disabledSpriteFrame:nil];
+    continueBtn.scale=0.5;
+    continueBtn.position=ccp(winSize.width/2+(continueBtn.contentSize.width*continueBtn.scale)/2+20,winSize.height/2-50);
     [continueBtn setTarget:self selector:@selector(onContinueClicked:)];
     [self addChild:continueBtn];
 
+    //コティニューボタンラベル
+    CCLabelTTF* continueLabel=[CCLabelTTF labelWithString:@"続きから" fontName:@"Verdana-Bold" fontSize:20];
+    continueLabel.position=ccp(continueBtn.contentSize.width/2,-(continueBtn.contentSize.height*continueBtn.scale)/2);
+    [continueBtn addChild:continueLabel];
+    
     //GameCenterボタン
     CCButton *gameCenterButton = [CCButton buttonWithTitle:@"" spriteFrame:
                                   [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"gamecenter.png"]];
@@ -169,7 +193,7 @@ CCLabelTTF* ticketLabel;
     CCButton *moreAppButton = [CCButton buttonWithTitle:@"" spriteFrame:
                                [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"moreAppBtn.png"]];
     moreAppButton.scale=0.6;
-    moreAppButton.position=ccp(winSize.width/2,continueBtn.position.y-50);
+    moreAppButton.position=ccp(winSize.width/2,80);
     [moreAppButton setTarget:self selector:@selector(onMoreAppClicked:)];
     [self addChild:moreAppButton];
     

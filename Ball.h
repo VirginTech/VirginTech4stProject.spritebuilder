@@ -11,13 +11,15 @@
 
 @interface Ball : CCSprite
 {
+    int ball_Id;
     bool stateFlg;
     int ballType;//1:ノーマル 2:天使 3:悪魔
 }
 
+@property int ball_Id;
 @property bool stateFlg;
 @property int ballType;;
 
-+(id)createBall:(CGPoint)pos type:(int)type;
++(id)createBall:(CGPoint)pos type:(int)type cnt:(int)cnt;
 
 @end
