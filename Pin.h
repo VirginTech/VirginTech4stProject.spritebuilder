@@ -12,7 +12,7 @@
 @interface Pin : CCSprite
 {
     CCSprite* axis;//CCB定義
-    CCSprite* pinBody;//CCB定義
+    CCSprite* windmill;//CCB定義
 }
 
 @property CCSprite* axis;

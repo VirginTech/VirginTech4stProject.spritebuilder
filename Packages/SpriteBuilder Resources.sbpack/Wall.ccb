@@ -78,32 +78,32 @@
 					<real>0.0</real>
 				</array>
 				<array>
-					<real>0.0</real>
-					<real>250</real>
+					<real>0.13817739486694336</real>
+					<real>261.098876953125</real>
 				</array>
 				<array>
-					<real>5</real>
-					<real>250</real>
+					<real>4.9409494400024414</real>
+					<real>261.28436279296875</real>
 				</array>
 				<array>
-					<real>5</real>
-					<real>0.0</real>
+					<real>4.9197521209716797</real>
+					<real>-0.14422312378883362</real>
 				</array>
 			</array>
 			<key>polygons</key>
 			<array>
 				<array>
 					<array>
-						<real>5</real>
-						<real>0.0</real>
+						<real>4.9197521209716797</real>
+						<real>-0.14422312378883362</real>
 					</array>
 					<array>
-						<real>5</real>
-						<real>250</real>
+						<real>4.9409494400024414</real>
+						<real>261.28436279296875</real>
 					</array>
 					<array>
-						<real>0.0</real>
-						<real>250</real>
+						<real>0.13817739486694336</real>
+						<real>261.098876953125</real>
 					</array>
 					<array>
 						<real>0.0</real>

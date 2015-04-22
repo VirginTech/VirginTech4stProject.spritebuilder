@@ -66,9 +66,9 @@ BallShadow* ballShadow;
 NSMutableArray* ballShadowArray;
 
 //デバッグラベル
-CCLabelTTF* maxBallCount_lbl;
-CCLabelTTF* ballCount_lbl;
-CCLabelTTF* doneBallCount_lbl;
+//CCLabelTTF* maxBallCount_lbl;
+//CCLabelTTF* ballCount_lbl;
+//CCLabelTTF* doneBallCount_lbl;
 
 + (StageScene *)scene
 {
@@ -84,7 +84,7 @@ CCLabelTTF* doneBallCount_lbl;
     winSize=[[CCDirector sharedDirector]viewSize];
     
     //Create a colored background (Dark Grey)
-    CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.5f green:0.0f blue:0.5f alpha:1.0f]];
+    CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.0f green:0.4f blue:0.0f alpha:1.0f]];
     [self addChild:background];
 
     //初期化
@@ -158,7 +158,7 @@ CCLabelTTF* doneBallCount_lbl;
     [self addChild:msg z:2];
     
     
-    //デバッグラベル
+    /*/デバッグラベル
     maxBallCount_lbl=[CCLabelTTF labelWithString:[NSString stringWithFormat:
                             @"MaxBallCount:%03d",maxBallCount] fontName:@"Verdana-Bold" fontSize:10];
     maxBallCount_lbl.position=ccp(maxBallCount_lbl.contentSize.width/2,winSize.height-50);
@@ -172,7 +172,7 @@ CCLabelTTF* doneBallCount_lbl;
     doneBallCount_lbl=[CCLabelTTF labelWithString:[NSString stringWithFormat:
                                                @"DoneBallCount:%03d",doneBallCount] fontName:@"Verdana-Bold" fontSize:10];
     doneBallCount_lbl.position=ccp(doneBallCount_lbl.contentSize.width/2,winSize.height-70);
-    [self addChild:doneBallCount_lbl z:1];
+    [self addChild:doneBallCount_lbl z:1];*/
 
     
     return self;
@@ -201,13 +201,12 @@ CCLabelTTF* doneBallCount_lbl;
     [physicWorld addChild:ground];
     
     //コーナー生成
-    corner=[Corner createCorner:ccp(0,0)];
+    corner=[Corner createCorner:ccp(0,0) type:0];//右
     corner.position=ccp(winSize.width-corner.contentSize.width/2+5,winSize.height-corner.contentSize.height/2+5);
     [physicWorld addChild:corner];
     
-    corner=[Corner createCorner:ccp(0,0)];
+    corner=[Corner createCorner:ccp(0,0) type:1];//左
     corner.position=ccp(corner.contentSize.width/2-5,winSize.height-corner.contentSize.height/2+5);
-    corner.rotation=-90;
     [physicWorld addChild:corner];
     
     //ピストン壁
@@ -235,7 +234,7 @@ CCLabelTTF* doneBallCount_lbl;
     
     //ピストン
     piston=[Piston createPiston:ccp(0,0)];
-    piston.position=ccp(winSize.width-piston.contentSize.width/2,winSize.height/2-100);
+    piston.position=ccp(winSize.width-piston.contentSize.width/2-1,winSize.height/2-100);
     [physicWorld addChild:piston];
     
     //ピン生成
@@ -253,7 +252,7 @@ CCLabelTTF* doneBallCount_lbl;
     
     //ボール生成
     ballCount++;
-    ballCount_lbl.string=[NSString stringWithFormat:@"BallCount:%03d",ballCount];
+    //ballCount_lbl.string=[NSString stringWithFormat:@"BallCount:%03d",ballCount];
     if([angelBall containsIndex:ballCount]){
         ball=[Ball createBall:ccp(0,0) type:2 cnt:ballCount];//天使ボール
     }else if([devilBall containsIndex:ballCount]){
@@ -367,14 +366,14 @@ CCLabelTTF* doneBallCount_lbl;
                 ball.stateFlg=true;
                 
                 ballTimingCnt=0;
-                force=((arc4random()%21)+60)*0.1;//6.0〜8.0
+                force=((arc4random()%5)+63)*0.1;//6.3〜6.7
                 //NSLog(@"Force=%f",force);
                 //下降
                 piston.position=ccp(piston.position.x,winSize.height/2-100);
                 //ボール生成
                 ballCount++;
                 if(ballCount<=maxBallCount){
-                    ballCount_lbl.string=[NSString stringWithFormat:@"BallCount:%03d",ballCount];
+                    //ballCount_lbl.string=[NSString stringWithFormat:@"BallCount:%03d",ballCount];
                     if([angelBall containsIndex:ballCount]){
                         ball=[Ball createBall:ccp(0,0) type:2 cnt:ballCount];//天使ボール
                     }else if([devilBall containsIndex:ballCount]){
@@ -415,7 +414,7 @@ CCLabelTTF* doneBallCount_lbl;
         if(_ball.stateFlg){
             if(_ball.physicsBody.sleeping){
                 doneBallCount++;
-                doneBallCount_lbl.string=[NSString stringWithFormat:@"DoneBallCount:%03d",doneBallCount];
+                //doneBallCount_lbl.string=[NSString stringWithFormat:@"DoneBallCount:%03d",doneBallCount];
                 _ball.stateFlg=false;
                 //終了判定
                 [self exit_Judgment];
@@ -435,7 +434,7 @@ CCLabelTTF* doneBallCount_lbl;
     for(Ball* _ball in removeBallArray){
         if(_ball.stateFlg){
             doneBallCount++;
-            doneBallCount_lbl.string=[NSString stringWithFormat:@"DoneBallCount:%03d",doneBallCount];
+            //doneBallCount_lbl.string=[NSString stringWithFormat:@"DoneBallCount:%03d",doneBallCount];
         }
         
         //シャドーボール削除
@@ -479,7 +478,7 @@ CCLabelTTF* doneBallCount_lbl;
     if(![GameManager getPause]){
         if(ball.stateFlg){
             doneBallCount++;
-            doneBallCount_lbl.string=[NSString stringWithFormat:@"DoneBallCount:%03d",doneBallCount];
+            //doneBallCount_lbl.string=[NSString stringWithFormat:@"DoneBallCount:%03d",doneBallCount];
             //[GameManager setScore:[GameManager getScore]+1];
             //[Information scoreUpdata];
         }
@@ -527,9 +526,11 @@ CCLabelTTF* doneBallCount_lbl;
 //================================
 //　ピンキャッチ判定
 //================================
--(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair catch_point:(Ground*)catch_point pinBody:(CCSprite*)pinBody
+-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair
+                                            catch_point:(Ground*)catch_point
+                                            windmill:(CCSprite*)windmill
 {
-    Pin* _pin=(Pin*)[pinBody parent];//親Pinオブジェクトを特定、代入
+    Pin* _pin=(Pin*)[windmill parent];//親Pinオブジェクトを特定、代入
     [physicWorld removeChild:_pin cleanup:YES];//削除
     
     //スコアリング
@@ -542,9 +543,9 @@ CCLabelTTF* doneBallCount_lbl;
 //================================
 //　ピン＆地上当たり判定
 //================================
--(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair ground:(Ground*)ground pinBody:(CCSprite*)pinBody
+-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair ground:(Ground*)ground windmill:(CCSprite*)windmill
 {
-    Pin* _pin=(Pin*)[pinBody parent];//親Pinオブジェクトを特定、代入
+    Pin* _pin=(Pin*)[windmill parent];//親Pinオブジェクトを特定、代入
     [physicWorld removeChild:_pin cleanup:YES];//削除
     
     return TRUE;
@@ -559,7 +560,7 @@ CCLabelTTF* doneBallCount_lbl;
         if(ball.stateFlg){
             ball.stateFlg=false;
             doneBallCount++;
-            doneBallCount_lbl.string=[NSString stringWithFormat:@"DoneBallCount:%03d",doneBallCount];
+            //doneBallCount_lbl.string=[NSString stringWithFormat:@"DoneBallCount:%03d",doneBallCount];
             [GameManager setPointCount:[GameManager getPointCount]-1];
             [Information pointCountUpdata];
             
@@ -573,12 +574,12 @@ CCLabelTTF* doneBallCount_lbl;
 //================================
 //　ボール＆ピン当たり判定
 //================================
--(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair pinBody:(CCSprite*)pinBody ball:(Ball*)ball
+-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair windmill:(CCSprite*)windmill ball:(Ball*)ball
 {
     //悪魔ボール
     if(ball.ballType==3)
     {
-        Pin* _pin=(Pin*)[pinBody parent];//親Pinオブジェクトを特定、代入
+        Pin* _pin=(Pin*)[windmill parent];//親Pinオブジェクトを特定、代入
         [_pin.axis.physicsBody setType:CCPhysicsBodyTypeDynamic];//動的物体にして落とす
     
         //[physicWorld removeChild:_pin cleanup:YES];//削除するなら

@@ -11,20 +11,24 @@
 
 @implementation Corner
 
--(id)initWithCorner:(CGPoint)pos
+-(id)initWithCorner:(CGPoint)pos type:(int)type
 {
     if(self=[super init]){
 
-        self=(id)[CCBReader load:@"Corner"];
+        if(type==0){
+            self=(id)[CCBReader load:@"Corner_r"];
+        }else{
+            self=(id)[CCBReader load:@"Corner_l"];
+        }
         self.position=pos;
         self.scale=1.0;
     }
     return self;
 }
 
-+(id)createCorner:(CGPoint)pos
++(id)createCorner:(CGPoint)pos type:(int)type
 {
-    return [[self alloc] initWithCorner:pos];
+    return [[self alloc] initWithCorner:pos type:type];
 }
 
 @end

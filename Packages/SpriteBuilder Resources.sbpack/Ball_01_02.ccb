@@ -40,7 +40,7 @@
 		<key>children</key>
 		<array/>
 		<key>customClass</key>
-		<string></string>
+		<string>Ball</string>
 		<key>displayName</key>
 		<string>CCSprite</string>
 		<key>memberVarAssignmentName</key>
@@ -54,7 +54,7 @@
 			<key>allowsRotation</key>
 			<true/>
 			<key>bodyShape</key>
-			<integer>0</integer>
+			<integer>1</integer>
 			<key>collisionCategories</key>
 			<array/>
 			<key>collisionMask</key>
@@ -62,55 +62,24 @@
 			<key>collisionType</key>
 			<string></string>
 			<key>cornerRadius</key>
-			<real>0.0</real>
+			<real>50</real>
 			<key>density</key>
 			<real>1</real>
 			<key>dynamic</key>
-			<false/>
+			<true/>
 			<key>elasticity</key>
-			<real>0.30000001192092896</real>
+			<real>0.5</real>
 			<key>friction</key>
 			<real>0.30000001192092896</real>
 			<key>points</key>
 			<array>
 				<array>
-					<real>0.0</real>
-					<real>0.0</real>
-				</array>
-				<array>
-					<real>0.44502037763595581</real>
-					<real>47.826698303222656</real>
-				</array>
-				<array>
-					<real>30.057327270507812</real>
-					<real>47.728584289550781</real>
-				</array>
-				<array>
-					<real>30</real>
-					<real>0.0</real>
+					<real>50</real>
+					<real>50</real>
 				</array>
 			</array>
 			<key>polygons</key>
-			<array>
-				<array>
-					<array>
-						<real>30</real>
-						<real>0.0</real>
-					</array>
-					<array>
-						<real>30.057327270507812</real>
-						<real>47.728584289550781</real>
-					</array>
-					<array>
-						<real>0.44502037763595581</real>
-						<real>47.826698303222656</real>
-					</array>
-					<array>
-						<real>0.0</real>
-						<real>0.0</real>
-					</array>
-				</array>
-			</array>
+			<array/>
 		</dict>
 		<key>properties</key>
 		<array>
@@ -168,7 +137,7 @@
 				<key>value</key>
 				<array>
 					<string></string>
-					<string>Sprite/piston.png</string>
+					<string>Sprite/ball_01_02.png</string>
 				</array>
 			</dict>
 			<dict>

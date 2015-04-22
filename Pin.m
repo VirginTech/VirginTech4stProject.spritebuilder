@@ -17,11 +17,13 @@
 {
     if(self=[super init]){
 
-        self=(id)[CCBReader load:@"Pin"];
+        int i=arc4random()%5+1;
+        NSString* pinName=[NSString stringWithFormat:@"Pin_%02d",i];
+        self=(id)[CCBReader load:pinName];
         self.position=pos;
         self.scale=0.2;
         
-        pinBody.physicsBody.collisionType = @"pinBody";
+        windmill.physicsBody.collisionType = @"windmill";
     }
     return self;
 }

@@ -126,8 +126,8 @@
 		CFB11D101ADCD6F00072B6CC /* ShopScene.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB11D0F1ADCD6F00072B6CC /* ShopScene.m */; };
 		CFB11D181ADD0B560072B6CC /* GKitController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB11D171ADD0B560072B6CC /* GKitController.m */; };
 		CFB11D1A1ADD0B830072B6CC /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFB11D191ADD0B830072B6CC /* GameKit.framework */; };
-		CFC1077C1AE61B8000A9E04E /* title_default.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFC1077A1AE61B8000A9E04E /* title_default.plist */; };
-		CFC1077D1AE61B8000A9E04E /* title_default.png in Resources */ = {isa = PBXBuildFile; fileRef = CFC1077B1AE61B8000A9E04E /* title_default.png */; };
+		CFB9C81A1AE7B1E9007E0A59 /* title_default.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFB9C8181AE7B1E9007E0A59 /* title_default.plist */; };
+		CFB9C81B1AE7B1E9007E0A59 /* title_default.png in Resources */ = {isa = PBXBuildFile; fileRef = CFB9C8191AE7B1E9007E0A59 /* title_default.png */; };
 		CFC107801AE687D700A9E04E /* BallShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC1077F1AE687D700A9E04E /* BallShadow.m */; };
 /* End PBXBuildFile section */
 
@@ -302,8 +302,8 @@
 		CFB11D161ADD0B560072B6CC /* GKitController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKitController.h; sourceTree = "<group>"; };
 		CFB11D171ADD0B560072B6CC /* GKitController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKitController.m; sourceTree = "<group>"; };
 		CFB11D191ADD0B830072B6CC /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
-		CFC1077A1AE61B8000A9E04E /* title_default.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = title_default.plist; sourceTree = "<group>"; };
-		CFC1077B1AE61B8000A9E04E /* title_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = title_default.png; sourceTree = "<group>"; };
+		CFB9C8181AE7B1E9007E0A59 /* title_default.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = title_default.plist; sourceTree = "<group>"; };
+		CFB9C8191AE7B1E9007E0A59 /* title_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = title_default.png; sourceTree = "<group>"; };
 		CFC1077E1AE687D700A9E04E /* BallShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BallShadow.h; sourceTree = "<group>"; };
 		CFC1077F1AE687D700A9E04E /* BallShadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BallShadow.m; sourceTree = "<group>"; };
 		D352B48019EC608A00829775 /* MetalShaders */ = {isa = PBXFileReference; lastKnownFileType = folder; name = MetalShaders; path = Source/MetalShaders; sourceTree = "<group>"; };
@@ -669,8 +669,8 @@
 		CF61D5471AD7867E0062F223 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				CFC1077A1AE61B8000A9E04E /* title_default.plist */,
-				CFC1077B1AE61B8000A9E04E /* title_default.png */,
+				CFB9C8181AE7B1E9007E0A59 /* title_default.plist */,
+				CFB9C8191AE7B1E9007E0A59 /* title_default.png */,
 				CF0C02141AE3D09100FFB854 /* shop_default.plist */,
 				CF0C02151AE3D09100FFB854 /* shop_default.png */,
 				CF1AC8151AE3B20F001E02C9 /* message_default.plist */,
@@ -948,10 +948,10 @@
 				B71F5917188484E7003F4D28 /* iPhone.png in Resources */,
 				B7378975180762440076A88C /* Default-568h@2x.png in Resources */,
 				CF61D54D1AD786BD0062F223 /* info_default.png in Resources */,
-				CFC1077D1AE61B8000A9E04E /* title_default.png in Resources */,
+				CFB9C81B1AE7B1E9007E0A59 /* title_default.png in Resources */,
 				CF0C02161AE3D09100FFB854 /* shop_default.plist in Resources */,
 				CF61D54C1AD786BD0062F223 /* info_default.plist in Resources */,
-				CFC1077C1AE61B8000A9E04E /* title_default.plist in Resources */,
+				CFB9C81A1AE7B1E9007E0A59 /* title_default.plist in Resources */,
 				B71F5918188484E7003F4D28 /* iPhone@2x.png in Resources */,
 				B7378977180762440076A88C /* Default.png in Resources */,
 				CF1AC8181AE3B20F001E02C9 /* message_default.png in Resources */,

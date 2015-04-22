@@ -78,36 +78,154 @@
 					<real>0.0</real>
 				</array>
 				<array>
-					<real>0.44502037763595581</real>
-					<real>47.826698303222656</real>
-				</array>
-				<array>
-					<real>30.057327270507812</real>
-					<real>47.728584289550781</real>
-				</array>
-				<array>
-					<real>30</real>
 					<real>0.0</real>
+					<real>100</real>
+				</array>
+				<array>
+					<real>100</real>
+					<real>100</real>
+				</array>
+				<array>
+					<real>80.583511352539062</real>
+					<real>97.041648864746094</real>
+				</array>
+				<array>
+					<real>60.455097198486328</real>
+					<real>91.250534057617188</real>
+				</array>
+				<array>
+					<real>44.155506134033203</real>
+					<real>81.172195434570312</real>
+				</array>
+				<array>
+					<real>28.716188430786133</real>
+					<real>68.861557006835938</real>
+				</array>
+				<array>
+					<real>17.835666656494141</real>
+					<real>54.896312713623047</real>
+				</array>
+				<array>
+					<real>7.4449348449707031</real>
+					<real>37.389522552490234</real>
+				</array>
+				<array>
+					<real>3.0085833072662354</real>
+					<real>20.537351608276367</real>
 				</array>
 			</array>
 			<key>polygons</key>
 			<array>
 				<array>
 					<array>
-						<real>30</real>
 						<real>0.0</real>
-					</array>
-					<array>
-						<real>30.057327270507812</real>
-						<real>47.728584289550781</real>
-					</array>
-					<array>
-						<real>0.44502037763595581</real>
-						<real>47.826698303222656</real>
+						<real>100</real>
 					</array>
 					<array>
 						<real>0.0</real>
 						<real>0.0</real>
+					</array>
+					<array>
+						<real>3.0085833072662354</real>
+						<real>20.537351608276367</real>
+					</array>
+				</array>
+				<array>
+					<array>
+						<real>0.0</real>
+						<real>100</real>
+					</array>
+					<array>
+						<real>3.0085833072662354</real>
+						<real>20.537351608276367</real>
+					</array>
+					<array>
+						<real>7.4449348449707031</real>
+						<real>37.389522552490234</real>
+					</array>
+				</array>
+				<array>
+					<array>
+						<real>0.0</real>
+						<real>100</real>
+					</array>
+					<array>
+						<real>7.4449348449707031</real>
+						<real>37.389522552490234</real>
+					</array>
+					<array>
+						<real>17.835666656494141</real>
+						<real>54.896312713623047</real>
+					</array>
+				</array>
+				<array>
+					<array>
+						<real>0.0</real>
+						<real>100</real>
+					</array>
+					<array>
+						<real>17.835666656494141</real>
+						<real>54.896312713623047</real>
+					</array>
+					<array>
+						<real>28.716188430786133</real>
+						<real>68.861557006835938</real>
+					</array>
+				</array>
+				<array>
+					<array>
+						<real>0.0</real>
+						<real>100</real>
+					</array>
+					<array>
+						<real>28.716188430786133</real>
+						<real>68.861557006835938</real>
+					</array>
+					<array>
+						<real>44.155506134033203</real>
+						<real>81.172195434570312</real>
+					</array>
+				</array>
+				<array>
+					<array>
+						<real>0.0</real>
+						<real>100</real>
+					</array>
+					<array>
+						<real>44.155506134033203</real>
+						<real>81.172195434570312</real>
+					</array>
+					<array>
+						<real>60.455097198486328</real>
+						<real>91.250534057617188</real>
+					</array>
+				</array>
+				<array>
+					<array>
+						<real>0.0</real>
+						<real>100</real>
+					</array>
+					<array>
+						<real>60.455097198486328</real>
+						<real>91.250534057617188</real>
+					</array>
+					<array>
+						<real>80.583511352539062</real>
+						<real>97.041648864746094</real>
+					</array>
+				</array>
+				<array>
+					<array>
+						<real>80.583511352539062</real>
+						<real>97.041648864746094</real>
+					</array>
+					<array>
+						<real>100</real>
+						<real>100</real>
+					</array>
+					<array>
+						<real>0.0</real>
+						<real>100</real>
 					</array>
 				</array>
 			</array>
@@ -168,7 +286,7 @@
 				<key>value</key>
 				<array>
 					<string></string>
-					<string>Sprite/piston.png</string>
+					<string>Sprite/corner_l.png</string>
 				</array>
 			</dict>
 			<dict>

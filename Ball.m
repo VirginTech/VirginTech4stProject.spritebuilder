@@ -19,7 +19,13 @@
 {
     if(self=[super init]){
         
-        NSString* ballName=[NSString stringWithFormat:@"Bird_%02d",type];
+        NSString* ballName;
+        if(type==1){
+            int i=arc4random()%3+1;
+            ballName=[NSString stringWithFormat:@"Ball_%02d_%02d",type,i];
+        }else{
+            ballName=[NSString stringWithFormat:@"Ball_%02d",type];
+        }
         self=(id)[CCBReader load:ballName];
 
         /*/画像読み込み

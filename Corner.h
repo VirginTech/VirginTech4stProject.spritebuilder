@@ -13,6 +13,6 @@
     
 }
 
-+(id)createCorner:(CGPoint)pos;
++(id)createCorner:(CGPoint)pos type:(int)type;
 
 @end
