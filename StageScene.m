@@ -40,6 +40,8 @@ Wall* wall_u;
 Wall* wall_m;
 Piston* piston;
 Basket* basket;
+CCSprite* basket_shadow;
+CCSprite* spark;
 
 int ballCount;//発射ボール数
 int ballTimingCnt;//ボール間隔経過タイム
@@ -139,15 +141,30 @@ NSMutableArray* ballShadowArray;
     [self addChild:naviLayer z:2];
     naviLayer.visible=false;
     
+    //画像読み込み
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"navi_default.plist"];
+    
     //ポーズボタン
-    pauseBtn=[CCButton buttonWithTitle:@"[ポーズ]"];
-    pauseBtn.position=ccp(winSize.width-pauseBtn.contentSize.width/2,pauseBtn.contentSize.height/2+50);
+    //pauseBtn=[CCButton buttonWithTitle:@"[ポーズ]"];
+    pauseBtn=[CCButton buttonWithTitle:@""
+                spriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"pause.png"]
+                highlightedSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"pause.png"]
+                disabledSpriteFrame:nil];
+    pauseBtn.scale=0.4;
+    pauseBtn.position=ccp(winSize.width-(pauseBtn.contentSize.width*pauseBtn.scale)/2,
+                                                    (pauseBtn.contentSize.height*pauseBtn.scale)/2+50);
     [pauseBtn setTarget:self selector:@selector(onPauseClicked:)];
     [self addChild:pauseBtn z:3];
     
     //レジュームボタン
-    resumeBtn=[CCButton buttonWithTitle:@"[レジューム]"];
-    resumeBtn.position=ccp(winSize.width-resumeBtn.contentSize.width/2,resumeBtn.contentSize.height/2+50);
+    //resumeBtn=[CCButton buttonWithTitle:@"[レジューム]"];
+    resumeBtn=[CCButton buttonWithTitle:@""
+                spriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"resume.png"]
+                highlightedSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"resume.png"]
+                disabledSpriteFrame:nil];
+    resumeBtn.scale=0.4;
+    resumeBtn.position=ccp(winSize.width-(resumeBtn.contentSize.width*resumeBtn.scale)/2,
+                                                    (resumeBtn.contentSize.height*resumeBtn.scale)/2+50);
     [resumeBtn setTarget:self selector:@selector(onResumeClicked:)];
     [self addChild:resumeBtn z:3];
     resumeBtn.visible=false;
@@ -247,8 +264,22 @@ NSMutableArray* ballShadowArray;
     }
 
     //バスケット生成
-    basket=[Basket createBasket:ccp(winSize.width/2,70)];
+    basket=[Basket createBasket:ccp(winSize.width/2,ground.position.y+(ground.contentSize.height*ground.scale)/2+23)];
     [physicWorld addChild:basket];
+    
+    //バスケットシャドー生成
+    basket_shadow=[CCSprite spriteWithImageNamed:@"basket_shadow.png"];
+    basket_shadow.scale=0.7;
+    basket_shadow.opacity=0.3;
+    basket_shadow.position=ccp(basket.position.x+35,ground.position.y+(ground.contentSize.height*ground.scale)/2-(basket_shadow.contentSize.height*basket_shadow.scale)/2);
+    [physicWorld addChild:basket_shadow];
+    
+    //スパーク
+    spark=[CCSprite spriteWithImageNamed:@"spark.png"];
+    spark.position=ccp(basket.position.x,basket.position.y+(basket.contentSize.height*basket.scale)/2+(spark.contentSize.height*spark.scale)/2 -20);
+    spark.scale=1.0;
+    spark.opacity=0.0;
+    [physicWorld addChild:spark];
     
     //ボール生成
     ballCount++;
@@ -317,6 +348,8 @@ NSMutableArray* ballShadowArray;
         //バスケット移動
         basket.position = tmpPos;
         //[basket.physicsBody applyForce:ccpAdd(basket.position,ccp(gravityX,0.0))];
+        //バスケットシャドー移動
+        basket_shadow.position=ccp(basket.position.x+35,basket_shadow.position.y);
     }
 }
 
@@ -511,11 +544,15 @@ NSMutableArray* ballShadowArray;
     }
     [physicWorld removeChild:removeBallShadow cleanup:YES];
     [ballShadowArray removeObject:removeBallShadow];
-
     
     //ボール削除
     [physicWorld removeChild:ball cleanup:YES];
     [ballArray removeObject:ball];
+    
+    //スパーク
+    spark.position=ccp(basket.position.x,basket.position.y+(basket.contentSize.height*basket.scale)/2+(spark.contentSize.height*spark.scale)/2 -20);
+    spark.opacity=1.0;
+    [self schedule:@selector(spark_Schedule:)interval:0.01];
     
     //終了判定
     [self exit_Judgment];
@@ -585,6 +622,18 @@ NSMutableArray* ballShadowArray;
         //[physicWorld removeChild:_pin cleanup:YES];//削除するなら
     }
     return true;
+}
+
+//================================
+//　スパーク
+//================================
+-(void)spark_Schedule:(CCTime)dt
+{
+    spark.opacity-=0.02;
+    spark.position=ccp(spark.position.x,spark.position.y+0.5);
+    if(spark.opacity<0){
+        [self unschedule:@selector(spark_Schedule:)];
+    }
 }
 
 //================================

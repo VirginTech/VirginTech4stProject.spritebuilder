@@ -117,7 +117,7 @@ CCLabelTTF* ticketLabel;
     
     //プレイボタンラベル
     CCLabelTTF* startLabel=[CCLabelTTF labelWithString:@"はじめから" fontName:@"Verdana-Bold" fontSize:20];
-    startLabel.position=ccp(startBtn.contentSize.width/2,-(startBtn.contentSize.height*startBtn.scale)/2);
+    startLabel.position=ccp(startBtn.contentSize.width/2,-startLabel.contentSize.height/2);
     [startBtn addChild:startLabel];
     
     //コンティニューボタン
@@ -133,7 +133,7 @@ CCLabelTTF* ticketLabel;
 
     //コティニューボタンラベル
     CCLabelTTF* continueLabel=[CCLabelTTF labelWithString:@"続きから" fontName:@"Verdana-Bold" fontSize:20];
-    continueLabel.position=ccp(continueBtn.contentSize.width/2,-(continueBtn.contentSize.height*continueBtn.scale)/2);
+    continueLabel.position=ccp(continueBtn.contentSize.width/2,-continueLabel.contentSize.height/2);
     [continueBtn addChild:continueLabel];
     
     //GameCenterボタン
