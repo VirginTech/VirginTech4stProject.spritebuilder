@@ -67,6 +67,9 @@ CCButton* resumeBtn;
 BallShadow* ballShadow;
 NSMutableArray* ballShadowArray;
 
+//ボールカウンター
+CCLabelTTF* ballCntLbl;
+
 //デバッグラベル
 //CCLabelTTF* maxBallCount_lbl;
 //CCLabelTTF* ballCount_lbl;
@@ -90,7 +93,6 @@ NSMutableArray* ballShadowArray;
     [self addChild:background];
 
     //初期化
-    maxBallCount=12;
     doneBallCount=0;
     ballCount=0;
     ballTimingCnt=0;
@@ -102,11 +104,20 @@ NSMutableArray* ballShadowArray;
     angelBall=[[NSMutableIndexSet alloc]init];
     devilBall=[[NSMutableIndexSet alloc]init];
     
+    //Maxボール数
+    if([GameManager getPlayMode]==1){//スコアチャレンジ
+        maxBallCount=12;
+    }else{
+        maxBallCount=[GameManager getStageLevel];//ステージモード
+    }
+    
     //天使・悪魔ボール取得
-    angelBall=[self special_Ball_Num:1];//１個分
-    devilBall=[self special_Ball_Num:2];//２個分
-    //NSLog(@"AngelBall=%@",angelBall);
-    //NSLog(@"DevilBall=%@",devilBall);
+    if([GameManager getPlayMode]==1){
+        angelBall=[self special_Ball_Num:1];//１個分
+        devilBall=[self special_Ball_Num:2];//２個分
+    }else{
+        
+    }
     
     //ジャイロセンサー初期化
     motionManager = [[CMMotionManager alloc] init];
@@ -301,6 +312,12 @@ NSMutableArray* ballShadowArray;
     [physicWorld addChild:ballShadow z:0];
     [ballShadowArray addObject:ballShadow];
     
+    //ボールカウンター
+    ballCntLbl=[CCLabelTTF labelWithString:[NSString stringWithFormat:@"%02d",maxBallCount-(ballCount-1)]
+                                                                fontName:@"Verdana-Bold" fontSize:15];
+    ballCntLbl.position=ccp(piston.position.x,wall_m.position.y-(wall_m.contentSize.height*wall_m.scale)/2-10);
+    [self addChild:ballCntLbl];
+    
     //ボール発射スケジュール
     [self schedule:@selector(ball_State_Schedule:)interval:0.01 repeat:CCTimerRepeatForever delay:1.5];
     
@@ -428,6 +445,8 @@ NSMutableArray* ballShadowArray;
                 }else{
                     lastBallFlg=true;
                 }
+                //ボールカウンター
+                ballCntLbl.string=[NSString stringWithFormat:@"%02d",maxBallCount-(ballCount-1)];
             }
         }
     }
@@ -528,9 +547,9 @@ NSMutableArray* ballShadowArray;
 
     //天使ボール（回復）
     if(ball.ballType==2){
-        if([GameManager getPointCount]<5){
-            [GameManager setPointCount:[GameManager getPointCount]+1];
-            [Information pointCountUpdata];
+        if([GameManager getLifePoint]<5){
+            [GameManager setLifePoint:[GameManager getLifePoint]+1];
+            [Information lifePointUpdata];
         }
     }
     
@@ -574,6 +593,11 @@ NSMutableArray* ballShadowArray;
     [GameManager setScore:[GameManager getScore]+100];
     [Information scoreUpdata];
     
+    //スパーク
+    spark.position=ccp(basket.position.x,basket.position.y+(basket.contentSize.height*basket.scale)/2+(spark.contentSize.height*spark.scale)/2 -20);
+    spark.opacity=1.0;
+    [self schedule:@selector(spark_Schedule:)interval:0.01];
+    
     return TRUE;
 }
 
@@ -598,8 +622,8 @@ NSMutableArray* ballShadowArray;
             ball.stateFlg=false;
             doneBallCount++;
             //doneBallCount_lbl.string=[NSString stringWithFormat:@"DoneBallCount:%03d",doneBallCount];
-            [GameManager setPointCount:[GameManager getPointCount]-1];
-            [Information pointCountUpdata];
+            [GameManager setLifePoint:[GameManager getLifePoint]-1];
+            [Information lifePointUpdata];
             
             //終了判定
             [self exit_Judgment];
@@ -642,7 +666,7 @@ NSMutableArray* ballShadowArray;
 -(void)exit_Judgment
 {
     //終了判定
-    if([GameManager getPointCount]<=0){//ゲームオーバー
+    if([GameManager getLifePoint]<=0){//ゲームオーバー
         [self gameEnd:false];
     }else if(lastBallFlg && maxBallCount==doneBallCount){//ステージクリア
         [self gameEnd:true];
@@ -659,8 +683,15 @@ NSMutableArray* ballShadowArray;
     
     if(flg){//ステージクリア
         //ステージレヴェル保存
-        if([GameManager load_Stage_Level]<[GameManager getStageLevel]){
-            [GameManager save_Stage_Level:[GameManager getStageLevel]];
+        if([GameManager getPlayMode]==1)
+        {
+            if([GameManager load_Stage_Level_1]<[GameManager getStageLevel]){
+                [GameManager save_Stage_Level_1:[GameManager getStageLevel]];
+            }
+        }else{
+            if([GameManager load_Stage_Level_2]<[GameManager getStageLevel]){
+                [GameManager save_Stage_Level_2:[GameManager getStageLevel]];
+            }
         }
         //ネクストステージへ
         MsgLayer* msg=[[MsgLayer alloc]initWithMsg:@"  Stage\nComplete!" nextFlg:true];
@@ -673,9 +704,17 @@ NSMutableArray* ballShadowArray;
         resumeBtn.visible=false;
     }
     //ハイスコア保存
-    if([GameManager load_High_Score]<[GameManager getScore]){
-        [GameManager save_High_Score:[GameManager getScore]];
-        [Information highScoreUpdata];
+    if([GameManager getPlayMode]==1)
+    {
+        if([GameManager load_High_Score_1]<[GameManager getScore]){
+            [GameManager save_High_Score_1:[GameManager getScore]];
+            [Information highScoreUpdata];
+        }
+    }else{
+        //ステージスコア
+        
+        
+        
     }
 }
 

@@ -18,6 +18,6 @@
 
 +(void)scoreUpdata;
 +(void)highScoreUpdata;
-+(void)pointCountUpdata;
++(void)lifePointUpdata;
 
 @end

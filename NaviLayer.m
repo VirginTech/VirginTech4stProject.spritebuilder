@@ -58,38 +58,72 @@ MessageLayer* msgBox;
     titleLabel.position=ccp(titleBtn.contentSize.width/2,-titleLabel.contentSize.height/2);
     [titleBtn addChild:titleLabel];
     
-    //プレイボタン
-    //CCButton* startBtn=[CCButton buttonWithTitle:@"[はじめから]" fontName:@"Verdana-Bold" fontSize:15];
-    CCButton* startBtn=[CCButton buttonWithTitle:@""
-                spriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"play01.png"]
-                highlightedSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"play02.png"]
+    if([GameManager getPlayMode]==1){
+        //プレイボタン
+        //CCButton* startBtn=[CCButton buttonWithTitle:@"[はじめから]" fontName:@"Verdana-Bold" fontSize:15];
+        CCButton* startBtn=[CCButton buttonWithTitle:@""
+                    spriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"play01.png"]
+                    highlightedSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"play02.png"]
+                    disabledSpriteFrame:nil];
+        startBtn.scale=0.5;
+        startBtn.position=ccp(titleBtn.position.x-(titleBtn.contentSize.width*titleBtn.scale)/2-(startBtn.contentSize.width*startBtn.scale)/2,winSize.height/2-50);
+        [startBtn setTarget:self selector:@selector(onPlayClicked:)];
+        [self addChild:startBtn];
+        
+        //プレイボタンラベル
+        CCLabelTTF* startLabel=[CCLabelTTF labelWithString:@"はじめから" fontName:@"Verdana-Bold" fontSize:20];
+        startLabel.position=ccp(startBtn.contentSize.width/2,-startLabel.contentSize.height/2);
+        [startBtn addChild:startLabel];
+        
+        //コンティニューボタン
+        //CCButton* continueBtn=[CCButton buttonWithTitle:@"[続きから]" fontName:@"Verdana-Bold" fontSize:15];
+        CCButton* continueBtn=[CCButton buttonWithTitle:@""
+                    spriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"continue01.png"]
+                    highlightedSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"continue02.png"]
+                    disabledSpriteFrame:nil];
+        continueBtn.scale=0.5;
+        continueBtn.position=ccp(titleBtn.position.x+(titleBtn.contentSize.width*titleBtn.scale)/2+(continueBtn.contentSize.width*continueBtn.scale)/2,winSize.height/2-50);
+        [continueBtn setTarget:self selector:@selector(onContinueClicked:)];
+        [self addChild:continueBtn];
+        
+        //コティニューボタンラベル
+        CCLabelTTF* continueLabel=[CCLabelTTF labelWithString:@"続きから" fontName:@"Verdana-Bold" fontSize:20];
+        continueLabel.position=ccp(continueBtn.contentSize.width/2,-continueLabel.contentSize.height/2);
+        [continueBtn addChild:continueLabel];
+    
+    }else{
+        
+        //リプレイボタン
+        CCButton* replayBtn=[CCButton buttonWithTitle:@""
+                spriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"replay.png"]
+                highlightedSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"replay.png"]
                 disabledSpriteFrame:nil];
-    startBtn.scale=0.5;
-    startBtn.position=ccp(titleBtn.position.x-(titleBtn.contentSize.width*titleBtn.scale)/2-(startBtn.contentSize.width*startBtn.scale)/2,winSize.height/2-50);
-    [startBtn setTarget:self selector:@selector(onPlayClicked:)];
-    [self addChild:startBtn];
+        replayBtn.scale=0.5;
+        replayBtn.position=ccp(titleBtn.position.x-(titleBtn.contentSize.width*titleBtn.scale)/2-(replayBtn.contentSize.width*replayBtn.scale)/2,winSize.height/2-50);
+        [replayBtn setTarget:self selector:@selector(onReplayClicked:)];
+        [self addChild:replayBtn];
+        
+        //プレイボタンラベル
+        CCLabelTTF* replayLabel=[CCLabelTTF labelWithString:@"リプレイ" fontName:@"Verdana-Bold" fontSize:20];
+        replayLabel.position=ccp(replayBtn.contentSize.width/2,-replayLabel.contentSize.height/2);
+        [replayBtn addChild:replayLabel];
     
-    //プレイボタンラベル
-    CCLabelTTF* startLabel=[CCLabelTTF labelWithString:@"はじめから" fontName:@"Verdana-Bold" fontSize:20];
-    startLabel.position=ccp(startBtn.contentSize.width/2,-startLabel.contentSize.height/2);
-    [startBtn addChild:startLabel];
-    
-    //コンティニューボタン
-    //CCButton* continueBtn=[CCButton buttonWithTitle:@"[続きから]" fontName:@"Verdana-Bold" fontSize:15];
-    CCButton* continueBtn=[CCButton buttonWithTitle:@""
-                spriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"continue01.png"]
-                highlightedSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"continue02.png"]
+        //セレクトボタン
+        CCButton* selectBtn=[CCButton buttonWithTitle:@""
+                spriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"select.png"]
+                highlightedSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"select.png"]
                 disabledSpriteFrame:nil];
-    continueBtn.scale=0.5;
-    continueBtn.position=ccp(titleBtn.position.x+(titleBtn.contentSize.width*titleBtn.scale)/2+(continueBtn.contentSize.width*continueBtn.scale)/2,winSize.height/2-50);
-    [continueBtn setTarget:self selector:@selector(onContinueClicked:)];
-    [self addChild:continueBtn];
-    
-    //コティニューボタンラベル
-    CCLabelTTF* continueLabel=[CCLabelTTF labelWithString:@"続きから" fontName:@"Verdana-Bold" fontSize:20];
-    continueLabel.position=ccp(continueBtn.contentSize.width/2,-continueLabel.contentSize.height/2);
-    [continueBtn addChild:continueLabel];
-    
+        selectBtn.scale=0.5;
+        selectBtn.position=ccp(titleBtn.position.x+(titleBtn.contentSize.width*titleBtn.scale)/2+(selectBtn.contentSize.width*selectBtn.scale)/2,winSize.height/2-50);
+        [selectBtn setTarget:self selector:@selector(onSelectClicked:)];
+        [self addChild:selectBtn];
+        
+        //セレクトボタンラベル
+        CCLabelTTF* selectLabel=[CCLabelTTF labelWithString:@"レヴェル選択" fontName:@"Verdana-Bold" fontSize:20];
+        selectLabel.position=ccp(selectBtn.contentSize.width/2,-selectLabel.contentSize.height/2);
+        [selectBtn addChild:selectLabel];
+    }
+
     /*CCButton* titleButton=[CCButton buttonWithTitle:@"[タイトル]" fontName:@"Verdana-Bold" fontSize:15];
     titleButton.position=ccp(winSize.width/2,winSize.height/2-50);
     [titleButton setTarget:self selector:@selector(onTitleClicked:)];
@@ -114,9 +148,19 @@ MessageLayer* msgBox;
                                withTransition:[CCTransition transitionCrossFadeWithDuration:1.0]];
 }
 
+- (void)onReplayClicked:(id)sender
+{
+
+}
+
+- (void)onSelectClicked:(id)sender
+{
+    
+}
+
 - (void)onPlayClicked:(id)sender
 {
-    [GameManager setPointCount:5];
+    [GameManager setLifePoint:5];
     [GameManager setStageLavel:1];
     [GameManager setScore:0];
     [[CCDirector sharedDirector] replaceScene:[StageScene scene]
@@ -126,7 +170,7 @@ MessageLayer* msgBox;
 
 - (void)onContinueClicked:(id)sender
 {
-    if([GameManager load_Stage_Level]>0){
+    if([GameManager load_Stage_Level_1]>0){
         if([GameManager load_Continue_Ticket]>0){
             //カスタムアラートメッセージ
             msgBox=[[MessageLayer alloc]initWithTitle:NSLocalizedString(@"Continue",NULL)
@@ -179,9 +223,9 @@ MessageLayer* msgBox;
         
     }else if(procNum==1){
         if(btnNum==2){//Yes
-            [GameManager setPointCount:5];
-            [GameManager setStageLavel:[GameManager load_Stage_Level]+1];
-            [GameManager setScore:[GameManager load_High_Score]];
+            [GameManager setLifePoint:5];
+            [GameManager setStageLavel:[GameManager load_Stage_Level_1]+1];
+            [GameManager setScore:[GameManager load_High_Score_1]];
             //チケット
             [GameManager save_Continue_Ticket:[GameManager load_Continue_Ticket]-1];
             //[TitleScene ticket_Update];

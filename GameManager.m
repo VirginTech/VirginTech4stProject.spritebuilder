@@ -13,9 +13,10 @@
 float osVersion;//OSバージョン
 int deviceType;// 1:iPad2 2:iPhone4 3:iPhone5 4:iPhone6
 int scorePoint;//スコア
-int pointCount;//持ち点
+int lifePoint;//持ち点
 bool pauseFlg;//ポーズ
 int stageLavel;//現在ステージレヴェル
+int playMode;//1:スコアチャレンジ 2:ステージチャレンジ
 
 //OSバージョン
 +(void)setOsVersion:(float)version{
@@ -39,11 +40,11 @@ int stageLavel;//現在ステージレヴェル
     return scorePoint;
 }
 //持ち点
-+(void)setPointCount:(int)count{
-    pointCount=count;
++(void)setLifePoint:(int)point{
+    lifePoint=point;
 }
-+(int)getPointCount{
-    return pointCount;
++(int)getLifePoint{
+    return lifePoint;
 }
 //ポーズフラグ
 +(void)setPause:(bool)flg{
@@ -59,6 +60,13 @@ int stageLavel;//現在ステージレヴェル
 +(int)getStageLevel{
     return stageLavel;
 }
+//プレイモード
++(void)setPlayMode:(int)mode{
+    playMode=mode;
+}
++(int)getPlayMode{
+    return playMode;
+}
 
 //=======================
 // 初回起動時 初期化処理
@@ -68,11 +76,17 @@ int stageLavel;//現在ステージレヴェル
     NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
     NSDictionary *dict = [[NSUserDefaults standardUserDefaults] persistentDomainForName:appDomain];
     
-    if([dict valueForKey:@"highscore"]==nil){
-        [self save_High_Score:0];
+    if([dict valueForKey:@"highscore1"]==nil){
+        [self save_High_Score_1:0];
     }
-    if([dict valueForKey:@"stagelevel"]==nil){
-        [self save_Stage_Level:0];
+    if([dict valueForKey:@"stagelevel1"]==nil){
+        [self save_Stage_Level_1:0];
+    }
+    if([dict valueForKey:@"highscore2"]==nil){
+        [self save_High_Score_2:0];
+    }
+    if([dict valueForKey:@"stagelevel2"]==nil){
+        [self save_Stage_Level_2:0];
     }
     if([dict valueForKey:@"ticket"]==nil){
         [self save_Continue_Ticket:0];
@@ -80,43 +94,82 @@ int stageLavel;//現在ステージレヴェル
 }
 
 //====================
-//ハイスコアの保存
+//ハイスコアの保存（スコアモード用）
 //====================
-+(void)save_High_Score:(int)value
++(void)save_High_Score_1:(int)value
 {
     NSUserDefaults  *userDefault=[NSUserDefaults standardUserDefaults];
     NSNumber* score=[NSNumber numberWithLong:value];
-    [userDefault setObject:score forKey:@"highscore"];
+    [userDefault setObject:score forKey:@"highscore1"];
     [userDefault synchronize];
 }
 //====================
-//ハイスコアの取得
+//ハイスコアの取得（スコアモード用）
 //====================
-+(int)load_High_Score
++(int)load_High_Score_1
 {
     NSUserDefaults  *userDefault=[NSUserDefaults standardUserDefaults];
-    int score=[[userDefault objectForKey:@"highscore"]intValue];
+    int score=[[userDefault objectForKey:@"highscore1"]intValue];
     return score;
 }
 //====================
-//レヴェルの保存
+//レヴェルの保存（スコアモード用）
 //====================
-+(void)save_Stage_Level:(int)value
++(void)save_Stage_Level_1:(int)value
 {
     NSUserDefaults  *userDefault=[NSUserDefaults standardUserDefaults];
     NSNumber* level=[NSNumber numberWithInt:value];
-    [userDefault setObject:level forKey:@"stagelevel"];
+    [userDefault setObject:level forKey:@"stagelevel1"];
     [userDefault synchronize];
 }
 //====================
-//レヴェルの取得
+//レヴェルの取得（スコアモード用）
 //====================
-+(int)load_Stage_Level
++(int)load_Stage_Level_1
 {
     NSUserDefaults  *userDefault=[NSUserDefaults standardUserDefaults];
-    int level=[[userDefault objectForKey:@"stagelevel"]intValue];
+    int level=[[userDefault objectForKey:@"stagelevel1"]intValue];
     return level;
 }
+//====================
+//ハイスコアの保存（ステージモード用）
+//====================
++(void)save_High_Score_2:(int)value
+{
+    NSUserDefaults  *userDefault=[NSUserDefaults standardUserDefaults];
+    NSNumber* score=[NSNumber numberWithLong:value];
+    [userDefault setObject:score forKey:@"highscore2"];
+    [userDefault synchronize];
+}
+//====================
+//ハイスコアの取得（ステージモード用）
+//====================
++(int)load_High_Score_2
+{
+    NSUserDefaults  *userDefault=[NSUserDefaults standardUserDefaults];
+    int score=[[userDefault objectForKey:@"highscore2"]intValue];
+    return score;
+}
+//====================
+//レヴェルの保存（ステージモード用）
+//====================
++(void)save_Stage_Level_2:(int)value
+{
+    NSUserDefaults  *userDefault=[NSUserDefaults standardUserDefaults];
+    NSNumber* level=[NSNumber numberWithInt:value];
+    [userDefault setObject:level forKey:@"stagelevel2"];
+    [userDefault synchronize];
+}
+//====================
+//レヴェルの取得（ステージモード用）
+//====================
++(int)load_Stage_Level_2
+{
+    NSUserDefaults  *userDefault=[NSUserDefaults standardUserDefaults];
+    int level=[[userDefault objectForKey:@"stagelevel2"]intValue];
+    return level;
+}
+
 //===========================
 //　コンティニューチケットの取得
 //===========================

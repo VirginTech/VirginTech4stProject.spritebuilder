@@ -20,4 +20,6 @@
 + (TitleScene *)scene;
 - (id)init;
 
++(void)ticket_Update;
+
 @end

@@ -14,6 +14,8 @@
 #import "PreferencesScene.h"
 #import "ShopScene.h"
 #import "Reachability.h"
+#import "ScoreModeMenu.h"
+#import "StageModeMenu.h"
 
 @implementation TitleScene
 
@@ -78,24 +80,24 @@ CCLabelTTF* ticketLabel;
     [self addChild:titleLogo];
     
     //レヴェル表示
-    CCLabelTTF* levelLabel=[CCLabelTTF labelWithString:[NSString stringWithFormat:@"Level:%03d",
-                                            [GameManager load_Stage_Level]] fontName:@"Verdana-Bold" fontSize:15];
-    levelLabel.position=ccp(levelLabel.contentSize.width/2,winSize.height-levelLabel.contentSize.height/2);
-    [self addChild:levelLabel];
+    //CCLabelTTF* levelLabel=[CCLabelTTF labelWithString:[NSString stringWithFormat:@"Level:%03d",
+    //                                      [GameManager load_Stage_Level]] fontName:@"Verdana-Bold" fontSize:15];
+    //levelLabel.position=ccp(levelLabel.contentSize.width/2,winSize.height-levelLabel.contentSize.height/2);
+    //[self addChild:levelLabel];
     
     //ハイスコア表示
-    CCLabelTTF* highscoreLabel=[CCLabelTTF labelWithString:[NSString stringWithFormat:@"HighScore:%05d",
-                                                [GameManager load_High_Score]] fontName:@"Verdana-Bold" fontSize:15];
-    highscoreLabel.position=ccp(winSize.width-highscoreLabel.contentSize.width/2,
-                                winSize.height-highscoreLabel.contentSize.height/2);
-    [self addChild:highscoreLabel];
+    //CCLabelTTF* highscoreLabel=[CCLabelTTF labelWithString:[NSString stringWithFormat:@"HighScore:%05d",
+    //                                      [GameManager load_High_Score]] fontName:@"Verdana-Bold" fontSize:15];
+    //highscoreLabel.position=ccp(winSize.width-highscoreLabel.contentSize.width/2,
+    //                            winSize.height-highscoreLabel.contentSize.height/2);
+    //[self addChild:highscoreLabel];
     
     //コンティニューチケット
     CCSprite* ticket=[CCSprite spriteWithSpriteFrame:
                       [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"ticket.png"]];
     ticket.scale=0.2;
     ticket.position=ccp((ticket.contentSize.width*ticket.scale)/2,
-                        levelLabel.position.y-levelLabel.contentSize.height/2-(ticket.contentSize.height*ticket.scale)/2);
+                                        winSize.height-(ticket.contentSize.height*ticket.scale)/2);
     [self addChild:ticket];
     
     //コンティニューチケット枚数
@@ -104,7 +106,7 @@ CCLabelTTF* ticketLabel;
     ticketLabel.position=ccp(ticket.position.x+ticketLabel.contentSize.width/2,ticket.position.y);
     [self addChild:ticketLabel];
     
-    //プレイボタン
+    /*/プレイボタン
     //CCButton* startBtn=[CCButton buttonWithTitle:@"[はじめから]" fontName:@"Verdana-Bold" fontSize:15];
     CCButton* startBtn=[CCButton buttonWithTitle:@""
                 spriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"play01.png"]
@@ -134,7 +136,20 @@ CCLabelTTF* ticketLabel;
     //コティニューボタンラベル
     CCLabelTTF* continueLabel=[CCLabelTTF labelWithString:@"続きから" fontName:@"Verdana-Bold" fontSize:20];
     continueLabel.position=ccp(continueBtn.contentSize.width/2,-continueLabel.contentSize.height/2);
-    [continueBtn addChild:continueLabel];
+    [continueBtn addChild:continueLabel];*/
+    
+    
+    //スコアチャレンジモード
+    CCButton* scoreModeBtn=[CCButton buttonWithTitle:@"[スコアチャレンジ]" fontName:@"Verdana-Bold" fontSize:20];
+    scoreModeBtn.position=ccp(winSize.width/2,winSize.height/2-70);
+    [scoreModeBtn setTarget:self selector:@selector(onScoreModeClicked:)];
+    [self addChild:scoreModeBtn];
+    
+    //ステージチャレンジモード
+    CCButton* stageModeBtn=[CCButton buttonWithTitle:@"[ステージチャレンジ]" fontName:@"Verdana-Bold" fontSize:20];
+    stageModeBtn.position=ccp(winSize.width/2,scoreModeBtn.position.y-30);
+    [stageModeBtn setTarget:self selector:@selector(onStageModeClicked:)];
+    [self addChild:stageModeBtn];
     
     //GameCenterボタン
     CCButton *gameCenterButton = [CCButton buttonWithTitle:@"" spriteFrame:
@@ -240,7 +255,7 @@ CCLabelTTF* ticketLabel;
     if(procNum==0){
 
     }
-    //コンティニューチケット使用
+    /*/コンティニューチケット使用
     else if(procNum==1){
         if(btnNum==2){//Yes
             [GameManager setPointCount:5];
@@ -253,7 +268,7 @@ CCLabelTTF* ticketLabel;
             [[CCDirector sharedDirector] replaceScene:[StageScene scene]
                                    withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
         }
-    }
+    }*/
     //初回ボーナス（メッセージ）
     else if(procNum==2){
         //カスタムアラートメッセージ
@@ -282,6 +297,19 @@ CCLabelTTF* ticketLabel;
     }
 }
 
+- (void)onScoreModeClicked:(id)sender
+{
+    [[CCDirector sharedDirector] replaceScene:[ScoreModeMenu scene]
+                               withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
+}
+
+- (void)onStageModeClicked:(id)sender
+{
+    [[CCDirector sharedDirector] replaceScene:[StageModeMenu scene]
+                               withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
+}
+
+/*
 - (void)onPlayClicked:(id)sender
 {
     [GameManager setPointCount:5];
@@ -336,6 +364,7 @@ CCLabelTTF* ticketLabel;
         return;
     }
 }
+*/
 
 -(void)onGameCenterClicked:(id)sender
 {

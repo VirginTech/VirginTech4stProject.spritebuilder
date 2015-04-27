@@ -43,8 +43,14 @@ CCLabelTTF* highscoreLabel;
     [self addChild:scoreLabel];
     
     //ハイスコアラベル
-    highscoreLabel=[CCLabelTTF labelWithString:[NSString stringWithFormat:@"HighScore:%05d",
-                                    [GameManager load_High_Score]] fontName:@"Verdana-Bold" fontSize:15];
+    if([GameManager getPlayMode]==1){
+        highscoreLabel=[CCLabelTTF labelWithString:[NSString stringWithFormat:@"HighScore:%05d",
+                                    [GameManager load_High_Score_1]] fontName:@"Verdana-Bold" fontSize:15];
+    }else{
+        highscoreLabel=[CCLabelTTF labelWithString:[NSString stringWithFormat:@"HighScore:%05d",
+                                    [GameManager load_High_Score_2]] fontName:@"Verdana-Bold" fontSize:15];
+    }
+    
     highscoreLabel.position=ccp(winSize.width-highscoreLabel.contentSize.width/2,
                                                         winSize.height-highscoreLabel.contentSize.height/2);
     [self addChild:highscoreLabel];
@@ -65,16 +71,16 @@ CCLabelTTF* highscoreLabel;
         [starArray addObject:star];
     }
     //持ち点更新
-    [Information pointCountUpdata];
+    [Information lifePointUpdata];
     
     return self;
 }
 
-+(void)pointCountUpdata
++(void)lifePointUpdata
 {
     int i=0;
     for(CCSprite* _star in starArray){
-        if(i<[GameManager getPointCount]){
+        if(i<[GameManager getLifePoint]){
             _star.visible=true;
         }else{
             _star.visible=false;
@@ -90,7 +96,11 @@ CCLabelTTF* highscoreLabel;
 
 +(void)highScoreUpdata
 {
-    highscoreLabel.string=[NSString stringWithFormat:@"HighScore:%05d",[GameManager load_High_Score]];
+    if([GameManager getPlayMode]==1){
+        highscoreLabel.string=[NSString stringWithFormat:@"HighScore:%05d",[GameManager load_High_Score_1]];
+    }else{
+        highscoreLabel.string=[NSString stringWithFormat:@"HighScore:%05d",[GameManager load_High_Score_2]];
+    }
 }
 
 - (void)dealloc

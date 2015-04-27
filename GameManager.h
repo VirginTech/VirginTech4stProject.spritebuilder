@@ -17,19 +17,29 @@
 
 +(void)setScore:(int)point;
 +(int)getScore;
-+(void)setPointCount:(int)count;
-+(int)getPointCount;
++(void)setLifePoint:(int)point;
++(int)getLifePoint;
 +(void)setPause:(bool)flg;
 +(bool)getPause;
 +(void)setStageLavel:(int)level;
 +(int)getStageLevel;
-
++(void)setPlayMode:(int)mode;
++(int)getPlayMode;
+    
 +(void)initialize_Save_Data;
 
-+(void)save_High_Score:(int)value;
-+(int)load_High_Score;
-+(void)save_Stage_Level:(int)value;
-+(int)load_Stage_Level;
+//スコアモード用
++(void)save_High_Score_1:(int)value;
++(int)load_High_Score_1;
++(void)save_Stage_Level_1:(int)value;
++(int)load_Stage_Level_1;
+
+//ステージモード用
++(void)save_High_Score_2:(int)value;
++(int)load_High_Score_2;
++(void)save_Stage_Level_2:(int)value;
++(int)load_Stage_Level_2;
+
 +(int)load_Continue_Ticket;
 +(void)save_Continue_Ticket:(int)value;
 
