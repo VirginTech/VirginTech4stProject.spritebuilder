@@ -76,6 +76,13 @@ int playMode;//1:スコアチャレンジ 2:ステージチャレンジ
     NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
     NSDictionary *dict = [[NSUserDefaults standardUserDefaults] persistentDomainForName:appDomain];
     
+    if([dict valueForKey:@"stagescore"]==nil){
+        NSMutableArray* array=[[NSMutableArray alloc]init];
+        for(int i=0;i<75;i++){
+            [array addObject:[NSNumber numberWithInt:0]];
+        }
+        [self save_Stage_Score_All:array];
+    }
     if([dict valueForKey:@"highscore1"]==nil){
         [self save_High_Score_1:0];
     }
@@ -92,6 +99,66 @@ int playMode;//1:スコアチャレンジ 2:ステージチャレンジ
         [self save_Continue_Ticket:0];
     }
 }
+
+//====================
+//ステージスコアの一括保存
+//====================
++(void)save_Stage_Score_All:(NSMutableArray*)array
+{
+    NSUserDefaults  *userDefault=[NSUserDefaults standardUserDefaults];
+    [userDefault setObject:array forKey:@"stagescore"];
+    [userDefault synchronize];
+}
+//====================
+//ステージスコアの一括取得
+//====================
++(NSMutableArray*)load_Stage_Score_All
+{
+    NSUserDefaults  *userDefault=[NSUserDefaults standardUserDefaults];
+    NSMutableArray *array = [[NSMutableArray alloc]init];
+    array = [userDefault objectForKey:@"stagescore"];
+    return array;
+}
+//====================
+//各ステージスコアの保存
+//====================
++(void)save_Stage_Score:(int)stage score:(int)score
+{
+    NSMutableArray* array=[[NSMutableArray alloc]init];
+    NSMutableArray* tmpArray=[[NSMutableArray alloc]init];
+    tmpArray=[self load_Stage_Score_All];
+    for(int i=0;i<tmpArray.count;i++){//コピー
+        [array addObject:[tmpArray objectAtIndex:i]];
+    }
+    [array replaceObjectAtIndex:stage-1 withObject:[NSNumber numberWithInt:score]];
+    [self save_Stage_Score_All:array];
+}
+
+//====================
+//各ステージスコアの取得
+//====================
++(int)load_Stage_Score:(int)stage
+{
+    NSMutableArray* array=[[NSMutableArray alloc]init];
+    array=[self load_Stage_Score_All];
+    int score=[[array objectAtIndex:stage-1]intValue];
+    return score;
+}
+//====================
+//トータルスコアの取得
+//====================
++(int)load_Total_Score:(int)stage
+{
+    int score=0;
+    NSUserDefaults  *userDefault=[NSUserDefaults standardUserDefaults];
+    NSMutableArray *array = [[NSMutableArray alloc]init];
+    array = [userDefault objectForKey:@"stagescore"];
+    for(int i=0;i<stage;i++){
+        score = score+[[array objectAtIndex:i]intValue];
+    }
+    return score;
+}
+
 
 //====================
 //ハイスコアの保存（スコアモード用）

@@ -17,7 +17,7 @@
 
 @end
 
-@interface MessageLayer : CCScene
+@interface MsgBoxLayer : CCScene
 {
     int procNum;
 }
@@ -28,7 +28,7 @@
 // デリゲート用メソッド
 -(void)sendDelegate:(int)btnNum;
 
-+(MessageLayer *)scene;
++(MsgBoxLayer *)scene;
 -(id)initWithTitle:(NSString*)title //タイトル
                             msg:(NSString*)msg //本文
                             pos:(CGPoint)pos//位置

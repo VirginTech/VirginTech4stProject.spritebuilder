@@ -19,6 +19,7 @@ NSMutableArray* starArray;
 CCLabelTTF* scoreLabel;
 CCLabelTTF* highscoreLabel;
 
+int totalScore;
 
 + (Information *)scene
 {
@@ -37,11 +38,19 @@ CCLabelTTF* highscoreLabel;
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"info_default.plist"];
     
     //スコアラベル
-    scoreLabel=[CCLabelTTF labelWithString:[NSString stringWithFormat:@"Score:%05d",
-                                    [GameManager getScore]] fontName:@"Verdana-Bold" fontSize:15];
-    scoreLabel.position=ccp(scoreLabel.contentSize.width/2,winSize.height-scoreLabel.contentSize.height/2);
-    [self addChild:scoreLabel];
-    
+    if([GameManager getPlayMode]==1){//スコアモードなら
+        scoreLabel=[CCLabelTTF labelWithString:[NSString stringWithFormat:@"Score:%05d",
+                            [GameManager getScore]] fontName:@"Verdana-Bold" fontSize:15];
+        scoreLabel.position=ccp(scoreLabel.contentSize.width/2,winSize.height-scoreLabel.contentSize.height/2);
+        [self addChild:scoreLabel];
+    }else{
+        totalScore=[GameManager load_Total_Score:[GameManager getStageLevel]-1];//1つ前までのステージスコア
+        scoreLabel=[CCLabelTTF labelWithString:[NSString stringWithFormat:@"Score:%05d",
+                            totalScore+[GameManager getScore]] fontName:@"Verdana-Bold" fontSize:15];
+        scoreLabel.position=ccp(scoreLabel.contentSize.width/2,winSize.height-scoreLabel.contentSize.height/2);
+        [self addChild:scoreLabel];
+    }
+
     //ハイスコアラベル
     if([GameManager getPlayMode]==1){
         highscoreLabel=[CCLabelTTF labelWithString:[NSString stringWithFormat:@"HighScore:%05d",
@@ -91,7 +100,11 @@ CCLabelTTF* highscoreLabel;
 
 +(void)scoreUpdata
 {
-    scoreLabel.string=[NSString stringWithFormat:@"Score:%05d",[GameManager getScore]];
+    if([GameManager getPlayMode]==1){
+        scoreLabel.string=[NSString stringWithFormat:@"Score:%05d",[GameManager getScore]];
+    }else{
+        scoreLabel.string=[NSString stringWithFormat:@"Score:%05d",totalScore+[GameManager getScore]];
+    }
 }
 
 +(void)highScoreUpdata

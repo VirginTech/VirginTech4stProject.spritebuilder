@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-#import "MessageLayer.h"
+#import "MsgBoxLayer.h"
 
 @interface ScoreModeMenu : CCScene <MsgLayerDelegate>
 {

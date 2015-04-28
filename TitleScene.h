@@ -10,7 +10,7 @@
 #import "cocos2d.h"
 #import "GKitController.h"
 #import <StoreKit/StoreKit.h>
-#import "MessageLayer.h"
+#import "MsgBoxLayer.h"
 
 @interface TitleScene : CCScene <MsgLayerDelegate>
 {

@@ -9,11 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-@interface MsgLayer : CCScene {
+@interface MsgEffect : CCScene {
     
 }
 
-+ (MsgLayer *)scene;
++ (MsgEffect *)scene;
 - (id)initWithMsg:(NSString*)str nextFlg:(bool)flg;
 
 @end

@@ -10,6 +10,7 @@
 #import "TitleScene.h"
 #import "GameManager.h"
 #import "StageScene.h"
+#import "StageModeMenu.h"
 
 @implementation NaviLayer
 
@@ -17,7 +18,7 @@
 
 CGSize winSize;
 CCNodeColor *background;
-MessageLayer* msgBox;
+MsgBoxLayer* msgBox;
 
 + (NaviLayer *)scene
 {
@@ -61,19 +62,19 @@ MessageLayer* msgBox;
     if([GameManager getPlayMode]==1){
         //プレイボタン
         //CCButton* startBtn=[CCButton buttonWithTitle:@"[はじめから]" fontName:@"Verdana-Bold" fontSize:15];
-        CCButton* startBtn=[CCButton buttonWithTitle:@""
+        CCButton* playBtn=[CCButton buttonWithTitle:@""
                     spriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"play01.png"]
                     highlightedSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"play02.png"]
                     disabledSpriteFrame:nil];
-        startBtn.scale=0.5;
-        startBtn.position=ccp(titleBtn.position.x-(titleBtn.contentSize.width*titleBtn.scale)/2-(startBtn.contentSize.width*startBtn.scale)/2,winSize.height/2-50);
-        [startBtn setTarget:self selector:@selector(onPlayClicked:)];
-        [self addChild:startBtn];
+        playBtn.scale=0.5;
+        playBtn.position=ccp(titleBtn.position.x-(titleBtn.contentSize.width*titleBtn.scale)/2-(playBtn.contentSize.width*playBtn.scale)/2,winSize.height/2-50);
+        [playBtn setTarget:self selector:@selector(onPlayClicked:)];
+        [self addChild:playBtn];
         
         //プレイボタンラベル
         CCLabelTTF* startLabel=[CCLabelTTF labelWithString:@"はじめから" fontName:@"Verdana-Bold" fontSize:20];
-        startLabel.position=ccp(startBtn.contentSize.width/2,-startLabel.contentSize.height/2);
-        [startBtn addChild:startLabel];
+        startLabel.position=ccp(playBtn.contentSize.width/2,-startLabel.contentSize.height/2);
+        [playBtn addChild:startLabel];
         
         //コンティニューボタン
         //CCButton* continueBtn=[CCButton buttonWithTitle:@"[続きから]" fontName:@"Verdana-Bold" fontSize:15];
@@ -95,23 +96,23 @@ MessageLayer* msgBox;
         
         //リプレイボタン
         CCButton* replayBtn=[CCButton buttonWithTitle:@""
-                spriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"replay.png"]
-                highlightedSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"replay.png"]
+                spriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"replay01.png"]
+                highlightedSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"replay02.png"]
                 disabledSpriteFrame:nil];
         replayBtn.scale=0.5;
         replayBtn.position=ccp(titleBtn.position.x-(titleBtn.contentSize.width*titleBtn.scale)/2-(replayBtn.contentSize.width*replayBtn.scale)/2,winSize.height/2-50);
         [replayBtn setTarget:self selector:@selector(onReplayClicked:)];
         [self addChild:replayBtn];
         
-        //プレイボタンラベル
+        //リプレイボタンラベル
         CCLabelTTF* replayLabel=[CCLabelTTF labelWithString:@"リプレイ" fontName:@"Verdana-Bold" fontSize:20];
         replayLabel.position=ccp(replayBtn.contentSize.width/2,-replayLabel.contentSize.height/2);
         [replayBtn addChild:replayLabel];
     
         //セレクトボタン
         CCButton* selectBtn=[CCButton buttonWithTitle:@""
-                spriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"select.png"]
-                highlightedSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"select.png"]
+                spriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"select01.png"]
+                highlightedSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"select02.png"]
                 disabledSpriteFrame:nil];
         selectBtn.scale=0.5;
         selectBtn.position=ccp(titleBtn.position.x+(titleBtn.contentSize.width*titleBtn.scale)/2+(selectBtn.contentSize.width*selectBtn.scale)/2,winSize.height/2-50);
@@ -150,12 +151,18 @@ MessageLayer* msgBox;
 
 - (void)onReplayClicked:(id)sender
 {
-
-}
+    [GameManager setPlayMode:2];
+    [GameManager setStageLavel:[GameManager getStageLevel]];
+    [GameManager setLifePoint:1];
+    [GameManager setScore:0];
+    
+    [[CCDirector sharedDirector] replaceScene:[StageScene scene]
+                               withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];}
 
 - (void)onSelectClicked:(id)sender
 {
-    
+    [[CCDirector sharedDirector] replaceScene:[StageModeMenu scene]
+                               withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
 }
 
 - (void)onPlayClicked:(id)sender
@@ -173,7 +180,7 @@ MessageLayer* msgBox;
     if([GameManager load_Stage_Level_1]>0){
         if([GameManager load_Continue_Ticket]>0){
             //カスタムアラートメッセージ
-            msgBox=[[MessageLayer alloc]initWithTitle:NSLocalizedString(@"Continue",NULL)
+            msgBox=[[MsgBoxLayer alloc]initWithTitle:NSLocalizedString(@"Continue",NULL)
                                                     msg:NSLocalizedString(@"Ticket_Use",NULL)
                                                     pos:ccp(winSize.width/2,winSize.height/2)
                                                     size:CGSizeMake(200, 100)
@@ -186,7 +193,7 @@ MessageLayer* msgBox;
             return;
         }else{
             //カスタムアラートメッセージ
-            msgBox=[[MessageLayer alloc]initWithTitle:NSLocalizedString(@"Continue",NULL)
+            msgBox=[[MsgBoxLayer alloc]initWithTitle:NSLocalizedString(@"Continue",NULL)
                                                     msg:NSLocalizedString(@"Ticket_Shortage",NULL)
                                                     pos:ccp(winSize.width/2,winSize.height/2)
                                                     size:CGSizeMake(200, 100)
@@ -200,7 +207,7 @@ MessageLayer* msgBox;
         }
     }else{
         //カスタムアラートメッセージ
-        msgBox=[[MessageLayer alloc]initWithTitle:NSLocalizedString(@"Continue",NULL)
+        msgBox=[[MsgBoxLayer alloc]initWithTitle:NSLocalizedString(@"Continue",NULL)
                                                 msg:NSLocalizedString(@"NotContinue",NULL)
                                                 pos:ccp(winSize.width/2,winSize.height/2)
                                                 size:CGSizeMake(200, 100)

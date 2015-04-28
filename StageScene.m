@@ -20,7 +20,7 @@
 #import "Basket.h"
 #import "Information.h"
 #import "NaviLayer.h"
-#import "MsgLayer.h"
+#import "MsgEffect.h"
 #import "BallShadow.h"
 
 @implementation StageScene
@@ -181,7 +181,7 @@ CCLabelTTF* ballCntLbl;
     resumeBtn.visible=false;
     
     //開始メッセージ
-    MsgLayer* msg=[[MsgLayer alloc]initWithMsg:[NSString stringWithFormat:@"Lv.%d Start!",
+    MsgEffect* msg=[[MsgEffect alloc]initWithMsg:[NSString stringWithFormat:@"Lv.%d Start!",
                                                             [GameManager getStageLevel]] nextFlg:false];
     [self addChild:msg z:2];
     
@@ -694,7 +694,7 @@ CCLabelTTF* ballCntLbl;
             }
         }
         //ネクストステージへ
-        MsgLayer* msg=[[MsgLayer alloc]initWithMsg:@"  Stage\nComplete!" nextFlg:true];
+        MsgEffect* msg=[[MsgEffect alloc]initWithMsg:@"  Stage\nComplete!" nextFlg:true];
         [self addChild:msg z:2];
     }else{//ゲームオーバー
         [GameManager setPause:true];
@@ -709,12 +709,25 @@ CCLabelTTF* ballCntLbl;
         if([GameManager load_High_Score_1]<[GameManager getScore]){
             [GameManager save_High_Score_1:[GameManager getScore]];
             [Information highScoreUpdata];
+            
+            //GameCenterへ送信
+            
+            
+            
         }
-    }else{
-        //ステージスコア
-        
-        
-        
+    }
+    else
+    {
+        if([GameManager getScore]>[GameManager load_Stage_Score:[GameManager getStageLevel]]){//ハイスコア！
+            [GameManager save_Stage_Score:[GameManager getStageLevel] score:[GameManager getScore]];//ステージスコア保存
+            [GameManager save_High_Score_2:[GameManager load_Total_Score:75]];//全スコアをハイスコアへ保存
+            [Information highScoreUpdata];//ハイスコア更新
+            
+            //GameCenterへ送信
+            
+            
+
+        }
     }
 }
 

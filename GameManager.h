@@ -15,6 +15,10 @@
 +(int)getDevice;
 +(void)setDevice:(int)type;// 1:iPhone5,6 2:iPhone4 3:iPad2
 
++(void)save_Stage_Score:(int)stage score:(int)score;
++(int)load_Stage_Score:(int)stage;
++(int)load_Total_Score:(int)stage;
+
 +(void)setScore:(int)point;
 +(int)getScore;
 +(void)setLifePoint:(int)point;

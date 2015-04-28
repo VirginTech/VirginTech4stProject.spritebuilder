@@ -20,7 +20,7 @@
 @implementation TitleScene
 
 CGSize winSize;
-MessageLayer* msgBox;
+MsgBoxLayer* msgBox;
 CCLabelTTF* ticketLabel;
 
 + (TitleScene *)scene
@@ -52,7 +52,7 @@ CCLabelTTF* ticketLabel;
         [GameManager save_login_Date:currentDate];
         
         //カスタムアラートメッセージ
-        msgBox=[[MessageLayer alloc]initWithTitle:NSLocalizedString(@"Welcome",NULL)
+        msgBox=[[MsgBoxLayer alloc]initWithTitle:NSLocalizedString(@"Welcome",NULL)
                                                 msg:NSLocalizedString(@"FirstLogin",NULL)
                                                 pos:ccp(winSize.width/2,winSize.height/2)
                                                 size:CGSizeMake(250, 200)
@@ -75,7 +75,7 @@ CCLabelTTF* ticketLabel;
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"title_default.plist"];
     
     //タイトル
-    CCLabelTTF* titleLogo=[CCLabelTTF labelWithString:@"4st Project" fontName:@"Verdana-Bold" fontSize:30];
+    CCLabelTTF* titleLogo=[CCLabelTTF labelWithString:@"Windmill" fontName:@"Verdana-Bold" fontSize:30];
     titleLogo.position=ccp(winSize.width/2,winSize.height/2+100);
     [self addChild:titleLogo];
     
@@ -106,40 +106,40 @@ CCLabelTTF* ticketLabel;
     ticketLabel.position=ccp(ticket.position.x+ticketLabel.contentSize.width/2,ticket.position.y);
     [self addChild:ticketLabel];
     
-    /*/プレイボタン
-    //CCButton* startBtn=[CCButton buttonWithTitle:@"[はじめから]" fontName:@"Verdana-Bold" fontSize:15];
-    CCButton* startBtn=[CCButton buttonWithTitle:@""
-                spriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"play01.png"]
-                highlightedSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"play02.png"]
-                disabledSpriteFrame:nil];
-    startBtn.scale=0.5;
-    startBtn.position=ccp(winSize.width/2-(startBtn.contentSize.width*startBtn.scale)/2-20,winSize.height/2-50);
-    [startBtn setTarget:self selector:@selector(onPlayClicked:)];
-    [self addChild:startBtn];
-    
-    //プレイボタンラベル
-    CCLabelTTF* startLabel=[CCLabelTTF labelWithString:@"はじめから" fontName:@"Verdana-Bold" fontSize:20];
-    startLabel.position=ccp(startBtn.contentSize.width/2,-startLabel.contentSize.height/2);
-    [startBtn addChild:startLabel];
-    
-    //コンティニューボタン
-    //CCButton* continueBtn=[CCButton buttonWithTitle:@"[続きから]" fontName:@"Verdana-Bold" fontSize:15];
-    CCButton* continueBtn=[CCButton buttonWithTitle:@""
-                spriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"continue01.png"]
-                highlightedSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"continue02.png"]
-                disabledSpriteFrame:nil];
-    continueBtn.scale=0.5;
-    continueBtn.position=ccp(winSize.width/2+(continueBtn.contentSize.width*continueBtn.scale)/2+20,winSize.height/2-50);
-    [continueBtn setTarget:self selector:@selector(onContinueClicked:)];
-    [self addChild:continueBtn];
-
-    //コティニューボタンラベル
-    CCLabelTTF* continueLabel=[CCLabelTTF labelWithString:@"続きから" fontName:@"Verdana-Bold" fontSize:20];
-    continueLabel.position=ccp(continueBtn.contentSize.width/2,-continueLabel.contentSize.height/2);
-    [continueBtn addChild:continueLabel];*/
-    
-    
     //スコアチャレンジモード
+    //CCButton* startBtn=[CCButton buttonWithTitle:@"[はじめから]" fontName:@"Verdana-Bold" fontSize:15];
+    CCButton* scoreModeBtn=[CCButton buttonWithTitle:@""
+                spriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"scoreMode01.png"]
+                highlightedSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"scoreMode02.png"]
+                disabledSpriteFrame:nil];
+    scoreModeBtn.scale=0.5;
+    scoreModeBtn.position=ccp(winSize.width/2-(scoreModeBtn.contentSize.width*scoreModeBtn.scale)/2-20,winSize.height/2-50);
+    [scoreModeBtn setTarget:self selector:@selector(onScoreModeClicked:)];
+    [self addChild:scoreModeBtn];
+    
+    //スコアチャレンジモードラベル
+    CCLabelTTF* scoreModeLabel=[CCLabelTTF labelWithString:@"スコアチャレンジ" fontName:@"Verdana-Bold" fontSize:20];
+    scoreModeLabel.position=ccp(scoreModeBtn.contentSize.width/2,-scoreModeLabel.contentSize.height/2);
+    [scoreModeBtn addChild:scoreModeLabel];
+    
+    //ステージチャレンジモード
+    //CCButton* continueBtn=[CCButton buttonWithTitle:@"[続きから]" fontName:@"Verdana-Bold" fontSize:15];
+    CCButton* stageModeBtn=[CCButton buttonWithTitle:@""
+                spriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"stageMode01.png"]
+                highlightedSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"stageMode02.png"]
+                disabledSpriteFrame:nil];
+    stageModeBtn.scale=0.5;
+    stageModeBtn.position=ccp(winSize.width/2+(stageModeBtn.contentSize.width*stageModeBtn.scale)/2+20,winSize.height/2-50);
+    [stageModeBtn setTarget:self selector:@selector(onStageModeClicked:)];
+    [self addChild:stageModeBtn];
+
+    //ステージチャレンジモードラベル
+    CCLabelTTF* stageModeLabel=[CCLabelTTF labelWithString:@"ステージモード" fontName:@"Verdana-Bold" fontSize:20];
+    stageModeLabel.position=ccp(stageModeBtn.contentSize.width/2,-stageModeLabel.contentSize.height/2);
+    [stageModeBtn addChild:stageModeLabel];
+    
+    
+    /*/スコアチャレンジモード
     CCButton* scoreModeBtn=[CCButton buttonWithTitle:@"[スコアチャレンジ]" fontName:@"Verdana-Bold" fontSize:20];
     scoreModeBtn.position=ccp(winSize.width/2,winSize.height/2-70);
     [scoreModeBtn setTarget:self selector:@selector(onScoreModeClicked:)];
@@ -149,7 +149,7 @@ CCLabelTTF* ticketLabel;
     CCButton* stageModeBtn=[CCButton buttonWithTitle:@"[ステージチャレンジ]" fontName:@"Verdana-Bold" fontSize:20];
     stageModeBtn.position=ccp(winSize.width/2,scoreModeBtn.position.y-30);
     [stageModeBtn setTarget:self selector:@selector(onStageModeClicked:)];
-    [self addChild:stageModeBtn];
+    [self addChild:stageModeBtn];*/
     
     //GameCenterボタン
     CCButton *gameCenterButton = [CCButton buttonWithTitle:@"" spriteFrame:
@@ -234,7 +234,7 @@ CCLabelTTF* ticketLabel;
         [GameManager save_login_Date:currentDate];
         
         //カスタムアラートメッセージ
-        msgBox=[[MessageLayer alloc]initWithTitle:NSLocalizedString(@"BonusGet",NULL)
+        msgBox=[[MsgBoxLayer alloc]initWithTitle:NSLocalizedString(@"BonusGet",NULL)
                                                 msg:NSLocalizedString(@"DailyBonus",NULL)
                                                 pos:ccp(winSize.width/2,winSize.height/2)
                                                 size:CGSizeMake(200, 100)
@@ -272,7 +272,7 @@ CCLabelTTF* ticketLabel;
     //初回ボーナス（メッセージ）
     else if(procNum==2){
         //カスタムアラートメッセージ
-        msgBox=[[MessageLayer alloc]initWithTitle:NSLocalizedString(@"BonusGet",NULL)
+        msgBox=[[MsgBoxLayer alloc]initWithTitle:NSLocalizedString(@"BonusGet",NULL)
                                                 msg:NSLocalizedString(@"FirstBonus",NULL)
                                                 pos:ccp(winSize.width/2,winSize.height/2)
                                                 size:CGSizeMake(200, 100)
@@ -300,13 +300,13 @@ CCLabelTTF* ticketLabel;
 - (void)onScoreModeClicked:(id)sender
 {
     [[CCDirector sharedDirector] replaceScene:[ScoreModeMenu scene]
-                               withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
+                               withTransition:[CCTransition transitionCrossFadeWithDuration:0.3]];
 }
 
 - (void)onStageModeClicked:(id)sender
 {
     [[CCDirector sharedDirector] replaceScene:[StageModeMenu scene]
-                               withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
+                               withTransition:[CCTransition transitionCrossFadeWithDuration:0.3]];
 }
 
 /*
@@ -388,7 +388,7 @@ CCLabelTTF* ticketLabel;
 {
     if (![SKPaymentQueue canMakePayments]){//ダメ
         //カスタムアラートメッセージ
-        msgBox=[[MessageLayer alloc]initWithTitle:NSLocalizedString(@"Error",NULL)
+        msgBox=[[MsgBoxLayer alloc]initWithTitle:NSLocalizedString(@"Error",NULL)
                                                 msg:NSLocalizedString(@"InAppBillingIslimited",NULL)
                                                 pos:ccp(winSize.width/2,winSize.height/2)
                                                 size:CGSizeMake(200, 100)
@@ -410,7 +410,7 @@ CCLabelTTF* ticketLabel;
         if(netStatus == NotReachable)//ダメ
         {
             //カスタムアラートメッセージ
-            msgBox=[[MessageLayer alloc]initWithTitle:NSLocalizedString(@"Error",NULL)
+            msgBox=[[MsgBoxLayer alloc]initWithTitle:NSLocalizedString(@"Error",NULL)
                                                     msg:NSLocalizedString(@"NotNetwork",NULL)
                                                     pos:ccp(winSize.width/2,winSize.height/2)
                                                     size:CGSizeMake(200, 100)

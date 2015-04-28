@@ -6,18 +6,18 @@
 //  Copyright 2014年 VirginTech LLC. All rights reserved.
 //
 
-#import "MsgLayer.h"
+#import "MsgEffect.h"
 #import "GameManager.h"
 #import "StageScene.h"
 
-@implementation MsgLayer
+@implementation MsgEffect
 
 CGSize winSize;
 CCLabelTTF* msg;
 int cnt;
 bool nextFlg;
 
-+(MsgLayer *)scene{
++(MsgEffect *)scene{
     
     return [[self alloc] init];
 }
@@ -66,9 +66,17 @@ bool nextFlg;
         if(nextFlg){
             [self unschedule:@selector(show_Message_Schedule:)];
             //次ステージへ
-            [GameManager setStageLavel:[GameManager getStageLevel]+1];//ステージレヴェル設定
-            [[CCDirector sharedDirector] replaceScene:[StageScene scene]
+            if([GameManager getPlayMode]==1){
+                [GameManager setStageLavel:[GameManager getStageLevel]+1];//ステージレヴェル設定
+                [[CCDirector sharedDirector] replaceScene:[StageScene scene]
                                        withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
+            }else{
+                [GameManager setStageLavel:[GameManager getStageLevel]+1];//ステージレヴェル設定
+                [GameManager setScore:0];
+
+                [[CCDirector sharedDirector] replaceScene:[StageScene scene]
+                                           withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
+            }
             [self removeFromParentAndCleanup:YES];
         //スタート時
         }else{

@@ -6,16 +6,16 @@
 //  Copyright 2014年 VirginTech LLC. All rights reserved.
 //
 
-#import "MessageLayer.h"
+#import "MsgBoxLayer.h"
 //#import "SoundManager.h"
 
-@implementation MessageLayer
+@implementation MsgBoxLayer
 
 @synthesize delegate;
 
 CGSize winSize;
 
-+ (MessageLayer *)scene
++ (MsgBoxLayer *)scene
 {
     return [[self alloc] init];
 }
