@@ -104,20 +104,91 @@ CCLabelTTF* ballCntLbl;
     angelBall=[[NSMutableIndexSet alloc]init];
     devilBall=[[NSMutableIndexSet alloc]init];
     
-    //Maxボール数
+    
+    //=============================== ゲームバランス調整 =============================//
+    
+    //=====================
+    //　Maxボール数
+    //=====================
     if([GameManager getPlayMode]==1){//スコアチャレンジ
         maxBallCount=12;
+    }else{//ステージモード
+        if([GameManager getStageLevel]<=20){//1〜20
+            maxBallCount=[GameManager getStageLevel];
+        }else if([GameManager getStageLevel]<=40){//21〜40
+            maxBallCount=20;
+        }else if([GameManager getStageLevel]<=60){//41〜60
+            maxBallCount=25;
+        }else{//61〜75
+            maxBallCount=30;
+        }
+    }
+    //=====================
+    //　天使・悪魔ボール取得
+    //=====================
+    if([GameManager getPlayMode]==1){
+        angelBall=[self special_Ball_Num:1 range:9];//１個 9以内
+        devilBall=[self special_Ball_Num:2 range:9];//２個 9以内
     }else{
-        maxBallCount=[GameManager getStageLevel];//ステージモード
+        if([GameManager getStageLevel]<=3){//1〜3
+
+        }else if([GameManager getStageLevel]<=5){//4〜5
+            angelBall=[self special_Ball_Num:1 range:3];//1個 3以内
+            devilBall=[self special_Ball_Num:1 range:3];//1個 3以内
+        }else if([GameManager getStageLevel]<=10){//6〜10
+            angelBall=[self special_Ball_Num:1 range:5];//1個 5以内
+            devilBall=[self special_Ball_Num:2 range:5];//2個 5以内
+        }else if([GameManager getStageLevel]<=20){//11〜20
+            angelBall=[self special_Ball_Num:2 range:10];//2個 10以内
+            devilBall=[self special_Ball_Num:3 range:10];//3個 10以内
+        }else if([GameManager getStageLevel]<=30){//21〜30
+            angelBall=[self special_Ball_Num:2 range:15];//2個 15以内
+            devilBall=[self special_Ball_Num:3 range:15];//3個 15以内
+        }else if([GameManager getStageLevel]<=40){//31〜40
+            angelBall=[self special_Ball_Num:3 range:15];//3個 15以内
+            devilBall=[self special_Ball_Num:4 range:15];//4個 15以内
+        }else if([GameManager getStageLevel]<=50){//41〜50
+            angelBall=[self special_Ball_Num:3 range:15];//3個 15以内
+            devilBall=[self special_Ball_Num:4 range:15];//4個 15以内
+        }else if([GameManager getStageLevel]<=60){//51〜60
+            angelBall=[self special_Ball_Num:4 range:15];//4個 15以内
+            devilBall=[self special_Ball_Num:5 range:15];//5個 15以内
+        }else if([GameManager getStageLevel]<=70){//61〜70
+            angelBall=[self special_Ball_Num:5 range:20];//5個 20以内
+            devilBall=[self special_Ball_Num:6 range:20];//6個 20以内
+        }else{//71〜75
+            angelBall=[self special_Ball_Num:5 range:20];//6個 20以内
+            devilBall=[self special_Ball_Num:7 range:20];//7個 20以内
+        }
+    }
+    //=====================
+    //　ボール発射間隔
+    //=====================
+    if([GameManager getPlayMode]==1){
+        ballLaunchCnt=300-((([GameManager getStageLevel]-1)/10)*10);//10ステージごとに-10
+        if(ballLaunchCnt<50){
+            ballLaunchCnt=50;//50を下回ったら50を維持
+        }
+    }else{
+        ballLaunchCnt=300-((([GameManager getStageLevel]-1)/3)*10);//3ステージごとに-10
+        if(ballLaunchCnt<50){
+            ballLaunchCnt=50;//50を下回ったら50を維持
+        }
+    }
+    //=====================
+    //　ライフポイント
+    //=====================
+    if([GameManager getPlayMode]==1){
+        //[GameManager setLifePoint:5];
+    }else{
+        [GameManager setLifePoint:1+((([GameManager getStageLevel]-1)/10)*1)];//10ステージごとに+1
+        if([GameManager getLifePoint]>5){
+            [GameManager setLifePoint:5];
+        }
     }
     
-    //天使・悪魔ボール取得
-    if([GameManager getPlayMode]==1){
-        angelBall=[self special_Ball_Num:1];//１個分
-        devilBall=[self special_Ball_Num:2];//２個分
-    }else{
-        
-    }
+    //=============================== ここまで =============================//
+
     
     //ジャイロセンサー初期化
     motionManager = [[CMMotionManager alloc] init];
@@ -135,13 +206,6 @@ CCLabelTTF* ballCntLbl;
     }else{
         adjustValue = 25;
     }
-    
-    //ボール発射間隔
-    ballLaunchCnt=300-((([GameManager getStageLevel]-1)/10)*10);//10ステージごとに-10
-    if(ballLaunchCnt<50){
-        ballLaunchCnt=50;//50を下回ったら50を維持
-    }
-    //NSLog(@"BallLaunchCnt=%d",ballLaunchCnt);
     
     //インフォメーションレイヤー
     Information* infoLayer=[[Information alloc]init];
@@ -373,14 +437,14 @@ CCLabelTTF* ballCntLbl;
 //================================
 //　ボール種別生成
 //================================
--(NSMutableIndexSet*)special_Ball_Num:(int)cnt
+-(NSMutableIndexSet*)special_Ball_Num:(int)cnt range:(int)range
 {
     NSMutableIndexSet* tmpIndex=[[NSMutableIndexSet alloc]init];
     int i=0;
     int num;
 
     while(i<cnt){
-        num=(arc4random()%(maxBallCount-3))+1;//Max=12 → 1〜9
+        num=(arc4random()%range)+1;//1〜Range
         if(![angelBall containsIndex:num] && ![tmpIndex containsIndex:num]){
             i++;
             [tmpIndex addIndex:num];
@@ -694,8 +758,18 @@ CCLabelTTF* ballCntLbl;
             }
         }
         //ネクストステージへ
-        MsgEffect* msg=[[MsgEffect alloc]initWithMsg:@"  Stage\nComplete!" nextFlg:true];
-        [self addChild:msg z:2];
+        if([GameManager getStageLevel]<75){
+            MsgEffect* msg=[[MsgEffect alloc]initWithMsg:@"  Stage\nComplete!" nextFlg:true];
+            [self addChild:msg z:2];
+        }
+        else//全ステージクリア！
+        {
+            [GameManager setPause:true];
+            naviLayer.visible=true;
+            naviLayer.gameOverLabel.string=@"おめでとう！";
+            pauseBtn.visible=false;
+            resumeBtn.visible=false;
+        }
     }else{//ゲームオーバー
         [GameManager setPause:true];
         naviLayer.visible=true;

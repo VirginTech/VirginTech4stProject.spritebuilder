@@ -147,8 +147,12 @@ CCScrollView* scrollView;
     
     [GameManager setPlayMode:2];
     [GameManager setStageLavel:stageNum];
-    [GameManager setLifePoint:1];
     [GameManager setScore:0];
+
+    /*[GameManager setLifePoint:1+((([GameManager getStageLevel]-1)/10)*1)];//10ステージごとに+1
+    if([GameManager getLifePoint]>5){
+        [GameManager setLifePoint:5];
+    }*/
 
     [[CCDirector sharedDirector] replaceScene:[StageScene scene]
                                withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];

@@ -153,7 +153,7 @@ MsgBoxLayer* msgBox;
 {
     [GameManager setPlayMode:2];
     [GameManager setStageLavel:[GameManager getStageLevel]];
-    [GameManager setLifePoint:1];
+    //[GameManager setLifePoint:1];
     [GameManager setScore:0];
     
     [[CCDirector sharedDirector] replaceScene:[StageScene scene]
