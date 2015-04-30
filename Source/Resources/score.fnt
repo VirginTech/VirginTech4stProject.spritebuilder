@@ -1,0 +1,40 @@
+info face="Impact" size=32 bold=1 italic=0 charset="" unicode=0 stretchH=100 smooth=1 aa=1 padding=1,1,1,1 spacing=1,1
+common lineHeight=40 base=32 scaleW=256 scaleH=128 pages=1 packed=0
+page id=0 file="score.png"
+chars count=25
+char id=32     x=117   y=76    width=0     height=0     xoffset=0     yoffset=37    xadvance=6     page=0 chnl=0 letter="space"
+char id=48     x=135   y=1     width=25    height=37    xoffset=-1    yoffset=0     xadvance=17    page=0 chnl=0 letter="0"
+char id=49     x=77    y=39    width=21    height=36    xoffset=-2    yoffset=1     xadvance=12    page=0 chnl=0 letter="1"
+char id=50     x=27    y=39    width=25    height=36    xoffset=-1    yoffset=1     xadvance=16    page=0 chnl=0 letter="2"
+char id=51     x=109   y=1     width=25    height=37    xoffset=-1    yoffset=1     xadvance=17    page=0 chnl=0 letter="3"
+char id=52     x=161   y=1     width=26    height=36    xoffset=-2    yoffset=1     xadvance=16    page=0 chnl=0 letter="4"
+char id=53     x=188   y=1     width=26    height=36    xoffset=-1    yoffset=1     xadvance=17    page=0 chnl=0 letter="5"
+char id=54     x=28    y=1     width=26    height=37    xoffset=-1    yoffset=0     xadvance=17    page=0 chnl=0 letter="6"
+char id=55     x=53    y=39    width=23    height=36    xoffset=-2    yoffset=1     xadvance=13    page=0 chnl=0 letter="7"
+char id=56     x=82    y=1     width=26    height=37    xoffset=-1    yoffset=0     xadvance=17    page=0 chnl=0 letter="8"
+char id=57     x=55    y=1     width=26    height=37    xoffset=-1    yoffset=1     xadvance=17    page=0 chnl=0 letter="9"
+char id=58     x=75    y=76    width=15    height=27    xoffset=-1    yoffset=10    xadvance=6     page=0 chnl=0 letter=":"
+char id=72     x=215   y=1     width=26    height=36    xoffset=-1    yoffset=1     xadvance=18    page=0 chnl=0 letter="H"
+char id=76     x=99    y=39    width=21    height=36    xoffset=-1    yoffset=1     xadvance=12    page=0 chnl=0 letter="L"
+char id=83     x=1     y=1     width=26    height=37    xoffset=-1    yoffset=1     xadvance=17    page=0 chnl=0 letter="S"
+char id=99     x=1     y=76    width=25    height=32    xoffset=-1    yoffset=5     xadvance=16    page=0 chnl=0 letter="c"
+char id=101    x=183   y=39    width=25    height=32    xoffset=-1    yoffset=5     xadvance=16    page=0 chnl=0 letter="e"
+char id=103    x=157   y=39    width=25    height=35    xoffset=-1    yoffset=6     xadvance=17    page=0 chnl=0 letter="g"
+char id=104    x=1     y=39    width=25    height=36    xoffset=-1    yoffset=1     xadvance=17    page=0 chnl=0 letter="h"
+char id=105    x=121   y=39    width=17    height=36    xoffset=-1    yoffset=1     xadvance=9     page=0 chnl=0 letter="i"
+char id=108    x=139   y=39    width=17    height=36    xoffset=-1    yoffset=1     xadvance=9     page=0 chnl=0 letter="l"
+char id=111    x=209   y=39    width=25    height=32    xoffset=-1    yoffset=5     xadvance=16    page=0 chnl=0 letter="o"
+char id=114    x=27    y=76    width=21    height=32    xoffset=-1    yoffset=5     xadvance=11    page=0 chnl=0 letter="r"
+char id=118    x=49    y=76    width=25    height=31    xoffset=-2    yoffset=6     xadvance=14    page=0 chnl=0 letter="v"
+char id=215    x=91    y=76    width=25    height=25    xoffset=-1    yoffset=6     xadvance=17    page=0 chnl=0 letter="×"
+kernings count=10
+kerning first=50 second=52 amount=-1
+kerning first=52 second=49 amount=-1
+kerning first=52 second=55 amount=-1
+kerning first=53 second=49 amount=-1
+kerning first=53 second=50 amount=-1
+kerning first=53 second=55 amount=-1
+kerning first=55 second=49 amount=1
+kerning first=55 second=52 amount=-1
+kerning first=55 second=55 amount=1
+kerning first=114 second=118 amount=1

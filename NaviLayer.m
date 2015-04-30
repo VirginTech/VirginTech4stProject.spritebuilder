@@ -33,12 +33,14 @@ MsgBoxLayer* msgBox;
     
     winSize=[[CCDirector sharedDirector]viewSize];
     
+    //バックグラウンド
     background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:0.7f]];
     [self addChild:background];
     
     //ゲームオーバーラベル
-    gameOverLabel=[CCLabelTTF labelWithString:@"" fontName:@"Verdana-Bold" fontSize:30];
-    gameOverLabel.position=ccp(winSize.width/2,winSize.height/2+50);
+    //gameOverLabel=[CCLabelTTF labelWithString:@"" fontName:@"Verdana-Bold" fontSize:30];
+    gameOverLabel=[CCLabelBMFont labelWithString:@"" fntFile:@"msgEffect.fnt"];
+    gameOverLabel.position=ccp(winSize.width/2,winSize.height/2+70);
     [self addChild:gameOverLabel];
     
     //画像読み込み

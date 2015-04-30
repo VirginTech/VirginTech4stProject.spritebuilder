@@ -41,10 +41,11 @@ CCScrollView* scrollView;
     //[self addChild:infoLayer z:1];
     
     //ハイスコア表示
-    CCLabelTTF* highscoreLabel=[CCLabelTTF labelWithString:[NSString stringWithFormat:@"HighScore:%05d",
-                                        [GameManager load_High_Score_2]] fontName:@"Verdana-Bold" fontSize:15];
-    highscoreLabel.position=ccp(winSize.width-highscoreLabel.contentSize.width/2,
-                                winSize.height-highscoreLabel.contentSize.height/2);
+    CCLabelBMFont* highscoreLabel=[CCLabelBMFont labelWithString:
+            [NSString stringWithFormat:@"HighScore:%05d",[GameManager load_High_Score_2]] fntFile:@"score.fnt"];
+    highscoreLabel.scale=0.6;
+    highscoreLabel.position=ccp(winSize.width-(highscoreLabel.contentSize.width*highscoreLabel.scale)/2,
+                                winSize.height-(highscoreLabel.contentSize.height*highscoreLabel.scale)/2);
     [self addChild:highscoreLabel];
     
     //画像読み込み

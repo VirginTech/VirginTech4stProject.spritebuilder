@@ -21,7 +21,7 @@
 
 CGSize winSize;
 MsgBoxLayer* msgBox;
-CCLabelTTF* ticketLabel;
+CCLabelBMFont* ticketLabel;
 
 + (TitleScene *)scene
 {
@@ -75,7 +75,7 @@ CCLabelTTF* ticketLabel;
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"title_default.plist"];
     
     //タイトル
-    CCLabelTTF* titleLogo=[CCLabelTTF labelWithString:@"Windmill" fontName:@"Verdana-Bold" fontSize:30];
+    CCLabelTTF* titleLogo=[CCLabelTTF labelWithString:@"windmill" fontName:@"Verdana-Bold" fontSize:30];
     titleLogo.position=ccp(winSize.width/2,winSize.height/2+100);
     [self addChild:titleLogo];
     
@@ -96,14 +96,15 @@ CCLabelTTF* ticketLabel;
     CCSprite* ticket=[CCSprite spriteWithSpriteFrame:
                       [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"ticket.png"]];
     ticket.scale=0.2;
-    ticket.position=ccp((ticket.contentSize.width*ticket.scale)/2,
-                                        winSize.height-(ticket.contentSize.height*ticket.scale)/2);
+    ticket.position=ccp((ticket.contentSize.width*ticket.scale)/2+5,
+                                        winSize.height-(ticket.contentSize.height*ticket.scale)/2-5);
     [self addChild:ticket];
     
     //コンティニューチケット枚数
-    ticketLabel=[CCLabelTTF labelWithString:[NSString stringWithFormat:@" ×%03d",
-                                    [GameManager load_Continue_Ticket]] fontName:@"Verdana-Bold" fontSize:15];
-    ticketLabel.position=ccp(ticket.position.x+ticketLabel.contentSize.width/2,ticket.position.y);
+    ticketLabel=[CCLabelBMFont labelWithString:
+                 [NSString stringWithFormat:@"×%03d",[GameManager load_Continue_Ticket]] fntFile:@"score.fnt"];
+    ticketLabel.scale=0.6;
+    ticketLabel.position=ccp(ticket.position.x+(ticket.contentSize.width*ticket.scale)/2+(ticketLabel.contentSize.width*ticketLabel.scale)/2,ticket.position.y);
     [self addChild:ticketLabel];
     
     //スコアチャレンジモード

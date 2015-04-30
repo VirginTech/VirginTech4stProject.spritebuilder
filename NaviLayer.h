@@ -12,10 +12,10 @@
 
 @interface NaviLayer : CCScene <MsgLayerDelegate>
 {
-    CCLabelTTF* gameOverLabel;
+    CCLabelBMFont* gameOverLabel;
 }
 
-@property CCLabelTTF* gameOverLabel;
+@property CCLabelBMFont* gameOverLabel;
 
 + (NaviLayer *)scene;
 - (id)init;

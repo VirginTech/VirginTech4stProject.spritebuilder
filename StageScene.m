@@ -68,7 +68,7 @@ BallShadow* ballShadow;
 NSMutableArray* ballShadowArray;
 
 //ボールカウンター
-CCLabelTTF* ballCntLbl;
+CCLabelBMFont* ballCntLbl;
 
 //デバッグラベル
 //CCLabelTTF* maxBallCount_lbl;
@@ -96,7 +96,7 @@ CCLabelTTF* ballCntLbl;
     doneBallCount=0;
     ballCount=0;
     ballTimingCnt=0;
-    force=((arc4random()%41)+60)*0.1;
+    force=((arc4random()%5)+63)*0.1;//6.3〜6.7
     ballArray=[[NSMutableArray alloc]init];
     ballShadowArray=[[NSMutableArray alloc]init];
     [GameManager setPause:false];
@@ -213,7 +213,7 @@ CCLabelTTF* ballCntLbl;
     
     //ポーズレイヤー
     naviLayer=[[NaviLayer alloc]init];
-    [self addChild:naviLayer z:2];
+    [self addChild:naviLayer z:3];
     naviLayer.visible=false;
     
     //画像読み込み
@@ -245,7 +245,7 @@ CCLabelTTF* ballCntLbl;
     resumeBtn.visible=false;
     
     //開始メッセージ
-    MsgEffect* msg=[[MsgEffect alloc]initWithMsg:[NSString stringWithFormat:@"Lv.%d Start!",
+    MsgEffect* msg=[[MsgEffect alloc]initWithMsg:[NSString stringWithFormat:@"Lv.%d \nStart!",
                                                             [GameManager getStageLevel]] nextFlg:false];
     [self addChild:msg z:2];
     
@@ -266,6 +266,11 @@ CCLabelTTF* ballCntLbl;
     doneBallCount_lbl.position=ccp(doneBallCount_lbl.contentSize.width/2,winSize.height-70);
     [self addChild:doneBallCount_lbl z:1];*/
 
+    CCLabelTTF* ballLaunchTiming_lbl=[CCLabelTTF labelWithString:
+            [NSString stringWithFormat:@"BallLaunchTiming:%d",ballLaunchCnt] fontName:@"Verdana-Bold" fontSize:10];
+    ballLaunchTiming_lbl.position=ccp(ballLaunchTiming_lbl.contentSize.width/2,winSize.height-50);
+    [self addChild:ballLaunchTiming_lbl z:1];
+    
     
     return self;
 }
@@ -377,16 +382,27 @@ CCLabelTTF* ballCntLbl;
     [ballShadowArray addObject:ballShadow];
     
     //ボールカウンター
-    ballCntLbl=[CCLabelTTF labelWithString:[NSString stringWithFormat:@"%02d",maxBallCount-(ballCount-1)]
-                                                                fontName:@"Verdana-Bold" fontSize:15];
+    //ballCntLbl=[CCLabelTTF labelWithString:[NSString stringWithFormat:@"%02d",maxBallCount-(ballCount-1)]
+    //                                                            fontName:@"Verdana-Bold" fontSize:15];
+    ballCntLbl=[CCLabelBMFont labelWithString:
+                        [NSString stringWithFormat:@"%02d",maxBallCount-(ballCount-1)]fntFile:@"score.fnt"];
+    ballCntLbl.scale=0.7;
     ballCntLbl.position=ccp(piston.position.x,wall_m.position.y-(wall_m.contentSize.height*wall_m.scale)/2-10);
     [self addChild:ballCntLbl];
     
     //ボール発射スケジュール
-    [self schedule:@selector(ball_State_Schedule:)interval:0.01 repeat:CCTimerRepeatForever delay:1.5];
+    int delay;
+    if(ballLaunchCnt<=100){
+        delay=3.0;
+    }else if(ballLaunchCnt<=200){
+        delay=2.0;
+    }else{
+        delay=1.5;
+    }
+    [self schedule:@selector(ball_State_Schedule:)interval:0.01 repeat:CCTimerRepeatForever delay:delay];
     
     //ジャイロセンサー開始タイムウェイト
-    [self schedule:@selector(basket_Start_Schedule:)interval:1.0 repeat:0 delay:2.0];
+    [self scheduleOnce:@selector(basket_Start_Schedule:) delay:2.0];
 }
 
 - (void)onExit
@@ -478,12 +494,13 @@ CCLabelTTF* ballCntLbl;
             }else{
                 //発射後TRUEにする
                 ball.stateFlg=true;
-                
+                //ピストン下降
+                piston.position=ccp(piston.position.x,winSize.height/2-100);
+
                 ballTimingCnt=0;
                 force=((arc4random()%5)+63)*0.1;//6.3〜6.7
                 //NSLog(@"Force=%f",force);
-                //下降
-                piston.position=ccp(piston.position.x,winSize.height/2-100);
+
                 //ボール生成
                 ballCount++;
                 if(ballCount<=maxBallCount){
@@ -758,22 +775,27 @@ CCLabelTTF* ballCntLbl;
             }
         }
         //ネクストステージへ
-        if([GameManager getStageLevel]<75){
-            MsgEffect* msg=[[MsgEffect alloc]initWithMsg:@"  Stage\nComplete!" nextFlg:true];
+        if([GameManager getPlayMode]==1){
+            MsgEffect* msg=[[MsgEffect alloc]initWithMsg:@"   Stage\nComplete!" nextFlg:true];
             [self addChild:msg z:2];
-        }
-        else//全ステージクリア！
-        {
-            [GameManager setPause:true];
-            naviLayer.visible=true;
-            naviLayer.gameOverLabel.string=@"おめでとう！";
-            pauseBtn.visible=false;
-            resumeBtn.visible=false;
+        }else{
+            if([GameManager getStageLevel]<75){
+                MsgEffect* msg=[[MsgEffect alloc]initWithMsg:@"   Stage\nComplete!" nextFlg:true];
+                [self addChild:msg z:2];
+            }
+            else//全ステージクリア！
+            {
+                [GameManager setPause:true];
+                naviLayer.visible=true;
+                naviLayer.gameOverLabel.string=@"Congratu\nlations!";
+                pauseBtn.visible=false;
+                resumeBtn.visible=false;
+            }
         }
     }else{//ゲームオーバー
         [GameManager setPause:true];
         naviLayer.visible=true;
-        naviLayer.gameOverLabel.string=@"Game Over!";
+        naviLayer.gameOverLabel.string=@"Stage\nfailed!";
         pauseBtn.visible=false;
         resumeBtn.visible=false;
     }

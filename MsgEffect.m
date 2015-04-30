@@ -13,7 +13,7 @@
 @implementation MsgEffect
 
 CGSize winSize;
-CCLabelTTF* msg;
+CCLabelBMFont* msg;
 int cnt;
 bool nextFlg;
 
@@ -29,15 +29,20 @@ bool nextFlg;
     
     winSize=[[CCDirector sharedDirector]viewSize];
     
+    //バックグラウンド
+    CCNodeColor* background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:0.7f]];
+    [self addChild:background];
+    
     cnt=0;
     nextFlg=flg;
-    msg=[CCLabelTTF labelWithString:str fontName:@"Chalkduster" fontSize:40];
-    msg.position=ccp(winSize.width/2,winSize.height/2+100);
+    //msg=[CCLabelTTF labelWithString:str fontName:@"Chalkduster" fontSize:40];
+    msg=[CCLabelBMFont labelWithString:str fntFile:@"msgEffect.fnt"];
+    msg.position=ccp(winSize.width/2,winSize.height/2+50);
     msg.opacity=0.0f;
-    msg.color=[CCColor redColor];
+    //msg.color=[CCColor redColor];
     [self addChild:msg];
     
-    [self schedule:@selector(show_Message_Schedule:)interval:0.05];
+    [self schedule:@selector(show_Message_Schedule:)interval:0.01];
     
     return self;
 }
@@ -49,19 +54,19 @@ bool nextFlg;
         return;
     }
 
-    if(cnt<=20){
-        msg.opacity+=0.05f;
-    }else if(cnt>=30){
-        msg.opacity-=0.05f;
+    if(cnt<=100){
+        msg.opacity+=0.01f;
+    }else if(cnt>=150){
+        msg.opacity-=0.01f;
     }
     cnt++;
     
-    if(cnt==20 && nextFlg){
+    if(cnt==100 && nextFlg){
         //エンディング効果音
         //[SoundManager endingEffect];
     }
     
-    if(cnt>=50){
+    if(cnt>=250){
         //終了時
         if(nextFlg){
             [self unschedule:@selector(show_Message_Schedule:)];

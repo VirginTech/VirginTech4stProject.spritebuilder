@@ -16,7 +16,7 @@
 
 CGSize winSize;
 MsgBoxLayer* msgBox;
-CCLabelTTF* ticketLabel;
+CCLabelBMFont* ticketLabel;
 
 + (ScoreModeMenu *)scene
 {
@@ -43,30 +43,39 @@ CCLabelTTF* ticketLabel;
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"menu_default.plist"];
     
     //レヴェル表示
-    CCLabelTTF* levelLabel=[CCLabelTTF labelWithString:[NSString stringWithFormat:@"Level:%03d",
-                                          [GameManager load_Stage_Level_1]] fontName:@"Verdana-Bold" fontSize:15];
-    levelLabel.position=ccp(levelLabel.contentSize.width/2,winSize.height-levelLabel.contentSize.height/2);
+    //CCLabelTTF* levelLabel=[CCLabelTTF labelWithString:[NSString stringWithFormat:@"Level:%03d",
+    //                                      [GameManager load_Stage_Level_1]] fontName:@"Verdana-Bold" fontSize:15];
+    CCLabelBMFont* levelLabel=[CCLabelBMFont labelWithString:
+                [NSString stringWithFormat:@"Level:%03d",[GameManager load_Stage_Level_1]] fntFile:@"score.fnt"];
+    levelLabel.scale=0.6;
+    levelLabel.position=ccp((levelLabel.contentSize.width*levelLabel.scale)/2,
+                            winSize.height-(levelLabel.contentSize.height*levelLabel.scale)/2);
     [self addChild:levelLabel];
     
     //ハイスコア表示
-    CCLabelTTF* highscoreLabel=[CCLabelTTF labelWithString:[NSString stringWithFormat:@"HighScore:%05d",
-                                          [GameManager load_High_Score_1]] fontName:@"Verdana-Bold" fontSize:15];
-    highscoreLabel.position=ccp(winSize.width-highscoreLabel.contentSize.width/2,
-                                winSize.height-highscoreLabel.contentSize.height/2);
+    //CCLabelTTF* highscoreLabel=[CCLabelTTF labelWithString:[NSString stringWithFormat:@"HighScore:%05d",
+    //                                      [GameManager load_High_Score_1]] fontName:@"Verdana-Bold" fontSize:15];
+    CCLabelBMFont* highscoreLabel=[CCLabelBMFont labelWithString:
+                [NSString stringWithFormat:@"HighScore:%05d",[GameManager load_High_Score_1]] fntFile:@"score.fnt"];
+    highscoreLabel.scale=0.6;
+    highscoreLabel.position=ccp(winSize.width-(highscoreLabel.contentSize.width*highscoreLabel.scale)/2,
+                                winSize.height-(highscoreLabel.contentSize.height*highscoreLabel.scale)/2);
     [self addChild:highscoreLabel];
     
     //コンティニューチケット
     CCSprite* ticket=[CCSprite spriteWithSpriteFrame:
                       [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"ticket.png"]];
     ticket.scale=0.2;
-    ticket.position=ccp((ticket.contentSize.width*ticket.scale)/2,
-                    (levelLabel.position.y-levelLabel.contentSize.height/2)-(ticket.contentSize.height*ticket.scale)/2);
+    ticket.position=ccp((ticket.contentSize.width*ticket.scale)/2,(levelLabel.position.y-(levelLabel.contentSize.height*levelLabel.scale)/2)-(ticket.contentSize.height*ticket.scale)/2);
     [self addChild:ticket];
     
     //コンティニューチケット枚数
-    ticketLabel=[CCLabelTTF labelWithString:[NSString stringWithFormat:@" ×%03d",
-                                             [GameManager load_Continue_Ticket]] fontName:@"Verdana-Bold" fontSize:15];
-    ticketLabel.position=ccp(ticket.position.x+ticketLabel.contentSize.width/2,ticket.position.y);
+    //ticketLabel=[CCLabelTTF labelWithString:[NSString stringWithFormat:@" ×%03d",
+    //                                         [GameManager load_Continue_Ticket]] fontName:@"Verdana-Bold" fontSize:15];
+    ticketLabel=[CCLabelBMFont labelWithString:
+                 [NSString stringWithFormat:@"×%03d",[GameManager load_Continue_Ticket]] fntFile:@"score.fnt"];
+    ticketLabel.scale=0.6;
+    ticketLabel.position=ccp(ticket.position.x+(ticket.contentSize.width*ticket.scale)/2+(ticketLabel.contentSize.width*ticketLabel.scale)/2,ticket.position.y);
     [self addChild:ticketLabel];
     
     //タイトルボタン

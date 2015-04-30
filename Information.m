@@ -16,8 +16,8 @@ CGSize winSize;
 CCSprite* star;
 NSMutableArray* starArray;
 
-CCLabelTTF* scoreLabel;
-CCLabelTTF* highscoreLabel;
+CCLabelBMFont* scoreLabel;
+CCLabelBMFont* highscoreLabel;
 
 int totalScore;
 
@@ -39,29 +39,29 @@ int totalScore;
     
     //スコアラベル
     if([GameManager getPlayMode]==1){//スコアモードなら
-        scoreLabel=[CCLabelTTF labelWithString:[NSString stringWithFormat:@"Score:%05d",
-                            [GameManager getScore]] fontName:@"Verdana-Bold" fontSize:15];
-        scoreLabel.position=ccp(scoreLabel.contentSize.width/2,winSize.height-scoreLabel.contentSize.height/2);
-        [self addChild:scoreLabel];
+        scoreLabel=[CCLabelBMFont labelWithString:
+                    [NSString stringWithFormat:@"Score:%05d",[GameManager getScore]] fntFile:@"score.fnt"];
     }else{
         totalScore=[GameManager load_Total_Score:[GameManager getStageLevel]-1];//1つ前までのステージスコア
-        scoreLabel=[CCLabelTTF labelWithString:[NSString stringWithFormat:@"Score:%05d",
-                            totalScore+[GameManager getScore]] fontName:@"Verdana-Bold" fontSize:15];
-        scoreLabel.position=ccp(scoreLabel.contentSize.width/2,winSize.height-scoreLabel.contentSize.height/2);
-        [self addChild:scoreLabel];
+        scoreLabel=[CCLabelBMFont labelWithString:
+                    [NSString stringWithFormat:@"Score:%05d",totalScore+[GameManager getScore]] fntFile:@"score.fnt"];
     }
+    scoreLabel.scale=0.6;
+    scoreLabel.position=ccp((scoreLabel.contentSize.width*scoreLabel.scale)/2,
+                            winSize.height-(scoreLabel.contentSize.height*scoreLabel.scale)/2);
+    [self addChild:scoreLabel];
 
     //ハイスコアラベル
     if([GameManager getPlayMode]==1){
-        highscoreLabel=[CCLabelTTF labelWithString:[NSString stringWithFormat:@"HighScore:%05d",
-                                    [GameManager load_High_Score_1]] fontName:@"Verdana-Bold" fontSize:15];
+        highscoreLabel=[CCLabelBMFont labelWithString:
+            [NSString stringWithFormat:@"HighScore:%05d",[GameManager load_High_Score_1]] fntFile:@"score.fnt"];
     }else{
-        highscoreLabel=[CCLabelTTF labelWithString:[NSString stringWithFormat:@"HighScore:%05d",
-                                    [GameManager load_High_Score_2]] fontName:@"Verdana-Bold" fontSize:15];
+        highscoreLabel=[CCLabelBMFont labelWithString:
+            [NSString stringWithFormat:@"HighScore:%05d",[GameManager load_High_Score_2]] fntFile:@"score.fnt"];
     }
-    
-    highscoreLabel.position=ccp(winSize.width-highscoreLabel.contentSize.width/2,
-                                                        winSize.height-highscoreLabel.contentSize.height/2);
+    highscoreLabel.scale=0.6;
+    highscoreLabel.position=ccp(winSize.width-(highscoreLabel.contentSize.width*highscoreLabel.scale)/2,
+                                winSize.height-(highscoreLabel.contentSize.height*highscoreLabel.scale)/2);
     [self addChild:highscoreLabel];
 
     //持ち点スター
@@ -69,13 +69,13 @@ int totalScore;
     for(int i=0;i<5;i++){
         star=[CCSprite spriteWithSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"star_B.png"]];
         star.scale=0.3;
-        star.position=ccp(10+i*16,scoreLabel.position.y-scoreLabel.contentSize.height/2-(star.contentSize.height*star.scale)/2);
+        star.position=ccp(10+i*16,scoreLabel.position.y-(scoreLabel.contentSize.height*scoreLabel.scale)/2-(star.contentSize.height*star.scale)/2);
         [self addChild:star];
     }
     for(int i=0;i<5;i++){
         star=[CCSprite spriteWithSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"star_G.png"]];
         star.scale=0.3;
-        star.position=ccp(10+i*16,scoreLabel.position.y-scoreLabel.contentSize.height/2-(star.contentSize.height*star.scale)/2);
+        star.position=ccp(10+i*16,scoreLabel.position.y-(scoreLabel.contentSize.height*scoreLabel.scale)/2-(star.contentSize.height*star.scale)/2);
         [self addChild:star];
         [starArray addObject:star];
     }
