@@ -21,7 +21,7 @@
 #import "Information.h"
 #import "NaviLayer.h"
 #import "MsgEffect.h"
-#import "BallShadow.h"
+//#import "BallShadow.h"
 
 @implementation StageScene
 
@@ -64,8 +64,8 @@ CCButton* pauseBtn;
 CCButton* resumeBtn;
 
 //シャドーボール
-BallShadow* ballShadow;
-NSMutableArray* ballShadowArray;
+//BallShadow* ballShadow;
+//NSMutableArray* ballShadowArray;
 
 //ボールカウンター
 CCLabelBMFont* ballCntLbl;
@@ -89,16 +89,22 @@ CCLabelBMFont* ballCntLbl;
     winSize=[[CCDirector sharedDirector]viewSize];
     
     //Create a colored background (Dark Grey)
-    CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.0f green:0.4f blue:0.0f alpha:1.0f]];
-    [self addChild:background];
+    //CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.0f green:0.4f blue:0.0f alpha:1.0f]];
+    //[self addChild:background];
 
+    //背景
+    NSString* bgName=[NSString stringWithFormat:@"bg_%02d.png",((([GameManager getStageLevel]-1)/5)+1)%3];//5区切り
+    CCSprite* bg=[CCSprite spriteWithImageNamed:bgName];
+    bg.position=ccp(winSize.width/2,winSize.height/2);
+    [self addChild:bg];
+    
     //初期化
     doneBallCount=0;
     ballCount=0;
     ballTimingCnt=0;
     force=((arc4random()%5)+63)*0.1;//6.3〜6.7
     ballArray=[[NSMutableArray alloc]init];
-    ballShadowArray=[[NSMutableArray alloc]init];
+    //ballShadowArray=[[NSMutableArray alloc]init];
     [GameManager setPause:false];
     lastBallFlg=false;
     angelBall=[[NSMutableIndexSet alloc]init];
@@ -371,15 +377,15 @@ CCLabelBMFont* ballCntLbl;
     }else{
         ball=[Ball createBall:ccp(0,0) type:1 cnt:ballCount];//ノーマルボール
     }
-    ball.position=ccp(winSize.width-(ball.contentSize.width*ball.scale)/2,winSize.height/2-50);
+    ball.position=ccp(piston.position.x,winSize.height/2-50);
     [physicWorld addChild:ball z:1];
     [ballArray addObject:ball];
     
-    //シャドーボール
+    /*/シャドーボール
     ballShadow=[BallShadow createBall:ballCount];
     //ballShadow.position=ball.position;
     [physicWorld addChild:ballShadow z:0];
-    [ballShadowArray addObject:ballShadow];
+    [ballShadowArray addObject:ballShadow];*/
     
     //ボールカウンター
     //ballCntLbl=[CCLabelTTF labelWithString:[NSString stringWithFormat:@"%02d",maxBallCount-(ballCount-1)]
@@ -512,16 +518,16 @@ CCLabelBMFont* ballCntLbl;
                     }else{
                         ball=[Ball createBall:ccp(0,0) type:1 cnt:ballCount];//ノーマルボール
                     }
-                    ball.position=ccp(winSize.width-(ball.contentSize.width*ball.scale)/2,winSize.height/2-50);
+                    ball.position=ccp(piston.position.x,winSize.height/2-50);
                     [physicWorld addChild:ball z:1];
                     //配列追加
                     [ballArray addObject:ball];
                     
-                    //シャドーボール
+                    /*/シャドーボール
                     ballShadow=[BallShadow createBall:ballCount];
                     ballShadow.position=ball.position;
                     [physicWorld addChild:ballShadow z:0];
-                    [ballShadowArray addObject:ballShadow];
+                    [ballShadowArray addObject:ballShadow];*/
                     
                 }else{
                     lastBallFlg=true;
@@ -532,7 +538,7 @@ CCLabelBMFont* ballCntLbl;
         }
     }
     
-    //シャドーボール移動
+    /*/シャドーボール移動
     for(Ball* _ball in ballArray){
         for(BallShadow* _ballShadow in ballShadowArray){
             if(_ball.ball_Id == _ballShadow.ball_Id){
@@ -540,7 +546,7 @@ CCLabelBMFont* ballCntLbl;
                 break;
             }
         }
-    }
+    }*/
     
     //ボール静止判定
     for(Ball* _ball in ballArray){
@@ -570,7 +576,7 @@ CCLabelBMFont* ballCntLbl;
             //doneBallCount_lbl.string=[NSString stringWithFormat:@"DoneBallCount:%03d",doneBallCount];
         }
         
-        //シャドーボール削除
+        /*/シャドーボール削除
         BallShadow* removeBallShadow;
         for(BallShadow* _shadow in ballShadowArray){
             if(_shadow.ball_Id==_ball.ball_Id){
@@ -579,7 +585,7 @@ CCLabelBMFont* ballCntLbl;
             }
         }
         [physicWorld removeChild:removeBallShadow cleanup:YES];
-        [ballShadowArray removeObject:removeBallShadow];
+        [ballShadowArray removeObject:removeBallShadow];*/
 
         //ボール削除
         [ballArray removeObject:_ball];
@@ -634,7 +640,7 @@ CCLabelBMFont* ballCntLbl;
         }
     }
     
-    //シャドーボール削除
+    /*/シャドーボール削除
     BallShadow* removeBallShadow;
     for(BallShadow* _shadow in ballShadowArray){
         if(_shadow.ball_Id==ball.ball_Id){
@@ -643,7 +649,7 @@ CCLabelBMFont* ballCntLbl;
         }
     }
     [physicWorld removeChild:removeBallShadow cleanup:YES];
-    [ballShadowArray removeObject:removeBallShadow];
+    [ballShadowArray removeObject:removeBallShadow];*/
     
     //ボール削除
     [physicWorld removeChild:ball cleanup:YES];
