@@ -183,9 +183,9 @@
 				<key>customClass</key>
 				<string></string>
 				<key>displayName</key>
-				<string>windmill</string>
+				<string>body</string>
 				<key>memberVarAssignmentName</key>
-				<string>windmill</string>
+				<string>body</string>
 				<key>memberVarAssignmentType</key>
 				<integer>1</integer>
 				<key>physicsBody</key>
@@ -278,7 +278,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>Sprite/windmill_04.png</string>
+							<string>Sprite/windmill_03.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -314,8 +314,6 @@
 						<array/>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -347,7 +345,7 @@
 					<key>collisionType</key>
 					<string></string>
 					<key>cornerRadius</key>
-					<real>9.0785064697265625</real>
+					<real>9</real>
 					<key>density</key>
 					<real>1</real>
 					<key>dynamic</key>
@@ -359,8 +357,8 @@
 					<key>points</key>
 					<array>
 						<array>
-							<real>30</real>
-							<real>30</real>
+							<real>25</real>
+							<real>25</real>
 						</array>
 					</array>
 					<key>polygons</key>
@@ -461,7 +459,7 @@
 			</dict>
 		</array>
 		<key>customClass</key>
-		<string>Pin</string>
+		<string>Windmill</string>
 		<key>displayName</key>
 		<string>CCSprite</string>
 		<key>memberVarAssignmentName</key>
@@ -560,6 +558,8 @@
 				<array/>
 			</dict>
 		</array>
+		<key>selected</key>
+		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>

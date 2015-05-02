@@ -11,7 +11,7 @@
 #import "TitleScene.h"
 #import "Ball.h"
 #import "Ground.h"
-#import "Pin.h"
+#import "Windmill.h"
 #import "InitManager.h"
 #import "Corner.h"
 #import "Wall.h"
@@ -33,7 +33,7 @@ CCPhysicsNode* physicWorld;
 Ball* ball;
 Ground* ground;
 Corner* corner;
-Pin* pin;
+Windmill* pin;
 Wall* wall_r;
 Wall* wall_l;
 Wall* wall_u;
@@ -62,6 +62,8 @@ NSMutableArray* removeBallArray;
 NaviLayer* naviLayer;
 CCButton* pauseBtn;
 CCButton* resumeBtn;
+
+bool illuminationFlg;
 
 //シャドーボール
 //BallShadow* ballShadow;
@@ -345,7 +347,7 @@ CCLabelBMFont* ballCntLbl;
     NSMutableArray* array=[InitManager init_Pin_Pattern:[GameManager getStageLevel]];
     for(int i=0;i<array.count;i++){
         pos=[[array objectAtIndex:i]CGPointValue];
-        pin=[Pin createPin:pos];
+        pin=[Windmill createPin:pos];
         [physicWorld addChild:pin];
     }
 
@@ -357,7 +359,7 @@ CCLabelBMFont* ballCntLbl;
     basket_shadow=[CCSprite spriteWithImageNamed:@"basket_shadow.png"];
     basket_shadow.scale=0.7;
     basket_shadow.opacity=0.3;
-    basket_shadow.position=ccp(basket.position.x+35,ground.position.y+(ground.contentSize.height*ground.scale)/2-(basket_shadow.contentSize.height*basket_shadow.scale)/2);
+    basket_shadow.position=ccp(basket.position.x+30,ground.position.y+(ground.contentSize.height*ground.scale)/2-(basket_shadow.contentSize.height*basket_shadow.scale)/2);
     [physicWorld addChild:basket_shadow];
     
     //スパーク
@@ -452,7 +454,7 @@ CCLabelBMFont* ballCntLbl;
         basket.position = tmpPos;
         //[basket.physicsBody applyForce:ccpAdd(basket.position,ccp(gravityX,0.0))];
         //バスケットシャドー移動
-        basket_shadow.position=ccp(basket.position.x+35,basket_shadow.position.y);
+        basket_shadow.position=ccp(basket.position.x+30,basket_shadow.position.y);
     }
 }
 
@@ -660,6 +662,11 @@ CCLabelBMFont* ballCntLbl;
     spark.opacity=1.0;
     [self schedule:@selector(spark_Schedule:)interval:0.01];
     
+    //バスケットイルミネーション
+    basket.basket_Color.color=ball.ballColor;
+    illuminationFlg=false;
+    [self schedule:@selector(basket_Illumination_Schedule:)interval:0.01];
+    
     //終了判定
     [self exit_Judgment];
     
@@ -673,8 +680,8 @@ CCLabelBMFont* ballCntLbl;
                                             catch_point:(Ground*)catch_point
                                             windmill:(CCSprite*)windmill
 {
-    Pin* _pin=(Pin*)[windmill parent];//親Pinオブジェクトを特定、代入
-    [physicWorld removeChild:_pin cleanup:YES];//削除
+    Windmill* _windmill=(Windmill*)[windmill parent];//親Pinオブジェクトを特定、代入
+    [physicWorld removeChild:_windmill cleanup:YES];//削除
     
     //スコアリング
     [GameManager setScore:[GameManager getScore]+100];
@@ -693,8 +700,8 @@ CCLabelBMFont* ballCntLbl;
 //================================
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair ground:(Ground*)ground windmill:(CCSprite*)windmill
 {
-    Pin* _pin=(Pin*)[windmill parent];//親Pinオブジェクトを特定、代入
-    [physicWorld removeChild:_pin cleanup:YES];//削除
+    Windmill* _windmill=(Windmill*)[windmill parent];//親Pinオブジェクトを特定、代入
+    [physicWorld removeChild:_windmill cleanup:YES];//削除
     
     return TRUE;
 }
@@ -727,8 +734,8 @@ CCLabelBMFont* ballCntLbl;
     //悪魔ボール
     if(ball.ballType==3)
     {
-        Pin* _pin=(Pin*)[windmill parent];//親Pinオブジェクトを特定、代入
-        [_pin.axis.physicsBody setType:CCPhysicsBodyTypeDynamic];//動的物体にして落とす
+        Windmill* _windmill=(Windmill*)[windmill parent];//親Pinオブジェクトを特定、代入
+        [_windmill.axis.physicsBody setType:CCPhysicsBodyTypeDynamic];//動的物体にして落とす
     
         //[physicWorld removeChild:_pin cleanup:YES];//削除するなら
     }
@@ -736,7 +743,7 @@ CCLabelBMFont* ballCntLbl;
 }
 
 //================================
-//　スパーク
+//　スパークスケジュール
 //================================
 -(void)spark_Schedule:(CCTime)dt
 {
@@ -746,7 +753,25 @@ CCLabelBMFont* ballCntLbl;
         [self unschedule:@selector(spark_Schedule:)];
     }
 }
-
+//================================
+//　バスケット発光スケジュール
+//================================
+-(void)basket_Illumination_Schedule:(CCTime)dt
+{
+    if(!illuminationFlg){
+        basket.basket_Color.opacity+=0.02;
+        if(basket.basket_Color.opacity>=0.5){
+            illuminationFlg=true;
+        }
+    }else{
+        basket.basket_Color.opacity-=0.02;
+        if(basket.basket_Color.opacity<=0.0){
+            illuminationFlg=false;
+            [self unschedule:@selector(basket_Illumination_Schedule:)];
+        }
+    }
+    
+}
 //================================
 //　終了判定
 //================================

@@ -7,9 +7,11 @@
 //
 
 #import "Basket.h"
-
+#import "GameManager.h"
 
 @implementation Basket
+
+@synthesize basket_Color;
 
 -(id)initWithBasket:(CGPoint)pos
 {
@@ -17,10 +19,19 @@
 
         self=(id)[CCBReader load:@"Basket"];
         self.position=pos;
-        self.scale=1.0;
+        
+        if([GameManager getDevice]==1){//iPad
+            self.scale=1.3;
+            self.position=ccp(self.position.x,self.position.y +6);
+        }else{
+            self.scale=1.0;
+        }
         
         catch_point.physicsBody.collisionType=@"catch_point";
         catch_point.physicsBody.sensor = TRUE;
+        
+        //basket_Color.color=[CCColor whiteColor];
+        basket_Color.opacity=0.0;
     }
     return self;
 }

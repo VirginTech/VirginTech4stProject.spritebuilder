@@ -109,7 +109,7 @@
 		CF6E24CB1ADA1F8900AA94D0 /* MsgEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6E24CA1ADA1F8900AA94D0 /* MsgEffect.m */; };
 		CF7CC4C81AD377F700D16EF9 /* Ball.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7CC4C51AD377F700D16EF9 /* Ball.m */; };
 		CF7CC4C91AD377F700D16EF9 /* Ground.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7CC4C71AD377F700D16EF9 /* Ground.m */; };
-		CF7CC4CC1AD385F200D16EF9 /* Pin.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7CC4CB1AD385F200D16EF9 /* Pin.m */; };
+		CF7CC4CC1AD385F200D16EF9 /* Windmill.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7CC4CB1AD385F200D16EF9 /* Windmill.m */; };
 		CF7CC4CF1AD3939000D16EF9 /* InitManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7CC4CE1AD3939000D16EF9 /* InitManager.m */; };
 		CF7CC4D21AD3BF2A00D16EF9 /* Corner.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7CC4D11AD3BF2A00D16EF9 /* Corner.m */; };
 		CF7CC4D51AD3DF0E00D16EF9 /* Wall.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7CC4D41AD3DF0E00D16EF9 /* Wall.m */; };
@@ -289,8 +289,8 @@
 		CF7CC4C51AD377F700D16EF9 /* Ball.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ball.m; sourceTree = "<group>"; };
 		CF7CC4C61AD377F700D16EF9 /* Ground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ground.h; sourceTree = "<group>"; };
 		CF7CC4C71AD377F700D16EF9 /* Ground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ground.m; sourceTree = "<group>"; };
-		CF7CC4CA1AD385F200D16EF9 /* Pin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pin.h; sourceTree = "<group>"; };
-		CF7CC4CB1AD385F200D16EF9 /* Pin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pin.m; sourceTree = "<group>"; };
+		CF7CC4CA1AD385F200D16EF9 /* Windmill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Windmill.h; sourceTree = "<group>"; };
+		CF7CC4CB1AD385F200D16EF9 /* Windmill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Windmill.m; sourceTree = "<group>"; };
 		CF7CC4CD1AD3939000D16EF9 /* InitManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitManager.h; sourceTree = "<group>"; };
 		CF7CC4CE1AD3939000D16EF9 /* InitManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitManager.m; sourceTree = "<group>"; };
 		CF7CC4D01AD3BF2A00D16EF9 /* Corner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Corner.h; sourceTree = "<group>"; };
@@ -736,8 +736,8 @@
 				CFC1077F1AE687D700A9E04E /* BallShadow.m */,
 				CF7CC4C61AD377F700D16EF9 /* Ground.h */,
 				CF7CC4C71AD377F700D16EF9 /* Ground.m */,
-				CF7CC4CA1AD385F200D16EF9 /* Pin.h */,
-				CF7CC4CB1AD385F200D16EF9 /* Pin.m */,
+				CF7CC4CA1AD385F200D16EF9 /* Windmill.h */,
+				CF7CC4CB1AD385F200D16EF9 /* Windmill.m */,
 				CF7CC4D01AD3BF2A00D16EF9 /* Corner.h */,
 				CF7CC4D11AD3BF2A00D16EF9 /* Corner.m */,
 				CF7CC4D31AD3DF0E00D16EF9 /* Wall.h */,
@@ -1147,7 +1147,7 @@
 				CFAF84FC1AD0D738009FB98F /* StageScene.m in Sources */,
 				CF1AC8141AE3B0A5001E02C9 /* MsgBoxLayer.m in Sources */,
 				CF7CC4C91AD377F700D16EF9 /* Ground.m in Sources */,
-				CF7CC4CC1AD385F200D16EF9 /* Pin.m in Sources */,
+				CF7CC4CC1AD385F200D16EF9 /* Windmill.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
