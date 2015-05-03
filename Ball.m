@@ -70,7 +70,7 @@
         self.ball_Id=cnt;
         self.position=pos;
         self.scale=0.3;
-        self.physicsBody.collisionType = @"ball";
+        self.physicsBody.collisionType = @"cBall";
     
         ballType=type;
         stateFlg=false;

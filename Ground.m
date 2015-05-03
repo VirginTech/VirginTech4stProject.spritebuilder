@@ -19,7 +19,7 @@
         self.position=pos;
         self.rotation=0.0;
         self.scale=1.0;
-        self.physicsBody.collisionType = @"ground";
+        self.physicsBody.collisionType = @"cGround";
     }
     return self;
 }

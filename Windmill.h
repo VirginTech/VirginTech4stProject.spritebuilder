@@ -13,10 +13,11 @@
 {
     CCSprite* axis;//CCB定義
     CCSprite* body;//CCB定義
+    int num;
 }
 
 @property CCSprite* axis;
 
-+(id)createPin:(CGPoint)pos;
++(id)createWindmill:(CGPoint)pos titleFlg:(bool)titleFlg;
 
 @end

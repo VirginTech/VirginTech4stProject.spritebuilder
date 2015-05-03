@@ -33,7 +33,7 @@ CCPhysicsNode* physicWorld;
 Ball* ball;
 Ground* ground;
 Corner* corner;
-Windmill* pin;
+Windmill* windmill;
 Wall* wall_r;
 Wall* wall_l;
 Wall* wall_u;
@@ -347,8 +347,8 @@ CCLabelBMFont* ballCntLbl;
     NSMutableArray* array=[InitManager init_Pin_Pattern:[GameManager getStageLevel]];
     for(int i=0;i<array.count;i++){
         pos=[[array objectAtIndex:i]CGPointValue];
-        pin=[Windmill createPin:pos];
-        [physicWorld addChild:pin];
+        windmill=[Windmill createWindmill:pos titleFlg:false];
+        [physicWorld addChild:windmill];
     }
 
     //バスケット生成
@@ -614,10 +614,10 @@ CCLabelBMFont* ballCntLbl;
 //================================
 //　ボールキャッチ判定
 //================================
--(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair catch_point:(Ground*)catch_point ball:(Ball*)ball
+-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair catch_point:(Ground*)catch_point cBall:(Ball*)cBall
 {
     if(![GameManager getPause]){
-        if(ball.stateFlg){
+        if(cBall.stateFlg){
             doneBallCount++;
             //doneBallCount_lbl.string=[NSString stringWithFormat:@"DoneBallCount:%03d",doneBallCount];
             //[GameManager setScore:[GameManager getScore]+1];
@@ -625,9 +625,9 @@ CCLabelBMFont* ballCntLbl;
         }
     }
     //スコアリング
-    if(ball.ballType==2){//天使
+    if(cBall.ballType==2){//天使
         [GameManager setScore:[GameManager getScore]+50];
-    }else if(ball.ballType==3){//悪魔
+    }else if(cBall.ballType==3){//悪魔
         [GameManager setScore:[GameManager getScore]+30];
     }else{
         [GameManager setScore:[GameManager getScore]+10];
@@ -635,7 +635,7 @@ CCLabelBMFont* ballCntLbl;
     [Information scoreUpdata];
 
     //天使ボール（回復）
-    if(ball.ballType==2){
+    if(cBall.ballType==2){
         if([GameManager getLifePoint]<5){
             [GameManager setLifePoint:[GameManager getLifePoint]+1];
             [Information lifePointUpdata];
@@ -654,8 +654,8 @@ CCLabelBMFont* ballCntLbl;
     [ballShadowArray removeObject:removeBallShadow];*/
     
     //ボール削除
-    [physicWorld removeChild:ball cleanup:YES];
-    [ballArray removeObject:ball];
+    [physicWorld removeChild:cBall cleanup:YES];
+    [ballArray removeObject:cBall];
     
     //スパーク
     spark.position=ccp(basket.position.x,basket.position.y+(basket.contentSize.height*basket.scale)/2+(spark.contentSize.height*spark.scale)/2 -20);
@@ -663,7 +663,7 @@ CCLabelBMFont* ballCntLbl;
     [self schedule:@selector(spark_Schedule:)interval:0.01];
     
     //バスケットイルミネーション
-    basket.basket_Color.color=ball.ballColor;
+    basket.basket_Color.color=cBall.ballColor;
     illuminationFlg=false;
     [self schedule:@selector(basket_Illumination_Schedule:)interval:0.01];
     
@@ -678,9 +678,9 @@ CCLabelBMFont* ballCntLbl;
 //================================
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair
                                             catch_point:(Ground*)catch_point
-                                            windmill:(CCSprite*)windmill
+                                            cWindmill:(CCSprite*)cWindmill
 {
-    Windmill* _windmill=(Windmill*)[windmill parent];//親Pinオブジェクトを特定、代入
+    Windmill* _windmill=(Windmill*)[cWindmill parent];//親Pinオブジェクトを特定、代入
     [physicWorld removeChild:_windmill cleanup:YES];//削除
     
     //スコアリング
@@ -698,9 +698,9 @@ CCLabelBMFont* ballCntLbl;
 //================================
 //　ピン＆地上当たり判定
 //================================
--(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair ground:(Ground*)ground windmill:(CCSprite*)windmill
+-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair cGround:(Ground*)cGround cWindmill:(CCSprite*)cWindmill
 {
-    Windmill* _windmill=(Windmill*)[windmill parent];//親Pinオブジェクトを特定、代入
+    Windmill* _windmill=(Windmill*)[cWindmill parent];//親Pinオブジェクトを特定、代入
     [physicWorld removeChild:_windmill cleanup:YES];//削除
     
     return TRUE;
@@ -709,11 +709,11 @@ CCLabelBMFont* ballCntLbl;
 //================================
 //　ボール＆地上当たり判定
 //================================
--(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair ground:(Ground*)ground ball:(Ball*)ball
+-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair cGround:(Ground*)cGround cBall:(Ball*)cBall
 {
     if(![GameManager getPause]){
-        if(ball.stateFlg){
-            ball.stateFlg=false;
+        if(cBall.stateFlg){
+            cBall.stateFlg=false;
             doneBallCount++;
             //doneBallCount_lbl.string=[NSString stringWithFormat:@"DoneBallCount:%03d",doneBallCount];
             [GameManager setLifePoint:[GameManager getLifePoint]-1];
@@ -729,12 +729,12 @@ CCLabelBMFont* ballCntLbl;
 //================================
 //　ボール＆ピン当たり判定
 //================================
--(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair windmill:(CCSprite*)windmill ball:(Ball*)ball
+-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair cWindmill:(CCSprite*)cWindmill cBall:(Ball*)cBall
 {
     //悪魔ボール
-    if(ball.ballType==3)
+    if(cBall.ballType==3)
     {
-        Windmill* _windmill=(Windmill*)[windmill parent];//親Pinオブジェクトを特定、代入
+        Windmill* _windmill=(Windmill*)[cWindmill parent];//親Pinオブジェクトを特定、代入
         [_windmill.axis.physicsBody setType:CCPhysicsBodyTypeDynamic];//動的物体にして落とす
     
         //[physicWorld removeChild:_pin cleanup:YES];//削除するなら

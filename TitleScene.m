@@ -16,6 +16,7 @@
 #import "Reachability.h"
 #import "ScoreModeMenu.h"
 #import "StageModeMenu.h"
+#import "Windmill.h"
 
 @implementation TitleScene
 
@@ -74,11 +75,43 @@ CCLabelBMFont* ticketLabel;
     //画像読み込み
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"title_default.plist"];
     
-    //タイトル
-    CCLabelTTF* titleLogo=[CCLabelTTF labelWithString:@"windmill" fontName:@"Verdana-Bold" fontSize:30];
-    titleLogo.position=ccp(winSize.width/2,winSize.height/2+100);
+    //タイトルロゴ
+    //CCLabelTTF* titleLogo=[CCLabelTTF labelWithString:@"windmill" fontName:@"Verdana-Bold" fontSize:30];
+    //titleLogo.position=ccp(winSize.width/2,winSize.height/2+100);
+    //[self addChild:titleLogo];
+    
+    CCSprite* titleLogo=[CCSprite spriteWithImageNamed:@"titleLogo.png"];
+    titleLogo.scale=0.4;
+    titleLogo.position=ccp(winSize.width/2,winSize.height/2 +100);
     [self addChild:titleLogo];
     
+    //風車
+    Windmill* windmill;
+    
+    windmill=[Windmill createWindmill:ccp(winSize.width/2 -70,winSize.height/2 +150) titleFlg:true];
+    [self addChild:windmill];
+    
+    windmill=[Windmill createWindmill:ccp(winSize.width/2 +20,winSize.height/2 +30) titleFlg:true];
+    [self addChild:windmill];
+
+    windmill=[Windmill createWindmill:ccp(winSize.width/2 +60,winSize.height/2 +170) titleFlg:true];
+    [self addChild:windmill];
+
+    windmill=[Windmill createWindmill:ccp(winSize.width/2 -80,winSize.height/2 +50) titleFlg:true];
+    [self addChild:windmill];
+
+    windmill=[Windmill createWindmill:ccp(winSize.width/2 -0,winSize.height/2 +190) titleFlg:true];
+    [self addChild:windmill];
+    
+    windmill=[Windmill createWindmill:ccp(winSize.width/2 +70,winSize.height/2 +40) titleFlg:true];
+    [self addChild:windmill];
+
+    windmill=[Windmill createWindmill:ccp(winSize.width/2 -100,winSize.height/2 +180) titleFlg:true];
+    [self addChild:windmill];
+
+    windmill=[Windmill createWindmill:ccp(winSize.width/2 +100,winSize.height/2 +200) titleFlg:true];
+    [self addChild:windmill];
+
     //レヴェル表示
     //CCLabelTTF* levelLabel=[CCLabelTTF labelWithString:[NSString stringWithFormat:@"Level:%03d",
     //                                      [GameManager load_Stage_Level]] fontName:@"Verdana-Bold" fontSize:15];
@@ -206,6 +239,15 @@ CCLabelBMFont* ticketLabel;
     [creditButton setTarget:self selector:@selector(onCreditButtonClicked:)];
     [self addChild:creditButton];
     
+    //バージョン表記
+    CCLabelTTF* version=[CCLabelTTF labelWithString:[NSString stringWithFormat:@"©VirginTech v%@",
+                        [[[NSBundle mainBundle] infoDictionary]objectForKey:@"CFBundleShortVersionString"]]
+                                           fontName:@"Verdana" fontSize:10];
+    version.position=ccp(winSize.width/2,120);
+    version.color=[CCColor whiteColor];
+    [self addChild:version];
+    
+    //モアアプリ
     CCButton *moreAppButton = [CCButton buttonWithTitle:@"" spriteFrame:
                                [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"moreAppBtn.png"]];
     moreAppButton.scale=0.6;
@@ -292,7 +334,7 @@ CCLabelBMFont* ticketLabel;
     }
     //デイリーボーナス
     else if(procNum==4){
-        [GameManager save_Continue_Ticket:[GameManager load_Continue_Ticket]+1];
+        [GameManager save_Continue_Ticket:[GameManager load_Continue_Ticket]+3];
         [TitleScene ticket_Update];
         msgBox.delegate=nil;//デリゲート解除
     }
