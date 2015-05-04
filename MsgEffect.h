@@ -8,8 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "MsgBoxLayer.h"
 
-@interface MsgEffect : CCScene {
+@interface MsgEffect : CCScene <MsgLayerDelegate>
+{
     
 }
 

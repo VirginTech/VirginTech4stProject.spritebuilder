@@ -11,6 +11,15 @@
 "No"="NO";
 "Ok"="OK";
 
+//メニューボタン
+"ScoreChallenge"="Score Challenge";
+"StageMode"="Stage Mode";
+"FirstPlay"="Play";
+"ContinuePlay"="Continue";
+"HomeTo"="Home";
+"Replay"="Replay";
+"LevelSelect"="Stage Select";
+
 //アプリ内課金
 "Notnetwork" = "No network connection.";
 "Error" = "Error";
@@ -24,15 +33,33 @@
 //コンティニューチケット
 "Continue"="Continue";
 "Ticket_Use"="Use a 1 ticket. Is it OK ?";
-"Ticket_Shortage"="Ticket is not enough. Can be bought at the ticket shop.";
 "NotContinue"="You can not continue.";
+"ShopPurchase"="'Ticket' are available at shop";
+"NotCoin"="You need more 'Ticket'";
 
 //ウェルカムメッセージ
 "Welcome"="Welcome!";
-"FirstLogin"="Thank you for downloading. \nIt doesn’t cost anything to play \nthis game, but some of the items \nhave to be paid. \nPlease make sure that children won’t \npurchase any items without \ntheir parents supervision.";
+"FirstLogin"="Thank you for downloading. \n\nIt doesn’t cost anything to play \nthis game, but some of the items \nhave to be paid. \n\nPlease make sure that children won’t \npurchase any items without \ntheir parents supervision.";
 
 //ログインボーナス
 "BonusGet"="Got a bonus!";
 "FirstBonus"="Thank you for the very first \nlog-in. Free 'Ticket' 30 set \nare yours now!";
-"DailyBonus"="Free daily 'Ticket' 1 set!";
+"DailyBonus"="Free daily 'Ticket' 3 set!";
+
+//ローカル通知
+"LocalNotification"="Let's play the 'windmill'";
+
+//レビュー誘導
+"Rate" = "Rate";
+"RateItNow" = "Rate It Now";
+"RemindMeLater" = "Remind Me Later";
+"NoThanks" = "No,Thanks";
+"Rate_Message"="Thank you for playing the game.\nWould you mind taking a moment \nto rate it?";
+
+//ソーシャル投稿メッセージ
+"PostMessage"="【windmill】\nCongratulations!\nHigh score";
+"PostEnd"=" is achieved!";
+"URL"="https://itunes.apple.com/jp/app/id985536616";
+
+
 

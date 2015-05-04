@@ -35,6 +35,7 @@ int totalScore;
     winSize=[[CCDirector sharedDirector]viewSize];
     
     //画像読み込み
+    [[CCSpriteFrameCache sharedSpriteFrameCache]removeSpriteFrames];
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"info_default.plist"];
     
     //スコアラベル

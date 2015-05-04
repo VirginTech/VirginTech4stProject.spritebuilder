@@ -10,6 +10,7 @@
 
 @implementation GameManager
 
+int locale;//1:日本語 0:それ以外(デフォルト)
 float osVersion;//OSバージョン
 int deviceType;// 1:iPad2 2:iPhone4 3:iPhone5 4:iPhone6
 int scorePoint;//スコア
@@ -18,6 +19,13 @@ bool pauseFlg;//ポーズ
 int stageLavel;//現在ステージレヴェル
 int playMode;//1:スコアチャレンジ 2:ステージチャレンジ
 
+//ロケール登録
++(void)setLocale:(int)value{
+    locale=value;
+}
++(int)getLocale{
+    return locale;
+}
 //OSバージョン
 +(void)setOsVersion:(float)version{
     osVersion=version;

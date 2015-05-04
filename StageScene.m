@@ -225,6 +225,7 @@ CCLabelBMFont* ballCntLbl;
     naviLayer.visible=false;
     
     //画像読み込み
+    [[CCSpriteFrameCache sharedSpriteFrameCache]removeSpriteFrames];
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"navi_default.plist"];
     
     //ポーズボタン

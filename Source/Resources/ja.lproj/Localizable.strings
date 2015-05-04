@@ -11,6 +11,15 @@
 "No"="いいえ";
 "Ok"="OK";
 
+//メニューボタン
+"ScoreChallenge"="スコアチャレンジ";
+"StageMode"="ステージモード";
+"FirstPlay"="はじめから";
+"ContinuePlay"="続きから";
+"HomeTo"="ホームへ";
+"Replay"="リプレイ";
+"LevelSelect"="ステージ選択";
+
 //アプリ内課金
 "NotNetwork" = "ネットワーク接続がありません。";
 "Error" = "エラー";
@@ -24,8 +33,9 @@
 //コンティニューチケット
 "Continue"="コンティニュー";
 "Ticket_Use"="チケット１枚を消費します。\nよろしいですか？";
-"Ticket_Shortage"="チケットが足りません。\nチケットはショップで購入できます。";
 "NotContinue"="コンティニュー出来ません。";
+"ShopPurchase"="チケットはショップで購入できます";
+"NotCoin"="チケットが足りません";
 
 //ウェルカムメッセージ
 "Welcome"="ようこそ！";
@@ -35,4 +45,23 @@
 "BonusGet"="ボーナス・ゲット！";
 "FirstBonus"="初回起動ありがとうございます。\nチケット30枚プレゼント！";
 "DailyBonus"="１日１回 チケット3枚プレゼント！";
+
+//ローカル通知
+"LocalNotification"="'windmill'で遊びませんか？";
+
+//レビュー誘導
+"Rate" = "評価して下さい";
+"RateItNow" = "今すぐ評価する";
+"RemindMeLater" = "後で評価する";
+"NoThanks" = "いいえ結構です";
+"Rate_Message"="ゲームを遊んで頂きありがとうございます。\n宜しければレビューをお願いします。";
+
+//ソーシャル投稿メッセージ
+"PostMessage"="【windmill】\nおめでとう！\nハイスコア";
+"PostEnd"="点達成!";
+"URL"="https://itunes.apple.com/jp/app/id985536616";
+
+
+
+
 

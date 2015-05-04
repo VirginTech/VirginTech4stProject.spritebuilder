@@ -17,12 +17,19 @@
 #import "ScoreModeMenu.h"
 #import "StageModeMenu.h"
 #import "Windmill.h"
+#import "Ground.h"
 
 @implementation TitleScene
 
 CGSize winSize;
 MsgBoxLayer* msgBox;
 CCLabelBMFont* ticketLabel;
+
+CCPhysicsNode* physicWorld;
+Ground* ground;
+CCButton* scoreModeBtn;
+CCButton* stageModeBtn;
+int boundCnt;
 
 + (TitleScene *)scene
 {
@@ -40,6 +47,9 @@ CCLabelBMFont* ticketLabel;
     //Create a colored background (Dark Grey)
     CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:1.0f green:0.07f blue:0.57f alpha:1.0f]];
     [self addChild:background];
+    
+    //初期化
+    boundCnt=0;
     
     //初回時データ初期化
     [GameManager initialize_Save_Data];
@@ -73,6 +83,7 @@ CCLabelBMFont* ticketLabel;
     //[self addChild:infoLayer z:1];
     
     //画像読み込み
+    [[CCSpriteFrameCache sharedSpriteFrameCache]removeSpriteFrames];
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"title_default.plist"];
     
     //タイトルロゴ
@@ -85,33 +96,48 @@ CCLabelBMFont* ticketLabel;
     titleLogo.position=ccp(winSize.width/2,winSize.height/2 +100);
     [self addChild:titleLogo];
     
+    //物理ワールド生成
+    physicWorld=[CCPhysicsNode node];
+    physicWorld.gravity = ccp(0,-1000);
+    //physicWorld.debugDraw = true;
+    [self addChild:physicWorld z:1];
+    
+    //衝突判定デリゲート設定
+    physicWorld.collisionDelegate = self;
+    
     //風車
     Windmill* windmill;
     
     windmill=[Windmill createWindmill:ccp(winSize.width/2 -70,winSize.height/2 +150) titleFlg:true];
-    [self addChild:windmill];
+    [physicWorld addChild:windmill];
     
     windmill=[Windmill createWindmill:ccp(winSize.width/2 +20,winSize.height/2 +30) titleFlg:true];
-    [self addChild:windmill];
+    [physicWorld addChild:windmill];
 
     windmill=[Windmill createWindmill:ccp(winSize.width/2 +60,winSize.height/2 +170) titleFlg:true];
-    [self addChild:windmill];
+    [physicWorld addChild:windmill];
 
     windmill=[Windmill createWindmill:ccp(winSize.width/2 -80,winSize.height/2 +50) titleFlg:true];
-    [self addChild:windmill];
+    [physicWorld addChild:windmill];
 
     windmill=[Windmill createWindmill:ccp(winSize.width/2 -0,winSize.height/2 +190) titleFlg:true];
-    [self addChild:windmill];
+    [physicWorld addChild:windmill];
     
     windmill=[Windmill createWindmill:ccp(winSize.width/2 +70,winSize.height/2 +40) titleFlg:true];
-    [self addChild:windmill];
+    [physicWorld addChild:windmill];
 
     windmill=[Windmill createWindmill:ccp(winSize.width/2 -100,winSize.height/2 +180) titleFlg:true];
-    [self addChild:windmill];
+    [physicWorld addChild:windmill];
 
     windmill=[Windmill createWindmill:ccp(winSize.width/2 +100,winSize.height/2 +200) titleFlg:true];
-    [self addChild:windmill];
+    [physicWorld addChild:windmill];
 
+    //地面生成
+    ground=[Ground createGround:ccp(winSize.width/2,0.0)];
+    ground.position=ccp(winSize.width/2,-(ground.contentSize.height*ground.scale)/2);
+    [physicWorld addChild:ground];
+    
+    
     //レヴェル表示
     //CCLabelTTF* levelLabel=[CCLabelTTF labelWithString:[NSString stringWithFormat:@"Level:%03d",
     //                                      [GameManager load_Stage_Level]] fontName:@"Verdana-Bold" fontSize:15];
@@ -128,7 +154,7 @@ CCLabelBMFont* ticketLabel;
     //コンティニューチケット
     CCSprite* ticket=[CCSprite spriteWithSpriteFrame:
                       [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"ticket.png"]];
-    ticket.scale=0.2;
+    ticket.scale=0.3;
     ticket.position=ccp((ticket.contentSize.width*ticket.scale)/2+5,
                                         winSize.height-(ticket.contentSize.height*ticket.scale)/2-5);
     [self addChild:ticket];
@@ -140,37 +166,55 @@ CCLabelBMFont* ticketLabel;
     ticketLabel.position=ccp(ticket.position.x+(ticket.contentSize.width*ticket.scale)/2+(ticketLabel.contentSize.width*ticketLabel.scale)/2,ticket.position.y);
     [self addChild:ticketLabel];
     
+    //===========================
     //スコアチャレンジモード
+    //===========================
     //CCButton* startBtn=[CCButton buttonWithTitle:@"[はじめから]" fontName:@"Verdana-Bold" fontSize:15];
-    CCButton* scoreModeBtn=[CCButton buttonWithTitle:@""
+    scoreModeBtn=[CCButton buttonWithTitle:@""
                 spriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"scoreMode01.png"]
                 highlightedSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"scoreMode02.png"]
                 disabledSpriteFrame:nil];
     scoreModeBtn.scale=0.5;
     scoreModeBtn.position=ccp(winSize.width/2-(scoreModeBtn.contentSize.width*scoreModeBtn.scale)/2-20,winSize.height/2-50);
     [scoreModeBtn setTarget:self selector:@selector(onScoreModeClicked:)];
-    [self addChild:scoreModeBtn];
+    //フィジックス適用
+    scoreModeBtn.physicsBody=[CCPhysicsBody bodyWithCircleOfRadius:50 andCenter:ccp(scoreModeBtn.contentSize.width/2,scoreModeBtn.contentSize.height/2)];
+    [scoreModeBtn.physicsBody setType:CCPhysicsBodyTypeStatic];
+    [scoreModeBtn.physicsBody setElasticity:1.0];
+    [scoreModeBtn.physicsBody setCollisionType:@"button01"];
+    [physicWorld addChild:scoreModeBtn];
     
     //スコアチャレンジモードラベル
-    CCLabelTTF* scoreModeLabel=[CCLabelTTF labelWithString:@"スコアチャレンジ" fontName:@"Verdana-Bold" fontSize:20];
-    scoreModeLabel.position=ccp(scoreModeBtn.contentSize.width/2,-scoreModeLabel.contentSize.height/2);
-    [scoreModeBtn addChild:scoreModeLabel];
+    CCLabelTTF* scoreModeLabel=[CCLabelTTF labelWithString:NSLocalizedString(@"ScoreChallenge",NULL)
+                                                  fontName:@"Verdana-Bold" fontSize:10];
+    scoreModeLabel.position=ccp(scoreModeBtn.position.x,
+                                scoreModeBtn.position.y-(scoreModeBtn.contentSize.height*scoreModeBtn.scale)/2 -8);
+    [self addChild:scoreModeLabel];
     
+    //===========================
     //ステージチャレンジモード
+    //===========================
     //CCButton* continueBtn=[CCButton buttonWithTitle:@"[続きから]" fontName:@"Verdana-Bold" fontSize:15];
-    CCButton* stageModeBtn=[CCButton buttonWithTitle:@""
+    stageModeBtn=[CCButton buttonWithTitle:@""
                 spriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"stageMode01.png"]
                 highlightedSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"stageMode02.png"]
                 disabledSpriteFrame:nil];
     stageModeBtn.scale=0.5;
     stageModeBtn.position=ccp(winSize.width/2+(stageModeBtn.contentSize.width*stageModeBtn.scale)/2+20,winSize.height/2-50);
     [stageModeBtn setTarget:self selector:@selector(onStageModeClicked:)];
-    [self addChild:stageModeBtn];
+    //フィジックス適用
+    stageModeBtn.physicsBody=[CCPhysicsBody bodyWithCircleOfRadius:50 andCenter:ccp(stageModeBtn.contentSize.width/2,stageModeBtn.contentSize.height/2)];
+    [stageModeBtn.physicsBody setType:CCPhysicsBodyTypeStatic];
+    [stageModeBtn.physicsBody setElasticity:1.0];
+    [stageModeBtn.physicsBody setCollisionType:@"button02"];
+    [physicWorld addChild:stageModeBtn];
 
     //ステージチャレンジモードラベル
-    CCLabelTTF* stageModeLabel=[CCLabelTTF labelWithString:@"ステージモード" fontName:@"Verdana-Bold" fontSize:20];
-    stageModeLabel.position=ccp(stageModeBtn.contentSize.width/2,-stageModeLabel.contentSize.height/2);
-    [stageModeBtn addChild:stageModeLabel];
+    CCLabelTTF* stageModeLabel=[CCLabelTTF labelWithString:NSLocalizedString(@"StageMode",NULL)
+                                                  fontName:@"Verdana-Bold" fontSize:10];
+    stageModeLabel.position=ccp(stageModeBtn.position.x,
+                                stageModeBtn.position.y-(stageModeBtn.contentSize.height*stageModeBtn.scale)/2 -8);
+    [self addChild:stageModeLabel];
     
     
     /*/スコアチャレンジモード
@@ -243,13 +287,19 @@ CCLabelBMFont* ticketLabel;
     CCLabelTTF* version=[CCLabelTTF labelWithString:[NSString stringWithFormat:@"©VirginTech v%@",
                         [[[NSBundle mainBundle] infoDictionary]objectForKey:@"CFBundleShortVersionString"]]
                                            fontName:@"Verdana" fontSize:10];
-    version.position=ccp(winSize.width/2,120);
+    version.position=ccp(winSize.width/2,110);
     version.color=[CCColor whiteColor];
     [self addChild:version];
     
     //モアアプリ
-    CCButton *moreAppButton = [CCButton buttonWithTitle:@"" spriteFrame:
-                               [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"moreAppBtn.png"]];
+    CCButton *moreAppButton;
+    if([GameManager getLocale]==1){
+        moreAppButton = [CCButton buttonWithTitle:@"" spriteFrame:
+                         [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"moreAppBtn.png"]];
+    }else{
+        moreAppButton = [CCButton buttonWithTitle:@"" spriteFrame:
+                         [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"moreAppBtn_en.png"]];
+    }
     moreAppButton.scale=0.6;
     moreAppButton.position=ccp(winSize.width/2,80);
     [moreAppButton setTarget:self selector:@selector(onMoreAppClicked:)];
@@ -342,14 +392,47 @@ CCLabelBMFont* ticketLabel;
 
 - (void)onScoreModeClicked:(id)sender
 {
-    [[CCDirector sharedDirector] replaceScene:[ScoreModeMenu scene]
+    [scoreModeBtn.physicsBody setType:CCPhysicsBodyTypeDynamic];
+    [scoreModeBtn.physicsBody applyImpulse:ccp(0,250)];
+    //[scoreModeBtn.physicsBody applyForce:ccp(0,15000)];
+    [scoreModeBtn.physicsBody applyAngularImpulse:-3000.f];
+    
+    //[[CCDirector sharedDirector] replaceScene:[ScoreModeMenu scene]
+    //                           withTransition:[CCTransition transitionCrossFadeWithDuration:0.3]];
+}
+
+-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair cGround:(Ground*)cGround
+                                                                    button01:(CCSprite*)button01
+{
+    boundCnt++;
+    if(boundCnt>2){
+        boundCnt=0;
+        [[CCDirector sharedDirector] replaceScene:[ScoreModeMenu scene]
                                withTransition:[CCTransition transitionCrossFadeWithDuration:0.3]];
+    }
+    return TRUE;
 }
 
 - (void)onStageModeClicked:(id)sender
 {
-    [[CCDirector sharedDirector] replaceScene:[StageModeMenu scene]
-                               withTransition:[CCTransition transitionCrossFadeWithDuration:0.3]];
+    [stageModeBtn.physicsBody setType:CCPhysicsBodyTypeDynamic];
+    [stageModeBtn.physicsBody applyImpulse:ccp(0,250)];
+    [stageModeBtn.physicsBody applyAngularImpulse:3000.f];
+    
+    //[[CCDirector sharedDirector] replaceScene:[StageModeMenu scene]
+    //                           withTransition:[CCTransition transitionCrossFadeWithDuration:0.3]];
+}
+
+-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair cGround:(Ground*)cGround
+                                                                    button02:(CCSprite*)button02
+{
+    boundCnt++;
+    if(boundCnt>2){
+        boundCnt=0;
+        [[CCDirector sharedDirector] replaceScene:[StageModeMenu scene]
+                                   withTransition:[CCTransition transitionCrossFadeWithDuration:0.3]];
+    }
+    return TRUE;
 }
 
 /*

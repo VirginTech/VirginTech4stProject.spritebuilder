@@ -64,6 +64,26 @@ bool nextFlg;
     if(cnt==100 && nextFlg){
         //エンディング効果音
         //[SoundManager endingEffect];
+
+        //レイティング
+        if([GameManager getStageLevel]%10==0){
+            //カスタムアラートメッセージ
+            MsgBoxLayer* msgBox=[[MsgBoxLayer alloc]initWithTitle:NSLocalizedString(@"Rate",NULL)
+                                                        msg:NSLocalizedString(@"Rate_Message",NULL)
+                                                        pos:ccp(winSize.width/2,winSize.height/2)
+                                                        size:CGSizeMake(230, 100)
+                                                        modal:true
+                                                        rotation:false
+                                                        type:1
+                                                        procNum:1];
+            msgBox.delegate=self;//デリゲートセット
+            [self addChild:msgBox z:3];
+            
+            //停止
+            [[CCDirector sharedDirector]pause];
+            //[GameManager setPause:true];
+        }
+
     }
     
     if(cnt>=250){
@@ -87,6 +107,26 @@ bool nextFlg;
         }else{
             [self unschedule:@selector(show_Message_Schedule:)];
             [self removeFromParentAndCleanup:YES];
+        }
+    }
+}
+
+//=====================
+// デリゲートメソッド
+//=====================
+-(void)onMessageLayerBtnClocked:(int)btnNum procNum:(int)procNum
+{
+    if(procNum==1){
+        if(btnNum==2){//YES
+            NSURL* url = [NSURL URLWithString:@"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=985536616&mt=8&type=Purple+Software"];
+            [[UIApplication sharedApplication]openURL:url];
+            //再開
+            [[CCDirector sharedDirector]resume];
+            //[GameManager setPause:false];
+        }else{
+            //再開
+            [[CCDirector sharedDirector]resume];
+            //[GameManager setPause:false];
         }
     }
 }

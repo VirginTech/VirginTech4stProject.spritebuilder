@@ -59,7 +59,8 @@
     [self setupCocos2dWithOptions:cocos2dSetup];
     
     
-    
+    //OSバージョン登録
+    [GameManager setOsVersion:[[[UIDevice currentDevice]systemVersion]floatValue]];
     
     //GameCenterへ認証
     GKLocalPlayer* localPlayer = [GKLocalPlayer localPlayer];
@@ -81,7 +82,10 @@
         localPlayer.authenticateHandler = ^(UIViewController* viewController, NSError* error){};
     }
 
-    
+    //ローカル通知の認証
+    if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)]) {
+        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeSound categories:nil]];
+    }
     
     return YES;
 }
@@ -113,7 +117,16 @@
     }else{
         [GameManager setDevice:0];//判別不能
     }
-    //NSLog(@"Device=%d",[GameManager getDevice]);
+    
+    //ロケール登録
+    NSArray *languages = [NSLocale preferredLanguages];
+    NSString *lang = [languages objectAtIndex:0];
+    if([lang isEqualToString:@"ja"]){
+        [GameManager setLocale:1];//日本語
+    }else{
+        [GameManager setLocale:0];//それ以外(デフォルト)
+    }
+    
     //return [CCBReader loadAsScene:@"MainScene"];
     return [TitleScene scene];
 }

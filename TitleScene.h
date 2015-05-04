@@ -12,7 +12,7 @@
 #import <StoreKit/StoreKit.h>
 #import "MsgBoxLayer.h"
 
-@interface TitleScene : CCScene <MsgLayerDelegate>
+@interface TitleScene : CCScene <MsgLayerDelegate,CCPhysicsCollisionDelegate>
 {
     GKitController* gkc;
 }

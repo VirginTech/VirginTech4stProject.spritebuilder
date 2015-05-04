@@ -40,6 +40,7 @@ CCLabelBMFont* ticketLabel;
     //[self addChild:infoLayer z:1];
     
     //画像読み込み
+    [[CCSpriteFrameCache sharedSpriteFrameCache]removeSpriteFrames];
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"menu_default.plist"];
     
     //レヴェル表示
@@ -65,7 +66,7 @@ CCLabelBMFont* ticketLabel;
     //コンティニューチケット
     CCSprite* ticket=[CCSprite spriteWithSpriteFrame:
                       [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"ticket.png"]];
-    ticket.scale=0.2;
+    ticket.scale=0.3;
     ticket.position=ccp((ticket.contentSize.width*ticket.scale)/2,(levelLabel.position.y-(levelLabel.contentSize.height*levelLabel.scale)/2)-(ticket.contentSize.height*ticket.scale)/2);
     [self addChild:ticket];
     
@@ -89,7 +90,8 @@ CCLabelBMFont* ticketLabel;
     [self addChild:titleBtn];
     
     //タイトルボタンラベル
-    CCLabelTTF* titleLabel=[CCLabelTTF labelWithString:@"ホームへ" fontName:@"Verdana-Bold" fontSize:20];
+    CCLabelTTF* titleLabel=[CCLabelTTF labelWithString:NSLocalizedString(@"HomeTo",NULL)
+                                              fontName:@"Verdana-Bold" fontSize:20];
     titleLabel.position=ccp(titleBtn.contentSize.width/2,-titleLabel.contentSize.height/2);
     [titleBtn addChild:titleLabel];
     
@@ -105,7 +107,8 @@ CCLabelBMFont* ticketLabel;
     [self addChild:playBtn];
     
     //プレイボタンラベル
-    CCLabelTTF* startLabel=[CCLabelTTF labelWithString:@"はじめから" fontName:@"Verdana-Bold" fontSize:20];
+    CCLabelTTF* startLabel=[CCLabelTTF labelWithString:NSLocalizedString(@"FirstPlay",NULL)
+                                              fontName:@"Verdana-Bold" fontSize:20];
     startLabel.position=ccp(playBtn.contentSize.width/2,-startLabel.contentSize.height/2);
     [playBtn addChild:startLabel];
     
@@ -121,7 +124,8 @@ CCLabelBMFont* ticketLabel;
     [self addChild:continueBtn];
     
     //コティニューボタンラベル
-    CCLabelTTF* continueLabel=[CCLabelTTF labelWithString:@"続きから" fontName:@"Verdana-Bold" fontSize:20];
+    CCLabelTTF* continueLabel=[CCLabelTTF labelWithString:NSLocalizedString(@"ContinuePlay",NULL)
+                                                 fontName:@"Verdana-Bold" fontSize:20];
     continueLabel.position=ccp(continueBtn.contentSize.width/2,-continueLabel.contentSize.height/2);
     [continueBtn addChild:continueLabel];
     
@@ -181,8 +185,8 @@ CCLabelBMFont* ticketLabel;
             return;
         }else{
             //カスタムアラートメッセージ
-            msgBox=[[MsgBoxLayer alloc]initWithTitle:NSLocalizedString(@"Continue",NULL)
-                                                  msg:NSLocalizedString(@"Ticket_Shortage",NULL)
+            msgBox=[[MsgBoxLayer alloc]initWithTitle:NSLocalizedString(@"NotCoin",NULL)
+                                                  msg:NSLocalizedString(@"ShopPurchase",NULL)
                                                   pos:ccp(winSize.width/2,winSize.height/2)
                                                  size:CGSizeMake(200, 100)
                                                 modal:true

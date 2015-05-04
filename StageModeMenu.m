@@ -83,6 +83,7 @@ CCScrollView* scrollView;
     CGPoint btnPos;
     
     //画像読み込み
+    [[CCSpriteFrameCache sharedSpriteFrameCache]removeSpriteFrames];
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"menu_default.plist"];
     
     for(int i=0;i<5;i++)

@@ -11,6 +11,7 @@
 #import "GameManager.h"
 #import "StageScene.h"
 #import "StageModeMenu.h"
+#import <Social/Social.h>
 
 @implementation NaviLayer
 
@@ -44,6 +45,7 @@ MsgBoxLayer* msgBox;
     [self addChild:gameOverLabel];
     
     //画像読み込み
+    [[CCSpriteFrameCache sharedSpriteFrameCache]removeSpriteFrames];
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"navi_default.plist"];
     
     //タイトルボタン
@@ -57,7 +59,8 @@ MsgBoxLayer* msgBox;
     [self addChild:titleBtn];
     
     //タイトルボタンラベル
-    CCLabelTTF* titleLabel=[CCLabelTTF labelWithString:@"ホームへ" fontName:@"Verdana-Bold" fontSize:20];
+    CCLabelTTF* titleLabel=[CCLabelTTF labelWithString:NSLocalizedString(@"HomeTo",NULL)
+                                                            fontName:@"Verdana-Bold" fontSize:20];
     titleLabel.position=ccp(titleBtn.contentSize.width/2,-titleLabel.contentSize.height/2);
     [titleBtn addChild:titleLabel];
     
@@ -74,7 +77,8 @@ MsgBoxLayer* msgBox;
         [self addChild:playBtn];
         
         //プレイボタンラベル
-        CCLabelTTF* startLabel=[CCLabelTTF labelWithString:@"はじめから" fontName:@"Verdana-Bold" fontSize:20];
+        CCLabelTTF* startLabel=[CCLabelTTF labelWithString:NSLocalizedString(@"FirstPlay",NULL)
+                                                  fontName:@"Verdana-Bold" fontSize:20];
         startLabel.position=ccp(playBtn.contentSize.width/2,-startLabel.contentSize.height/2);
         [playBtn addChild:startLabel];
         
@@ -90,7 +94,8 @@ MsgBoxLayer* msgBox;
         [self addChild:continueBtn];
         
         //コティニューボタンラベル
-        CCLabelTTF* continueLabel=[CCLabelTTF labelWithString:@"続きから" fontName:@"Verdana-Bold" fontSize:20];
+        CCLabelTTF* continueLabel=[CCLabelTTF labelWithString:NSLocalizedString(@"ContinuePlay",NULL)
+                                                     fontName:@"Verdana-Bold" fontSize:20];
         continueLabel.position=ccp(continueBtn.contentSize.width/2,-continueLabel.contentSize.height/2);
         [continueBtn addChild:continueLabel];
     
@@ -107,7 +112,8 @@ MsgBoxLayer* msgBox;
         [self addChild:replayBtn];
         
         //リプレイボタンラベル
-        CCLabelTTF* replayLabel=[CCLabelTTF labelWithString:@"リプレイ" fontName:@"Verdana-Bold" fontSize:20];
+        CCLabelTTF* replayLabel=[CCLabelTTF labelWithString:NSLocalizedString(@"Replay",NULL)
+                                                   fontName:@"Verdana-Bold" fontSize:20];
         replayLabel.position=ccp(replayBtn.contentSize.width/2,-replayLabel.contentSize.height/2);
         [replayBtn addChild:replayLabel];
     
@@ -122,11 +128,28 @@ MsgBoxLayer* msgBox;
         [self addChild:selectBtn];
         
         //セレクトボタンラベル
-        CCLabelTTF* selectLabel=[CCLabelTTF labelWithString:@"レヴェル選択" fontName:@"Verdana-Bold" fontSize:20];
+        CCLabelTTF* selectLabel=[CCLabelTTF labelWithString:NSLocalizedString(@"LevelSelect",NULL)
+                                                   fontName:@"Verdana-Bold" fontSize:20];
         selectLabel.position=ccp(selectBtn.contentSize.width/2,-selectLabel.contentSize.height/2);
         [selectBtn addChild:selectLabel];
     }
 
+    //ソーシャルボタン
+    CCButton* twiterBtn=[CCButton buttonWithTitle:@"" spriteFrame:
+                        [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"twitter.png"]];
+    twiterBtn.scale=0.7;
+    twiterBtn.position=ccp(winSize.width/2-(twiterBtn.contentSize.width*twiterBtn.scale)/2-10,100);
+    [twiterBtn setTarget:self selector:@selector(onTwitterClicked:)];
+    [self addChild:twiterBtn];
+
+    CCButton* facebookBtn=[CCButton buttonWithTitle:@"" spriteFrame:
+                         [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"facebook.png"]];
+    facebookBtn.scale=0.7;
+    facebookBtn.position=ccp(winSize.width/2+(facebookBtn.contentSize.width*twiterBtn.scale)/2+10,100);
+    [facebookBtn setTarget:self selector:@selector(onFacebookClicked:)];
+    [self addChild:facebookBtn];
+
+    
     /*CCButton* titleButton=[CCButton buttonWithTitle:@"[タイトル]" fontName:@"Verdana-Bold" fontSize:15];
     titleButton.position=ccp(winSize.width/2,winSize.height/2-50);
     [titleButton setTarget:self selector:@selector(onTitleClicked:)];
@@ -243,6 +266,52 @@ MsgBoxLayer* msgBox;
                                        withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
         }
     }
+}
+
+-(void)onTwitterClicked:(id)sender
+{
+    SLComposeViewController *vc = [SLComposeViewController
+                                   composeViewControllerForServiceType:SLServiceTypeTwitter];
+    [vc setInitialText:[NSString stringWithFormat:@"%@ %d %@\n",
+                                                        NSLocalizedString(@"PostMessage",NULL),
+                                                        [GameManager load_High_Score_1],
+                                                        NSLocalizedString(@"PostEnd",NULL)]];
+    [vc addURL:[NSURL URLWithString:NSLocalizedString(@"URL",NULL)]];
+    [vc setCompletionHandler:^(SLComposeViewControllerResult result)
+     {
+         switch (result) {
+             case SLComposeViewControllerResultDone:
+                 //チケットを付与
+                 [GameManager save_Continue_Ticket:[GameManager load_Continue_Ticket]+10];
+                 break;
+             case SLComposeViewControllerResultCancelled:
+                 break;
+         }
+     }];
+    [[CCDirector sharedDirector]presentViewController:vc animated:YES completion:nil];
+}
+
+-(void)onFacebookClicked:(id)sender
+{
+    SLComposeViewController *vc = [SLComposeViewController
+                                   composeViewControllerForServiceType:SLServiceTypeFacebook];
+    [vc setInitialText:[NSString stringWithFormat:@"%@ %d %@\n",
+                                                        NSLocalizedString(@"PostMessage",NULL),
+                                                        [GameManager load_High_Score_1],
+                                                        NSLocalizedString(@"PostEnd",NULL)]];
+    [vc addURL:[NSURL URLWithString:NSLocalizedString(@"URL",NULL)]];
+    [vc setCompletionHandler:^(SLComposeViewControllerResult result)
+     {
+         switch (result) {
+             case SLComposeViewControllerResultDone:
+                 //チケットを付与
+                 [GameManager save_Continue_Ticket:[GameManager load_Continue_Ticket]+10];
+                 break;
+             case SLComposeViewControllerResultCancelled:
+                 break;
+         }
+     }];
+    [[CCDirector sharedDirector]presentViewController:vc animated:YES completion:nil];
 }
 
 @end

@@ -14,7 +14,7 @@
 
 CGSize winSize;
 
-CCLabelTTF* ticketLabel;
+CCLabelBMFont* ticketLabel;
 
 SKProductsRequest *productsRequest;
 PaymentManager* paymane;
@@ -58,15 +58,16 @@ SKProduct* product05;
     //コンティニューチケット
     CCSprite* ticket=[CCSprite spriteWithSpriteFrame:
                       [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"ticket.png"]];
-    ticket.scale=0.2;
-    ticket.position=ccp((ticket.contentSize.width*ticket.scale)/2,
-                                    winSize.height-(ticket.contentSize.height*ticket.scale)/2);
+    ticket.scale=0.3;
+    ticket.position=ccp((ticket.contentSize.width*ticket.scale)/2 +5,
+                                    winSize.height-(ticket.contentSize.height*ticket.scale)/2 -5);
     [self addChild:ticket];
     
     //コンティニューチケット枚数
-    ticketLabel=[CCLabelTTF labelWithString:[NSString stringWithFormat:@" ×%03d",
-                                                         [GameManager load_Continue_Ticket]] fontName:@"Verdana-Bold" fontSize:15];
-    ticketLabel.position=ccp(ticket.position.x+ticketLabel.contentSize.width/2,ticket.position.y);
+    ticketLabel=[CCLabelBMFont labelWithString:
+                 [NSString stringWithFormat:@"×%03d",[GameManager load_Continue_Ticket]] fntFile:@"score.fnt"];
+    ticketLabel.scale=0.6;
+    ticketLabel.position=ccp(ticket.position.x+(ticket.contentSize.width*ticket.scale)/2+(ticketLabel.contentSize.width*ticketLabel.scale)/2,ticket.position.y);
     [self addChild:ticketLabel];
     
     //インジケータ
