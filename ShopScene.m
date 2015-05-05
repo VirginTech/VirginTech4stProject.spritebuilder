@@ -258,7 +258,7 @@ SKProduct* product05;
 
 +(void)ticket_Update
 {
-    ticketLabel.string=[NSString stringWithFormat:@" ×%03d",[GameManager load_Continue_Ticket]];
+    ticketLabel.string=[NSString stringWithFormat:@"×%03d",[GameManager load_Continue_Ticket]];
 }
 
 - (void)onTitleClicked:(id)sender

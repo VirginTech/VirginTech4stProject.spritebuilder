@@ -135,17 +135,29 @@ MsgBoxLayer* msgBox;
     }
 
     //ソーシャルボタン
-    CCButton* twiterBtn=[CCButton buttonWithTitle:@"" spriteFrame:
+    CCButton* twitterBtn;
+    if([GameManager getLocale]==1){
+        twitterBtn=[CCButton buttonWithTitle:@"" spriteFrame:
                         [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"twitter.png"]];
-    twiterBtn.scale=0.7;
-    twiterBtn.position=ccp(winSize.width/2-(twiterBtn.contentSize.width*twiterBtn.scale)/2-10,100);
-    [twiterBtn setTarget:self selector:@selector(onTwitterClicked:)];
-    [self addChild:twiterBtn];
+    }else{
+        twitterBtn=[CCButton buttonWithTitle:@"" spriteFrame:
+                        [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"twitter_en.png"]];
+    }
+    twitterBtn.scale=0.7;
+    twitterBtn.position=ccp(winSize.width/2-(twitterBtn.contentSize.width*twitterBtn.scale)/2-10,100);
+    [twitterBtn setTarget:self selector:@selector(onTwitterClicked:)];
+    [self addChild:twitterBtn];
 
-    CCButton* facebookBtn=[CCButton buttonWithTitle:@"" spriteFrame:
-                         [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"facebook.png"]];
+    CCButton* facebookBtn;
+    if([GameManager getLocale]==1){
+        facebookBtn=[CCButton buttonWithTitle:@"" spriteFrame:
+                        [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"facebook.png"]];
+    }else{
+        facebookBtn=[CCButton buttonWithTitle:@"" spriteFrame:
+                        [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"facebook_en.png"]];
+    }
     facebookBtn.scale=0.7;
-    facebookBtn.position=ccp(winSize.width/2+(facebookBtn.contentSize.width*twiterBtn.scale)/2+10,100);
+    facebookBtn.position=ccp(winSize.width/2+(facebookBtn.contentSize.width*facebookBtn.scale)/2+10,100);
     [facebookBtn setTarget:self selector:@selector(onFacebookClicked:)];
     [self addChild:facebookBtn];
 

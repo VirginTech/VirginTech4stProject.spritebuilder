@@ -275,11 +275,14 @@ CCLabelBMFont* ballCntLbl;
     doneBallCount_lbl.position=ccp(doneBallCount_lbl.contentSize.width/2,winSize.height-70);
     [self addChild:doneBallCount_lbl z:1];*/
 
+#if DEBUG
+
     CCLabelTTF* ballLaunchTiming_lbl=[CCLabelTTF labelWithString:
             [NSString stringWithFormat:@"BallLaunchTiming:%d",ballLaunchCnt] fontName:@"Verdana-Bold" fontSize:10];
     ballLaunchTiming_lbl.position=ccp(ballLaunchTiming_lbl.contentSize.width/2,winSize.height-50);
     [self addChild:ballLaunchTiming_lbl z:1];
     
+#endif
     
     return self;
 }

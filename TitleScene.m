@@ -133,8 +133,8 @@ int boundCnt;
     [physicWorld addChild:windmill];
 
     //地面生成
-    ground=[Ground createGround:ccp(winSize.width/2,0.0)];
-    ground.position=ccp(winSize.width/2,-(ground.contentSize.height*ground.scale)/2);
+    ground=[Ground createGround:ccp(winSize.width/2,10.0)];
+    //ground.position=ccp(winSize.width/2,-(ground.contentSize.height*ground.scale)/2);
     [physicWorld addChild:ground];
     
     
@@ -577,7 +577,7 @@ int boundCnt;
 
 +(void)ticket_Update
 {
-    ticketLabel.string=[NSString stringWithFormat:@" ×%03d",[GameManager load_Continue_Ticket]];
+    ticketLabel.string=[NSString stringWithFormat:@"×%03d",[GameManager load_Continue_Ticket]];
 }
 
 @end
