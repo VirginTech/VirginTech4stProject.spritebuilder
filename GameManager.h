@@ -52,4 +52,6 @@
 +(NSDate*)load_Login_Date;
 +(void)save_login_Date:(NSDate*)date;
 
++(void)save_Gift_Acquired:(NSString*)giftKey flg:(bool)flg;
+
 @end

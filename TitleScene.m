@@ -18,6 +18,7 @@
 #import "StageModeMenu.h"
 #import "Windmill.h"
 #import "Ground.h"
+#import "NoticeScene.h"
 
 @implementation TitleScene
 
@@ -283,6 +284,17 @@ int boundCnt;
     [creditButton setTarget:self selector:@selector(onCreditButtonClicked:)];
     [self addChild:creditButton];
     
+    //お知らせ
+    if([GameManager getLocale]==1){//日本語のみ
+        CCButton* noticeButton=[CCButton buttonWithTitle:@""
+                        spriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"notice.png"]];
+        noticeButton.scale=0.4;
+        noticeButton.position=ccp(winSize.width/2,130);
+        [noticeButton setTarget:self selector:@selector(onNoticeClicked:)];
+        [self addChild:noticeButton];
+    }
+
+    
     //バージョン表記
     CCLabelTTF* version=[CCLabelTTF labelWithString:[NSString stringWithFormat:@"©VirginTech v%@",
                         [[[NSBundle mainBundle] infoDictionary]objectForKey:@"CFBundleShortVersionString"]]
@@ -346,7 +358,7 @@ int boundCnt;
 -(void)onMessageLayerBtnClocked:(int)btnNum procNum:(int)procNum
 {
     if(procNum==0){
-
+        //何もしない
     }
     /*/コンティニューチケット使用
     else if(procNum==1){
@@ -578,6 +590,34 @@ int boundCnt;
 +(void)ticket_Update
 {
     ticketLabel.string=[NSString stringWithFormat:@"×%03d",[GameManager load_Continue_Ticket]];
+}
+
+-(void)onNoticeClicked:(id)sender
+{
+    //ネット接続できるか確認
+    Reachability *internetReach = [Reachability reachabilityForInternetConnection];
+    NetworkStatus netStatus = [internetReach currentReachabilityStatus];
+    if(netStatus == NotReachable)
+    {
+        //カスタムアラートメッセージ
+        msgBox=[[MsgBoxLayer alloc]initWithTitle:NSLocalizedString(@"Error",NULL)
+                                                msg:NSLocalizedString(@"NotNetwork",NULL)
+                                                pos:ccp(winSize.width/2,winSize.height/2)
+                                                size:CGSizeMake(200, 100)
+                                                modal:true
+                                                rotation:false
+                                                type:0
+                                                procNum:0];//処理なし
+        msgBox.delegate=self;//デリゲートセット
+        [self addChild:msgBox z:3];
+        
+        return;
+    }
+    else
+    {
+        [[CCDirector sharedDirector] replaceScene:[NoticeScene scene]
+                                   withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
+    }
 }
 
 @end

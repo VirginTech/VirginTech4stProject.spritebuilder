@@ -43,8 +43,8 @@
 
 //ログインボーナス
 "BonusGet"="Got a bonus!";
-"FirstBonus"="Thank you for the very first \nlog-in. Free 'Ticket' 30 set \nare yours now!";
-"DailyBonus"="Free daily 'Ticket' 3 set!";
+"FirstBonus"="Thank you for the very first \nlog-in. Free 30 Tickets \nare yours now!";
+"DailyBonus"="Free daily 3 Tickets !";
 
 //ローカル通知
 "LocalNotification"="Let's play the 'windmill'";
@@ -60,6 +60,13 @@
 "PostMessage"="【windmill】\nCongratulations!\nHigh score";
 "PostEnd"=" is achieved!";
 "URL"="https://itunes.apple.com/jp/app/id985536616";
+
+//予約特典
+"Gift"="Present!";
+"Gift_Get"=" Tickets";
+"Gift_Ticket"="Get! ";
+"Gift_Error"="ID for the exclusive offer \nis incorrect";
+"Gift_Not"="This exclusive offer is limited \nto one per customer";
 
 
 

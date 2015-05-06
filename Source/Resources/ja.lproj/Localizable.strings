@@ -61,6 +61,12 @@
 "PostEnd"="点達成!";
 "URL"="https://itunes.apple.com/jp/app/id985536616";
 
+//予約特典
+"Gift"="プレゼント";
+"Gift_Get"="枚 ゲット！";
+"Gift_Ticket"="チケット";
+"Gift_Error"="特典IDが間違っています";
+"Gift_Not"="特典は、お１人様１回までです";
 
 
 
