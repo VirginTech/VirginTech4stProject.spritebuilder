@@ -39,14 +39,8 @@ SKProduct* product05;
     winSize=[[CCDirector sharedDirector]viewSize];
     
     //Create a colored background (Dark Grey)
-    CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:0.8f]];
+    CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.7f green:0.2f blue:0.2f alpha:1.0f]];
     [self addChild:background];
-    
-    //タイトルボタン
-    CCButton *titleButton=[CCButton buttonWithTitle:@"[タイトル]" fontName:@"Verdana-Bold" fontSize:15];
-    titleButton.position=ccp(winSize.width-titleButton.contentSize.width/2,winSize.height-titleButton.contentSize.height/2);
-    [titleButton setTarget:self selector:@selector(onTitleClicked:)];
-    [self addChild:titleButton];
     
     //初期化
     paymane = [[PaymentManager alloc]init];
@@ -54,6 +48,28 @@ SKProduct* product05;
     //画像読み込み
     [[CCSpriteFrameCache sharedSpriteFrameCache]removeSpriteFrames];
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"shop_default.plist"];
+    
+    /*/タイトルボタン
+    CCButton *titleButton=[CCButton buttonWithTitle:@"[タイトル]" fontName:@"Verdana-Bold" fontSize:15];
+    titleButton.position=ccp(winSize.width-titleButton.contentSize.width/2,winSize.height-titleButton.contentSize.height/2);
+    [titleButton setTarget:self selector:@selector(onTitleClicked:)];
+    [self addChild:titleButton];*/
+    
+    //タイトルボタン
+    CCButton *titleButton;
+    if([GameManager getLocale]==1){
+        titleButton = [CCButton buttonWithTitle:@"" spriteFrame:
+                       [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"titleBtn.png"]];
+    }else{
+        titleButton = [CCButton buttonWithTitle:@"" spriteFrame:
+                       [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"titleBtn_en.png"]];
+    }
+    //titleButton.positionType = CCPositionTypeNormalized;
+    titleButton.scale=0.6;
+    titleButton.position = ccp(winSize.width-(titleButton.contentSize.width*titleButton.scale)/2,
+                               winSize.height-(titleButton.contentSize.height*titleButton.scale)/2);
+    [titleButton setTarget:self selector:@selector(onTitleClicked:)];
+    [self addChild:titleButton];
     
     //コンティニューチケット
     CCSprite* ticket=[CCSprite spriteWithSpriteFrame:
@@ -122,7 +138,191 @@ SKProduct* product05;
     product04=[response.products objectAtIndex:4];// 50set
     product05=[response.products objectAtIndex:1];// 100set
     
-    //チケットイメージ
+    //フレームのスケール取得
+    float scale;
+    if([GameManager getDevice]==1){  //iPad
+        scale=0.55;
+    }else if([GameManager getDevice]==2){  //iPhone4
+        scale=0.55;
+    }else{  //iPhone5,6
+        scale=0.6;
+    }
+
+    //=================
+    // チケット10セット
+    //=================
+    CCSprite* frame_Item_01=[CCSprite spriteWithSpriteFrame:
+                             [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"frame.png"]];
+    frame_Item_01.scale=scale;
+    frame_Item_01.position=ccp(winSize.width/2-(frame_Item_01.contentSize.width*frame_Item_01.scale)/2,
+                               winSize.height/2+frame_Item_01.contentSize.height*frame_Item_01.scale);
+    [self addChild:frame_Item_01];
+    //画像
+    CCSprite* item_01=[CCSprite spriteWithSpriteFrame:
+                       [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"ticket10.png"]];
+    item_01.scale=1.0;
+    item_01.position=ccp(frame_Item_01.contentSize.width/2,frame_Item_01.contentSize.height/2-10);
+    [frame_Item_01 addChild:item_01];
+    //プロダクトネーム
+    CCLabelTTF* lbl_Name_01=[CCLabelTTF labelWithString:
+            [NSString stringWithFormat:@"【%@】",product01.localizedTitle]fontName:@"Verdana-Bold" fontSize:20];
+    lbl_Name_01.position=ccp(frame_Item_01.contentSize.width/2,
+                             frame_Item_01.contentSize.height-lbl_Name_01.contentSize.height-10);
+    [frame_Item_01 addChild:lbl_Name_01];
+    //説明
+    CCLabelTTF* lbl_Descript_01=[CCLabelTTF labelWithString:product01.localizedDescription
+                                                   fontName:@"Verdana-Bold" fontSize:12];
+    lbl_Descript_01.position=ccp(frame_Item_01.contentSize.width/2,lbl_Name_01.position.y-30);
+    [frame_Item_01 addChild:lbl_Descript_01];
+    //購入ボタン
+    CCButton* btn_Item_01=[CCButton buttonWithTitle:[NSString stringWithFormat:@"%@%@",
+                    [product01.priceLocale objectForKey:NSLocaleCurrencySymbol],product01.price] spriteFrame:
+                    [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"buyBtn.png"]];
+    btn_Item_01.position=ccp(frame_Item_01.contentSize.width/2,btn_Item_01.contentSize.height/2+30);
+    [btn_Item_01 setTarget:self selector:@selector(button01_Clicked:)];
+    btn_Item_01.color=[CCColor whiteColor];
+    [frame_Item_01 addChild:btn_Item_01];
+    
+    //=================
+    // チケット20セット
+    //=================
+    CCSprite* frame_Item_02=[CCSprite spriteWithSpriteFrame:
+                             [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"frame.png"]];
+    frame_Item_02.scale=scale;
+    frame_Item_02.position=ccp(frame_Item_01.position.x+frame_Item_02.contentSize.width*frame_Item_02.scale,
+                               frame_Item_01.position.y);
+    [self addChild:frame_Item_02];
+    //画像
+    CCSprite* item_02=[CCSprite spriteWithSpriteFrame:
+                       [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"ticket20.png"]];
+    item_02.scale=1.5;
+    item_02.position=ccp(frame_Item_02.contentSize.width/2,frame_Item_02.contentSize.height/2-10);
+    [frame_Item_02 addChild:item_02];
+    //プロダクトネーム
+    CCLabelTTF* lbl_Name_02=[CCLabelTTF labelWithString:
+                [NSString stringWithFormat:@"【%@】",product02.localizedTitle]fontName:@"Verdana-Bold" fontSize:20];
+    lbl_Name_02.position=ccp(frame_Item_02.contentSize.width/2,
+                             frame_Item_02.contentSize.height-lbl_Name_02.contentSize.height-10);
+    [frame_Item_02 addChild:lbl_Name_02];
+    //説明
+    CCLabelTTF* lbl_Descript_02=[CCLabelTTF labelWithString:product02.localizedDescription
+                                                   fontName:@"Verdana-Bold" fontSize:12];
+    lbl_Descript_02.position=ccp(frame_Item_02.contentSize.width/2,lbl_Name_02.position.y-30);
+    [frame_Item_02 addChild:lbl_Descript_02];
+    //購入ボタン
+    CCButton* btn_Item_02=[CCButton buttonWithTitle:[NSString stringWithFormat:@"%@%@",
+                        [product02.priceLocale objectForKey:NSLocaleCurrencySymbol],product02.price] spriteFrame:
+                        [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"buyBtn.png"]];
+    btn_Item_02.position=ccp(frame_Item_02.contentSize.width/2,btn_Item_02.contentSize.height/2+30);
+    [btn_Item_02 setTarget:self selector:@selector(button02_Clicked:)];
+    btn_Item_02.color=[CCColor whiteColor];
+    [frame_Item_02 addChild:btn_Item_02];
+    
+    //=================
+    // チケット30セット
+    //=================
+    CCSprite* frame_Item_03=[CCSprite spriteWithSpriteFrame:
+                             [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"frame.png"]];
+    frame_Item_03.scale=scale;
+    frame_Item_03.position=ccp(frame_Item_01.position.x,
+                               frame_Item_01.position.y-frame_Item_03.contentSize.height*frame_Item_03.scale);
+    [self addChild:frame_Item_03];
+    //画像
+    CCSprite* item_03=[CCSprite spriteWithSpriteFrame:
+                       [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"ticket30.png"]];
+    item_03.scale=1.5;
+    item_03.position=ccp(frame_Item_03.contentSize.width/2,frame_Item_03.contentSize.height/2-10);
+    [frame_Item_03 addChild:item_03];
+    //プロダクトネーム
+    CCLabelTTF* lbl_Name_03=[CCLabelTTF labelWithString:
+                    [NSString stringWithFormat:@"【%@】",product03.localizedTitle]fontName:@"Verdana-Bold" fontSize:20];
+    lbl_Name_03.position=ccp(frame_Item_03.contentSize.width/2,
+                             frame_Item_03.contentSize.height-lbl_Name_03.contentSize.height-10);
+    [frame_Item_03 addChild:lbl_Name_03];
+    //説明
+    CCLabelTTF* lbl_Descript_03=[CCLabelTTF labelWithString:product03.localizedDescription
+                                                   fontName:@"Verdana-Bold" fontSize:12];
+    lbl_Descript_03.position=ccp(frame_Item_03.contentSize.width/2,lbl_Name_03.position.y-30);
+    [frame_Item_03 addChild:lbl_Descript_03];
+    //購入ボタン
+    CCButton* btn_Item_03=[CCButton buttonWithTitle:[NSString stringWithFormat:@"%@%@",
+                        [product03.priceLocale objectForKey:NSLocaleCurrencySymbol],product03.price] spriteFrame:
+                        [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"buyBtn.png"]];
+    btn_Item_03.position=ccp(frame_Item_03.contentSize.width/2,btn_Item_03.contentSize.height/2+30);
+    [btn_Item_03 setTarget:self selector:@selector(button03_Clicked:)];
+    btn_Item_03.color=[CCColor whiteColor];
+    [frame_Item_03 addChild:btn_Item_03];
+    
+    //=================
+    // チケット50セット
+    //=================
+    CCSprite* frame_Item_04=[CCSprite spriteWithSpriteFrame:
+                             [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"frame.png"]];
+    frame_Item_04.scale=scale;
+    frame_Item_04.position=ccp(frame_Item_02.position.x,frame_Item_03.position.y);
+    [self addChild:frame_Item_04];
+    //画像
+    CCSprite* item_04=[CCSprite spriteWithSpriteFrame:
+                       [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"ticket50.png"]];
+    item_04.scale=1.5;
+    item_04.position=ccp(frame_Item_04.contentSize.width/2,frame_Item_04.contentSize.height/2-10);
+    [frame_Item_04 addChild:item_04];
+    //プロダクトネーム
+    CCLabelTTF* lbl_Name_04=[CCLabelTTF labelWithString:
+                [NSString stringWithFormat:@"【%@】",product04.localizedTitle]fontName:@"Verdana-Bold" fontSize:20];
+    lbl_Name_04.position=ccp(frame_Item_04.contentSize.width/2,
+                             frame_Item_04.contentSize.height-lbl_Name_04.contentSize.height-10);
+    [frame_Item_04 addChild:lbl_Name_04];
+    //説明
+    CCLabelTTF* lbl_Descript_04=[CCLabelTTF labelWithString:product04.localizedDescription
+                                                   fontName:@"Verdana-Bold" fontSize:12];
+    lbl_Descript_04.position=ccp(frame_Item_04.contentSize.width/2,lbl_Name_04.position.y-30);
+    [frame_Item_04 addChild:lbl_Descript_04];
+    //購入ボタン
+    CCButton* btn_Item_04=[CCButton buttonWithTitle:[NSString stringWithFormat:@"%@%@",
+                        [product04.priceLocale objectForKey:NSLocaleCurrencySymbol],product04.price] spriteFrame:
+                        [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"buyBtn.png"]];
+    btn_Item_04.position=ccp(frame_Item_04.contentSize.width/2,btn_Item_04.contentSize.height/2+30);
+    [btn_Item_04 setTarget:self selector:@selector(button04_Clicked:)];
+    btn_Item_04.color=[CCColor whiteColor];
+    [frame_Item_04 addChild:btn_Item_04];
+    
+    //=================
+    // チケット100セット
+    //=================
+    CCSprite* frame_Item_05=[CCSprite spriteWithSpriteFrame:
+                             [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"frame.png"]];
+    frame_Item_05.scale=scale;
+    frame_Item_05.position=ccp(frame_Item_03.position.x,
+                               frame_Item_04.position.y-frame_Item_05.contentSize.height*frame_Item_05.scale);
+    [self addChild:frame_Item_05];
+    //画像
+    CCSprite* item_05=[CCSprite spriteWithSpriteFrame:
+                       [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"ticket100.png"]];
+    item_05.scale=1.5;
+    item_05.position=ccp(frame_Item_05.contentSize.width/2,frame_Item_05.contentSize.height/2-10);
+    [frame_Item_05 addChild:item_05];
+    //プロダクトネーム
+    CCLabelTTF* lbl_Name_05=[CCLabelTTF labelWithString:
+                [NSString stringWithFormat:@"【%@】",product05.localizedTitle]fontName:@"Verdana-Bold" fontSize:20];
+    lbl_Name_05.position=ccp(frame_Item_05.contentSize.width/2,
+                             frame_Item_05.contentSize.height-lbl_Name_05.contentSize.height-10);
+    [frame_Item_05 addChild:lbl_Name_05];
+    //説明
+    CCLabelTTF* lbl_Descript_05=[CCLabelTTF labelWithString:product05.localizedDescription
+                                                   fontName:@"Verdana-Bold" fontSize:12];
+    lbl_Descript_05.position=ccp(frame_Item_05.contentSize.width/2,lbl_Name_05.position.y-30);
+    [frame_Item_05 addChild:lbl_Descript_05];
+    //購入ボタン
+    CCButton* btn_Item_05=[CCButton buttonWithTitle:[NSString stringWithFormat:@"%@%@",
+                    [product05.priceLocale objectForKey:NSLocaleCurrencySymbol],product05.price] spriteFrame:
+                    [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"buyBtn.png"]];
+    btn_Item_05.position=ccp(frame_Item_05.contentSize.width/2,btn_Item_05.contentSize.height/2+30);
+    [btn_Item_05 setTarget:self selector:@selector(button05_Clicked:)];
+    btn_Item_05.color=[CCColor whiteColor];
+    [frame_Item_05 addChild:btn_Item_05];
+    
+    /*/チケットイメージ
     CCSprite* ticket01=[CCSprite spriteWithSpriteFrame:
                       [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"ticket.png"]];
     ticket01.position=ccp(30, winSize.height -130);
@@ -223,9 +423,7 @@ SKProduct* product05;
     CCLabelTTF* labelBtn05=[CCLabelTTF labelWithString:[NSString stringWithFormat:@"%@%@",[product05.priceLocale objectForKey:NSLocaleCurrencySymbol],product05.price] fontName:@"Verdana-Italic" fontSize:18.0f];
     labelBtn05.position=ccp(button05.contentSize.width/2,button05.contentSize.height/2);
     labelBtn05.color=[CCColor whiteColor];
-    [button05 addChild:labelBtn05];
-    
-    
+    [button05 addChild:labelBtn05];*/
     
     // インジケータを非表示にする
     if([indicator isAnimating])

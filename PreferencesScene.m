@@ -8,6 +8,7 @@
 
 #import "PreferencesScene.h"
 #import "TitleScene.h"
+#import "GameManager.h"
 
 @implementation PreferencesScene
 
@@ -30,9 +31,25 @@ CGSize winSize;
     CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:0.8f]];
     [self addChild:background];
     
-    //タイトルボタン
+    /*/タイトルボタン
     CCButton *titleButton=[CCButton buttonWithTitle:@"[タイトル]" fontName:@"Verdana-Bold" fontSize:15];
     titleButton.position=ccp(winSize.width-titleButton.contentSize.width/2,winSize.height-titleButton.contentSize.height/2);
+    [titleButton setTarget:self selector:@selector(onTitleClicked:)];
+    [self addChild:titleButton];*/
+    
+    //タイトルボタン
+    CCButton *titleButton;
+    if([GameManager getLocale]==1){
+        titleButton = [CCButton buttonWithTitle:@"" spriteFrame:
+                       [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"titleBtn.png"]];
+    }else{
+        titleButton = [CCButton buttonWithTitle:@"" spriteFrame:
+                       [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"titleBtn_en.png"]];
+    }
+    //titleButton.positionType = CCPositionTypeNormalized;
+    titleButton.scale=0.6;
+    titleButton.position = ccp(winSize.width-(titleButton.contentSize.width*titleButton.scale)/2,
+                               winSize.height-(titleButton.contentSize.height*titleButton.scale)/2);
     [titleButton setTarget:self selector:@selector(onTitleClicked:)];
     [self addChild:titleButton];
     

@@ -60,8 +60,9 @@ MsgBoxLayer* msgBox;
     [[[CCDirector sharedDirector] view] addSubview:webview];
     
     //画像読み込み
-    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"title_default.plist"];
+    //[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"title_default.plist"];
     
+    //タイトルボタン
     CCButton *titleButton;
     if([GameManager getLocale]==1){
         titleButton = [CCButton buttonWithTitle:@"" spriteFrame:
@@ -73,7 +74,7 @@ MsgBoxLayer* msgBox;
     //titleButton.positionType = CCPositionTypeNormalized;
     titleButton.scale=0.6;
     titleButton.position = ccp(winSize.width-(titleButton.contentSize.width*titleButton.scale)/2,
-                               winSize.height-titleButton.contentSize.height/2);
+                               winSize.height-(titleButton.contentSize.height*titleButton.scale)/2);
     [titleButton setTarget:self selector:@selector(onTitleClicked:)];
     [self addChild:titleButton];
     
@@ -102,7 +103,7 @@ MsgBoxLayer* msgBox;
         indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
         indicator.color=[UIColor blackColor];
         [[[CCDirector sharedDirector] view] addSubview:indicator];
-        if([GameManager getDevice]==3){
+        if([GameManager getDevice]==1){//iPad
             indicator.center = ccp(winSize.width, winSize.height);
         }else{
             indicator.center = ccp(winSize.width/2, winSize.height/2);
