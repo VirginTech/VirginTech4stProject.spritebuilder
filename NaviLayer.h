@@ -20,4 +20,7 @@
 + (NaviLayer *)scene;
 - (id)init;
 
+-(void)dispAdLayer;
+-(void)hideAdLayer;
+
 @end

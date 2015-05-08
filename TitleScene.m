@@ -20,6 +20,9 @@
 #import "Ground.h"
 #import "NoticeScene.h"
 
+#import "IAdLayer.h"
+#import "IMobileLayer.h"
+
 @implementation TitleScene
 
 CGSize winSize;
@@ -83,6 +86,17 @@ int boundCnt;
     //Information* infoLayer=[[Information alloc]init];
     //[self addChild:infoLayer z:1];
     
+    //Ad広告レイヤー
+    if([GameManager getLocale]==1){//日本語なら
+        //i-Mobile広告(フッター、アイコン)
+        IMobileLayer* iMobileAd=[[IMobileLayer alloc]init:true];
+        [self addChild:iMobileAd];
+    }else{//それ以外
+        //iAd広告
+        IAdLayer* iAdLayer=[[IAdLayer alloc]init];
+        [self addChild:iAdLayer];
+    }
+
     //画像読み込み
     [[CCSpriteFrameCache sharedSpriteFrameCache]removeSpriteFrames];
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"title_default.plist"];
@@ -421,6 +435,8 @@ int boundCnt;
         boundCnt=0;
         [[CCDirector sharedDirector] replaceScene:[ScoreModeMenu scene]
                                withTransition:[CCTransition transitionCrossFadeWithDuration:0.3]];
+        //インターステイシャル広告表示
+        [ImobileSdkAds showBySpotID:@"457103"];
     }
     return TRUE;
 }
@@ -443,6 +459,8 @@ int boundCnt;
         boundCnt=0;
         [[CCDirector sharedDirector] replaceScene:[StageModeMenu scene]
                                    withTransition:[CCTransition transitionCrossFadeWithDuration:0.3]];
+        //インターステイシャル広告表示
+        [ImobileSdkAds showBySpotID:@"457103"];
     }
     return TRUE;
 }

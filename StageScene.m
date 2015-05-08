@@ -23,6 +23,8 @@
 #import "MsgEffect.h"
 //#import "BallShadow.h"
 
+#import "ImobileSdkAds/ImobileSdkAds.h"
+
 @implementation StageScene
 
 CGSize winSize;
@@ -825,6 +827,10 @@ CCLabelBMFont* ballCntLbl;
                 naviLayer.gameOverLabel.string=@"Congratu\nlations!";
                 pauseBtn.visible=false;
                 resumeBtn.visible=false;
+                //Ad表示
+                [naviLayer dispAdLayer];
+                //インターステイシャル広告表示
+                [ImobileSdkAds showBySpotID:@"457103"];
             }
         }
     }else{//ゲームオーバー
@@ -833,6 +839,10 @@ CCLabelBMFont* ballCntLbl;
         naviLayer.gameOverLabel.string=@"Stage\nfailed!";
         pauseBtn.visible=false;
         resumeBtn.visible=false;
+        //Ad表示
+        [naviLayer dispAdLayer];
+        //インターステイシャル広告表示
+        [ImobileSdkAds showBySpotID:@"457103"];
     }
     //ハイスコア保存
     if([GameManager getPlayMode]==1)
@@ -875,6 +885,9 @@ CCLabelBMFont* ballCntLbl;
     naviLayer.visible=true;
     pauseBtn.visible=false;
     resumeBtn.visible=true;
+    
+    //Ad表示
+    [naviLayer dispAdLayer];
 }
 
 //================================
@@ -897,7 +910,9 @@ CCLabelBMFont* ballCntLbl;
     naviLayer.visible=false;
     pauseBtn.visible=true;
     resumeBtn.visible=false;
-
+    
+    //Ad非表示
+    [naviLayer hideAdLayer];
 }
 
 @end

@@ -14,8 +14,8 @@
 //メニューボタン
 "ScoreChallenge"="Score Challenge";
 "StageMode"="Stage Mode";
-"FirstPlay"="From begin";
-"ContinuePlay"="Continue";
+"FirstPlay"="From beginning";
+"ContinuePlay"="From continued";
 "HomeTo"="Home";
 "Replay"="Replay";
 "LevelSelect"="Stage Select";

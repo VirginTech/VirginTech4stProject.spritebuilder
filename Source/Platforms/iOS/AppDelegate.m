@@ -32,6 +32,8 @@
 #import "TitleScene.h"
 #import "GameManager.h"
 
+#import "ImobileSdkAds/ImobileSdkAds.h"
+
 @implementation AppController
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -126,6 +128,13 @@
     }else{
         [GameManager setLocale:0];//それ以外(デフォルト)
     }
+    
+    //iMobileインタースティシャル読込み (AppBankNetworkインタースティシャルと相性悪し)
+    //if([GameManager getDevice]!=1){//iPadでなければ
+        [ImobileSdkAds registerWithPublisherID:@"31967" MediaID:@"170299" SpotID:@"457103"];
+        [ImobileSdkAds setAdOrientation:IMOBILESDKADS_AD_ORIENTATION_PORTRAIT];
+        [ImobileSdkAds startBySpotID:@"457103"];
+    //}
     
     //return [CCBReader loadAsScene:@"MainScene"];
     return [TitleScene scene];

@@ -124,6 +124,17 @@
 		CFB2B1A61AF35C90000AF85F /* bg_02.png in Resources */ = {isa = PBXBuildFile; fileRef = CFB2B1A41AF35C90000AF85F /* bg_02.png */; };
 		CFB2B1B71AF37579000AF85F /* bg_00.png in Resources */ = {isa = PBXBuildFile; fileRef = CFB2B1B61AF37579000AF85F /* bg_00.png */; };
 		CFB398361AF9DE6700575BB0 /* NoticeScene.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB398351AF9DE6700575BB0 /* NoticeScene.m */; };
+		CFB6BFF71AFC723800E4B50B /* title_default.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFB6BFF51AFC723800E4B50B /* title_default.plist */; };
+		CFB6BFF81AFC723800E4B50B /* title_default.png in Resources */ = {isa = PBXBuildFile; fileRef = CFB6BFF61AFC723800E4B50B /* title_default.png */; };
+		CFB6BFFB1AFC725200E4B50B /* shop_default.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFB6BFF91AFC725200E4B50B /* shop_default.plist */; };
+		CFB6BFFC1AFC725200E4B50B /* shop_default.png in Resources */ = {isa = PBXBuildFile; fileRef = CFB6BFFA1AFC725200E4B50B /* shop_default.png */; };
+		CFB6C0021AFC793500E4B50B /* IAdLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB6BFFF1AFC793500E4B50B /* IAdLayer.m */; };
+		CFB6C0031AFC793500E4B50B /* IMobileLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB6C0011AFC793500E4B50B /* IMobileLayer.m */; };
+		CFB6C0051AFC7A2E00E4B50B /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFB6C0041AFC7A2E00E4B50B /* iAd.framework */; };
+		CFB6C0071AFC7A4E00E4B50B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFB6C0061AFC7A4E00E4B50B /* SystemConfiguration.framework */; };
+		CFB6C0091AFC7A6200E4B50B /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFB6C0081AFC7A6200E4B50B /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		CFB6C00B1AFC7A7A00E4B50B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFB6C00A1AFC7A7A00E4B50B /* CoreLocation.framework */; };
+		CFB6C00D1AFC7AA400E4B50B /* ImobileSdkAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFB6C00C1AFC7AA300E4B50B /* ImobileSdkAds.framework */; };
 		CFB74D561AF1DF8C0084039C /* score.fnt in Resources */ = {isa = PBXBuildFile; fileRef = CFB74D541AF1DF8C0084039C /* score.fnt */; };
 		CFB74D571AF1DF8C0084039C /* score.png in Resources */ = {isa = PBXBuildFile; fileRef = CFB74D551AF1DF8C0084039C /* score.png */; };
 		CFB74D5A1AF1FE4D0084039C /* msgEffect.fnt in Resources */ = {isa = PBXBuildFile; fileRef = CFB74D581AF1FE4D0084039C /* msgEffect.fnt */; };
@@ -134,10 +145,6 @@
 		CFB85A551AE8EA5900C6E654 /* basket_shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = CFB85A541AE8EA5900C6E654 /* basket_shadow.png */; };
 		CFB85A611AE915A600C6E654 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = CFB85A601AE915A600C6E654 /* spark.png */; };
 		CFC0A2E31AFAF363005A3A25 /* virgintechLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = CFC0A2E21AFAF363005A3A25 /* virgintechLogo.png */; };
-		CFC0A2EC1AFB3256005A3A25 /* shop_default.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFC0A2EA1AFB3256005A3A25 /* shop_default.plist */; };
-		CFC0A2ED1AFB3256005A3A25 /* shop_default.png in Resources */ = {isa = PBXBuildFile; fileRef = CFC0A2EB1AFB3256005A3A25 /* shop_default.png */; };
-		CFC0A2F01AFB370B005A3A25 /* title_default.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFC0A2EE1AFB370B005A3A25 /* title_default.plist */; };
-		CFC0A2F11AFB370B005A3A25 /* title_default.png in Resources */ = {isa = PBXBuildFile; fileRef = CFC0A2EF1AFB370B005A3A25 /* title_default.png */; };
 		CFC107801AE687D700A9E04E /* BallShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC1077F1AE687D700A9E04E /* BallShadow.m */; };
 		CFC3F5C41AEDC6C600BAE803 /* ScoreModeMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC3F5C31AEDC6C600BAE803 /* ScoreModeMenu.m */; };
 		CFC3F5C91AEDC6DD00BAE803 /* StageModeMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC3F5C81AEDC6DD00BAE803 /* StageModeMenu.m */; };
@@ -321,6 +328,19 @@
 		CFB2B1B61AF37579000AF85F /* bg_00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_00.png; sourceTree = "<group>"; };
 		CFB398341AF9DE6700575BB0 /* NoticeScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeScene.h; sourceTree = "<group>"; };
 		CFB398351AF9DE6700575BB0 /* NoticeScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeScene.m; sourceTree = "<group>"; };
+		CFB6BFF51AFC723800E4B50B /* title_default.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = title_default.plist; sourceTree = "<group>"; };
+		CFB6BFF61AFC723800E4B50B /* title_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = title_default.png; sourceTree = "<group>"; };
+		CFB6BFF91AFC725200E4B50B /* shop_default.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = shop_default.plist; sourceTree = "<group>"; };
+		CFB6BFFA1AFC725200E4B50B /* shop_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shop_default.png; sourceTree = "<group>"; };
+		CFB6BFFE1AFC793500E4B50B /* IAdLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAdLayer.h; sourceTree = "<group>"; };
+		CFB6BFFF1AFC793500E4B50B /* IAdLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAdLayer.m; sourceTree = "<group>"; };
+		CFB6C0001AFC793500E4B50B /* IMobileLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMobileLayer.h; sourceTree = "<group>"; };
+		CFB6C0011AFC793500E4B50B /* IMobileLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMobileLayer.m; sourceTree = "<group>"; };
+		CFB6C0041AFC7A2E00E4B50B /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		CFB6C0061AFC7A4E00E4B50B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		CFB6C0081AFC7A6200E4B50B /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		CFB6C00A1AFC7A7A00E4B50B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		CFB6C00C1AFC7AA300E4B50B /* ImobileSdkAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImobileSdkAds.framework; path = ../../Library/Ad/iMobile/imobile_for_SP_app_iOS_SDK_2.0.8/lib/ImobileSdkAds.framework; sourceTree = "<group>"; };
 		CFB74D541AF1DF8C0084039C /* score.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = score.fnt; sourceTree = "<group>"; };
 		CFB74D551AF1DF8C0084039C /* score.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = score.png; sourceTree = "<group>"; };
 		CFB74D581AF1FE4D0084039C /* msgEffect.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = msgEffect.fnt; sourceTree = "<group>"; };
@@ -331,10 +351,6 @@
 		CFB85A541AE8EA5900C6E654 /* basket_shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basket_shadow.png; sourceTree = "<group>"; };
 		CFB85A601AE915A600C6E654 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		CFC0A2E21AFAF363005A3A25 /* virgintechLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = virgintechLogo.png; sourceTree = "<group>"; };
-		CFC0A2EA1AFB3256005A3A25 /* shop_default.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = shop_default.plist; sourceTree = "<group>"; };
-		CFC0A2EB1AFB3256005A3A25 /* shop_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shop_default.png; sourceTree = "<group>"; };
-		CFC0A2EE1AFB370B005A3A25 /* title_default.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = title_default.plist; sourceTree = "<group>"; };
-		CFC0A2EF1AFB370B005A3A25 /* title_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = title_default.png; sourceTree = "<group>"; };
 		CFC1077E1AE687D700A9E04E /* BallShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BallShadow.h; sourceTree = "<group>"; };
 		CFC1077F1AE687D700A9E04E /* BallShadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BallShadow.m; sourceTree = "<group>"; };
 		CFC3F5C21AEDC6C600BAE803 /* ScoreModeMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreModeMenu.h; sourceTree = "<group>"; };
@@ -393,6 +409,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFB6C00D1AFC7AA400E4B50B /* ImobileSdkAds.framework in Frameworks */,
+				CFB6C00B1AFC7A7A00E4B50B /* CoreLocation.framework in Frameworks */,
+				CFB6C0091AFC7A6200E4B50B /* AdSupport.framework in Frameworks */,
+				CFB6C0071AFC7A4E00E4B50B /* SystemConfiguration.framework in Frameworks */,
+				CFB6C0051AFC7A2E00E4B50B /* iAd.framework in Frameworks */,
 				CFD35C611AF7552900CD91FF /* Social.framework in Frameworks */,
 				CF1AC81A1AE3B28A001E02C9 /* StoreKit.framework in Frameworks */,
 				CFB11D1A1ADD0B830072B6CC /* GameKit.framework in Frameworks */,
@@ -591,6 +612,7 @@
 				CFC3F5C31AEDC6C600BAE803 /* ScoreModeMenu.m */,
 				CFC3F5C71AEDC6DD00BAE803 /* StageModeMenu.h */,
 				CFC3F5C81AEDC6DD00BAE803 /* StageModeMenu.m */,
+				CFB6BFFD1AFC78EB00E4B50B /* AdLayer */,
 				CF7CC4D91AD3E79A00D16EF9 /* Manager */,
 				CFB11D151ADD0B360072B6CC /* Lib */,
 				CFB11D071ADCD1F60072B6CC /* OptionScene */,
@@ -646,6 +668,11 @@
 		B77F1B3017B978D7009739AE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CFB6C00C1AFC7AA300E4B50B /* ImobileSdkAds.framework */,
+				CFB6C00A1AFC7A7A00E4B50B /* CoreLocation.framework */,
+				CFB6C0081AFC7A6200E4B50B /* AdSupport.framework */,
+				CFB6C0061AFC7A4E00E4B50B /* SystemConfiguration.framework */,
+				CFB6C0041AFC7A2E00E4B50B /* iAd.framework */,
 				CFD35C601AF7552900CD91FF /* Social.framework */,
 				CF1AC8191AE3B28A001E02C9 /* StoreKit.framework */,
 				CFB11D191ADD0B830072B6CC /* GameKit.framework */,
@@ -721,10 +748,10 @@
 		CF61D5471AD7867E0062F223 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				CFC0A2EE1AFB370B005A3A25 /* title_default.plist */,
-				CFC0A2EF1AFB370B005A3A25 /* title_default.png */,
-				CFC0A2EA1AFB3256005A3A25 /* shop_default.plist */,
-				CFC0A2EB1AFB3256005A3A25 /* shop_default.png */,
+				CFB6BFF91AFC725200E4B50B /* shop_default.plist */,
+				CFB6BFFA1AFC725200E4B50B /* shop_default.png */,
+				CFB6BFF51AFC723800E4B50B /* title_default.plist */,
+				CFB6BFF61AFC723800E4B50B /* title_default.png */,
 				CFE4DCF01AF85BD50088204A /* navi_default.plist */,
 				CFE4DCF11AF85BD50088204A /* navi_default.png */,
 				CFD35C661AF7711200CD91FF /* menu_default.plist */,
@@ -810,6 +837,17 @@
 				CFC3F5CE1AEDDB3900BAE803 /* bgLayer.png */,
 			);
 			name = BackGround;
+			sourceTree = "<group>";
+		};
+		CFB6BFFD1AFC78EB00E4B50B /* AdLayer */ = {
+			isa = PBXGroup;
+			children = (
+				CFB6BFFE1AFC793500E4B50B /* IAdLayer.h */,
+				CFB6BFFF1AFC793500E4B50B /* IAdLayer.m */,
+				CFB6C0001AFC793500E4B50B /* IMobileLayer.h */,
+				CFB6C0011AFC793500E4B50B /* IMobileLayer.m */,
+			);
+			name = AdLayer;
 			sourceTree = "<group>";
 		};
 		CFB74D511AF1DF710084039C /* Font */ = {
@@ -1034,7 +1072,7 @@
 				B71F5919188484E7003F4D28 /* Settings.png in Resources */,
 				B7378978180762440076A88C /* Default@2x.png in Resources */,
 				CFC3F5CF1AEDDB3900BAE803 /* bgLayer.png in Resources */,
-				CFC0A2F01AFB370B005A3A25 /* title_default.plist in Resources */,
+				CFB6BFF71AFC723800E4B50B /* title_default.plist in Resources */,
 				CFB85A551AE8EA5900C6E654 /* basket_shadow.png in Resources */,
 				CF0C020A1AE3B98A00FFB854 /* Localizable.strings in Resources */,
 				B71F5914188484E7003F4D28 /* iPad@2x.png in Resources */,
@@ -1051,8 +1089,8 @@
 				B737893B180761570076A88C /* Published-iOS in Resources */,
 				CFB74D571AF1DF8C0084039C /* score.png in Resources */,
 				CFC9FC201AEF7EC700A35D1A /* message_default.png in Resources */,
-				CFC0A2ED1AFB3256005A3A25 /* shop_default.png in Resources */,
 				CFB778451AF5C72C00A95168 /* titleLogo.png in Resources */,
+				CFB6BFFC1AFC725200E4B50B /* shop_default.png in Resources */,
 				CFB85A611AE915A600C6E654 /* spark.png in Resources */,
 				CF0C02041AE3B89200FFB854 /* InfoPlist.strings in Resources */,
 				B71F591A188484E7003F4D28 /* Settings@2x.png in Resources */,
@@ -1063,10 +1101,10 @@
 				CFB74D5A1AF1FE4D0084039C /* msgEffect.fnt in Resources */,
 				B71F5917188484E7003F4D28 /* iPhone.png in Resources */,
 				CFB2B1A31AF35769000AF85F /* bg_01.png in Resources */,
-				CFC0A2F11AFB370B005A3A25 /* title_default.png in Resources */,
+				CFB6BFF81AFC723800E4B50B /* title_default.png in Resources */,
 				CFB85A451AE8B16C00C6E654 /* info_default.plist in Resources */,
 				CFB2B1A61AF35C90000AF85F /* bg_02.png in Resources */,
-				CFC0A2EC1AFB3256005A3A25 /* shop_default.plist in Resources */,
+				CFB6BFFB1AFC725200E4B50B /* shop_default.plist in Resources */,
 				B7378975180762440076A88C /* Default-568h@2x.png in Resources */,
 				CFD35C691AF7711200CD91FF /* menu_default.png in Resources */,
 				B71F5918188484E7003F4D28 /* iPhone@2x.png in Resources */,
@@ -1151,6 +1189,7 @@
 				CF61D5501AD796B00062F223 /* NaviLayer.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
 				CF0C02131AE3CC2D00FFB854 /* PaymentManager.m in Sources */,
+				CFB6C0031AFC793500E4B50B /* IMobileLayer.m in Sources */,
 				CFC107801AE687D700A9E04E /* BallShadow.m in Sources */,
 				CFB11D0D1ADCD51D0072B6CC /* PreferencesScene.m in Sources */,
 				CF51C7B91AD66EDF0024AC6B /* Information.m in Sources */,
@@ -1162,6 +1201,7 @@
 				CFC3F5C41AEDC6C600BAE803 /* ScoreModeMenu.m in Sources */,
 				CFB11D101ADCD6F00072B6CC /* ShopScene.m in Sources */,
 				CF5C24B81AD4BF7F00390A50 /* Basket.m in Sources */,
+				CFB6C0021AFC793500E4B50B /* IAdLayer.m in Sources */,
 				CFC3F5C91AEDC6DD00BAE803 /* StageModeMenu.m in Sources */,
 				CF7CC4C81AD377F700D16EF9 /* Ball.m in Sources */,
 				CF7CC4D21AD3BF2A00D16EF9 /* Corner.m in Sources */,
@@ -1480,6 +1520,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/virgintech/Documents/Library/Ad/iMobile/imobile_for_SP_app_iOS_SDK_2.0.8/lib,
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Source/Prefix.pch;
@@ -1515,6 +1559,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/virgintech/Documents/Library/Ad/iMobile/imobile_for_SP_app_iOS_SDK_2.0.8/lib,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Source/Prefix.pch;
 				HEADER_SEARCH_PATHS = (

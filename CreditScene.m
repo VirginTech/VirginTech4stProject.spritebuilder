@@ -10,6 +10,8 @@
 #import "TitleScene.h"
 #import "GameManager.h"
 
+#import "ImobileSdkAds/ImobileSdkAds.h"
+
 @implementation CreditScene
 
 CGSize winSize;
@@ -30,7 +32,7 @@ CCScrollView* scrollView;
     winSize=[[CCDirector sharedDirector]viewSize];
     
     //Create a colored background (Dark Grey)
-    CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:1.0f]];
+    CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.9f green:0.9f blue:1.0f alpha:1.0f]];
     [self addChild:background];
     
     //背景画像拡大
@@ -98,6 +100,9 @@ CCScrollView* scrollView;
 {
     [[CCDirector sharedDirector] replaceScene:[TitleScene scene]
                                withTransition:[CCTransition transitionCrossFadeWithDuration:1.0]];
+    //インターステイシャル広告表示
+    [ImobileSdkAds showBySpotID:@"457103"];
+
 }
 
 @end

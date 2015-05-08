@@ -12,6 +12,9 @@
 #import "TitleScene.h"
 #import "Information.h"
 
+#import "IAdLayer.h"
+#import "IMobileLayer.h"
+
 @implementation ScoreModeMenu
 
 CGSize winSize;
@@ -38,6 +41,17 @@ CCLabelBMFont* ticketLabel;
     //インフォメーションレイヤー
     //Information* infoLayer=[[Information alloc]init];
     //[self addChild:infoLayer z:1];
+    
+    //Ad広告レイヤー
+    if([GameManager getLocale]==1){//日本語なら
+        //i-Mobile広告(フッター、アイコン)
+        IMobileLayer* iMobileAd=[[IMobileLayer alloc]init:false];
+        [self addChild:iMobileAd];
+    }else{//それ以外
+        //iAd広告
+        IAdLayer* iAdLayer=[[IAdLayer alloc]init];
+        [self addChild:iAdLayer];
+    }
     
     //画像読み込み
     [[CCSpriteFrameCache sharedSpriteFrameCache]removeSpriteFrames];
@@ -222,6 +236,8 @@ CCLabelBMFont* ticketLabel;
 {
     [[CCDirector sharedDirector] replaceScene:[TitleScene scene]
                                withTransition:[CCTransition transitionCrossFadeWithDuration:1.0]];
+    //インターステイシャル広告表示
+    [ImobileSdkAds showBySpotID:@"457103"];
 }
 
 @end

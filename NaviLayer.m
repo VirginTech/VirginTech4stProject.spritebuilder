@@ -13,6 +13,9 @@
 #import "StageModeMenu.h"
 #import <Social/Social.h>
 
+#import "IAdLayer.h"
+#import "IMobileLayer.h"
+
 @implementation NaviLayer
 
 @synthesize gameOverLabel;
@@ -20,6 +23,10 @@
 CGSize winSize;
 CCNodeColor *background;
 MsgBoxLayer* msgBox;
+
+//Ad
+IMobileLayer* iMobileAd;
+IAdLayer* iAdLayer;
 
 + (NaviLayer *)scene
 {
@@ -37,7 +44,7 @@ MsgBoxLayer* msgBox;
     //バックグラウンド
     background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:0.7f]];
     [self addChild:background];
-    
+        
     //ゲームオーバーラベル
     //gameOverLabel=[CCLabelTTF labelWithString:@"" fontName:@"Verdana-Bold" fontSize:30];
     gameOverLabel=[CCLabelBMFont labelWithString:@"" fntFile:@"msgEffect.fnt"];
@@ -182,12 +189,20 @@ MsgBoxLayer* msgBox;
 
 - (void)onTitleClicked:(id)sender
 {
+    //Ad非表示
+    [self hideAdLayer];
+    
     [[CCDirector sharedDirector] replaceScene:[TitleScene scene]
-                               withTransition:[CCTransition transitionCrossFadeWithDuration:1.0]];
+                               withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
+    //インターステイシャル広告表示
+    [ImobileSdkAds showBySpotID:@"457103"];
 }
 
 - (void)onReplayClicked:(id)sender
 {
+    //Ad非表示
+    [self hideAdLayer];
+    
     [GameManager setPlayMode:2];
     [GameManager setStageLavel:[GameManager getStageLevel]];
     //[GameManager setLifePoint:1];
@@ -198,12 +213,20 @@ MsgBoxLayer* msgBox;
 
 - (void)onSelectClicked:(id)sender
 {
+    //Ad非表示
+    [self hideAdLayer];
+    
     [[CCDirector sharedDirector] replaceScene:[StageModeMenu scene]
                                withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
+    //インターステイシャル広告表示
+    [ImobileSdkAds showBySpotID:@"457103"];
 }
 
 - (void)onPlayClicked:(id)sender
 {
+    //Ad非表示
+    [self hideAdLayer];
+    
     [GameManager setLifePoint:5];
     [GameManager setStageLavel:1];
     [GameManager setScore:0];
@@ -274,6 +297,9 @@ MsgBoxLayer* msgBox;
             [GameManager save_Continue_Ticket:[GameManager load_Continue_Ticket]-1];
             //[TitleScene ticket_Update];
             
+            //Ad非表示
+            [self hideAdLayer];
+            
             [[CCDirector sharedDirector] replaceScene:[StageScene scene]
                                        withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
         }
@@ -324,6 +350,32 @@ MsgBoxLayer* msgBox;
          }
      }];
     [[CCDirector sharedDirector]presentViewController:vc animated:YES completion:nil];
+}
+
+-(void)dispAdLayer
+{
+    //Ad広告レイヤー
+    if([GameManager getLocale]==1){//日本語なら
+        //i-Mobile広告(フッター、アイコン)
+        iMobileAd=[[IMobileLayer alloc]init:false];
+        [self addChild:iMobileAd];
+    }else{//それ以外
+        //iAd広告
+        iAdLayer=[[IAdLayer alloc]init];
+        [self addChild:iAdLayer];
+    }
+
+}
+
+-(void)hideAdLayer
+{
+    //Ad非表示
+    if([GameManager getLocale]==1){//日本語なら
+        [iMobileAd removeLayer];
+    }else{
+        [iAdLayer removeLayer];
+    }
+
 }
 
 @end

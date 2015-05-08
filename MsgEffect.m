@@ -10,6 +10,8 @@
 #import "GameManager.h"
 #import "StageScene.h"
 
+#import "ImobileSdkAds/ImobileSdkAds.h"
+
 @implementation MsgEffect
 
 CGSize winSize;
@@ -90,6 +92,10 @@ bool nextFlg;
         //終了時
         if(nextFlg){
             [self unschedule:@selector(show_Message_Schedule:)];
+            
+            //インターステイシャル広告表示
+            //[ImobileSdkAds showBySpotID:@"457103"];
+            
             //次ステージへ
             if([GameManager getPlayMode]==1){
                 [GameManager setStageLavel:[GameManager getStageLevel]+1];//ステージレヴェル設定
