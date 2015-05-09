@@ -11,6 +11,9 @@
 #import "GameManager.h"
 //#import "SoundManager.h"
 
+#import "IAdLayer.h"
+#import "IMobileLayer.h"
+
 @implementation NoticeScene
 
 CGSize winSize;
@@ -38,6 +41,17 @@ MsgBoxLayer* msgBox;
     CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:1.0f green:0.07f blue:0.57f alpha:1.0f]];
     [self addChild:background];
     
+    if([GameManager getLocale]==1){//日本語なら
+        //i-Mobile広告(フッター、アイコン)
+        IMobileLayer* iMobileAd=[[IMobileLayer alloc]init:false];
+        [self addChild:iMobileAd];
+    }else{//それ以外
+        //iAd広告
+        IAdLayer* iAdLayer=[[IAdLayer alloc]init];
+        [self addChild:iAdLayer];
+    }
+
+    
     //WebViewの生成
     if([GameManager getDevice]==1){//iPad
         webview = [[UIWebView alloc] initWithFrame:CGRectMake(winSize.width*2*0.1,winSize.height*2*0.1,
@@ -60,7 +74,8 @@ MsgBoxLayer* msgBox;
     [[[CCDirector sharedDirector] view] addSubview:webview];
     
     //画像読み込み
-    //[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"title_default.plist"];
+    [[CCSpriteFrameCache sharedSpriteFrameCache]removeSpriteFrames];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"option_default.plist"];
     
     //タイトルボタン
     CCButton *titleButton;

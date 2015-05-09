@@ -54,4 +54,6 @@
 
 +(void)save_Gift_Acquired:(NSString*)giftKey flg:(bool)flg;
 
++(void)submit_Score_GameCenter:(NSInteger)score mode:(int)mode; //1:スコアチャレンジ 2:ステージモード
+
 @end

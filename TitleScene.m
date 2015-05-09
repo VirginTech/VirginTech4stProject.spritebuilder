@@ -19,6 +19,7 @@
 #import "Windmill.h"
 #import "Ground.h"
 #import "NoticeScene.h"
+#import "ManualLayer.h"
 
 #import "IAdLayer.h"
 #import "IMobileLayer.h"
@@ -148,8 +149,20 @@ int boundCnt;
     [physicWorld addChild:windmill];
 
     //地面生成
-    ground=[Ground createGround:ccp(winSize.width/2,10.0)];
-    //ground.position=ccp(winSize.width/2,-(ground.contentSize.height*ground.scale)/2);
+    if([GameManager getDevice]==1){//iPad
+        if([GameManager getLocale]==1){//日本語
+            ground=[Ground createGround:ccp(winSize.width/2,13.0)];
+            ground.scaleX=0.73;
+        }else{
+            ground=[Ground createGround:ccp(winSize.width/2,1.0)];
+        }
+    }else{
+        if([GameManager getLocale]==1){//日本語
+            ground=[Ground createGround:ccp(winSize.width/2,18.0)];
+        }else{
+            ground=[Ground createGround:ccp(winSize.width/2,18.0)];
+        }
+    }
     [physicWorld addChild:ground];
     
     
@@ -190,10 +203,16 @@ int boundCnt;
                 highlightedSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"scoreMode02.png"]
                 disabledSpriteFrame:nil];
     scoreModeBtn.scale=0.5;
-    scoreModeBtn.position=ccp(winSize.width/2-(scoreModeBtn.contentSize.width*scoreModeBtn.scale)/2-20,winSize.height/2-50);
+    if([GameManager getDevice]==1 || [GameManager getDevice]==2){//iPad,iPhone4
+        scoreModeBtn.position=ccp(winSize.width/2-(scoreModeBtn.contentSize.width*scoreModeBtn.scale)/2-20,
+                                                                                        winSize.height/2-25);
+    }else{
+        scoreModeBtn.position=ccp(winSize.width/2-(scoreModeBtn.contentSize.width*scoreModeBtn.scale)/2-20,
+                                                                                        winSize.height/2-50);
+    }
     [scoreModeBtn setTarget:self selector:@selector(onScoreModeClicked:)];
     //フィジックス適用
-    scoreModeBtn.physicsBody=[CCPhysicsBody bodyWithCircleOfRadius:50 andCenter:ccp(scoreModeBtn.contentSize.width/2,scoreModeBtn.contentSize.height/2)];
+    scoreModeBtn.physicsBody=[CCPhysicsBody bodyWithCircleOfRadius:55 andCenter:ccp(scoreModeBtn.contentSize.width/2-1,scoreModeBtn.contentSize.height/2+1)];
     [scoreModeBtn.physicsBody setType:CCPhysicsBodyTypeStatic];
     [scoreModeBtn.physicsBody setElasticity:1.0];
     [scoreModeBtn.physicsBody setCollisionType:@"button01"];
@@ -203,7 +222,7 @@ int boundCnt;
     CCLabelTTF* scoreModeLabel=[CCLabelTTF labelWithString:NSLocalizedString(@"ScoreChallenge",NULL)
                                                   fontName:@"Verdana-Bold" fontSize:10];
     scoreModeLabel.position=ccp(scoreModeBtn.position.x,
-                                scoreModeBtn.position.y-(scoreModeBtn.contentSize.height*scoreModeBtn.scale)/2 -8);
+                                scoreModeBtn.position.y-(scoreModeBtn.contentSize.height*scoreModeBtn.scale)/2 -0);
     [self addChild:scoreModeLabel];
     
     //===========================
@@ -215,10 +234,11 @@ int boundCnt;
                 highlightedSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"stageMode02.png"]
                 disabledSpriteFrame:nil];
     stageModeBtn.scale=0.5;
-    stageModeBtn.position=ccp(winSize.width/2+(stageModeBtn.contentSize.width*stageModeBtn.scale)/2+20,winSize.height/2-50);
+    stageModeBtn.position=ccp(winSize.width/2+(stageModeBtn.contentSize.width*stageModeBtn.scale)/2+20,
+                                                                                scoreModeBtn.position.y);
     [stageModeBtn setTarget:self selector:@selector(onStageModeClicked:)];
     //フィジックス適用
-    stageModeBtn.physicsBody=[CCPhysicsBody bodyWithCircleOfRadius:50 andCenter:ccp(stageModeBtn.contentSize.width/2,stageModeBtn.contentSize.height/2)];
+    stageModeBtn.physicsBody=[CCPhysicsBody bodyWithCircleOfRadius:55 andCenter:ccp(stageModeBtn.contentSize.width/2-1,stageModeBtn.contentSize.height/2+1)];
     [stageModeBtn.physicsBody setType:CCPhysicsBodyTypeStatic];
     [stageModeBtn.physicsBody setElasticity:1.0];
     [stageModeBtn.physicsBody setCollisionType:@"button02"];
@@ -228,7 +248,7 @@ int boundCnt;
     CCLabelTTF* stageModeLabel=[CCLabelTTF labelWithString:NSLocalizedString(@"StageMode",NULL)
                                                   fontName:@"Verdana-Bold" fontSize:10];
     stageModeLabel.position=ccp(stageModeBtn.position.x,
-                                stageModeBtn.position.y-(stageModeBtn.contentSize.height*stageModeBtn.scale)/2 -8);
+                                stageModeBtn.position.y-(stageModeBtn.contentSize.height*stageModeBtn.scale)/2 -0);
     [self addChild:stageModeLabel];
     
     
@@ -298,22 +318,36 @@ int boundCnt;
     [creditButton setTarget:self selector:@selector(onCreditButtonClicked:)];
     [self addChild:creditButton];
     
+    //ヘルプボタン
+    CCButton* helpButton=[CCButton buttonWithTitle:@""
+                    spriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"helpBtn01.png"]
+                    highlightedSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"helpBtn02.png"]
+                    disabledSpriteFrame:nil];
+    helpButton.scale=0.4;
+    helpButton.position=ccp(winSize.width/2,scoreModeBtn.position.y-70);
+    [helpButton setTarget:self selector:@selector(onHelpClicked:)];
+    [self addChild:helpButton];
+    //ヘルプラベル
+    CCLabelTTF* helpLabel=[CCLabelTTF labelWithString:NSLocalizedString(@"Help",NULL)
+                                                            fontName:@"Verdana-Bold" fontSize:25];
+    helpLabel.position=ccp(helpButton.contentSize.width/2,-0);
+    [helpButton addChild:helpLabel];
+
     //お知らせ
     if([GameManager getLocale]==1){//日本語のみ
         CCButton* noticeButton=[CCButton buttonWithTitle:@""
                         spriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"notice.png"]];
         noticeButton.scale=0.4;
-        noticeButton.position=ccp(winSize.width/2,130);
+        noticeButton.position=ccp(winSize.width/2,103);
         [noticeButton setTarget:self selector:@selector(onNoticeClicked:)];
         [self addChild:noticeButton];
     }
-
     
     //バージョン表記
     CCLabelTTF* version=[CCLabelTTF labelWithString:[NSString stringWithFormat:@"©VirginTech v%@",
                         [[[NSBundle mainBundle] infoDictionary]objectForKey:@"CFBundleShortVersionString"]]
                                            fontName:@"Verdana" fontSize:10];
-    version.position=ccp(winSize.width/2,110);
+    version.position=ccp(winSize.width/2,90);
     version.color=[CCColor whiteColor];
     [self addChild:version];
     
@@ -327,7 +361,7 @@ int boundCnt;
                          [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"moreAppBtn_en.png"]];
     }
     moreAppButton.scale=0.6;
-    moreAppButton.position=ccp(winSize.width/2,80);
+    moreAppButton.position=ccp(winSize.width/2,70);
     [moreAppButton setTarget:self selector:@selector(onMoreAppClicked:)];
     [self addChild:moreAppButton];
     
@@ -608,6 +642,12 @@ int boundCnt;
 +(void)ticket_Update
 {
     ticketLabel.string=[NSString stringWithFormat:@"×%03d",[GameManager load_Continue_Ticket]];
+}
+
+-(void)onHelpClicked:(id)sender
+{
+    [[CCDirector sharedDirector] replaceScene:[ManualLayer scene]
+                               withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
 }
 
 -(void)onNoticeClicked:(id)sender

@@ -300,4 +300,26 @@ int playMode;//1:スコアチャレンジ 2:ステージチャレンジ
     [userDefault setObject:gift forKey:giftKey];
 }
 
+//=========================================
+//GameCenterへスコアを送信
+//=========================================
++(void)submit_Score_GameCenter:(NSInteger)score mode:(int)mode //1:スコアチャレンジ 2:ステージモード
+{
+    GKScore *scoreReporter;
+    
+    if(mode==1){//スコアチャレンジ
+        scoreReporter = [[GKScore alloc] initWithCategory:@"VirginTech4stProject_Leaderboard_01"];
+    }else{//ステージモード
+        scoreReporter = [[GKScore alloc] initWithCategory:@"VirginTech4stProject_Leaderboard_02"];
+    }
+    
+    NSInteger scoreR = score;
+    scoreReporter.value = scoreR;
+    [scoreReporter reportScoreWithCompletionHandler:^(NSError *error) {
+        if (error != nil){
+            NSLog(@"Error in reporting score %@",error);
+        }
+    }];
+}
+
 @end

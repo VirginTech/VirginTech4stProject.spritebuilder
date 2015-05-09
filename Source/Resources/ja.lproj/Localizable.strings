@@ -19,6 +19,7 @@
 "HomeTo"="ホームへ";
 "Replay"="リプレイ";
 "LevelSelect"="ステージ選択";
+"Help"="遊び方";
 
 //アプリ内課金
 "NotNetwork" = "ネットワーク接続がありません。";

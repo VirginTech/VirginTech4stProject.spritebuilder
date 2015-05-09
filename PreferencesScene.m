@@ -45,6 +45,10 @@ CGSize winSize;
         [self addChild:iAdLayer];
     }
     
+    //画像読み込み
+    [[CCSpriteFrameCache sharedSpriteFrameCache]removeSpriteFrames];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"option_default.plist"];
+    
     /*/タイトルボタン
     CCButton *titleButton=[CCButton buttonWithTitle:@"[タイトル]" fontName:@"Verdana-Bold" fontSize:15];
     titleButton.position=ccp(winSize.width-titleButton.contentSize.width/2,winSize.height-titleButton.contentSize.height/2);

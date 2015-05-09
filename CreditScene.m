@@ -47,6 +47,10 @@ CCScrollView* scrollView;
     scrollView=[[CCScrollView alloc]initWithContentNode:bgSpLayer];
     scrollView.horizontalScrollEnabled=NO;
     [self addChild:scrollView];
+
+    //画像読み込み
+    [[CCSpriteFrameCache sharedSpriteFrameCache]removeSpriteFrames];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"option_default.plist"];
     
     /*/タイトルボタン
     CCButton *titleButton=[CCButton buttonWithTitle:@"[タイトル]" fontName:@"Verdana-Bold" fontSize:15];

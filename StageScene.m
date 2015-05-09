@@ -44,6 +44,7 @@ Piston* piston;
 Basket* basket;
 CCSprite* basket_shadow;
 CCSprite* spark;
+CCSprite* boost;
 
 int ballCount;//発射ボール数
 int ballTimingCnt;//ボール間隔経過タイム
@@ -375,6 +376,13 @@ CCLabelBMFont* ballCntLbl;
     spark.opacity=0.0;
     [physicWorld addChild:spark];
     
+    //ブーストエフェクト
+    boost=[CCSprite spriteWithImageNamed:@"boost.png"];
+    boost.position=ccp(piston.position.x,piston.position.y-(piston.contentSize.height*piston.scale)/2);
+    boost.scale=0.5;
+    boost.opacity=0.0;
+    [physicWorld addChild:boost];
+    
     //ボール生成
     ballCount++;
     //ballCount_lbl.string=[NSString stringWithFormat:@"BallCount:%03d",ballCount];
@@ -515,6 +523,11 @@ CCLabelBMFont* ballCntLbl;
                 force=((arc4random()%5)+63)*0.1;//6.3〜6.7
                 //NSLog(@"Force=%f",force);
 
+                //ブーストエフェクト
+                boost.position=ccp(piston.position.x,piston.position.y-(piston.contentSize.height*piston.scale)/2);
+                boost.opacity=1.0;
+                [self schedule:@selector(boost_Schedule:) interval:0.01];
+                
                 //ボール生成
                 ballCount++;
                 if(ballCount<=maxBallCount){
@@ -749,6 +762,17 @@ CCLabelBMFont* ballCntLbl;
 }
 
 //================================
+//　ブーストエフェクトスケジュール
+//================================
+-(void)boost_Schedule:(CCTime)dt
+{
+    boost.opacity-=0.02;
+    boost.position=ccp(boost.position.x,boost.position.y-0.5);
+    if(boost.opacity<0){
+        [self unschedule:@selector(boost_Schedule:)];
+    }
+}
+//================================
 //　スパークスケジュール
 //================================
 -(void)spark_Schedule:(CCTime)dt
@@ -852,9 +876,7 @@ CCLabelBMFont* ballCntLbl;
             [Information highScoreUpdata];
             
             //GameCenterへ送信
-            
-            
-            
+            [GameManager submit_Score_GameCenter:[GameManager load_High_Score_1] mode:1];
         }
     }
     else
@@ -865,9 +887,7 @@ CCLabelBMFont* ballCntLbl;
             [Information highScoreUpdata];//ハイスコア更新
             
             //GameCenterへ送信
-            
-            
-
+            [GameManager submit_Score_GameCenter:[GameManager load_High_Score_2] mode:2];
         }
     }
 }

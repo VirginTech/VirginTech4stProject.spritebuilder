@@ -19,6 +19,7 @@
 "HomeTo"="Home";
 "Replay"="Replay";
 "LevelSelect"="Stage Select";
+"Help"="How to play";
 
 //アプリ内課金
 "Notnetwork" = "No network connection.";
