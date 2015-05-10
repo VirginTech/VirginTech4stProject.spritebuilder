@@ -379,7 +379,7 @@ CCLabelBMFont* ballCntLbl;
     //ブーストエフェクト
     boost=[CCSprite spriteWithImageNamed:@"boost.png"];
     boost.position=ccp(piston.position.x,piston.position.y-(piston.contentSize.height*piston.scale)/2);
-    boost.scale=0.5;
+    boost.scale=0.3;
     boost.opacity=0.0;
     [physicWorld addChild:boost];
     
@@ -460,7 +460,7 @@ CCLabelBMFont* ballCntLbl;
     //float gravityY = gravity.y * adjustValue;
     
     CGPoint tmpPos=ccpAdd(basket.position,ccp(gravityX,0.0));
-    if(tmpPos.x>basket.contentSize.width/3 && tmpPos.x<winSize.width-basket.contentSize.width/3)
+    if(tmpPos.x>basket.contentSize.width/5 && tmpPos.x<winSize.width-basket.contentSize.width/3)
     {
         //タイヤ回転
         [basket tire_Rotation:gravityX*5];
@@ -897,17 +897,19 @@ CCLabelBMFont* ballCntLbl;
 //================================
 -(void)onPauseClicked:(id)sender
 {
-    [GameManager setPause:true];
-    [motionManager stopDeviceMotionUpdates];//ジャイロセンサー停止
-    physicWorld.paused=YES;//物理ワールド停止
-    
-    //ポーズレイヤー表示
-    naviLayer.visible=true;
-    pauseBtn.visible=false;
-    resumeBtn.visible=true;
-    
-    //Ad表示
-    [naviLayer dispAdLayer];
+    if(![[CCDirector sharedDirector]isPaused]){ //レイティングポーズ時はポーズしない(2重ポーズ防止)
+        [GameManager setPause:true];
+        [motionManager stopDeviceMotionUpdates];//ジャイロセンサー停止
+        physicWorld.paused=YES;//物理ワールド停止
+        
+        //ポーズレイヤー表示
+        naviLayer.visible=true;
+        pauseBtn.visible=false;
+        resumeBtn.visible=true;
+        
+        //Ad表示
+        [naviLayer dispAdLayer];
+    }
 }
 
 //================================
