@@ -14,7 +14,7 @@
 //メニューボタン
 "ScoreChallenge"="Score Challenge";
 "StageMode"="Stage Mode";
-"FirstPlay"="From beginning";
+"FirstPlay"="From start";
 "ContinuePlay"="From continued";
 "HomeTo"="Home";
 "Replay"="Replay";
@@ -33,8 +33,8 @@
 
 //コンティニューチケット
 "Continue"="Continue";
-"Ticket_Use"="Use a 1 ticket. Is it OK ?";
-"NotContinue"="You can not continue.";
+"Ticket_Use"="A ticket will be used. Is it OK ?";
+"NotContinue"="It is not possible to \ncontinue playing.";
 "ShopPurchase"="'Ticket' are available at shop";
 "NotCoin"="You need more 'Ticket'";
 
@@ -48,7 +48,7 @@
 "DailyBonus"="Free daily 3 Tickets !";
 
 //ローカル通知
-"LocalNotification"="Let's play the 'windmill'";
+"LocalNotification"="Why don't you play 'windmill'?";
 
 //レビュー誘導
 "Rate" = "Rate";

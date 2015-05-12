@@ -50,9 +50,9 @@ CCScrollView* scrollView;
     //スクロール背景画像拡大
     int length;
     if([GameManager getDevice]==2){//iPhone4は2048pxが限界・・・。
-        length=5;//1920px
+        length=6;//1920px
     }else{//iPhone5以降なら4096pxまで可能
-        length=5;//2880px
+        length=7;//2880px
     }
     UIImage *image = [UIImage imageNamed:@"bgLayer.png"];
     UIGraphicsBeginImageContext(CGSizeMake(winSize.width * length,winSize.height));
@@ -66,7 +66,7 @@ CCScrollView* scrollView;
     scrollView.verticalScrollEnabled=NO;
     [self addChild:scrollView];
     
-    for(int i=0;i<length;i++)
+    for(int i=0;i<7;i++)
     {
         /*/背景
         CCSprite* bg=[CCSprite spriteWithImageNamed:@"itemLayer.png"];
