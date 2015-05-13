@@ -77,7 +77,7 @@ CGSize winSize;
 - (void)onTitleClicked:(id)sender
 {
     [[CCDirector sharedDirector] replaceScene:[TitleScene scene]
-                               withTransition:[CCTransition transitionCrossFadeWithDuration:1.0]];
+                               withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
     //インターステイシャル広告表示
     [ImobileSdkAds showBySpotID:@"457103"];
 }

@@ -253,8 +253,8 @@ IAdLayer* iAdLayer;
             return;
         }else{
             //カスタムアラートメッセージ
-            msgBox=[[MsgBoxLayer alloc]initWithTitle:NSLocalizedString(@"Continue",NULL)
-                                                    msg:NSLocalizedString(@"Ticket_Shortage",NULL)
+            msgBox=[[MsgBoxLayer alloc]initWithTitle:NSLocalizedString(@"NotCoin",NULL)
+                                                    msg:NSLocalizedString(@"ShopPurchase",NULL)
                                                     pos:ccp(winSize.width/2,winSize.height/2)
                                                     size:CGSizeMake(200, 100)
                                                     modal:true

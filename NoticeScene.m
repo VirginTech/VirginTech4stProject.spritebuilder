@@ -269,7 +269,7 @@ MsgBoxLayer* msgBox;
     // back to intro scene with transition
     //[SoundManager click_Effect];
     [[CCDirector sharedDirector] replaceScene:[TitleScene scene]
-                               withTransition:[CCTransition transitionCrossFadeWithDuration:1.0]];
+                               withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
     //インターステイシャル広告表示
     //[ImobileSdkAds showBySpotID:@"359467"];
 }
