@@ -11,9 +11,10 @@
 
 @implementation Windmill
 
+@synthesize windmill_Id;
 @synthesize axis;
 
--(id)initWithWindmill:(CGPoint)pos titleFlg:(bool)titleFlg
+-(id)initWithWindmill:(CGPoint)pos titleFlg:(bool)titleFlg cnt:(int)cnt
 {
     if(self=[super init]){
 
@@ -22,6 +23,7 @@
         
         self=(id)[CCBReader load:objName];
         
+        windmill_Id=cnt;
         num=i;
         self.position=pos;
         self.scale=0.2;
@@ -51,9 +53,9 @@
     }
 }
 
-+(id)createWindmill:(CGPoint)pos titleFlg:(bool)titleFlg
++(id)createWindmill:(CGPoint)pos titleFlg:(bool)titleFlg cnt:(int)cnt
 {
-    return [[self alloc] initWithWindmill:pos titleFlg:titleFlg];
+    return [[self alloc] initWithWindmill:pos titleFlg:titleFlg cnt:cnt];
 }
 
 @end

@@ -15,6 +15,8 @@
 @synthesize stateFlg;
 @synthesize ballType;//1:ノーマル 2:天使 3:悪魔
 @synthesize ballColor;
+@synthesize collisionWindmill;
+@synthesize ballGroup;
 
 -(id)initWithBall:(CGPoint)pos type:(int)type cnt:(int)cnt
 {
@@ -52,25 +54,33 @@
         if(type==1){
             if(i==1){
                 ballColor=[CCColor colorWithRed:1.0 green:1.0 blue:1.0];//白
+                ballGroup=11;
             }else if(i==2){
                 ballColor=[CCColor colorWithRed:0.0 green:1.0 blue:0.0];//緑
+                ballGroup=12;
             }else if(i==3){
                 ballColor=[CCColor colorWithRed:0.0 green:0.0 blue:1.0];//青
+                ballGroup=13;
             }else if(i==4){
                 ballColor=[CCColor colorWithRed:1.0 green:0.0 blue:0.0];//赤
+                ballGroup=14;
             }else if(i==5){
                 ballColor=[CCColor colorWithRed:1.0 green:0.0 blue:1.0];//紫
+                ballGroup=15;
             }
         }else if(type==2){
             ballColor=[CCColor yellowColor];
+            ballGroup=21;
         }else if(type==3){
             ballColor=[CCColor blackColor];
+            ballGroup=31;
         }
         
         self.ball_Id=cnt;
         self.position=pos;
         self.scale=0.3;
         self.physicsBody.collisionType = @"cBall";
+        self.collisionWindmill=0;
     
         ballType=type;
         stateFlg=false;

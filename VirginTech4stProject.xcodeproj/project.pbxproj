@@ -136,6 +136,18 @@
 		CFB74D5A1AF1FE4D0084039C /* msgEffect.fnt in Resources */ = {isa = PBXBuildFile; fileRef = CFB74D581AF1FE4D0084039C /* msgEffect.fnt */; };
 		CFB74D5B1AF1FE4D0084039C /* msgEffect.png in Resources */ = {isa = PBXBuildFile; fileRef = CFB74D591AF1FE4D0084039C /* msgEffect.png */; };
 		CFB778451AF5C72C00A95168 /* titleLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = CFB778441AF5C72C00A95168 /* titleLogo.png */; };
+		CFB83B381B0438E900323F1C /* SoundManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB83B371B0438E900323F1C /* SoundManager.m */; };
+		CFB83B4C1B048D9000323F1C /* pin_ball_12.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CFB83B451B048D9000323F1C /* pin_ball_12.mp3 */; };
+		CFB83B4E1B048D9000323F1C /* pin_ball_14.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CFB83B471B048D9000323F1C /* pin_ball_14.mp3 */; };
+		CFB83B501B048D9000323F1C /* pin_ball_21.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CFB83B491B048D9000323F1C /* pin_ball_21.mp3 */; };
+		CFB83B511B048D9000323F1C /* pin_ball_31.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CFB83B4A1B048D9000323F1C /* pin_ball_31.mp3 */; };
+		CFB83B591B04A25400323F1C /* ball_launch.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CFB83B581B04A25400323F1C /* ball_launch.mp3 */; };
+		CFB83B5D1B04A29200323F1C /* catch_ball.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CFB83B5A1B04A29200323F1C /* catch_ball.mp3 */; };
+		CFB83B5E1B04A29200323F1C /* catch_pin.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CFB83B5B1B04A29200323F1C /* catch_pin.mp3 */; };
+		CFB83B5F1B04A29200323F1C /* ground_ball.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CFB83B5C1B04A29200323F1C /* ground_ball.mp3 */; };
+		CFB83B621B04AFC400323F1C /* pin_ball_11.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CFB83B601B04AFC400323F1C /* pin_ball_11.mp3 */; };
+		CFB83B631B04AFC400323F1C /* pin_ball_13.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CFB83B611B04AFC400323F1C /* pin_ball_13.mp3 */; };
+		CFB83B651B04B10800323F1C /* pin_ball_15.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CFB83B641B04B10800323F1C /* pin_ball_15.mp3 */; };
 		CFB85A451AE8B16C00C6E654 /* info_default.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFB85A431AE8B16C00C6E654 /* info_default.plist */; };
 		CFB85A461AE8B16C00C6E654 /* info_default.png in Resources */ = {isa = PBXBuildFile; fileRef = CFB85A441AE8B16C00C6E654 /* info_default.png */; };
 		CFB85A551AE8EA5900C6E654 /* basket_shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = CFB85A541AE8EA5900C6E654 /* basket_shadow.png */; };
@@ -363,6 +375,19 @@
 		CFB74D581AF1FE4D0084039C /* msgEffect.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = msgEffect.fnt; sourceTree = "<group>"; };
 		CFB74D591AF1FE4D0084039C /* msgEffect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = msgEffect.png; sourceTree = "<group>"; };
 		CFB778441AF5C72C00A95168 /* titleLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = titleLogo.png; sourceTree = "<group>"; };
+		CFB83B361B0438E900323F1C /* SoundManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundManager.h; sourceTree = "<group>"; };
+		CFB83B371B0438E900323F1C /* SoundManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundManager.m; sourceTree = "<group>"; };
+		CFB83B451B048D9000323F1C /* pin_ball_12.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = pin_ball_12.mp3; sourceTree = "<group>"; };
+		CFB83B471B048D9000323F1C /* pin_ball_14.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = pin_ball_14.mp3; sourceTree = "<group>"; };
+		CFB83B491B048D9000323F1C /* pin_ball_21.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = pin_ball_21.mp3; sourceTree = "<group>"; };
+		CFB83B4A1B048D9000323F1C /* pin_ball_31.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = pin_ball_31.mp3; sourceTree = "<group>"; };
+		CFB83B581B04A25400323F1C /* ball_launch.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ball_launch.mp3; sourceTree = "<group>"; };
+		CFB83B5A1B04A29200323F1C /* catch_ball.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = catch_ball.mp3; sourceTree = "<group>"; };
+		CFB83B5B1B04A29200323F1C /* catch_pin.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = catch_pin.mp3; sourceTree = "<group>"; };
+		CFB83B5C1B04A29200323F1C /* ground_ball.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ground_ball.mp3; sourceTree = "<group>"; };
+		CFB83B601B04AFC400323F1C /* pin_ball_11.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = pin_ball_11.mp3; sourceTree = "<group>"; };
+		CFB83B611B04AFC400323F1C /* pin_ball_13.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = pin_ball_13.mp3; sourceTree = "<group>"; };
+		CFB83B641B04B10800323F1C /* pin_ball_15.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = pin_ball_15.mp3; sourceTree = "<group>"; };
 		CFB85A431AE8B16C00C6E654 /* info_default.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = info_default.plist; sourceTree = "<group>"; };
 		CFB85A441AE8B16C00C6E654 /* info_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info_default.png; sourceTree = "<group>"; };
 		CFB85A541AE8EA5900C6E654 /* basket_shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basket_shadow.png; sourceTree = "<group>"; };
@@ -749,6 +774,7 @@
 		B77F1B4617B978D7009739AE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CFB83B3B1B04412200323F1C /* Sound */,
 				CFCA6EE81AFDDB6B00387563 /* Manual */,
 				CFB778431AF5C71700A95168 /* Title */,
 				CFB2B19D1AF31395000AF85F /* BackGround */,
@@ -839,6 +865,8 @@
 		CF7CC4D91AD3E79A00D16EF9 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				CFB83B361B0438E900323F1C /* SoundManager.h */,
+				CFB83B371B0438E900323F1C /* SoundManager.m */,
 				CF0C02111AE3CC2D00FFB854 /* PaymentManager.h */,
 				CF0C02121AE3CC2D00FFB854 /* PaymentManager.m */,
 				CF7CC4CD1AD3939000D16EF9 /* InitManager.h */,
@@ -917,6 +945,24 @@
 				CFC0A2E21AFAF363005A3A25 /* virgintechLogo.png */,
 			);
 			name = Title;
+			sourceTree = "<group>";
+		};
+		CFB83B3B1B04412200323F1C /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				CFB83B581B04A25400323F1C /* ball_launch.mp3 */,
+				CFB83B5A1B04A29200323F1C /* catch_ball.mp3 */,
+				CFB83B5B1B04A29200323F1C /* catch_pin.mp3 */,
+				CFB83B5C1B04A29200323F1C /* ground_ball.mp3 */,
+				CFB83B601B04AFC400323F1C /* pin_ball_11.mp3 */,
+				CFB83B451B048D9000323F1C /* pin_ball_12.mp3 */,
+				CFB83B611B04AFC400323F1C /* pin_ball_13.mp3 */,
+				CFB83B471B048D9000323F1C /* pin_ball_14.mp3 */,
+				CFB83B641B04B10800323F1C /* pin_ball_15.mp3 */,
+				CFB83B491B048D9000323F1C /* pin_ball_21.mp3 */,
+				CFB83B4A1B048D9000323F1C /* pin_ball_31.mp3 */,
+			);
+			name = Sound;
 			sourceTree = "<group>";
 		};
 		CFB85A4B1AE8DF7200C6E654 /* object */ = {
@@ -1162,20 +1208,27 @@
 				CFC3F5CF1AEDDB3900BAE803 /* bgLayer.png in Resources */,
 				CFCA6EC61AFDA27700387563 /* option_default.png in Resources */,
 				CFCFBC511B01ACD700AB2EC8 /* manual_en_03.png in Resources */,
+				CFB83B591B04A25400323F1C /* ball_launch.mp3 in Resources */,
 				CFCFBC521B01ACD700AB2EC8 /* manual_en_04.png in Resources */,
 				CFB85A551AE8EA5900C6E654 /* basket_shadow.png in Resources */,
 				CF0C020A1AE3B98A00FFB854 /* Localizable.strings in Resources */,
+				CFB83B511B048D9000323F1C /* pin_ball_31.mp3 in Resources */,
 				CFCFBC551B01ACD700AB2EC8 /* manual_en_07.png in Resources */,
 				B71F5914188484E7003F4D28 /* iPad@2x.png in Resources */,
+				CFB83B4E1B048D9000323F1C /* pin_ball_14.mp3 in Resources */,
 				CFCFBC501B01ACD700AB2EC8 /* manual_en_02.png in Resources */,
 				B71F5913188484E7003F4D28 /* iPad.png in Resources */,
 				CFCFBC431B01ACC000AB2EC8 /* manual_03.png in Resources */,
+				CFB83B5D1B04A29200323F1C /* catch_ball.mp3 in Resources */,
+				CFB83B5F1B04A29200323F1C /* ground_ball.mp3 in Resources */,
 				CFB437C11AFF00480092A160 /* boost.png in Resources */,
 				CFC1F8E11B01E83400DF49CD /* Default-Landscape~ipad.png in Resources */,
 				CFB85A461AE8B16C00C6E654 /* info_default.png in Resources */,
 				CFCFBC451B01ACC000AB2EC8 /* manual_05.png in Resources */,
 				CFE4DCF21AF85BD50088204A /* navi_default.plist in Resources */,
+				CFB83B621B04AFC400323F1C /* pin_ball_11.mp3 in Resources */,
 				B71F5912188484E7003F4D28 /* iPad-old@2x.png in Resources */,
+				CFB83B4C1B048D9000323F1C /* pin_ball_12.mp3 in Resources */,
 				CFB74D561AF1DF8C0084039C /* score.fnt in Resources */,
 				CFB74D5B1AF1FE4D0084039C /* msgEffect.png in Resources */,
 				B71F5916188484E7003F4D28 /* iPhone-old@2x.png in Resources */,
@@ -1187,6 +1240,7 @@
 				CFB74D571AF1DF8C0084039C /* score.png in Resources */,
 				CFC9FC201AEF7EC700A35D1A /* message_default.png in Resources */,
 				CFB778451AF5C72C00A95168 /* titleLogo.png in Resources */,
+				CFB83B631B04AFC400323F1C /* pin_ball_13.mp3 in Resources */,
 				CFB6BFFC1AFC725200E4B50B /* shop_default.png in Resources */,
 				CFB85A611AE915A600C6E654 /* spark.png in Resources */,
 				CF0C02041AE3B89200FFB854 /* InfoPlist.strings in Resources */,
@@ -1205,6 +1259,9 @@
 				CFB85A451AE8B16C00C6E654 /* info_default.plist in Resources */,
 				CFB2B1A61AF35C90000AF85F /* bg_02.png in Resources */,
 				CFB6BFFB1AFC725200E4B50B /* shop_default.plist in Resources */,
+				CFB83B651B04B10800323F1C /* pin_ball_15.mp3 in Resources */,
+				CFB83B501B048D9000323F1C /* pin_ball_21.mp3 in Resources */,
+				CFB83B5E1B04A29200323F1C /* catch_pin.mp3 in Resources */,
 				CFCFBC4F1B01ACD700AB2EC8 /* manual_en_01.png in Resources */,
 				B7378975180762440076A88C /* Default-568h@2x.png in Resources */,
 				CFCFBC461B01ACC000AB2EC8 /* manual_06.png in Resources */,
@@ -1302,6 +1359,7 @@
 				7A046D8C19E8A20E004C4763 /* MainScene.m in Sources */,
 				CF7CC4D51AD3DF0E00D16EF9 /* Wall.m in Sources */,
 				CF6E24CB1ADA1F8900AA94D0 /* MsgEffect.m in Sources */,
+				CFB83B381B0438E900323F1C /* SoundManager.m in Sources */,
 				CFB398361AF9DE6700575BB0 /* NoticeScene.m in Sources */,
 				CFC3F5C41AEDC6C600BAE803 /* ScoreModeMenu.m in Sources */,
 				CFB11D101ADCD6F00072B6CC /* ShopScene.m in Sources */,

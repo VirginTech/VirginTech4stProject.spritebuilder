@@ -24,7 +24,9 @@ CGSize winSize;
     if (!self) return(nil);
     
     winSize=[[CCDirector sharedDirector]viewSize];
-    
+
+#if DEBUG
+#else
     // iAd設定
     iAdView = [[ADBannerView alloc] initWithFrame:CGRectZero];
     //iAdView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
@@ -33,6 +35,7 @@ CGSize winSize;
     iAdView.frame = CGRectOffset(iAdView.frame, 0, [[UIScreen mainScreen] bounds].size.height);
     iAdView.delegate = self;
     _bannerIsVisible = NO;
+#endif
     
     return self;
 }

@@ -29,8 +29,10 @@
 #import "CCBuilderReader.h"
 
 #import <sys/utsname.h>
+
 #import "TitleScene.h"
 #import "GameManager.h"
+#import "SoundManager.h"
 
 #import "ImobileSdkAds/ImobileSdkAds.h"
 
@@ -128,6 +130,9 @@
     }else{
         [GameManager setLocale:0];//それ以外(デフォルト)
     }
+    
+    //サウンドプリロード
+    [SoundManager initSoundPreload];
     
     //iMobileインタースティシャル読込み (AppBankNetworkインタースティシャルと相性悪し)
     //if([GameManager getDevice]!=1){//iPadでなければ

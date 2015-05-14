@@ -15,8 +15,12 @@
     bool stateFlg;
     int ballType;//1:ノーマル 2:天使 3:悪魔
     CCColor* ballColor;
+    int collisionWindmill;
+    int ballGroup;
 }
 
+@property int ballGroup;
+@property int collisionWindmill;
 @property int ball_Id;
 @property bool stateFlg;
 @property int ballType;;

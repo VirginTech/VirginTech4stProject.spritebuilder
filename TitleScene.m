@@ -124,28 +124,28 @@ int boundCnt;
     //風車
     Windmill* windmill;
     
-    windmill=[Windmill createWindmill:ccp(winSize.width/2 -70,winSize.height/2 +150) titleFlg:true];
+    windmill=[Windmill createWindmill:ccp(winSize.width/2 -70,winSize.height/2 +150) titleFlg:true cnt:0];
     [physicWorld addChild:windmill];
     
-    windmill=[Windmill createWindmill:ccp(winSize.width/2 +20,winSize.height/2 +30) titleFlg:true];
+    windmill=[Windmill createWindmill:ccp(winSize.width/2 +20,winSize.height/2 +30) titleFlg:true cnt:0];
     [physicWorld addChild:windmill];
 
-    windmill=[Windmill createWindmill:ccp(winSize.width/2 +60,winSize.height/2 +170) titleFlg:true];
+    windmill=[Windmill createWindmill:ccp(winSize.width/2 +60,winSize.height/2 +170) titleFlg:true cnt:0];
     [physicWorld addChild:windmill];
 
-    windmill=[Windmill createWindmill:ccp(winSize.width/2 -80,winSize.height/2 +50) titleFlg:true];
+    windmill=[Windmill createWindmill:ccp(winSize.width/2 -80,winSize.height/2 +50) titleFlg:true cnt:0];
     [physicWorld addChild:windmill];
 
-    windmill=[Windmill createWindmill:ccp(winSize.width/2 -0,winSize.height/2 +190) titleFlg:true];
+    windmill=[Windmill createWindmill:ccp(winSize.width/2 -0,winSize.height/2 +190) titleFlg:true cnt:0];
     [physicWorld addChild:windmill];
     
-    windmill=[Windmill createWindmill:ccp(winSize.width/2 +70,winSize.height/2 +40) titleFlg:true];
+    windmill=[Windmill createWindmill:ccp(winSize.width/2 +70,winSize.height/2 +40) titleFlg:true cnt:0];
     [physicWorld addChild:windmill];
 
-    windmill=[Windmill createWindmill:ccp(winSize.width/2 -100,winSize.height/2 +180) titleFlg:true];
+    windmill=[Windmill createWindmill:ccp(winSize.width/2 -100,winSize.height/2 +180) titleFlg:true cnt:0];
     [physicWorld addChild:windmill];
 
-    windmill=[Windmill createWindmill:ccp(winSize.width/2 +100,winSize.height/2 +200) titleFlg:true];
+    windmill=[Windmill createWindmill:ccp(winSize.width/2 +100,winSize.height/2 +200) titleFlg:true cnt:0];
     [physicWorld addChild:windmill];
 
     //地面生成

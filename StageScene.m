@@ -22,6 +22,7 @@
 #import "NaviLayer.h"
 #import "MsgEffect.h"
 //#import "BallShadow.h"
+#import "SoundManager.h"
 
 #import "ImobileSdkAds/ImobileSdkAds.h"
 
@@ -354,7 +355,7 @@ CCLabelBMFont* ballCntLbl;
     NSMutableArray* array=[InitManager init_Pin_Pattern:[GameManager getStageLevel]];
     for(int i=0;i<array.count;i++){
         pos=[[array objectAtIndex:i]CGPointValue];
-        windmill=[Windmill createWindmill:pos titleFlg:false];
+        windmill=[Windmill createWindmill:pos titleFlg:false cnt:i+1];
         [physicWorld addChild:windmill];
     }
 
@@ -522,7 +523,10 @@ CCLabelBMFont* ballCntLbl;
                 ballTimingCnt=0;
                 force=((arc4random()%5)+63)*0.1;//6.3〜6.7
                 //NSLog(@"Force=%f",force);
-
+                
+                //サウンドエフェクト
+                [SoundManager ball_Launch_Effect];
+                
                 //ブーストエフェクト
                 boost.position=ccp(piston.position.x,piston.position.y-(piston.contentSize.height*piston.scale)/2);
                 boost.opacity=1.0;
@@ -676,6 +680,9 @@ CCLabelBMFont* ballCntLbl;
     [physicWorld removeChild:cBall cleanup:YES];
     [ballArray removeObject:cBall];
     
+    //サウンドエフェクト
+    [SoundManager catch_Ball_Effect];
+    
     //スパーク
     spark.position=ccp(basket.position.x,basket.position.y+(basket.contentSize.height*basket.scale)/2+(spark.contentSize.height*spark.scale)/2 -20);
     spark.opacity=1.0;
@@ -705,6 +712,9 @@ CCLabelBMFont* ballCntLbl;
     //スコアリング
     [GameManager setScore:[GameManager getScore]+100];
     [Information scoreUpdata];
+    
+    //サウンドエフェクト
+    [SoundManager catch_Pin_Effect];
     
     //スパーク
     spark.position=ccp(basket.position.x,basket.position.y+(basket.contentSize.height*basket.scale)/2+(spark.contentSize.height*spark.scale)/2 -20);
@@ -738,6 +748,9 @@ CCLabelBMFont* ballCntLbl;
             [GameManager setLifePoint:[GameManager getLifePoint]-1];
             [Information lifePointUpdata];
             
+            //サウンドエフェクト
+            [SoundManager ground_Ball_Effect];
+            
             //終了判定
             [self exit_Judgment];
         }
@@ -750,12 +763,33 @@ CCLabelBMFont* ballCntLbl;
 //================================
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair cWindmill:(CCSprite*)cWindmill cBall:(Ball*)cBall
 {
+
+    Windmill* _windmill=(Windmill*)[cWindmill parent];//親Pinオブジェクトを特定、代入
+    //サウンドエフェクト
+    if(cBall.collisionWindmill!=_windmill.windmill_Id){
+        if(cBall.stateFlg){
+            cBall.collisionWindmill=_windmill.windmill_Id;
+            if(cBall.ballGroup==11){
+                [SoundManager pin_Ball_11_Effect];
+            }else if(cBall.ballGroup==12){
+                [SoundManager pin_Ball_12_Effect];
+            }else if(cBall.ballGroup==13){
+                [SoundManager pin_Ball_13_Effect];
+            }else if(cBall.ballGroup==14){
+                [SoundManager pin_Ball_14_Effect];
+            }else if(cBall.ballGroup==15){
+                [SoundManager pin_Ball_15_Effect];
+            }else if(cBall.ballGroup==21){
+                [SoundManager pin_Ball_21_Effect];
+            }else if(cBall.ballGroup==31){
+                [SoundManager pin_Ball_31_Effect];
+            }
+        }
+    }
     //悪魔ボール
     if(cBall.ballType==3)
     {
-        Windmill* _windmill=(Windmill*)[cWindmill parent];//親Pinオブジェクトを特定、代入
         [_windmill.axis.physicsBody setType:CCPhysicsBodyTypeDynamic];//動的物体にして落とす
-    
         //[physicWorld removeChild:_pin cleanup:YES];//削除するなら
     }
     return true;
