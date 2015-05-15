@@ -14,10 +14,10 @@
     CCSprite* tire1;//CCB定義
     CCSprite* tire2;//CCB定義
     CCNode* catch_point;//CCB定義（キャッチ判定用）
-    CCNodeColor* basket_Color;//CCB定義
+    CCSprite* basket_Color;//CCB定義
 }
 
-@property CCNodeColor* basket_Color;
+@property CCSprite* basket_Color;
 
 +(id)createBasket:(CGPoint)pos;
 

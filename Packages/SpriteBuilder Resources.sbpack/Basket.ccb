@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>12</integer>
+	<integer>13</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -476,15 +476,15 @@
 			</dict>
 			<dict>
 				<key>UUID</key>
-				<integer>11</integer>
+				<integer>12</integer>
 				<key>baseClass</key>
-				<string>CCNodeColor</string>
+				<string>CCSprite</string>
 				<key>children</key>
 				<array/>
 				<key>customClass</key>
 				<string></string>
 				<key>displayName</key>
-				<string>CCNodeColor</string>
+				<string>basket</string>
 				<key>memberVarAssignmentName</key>
 				<string>basket_Color</string>
 				<key>memberVarAssignmentType</key>
@@ -506,22 +506,9 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>17.231931686401367</real>
-							<real>13.014863014221191</real>
+							<real>50</real>
+							<real>17.5</real>
 							<integer>0</integer>
-							<integer>0</integer>
-							<integer>0</integer>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>contentSize</string>
-						<key>type</key>
-						<string>Size</string>
-						<key>value</key>
-						<array>
-							<real>100</real>
-							<real>100</real>
 							<integer>0</integer>
 							<integer>0</integer>
 						</array>
@@ -533,8 +520,8 @@
 						<string>Point</string>
 						<key>value</key>
 						<array>
-							<real>0.0</real>
-							<real>0.0</real>
+							<real>0.5</real>
+							<real>0.5</real>
 						</array>
 					</dict>
 					<dict>
@@ -544,11 +531,41 @@
 						<string>ScaleLock</string>
 						<key>value</key>
 						<array>
-							<real>0.65570169687271118</real>
-							<real>0.052566047757863998</real>
+							<real>1</real>
+							<real>1</real>
 							<false/>
 							<integer>0</integer>
 						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>spriteFrame</string>
+						<key>type</key>
+						<string>SpriteFrame</string>
+						<key>value</key>
+						<array>
+							<string></string>
+							<string>Sprite/basket.png</string>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>normalMapSpriteFrame</string>
+						<key>type</key>
+						<string>SpriteFrame</string>
+						<key>value</key>
+						<array>
+							<string></string>
+							<string></string>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>opacity</string>
+						<key>type</key>
+						<string>Float</string>
+						<key>value</key>
+						<real>0.0</real>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -560,18 +577,20 @@
 							<real>1</real>
 							<real>1</real>
 							<real>1</real>
-							<real>1</real>
+							<real>0.0</real>
 						</array>
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>opacity</string>
+						<string>effects</string>
 						<key>type</key>
-						<string>Float</string>
+						<string>EffectControl</string>
 						<key>value</key>
-						<real>1</real>
+						<array/>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
