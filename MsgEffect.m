@@ -18,14 +18,16 @@ CGSize winSize;
 CCLabelBMFont* msg;
 int cnt;
 bool nextFlg;
+bool highScore;
+CCSprite* spHighScore;
 
 +(MsgEffect *)scene{
     
     return [[self alloc] init];
 }
 
--(id)initWithMsg:(NSString*)str nextFlg:(bool)flg{
-    
+-(id)initWithMsg:(NSString*)str nextFlg:(bool)flg highScoreFlg:(bool)highScoreFlg
+{    
     self = [super init];
     if (!self) return(nil);
     
@@ -37,6 +39,8 @@ bool nextFlg;
     
     cnt=0;
     nextFlg=flg;
+    highScore=highScoreFlg;
+    
     //msg=[CCLabelTTF labelWithString:str fontName:@"Chalkduster" fontSize:40];
     msg=[CCLabelBMFont labelWithString:str fntFile:@"msgEffect.fnt"];
     msg.position=ccp(winSize.width/2,winSize.height/2+50);
@@ -63,10 +67,22 @@ bool nextFlg;
     }
     cnt++;
     
+    //終了時のみ
     if(cnt==100 && nextFlg){
         //エンディング効果音
         //[SoundManager endingEffect];
-
+        
+        //ハイスコア表示
+        if(highScore){
+            spHighScore=[CCSprite spriteWithImageNamed:@"highscore.png"];
+            spHighScore.position=ccp(winSize.width/2,winSize.height/2 +50);
+            spHighScore.rotation=-20;
+            spHighScore.scale=5.0;
+            [self addChild:spHighScore];
+            //アニメーション
+            [self schedule:@selector(high_Score_Schedule:) interval:0.01];
+        }
+        
         //レイティング
         if([GameManager getStageLevel]%10==0){
             //カスタムアラートメッセージ
@@ -82,8 +98,8 @@ bool nextFlg;
             [self addChild:msgBox z:3];
             
             //停止
-            [[CCDirector sharedDirector]pause];
-            //[GameManager setPause:true];
+            //[[CCDirector sharedDirector]pause];
+            [GameManager setPause:true];
         }
 
     }
@@ -117,6 +133,18 @@ bool nextFlg;
     }
 }
 
+-(void)high_Score_Schedule:(CCTime)dt
+{
+    spHighScore.scale-=0.2;
+    //spHighScore.rotation-=12.5;
+    
+    if(spHighScore.scale<=0.0){
+        spHighScore.scale=1.0;
+        //spHighScore.rotation=-20;
+        [self unschedule:@selector(high_Score_Schedule:)];
+    }
+}
+
 //=====================
 // デリゲートメソッド
 //=====================
@@ -127,12 +155,12 @@ bool nextFlg;
             NSURL* url = [NSURL URLWithString:@"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=985536616&mt=8&type=Purple+Software"];
             [[UIApplication sharedApplication]openURL:url];
             //再開
-            [[CCDirector sharedDirector]resume];
-            //[GameManager setPause:false];
+            //[[CCDirector sharedDirector]resume];
+            [GameManager setPause:false];
         }else{
             //再開
-            [[CCDirector sharedDirector]resume];
-            //[GameManager setPause:false];
+            //[[CCDirector sharedDirector]resume];
+            [GameManager setPause:false];
         }
     }
 }

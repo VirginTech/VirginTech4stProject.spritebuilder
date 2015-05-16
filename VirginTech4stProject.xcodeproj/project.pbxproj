@@ -98,6 +98,7 @@
 		CF1AC8141AE3B0A5001E02C9 /* MsgBoxLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = CF1AC8131AE3B0A5001E02C9 /* MsgBoxLayer.m */; };
 		CF1AC81A1AE3B28A001E02C9 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF1AC8191AE3B28A001E02C9 /* StoreKit.framework */; };
 		CF3635271AD4C17B00EFA58D /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF3635261AD4C17B00EFA58D /* CoreMotion.framework */; };
+		CF40DB371B06E23200BF847A /* highscore.png in Resources */ = {isa = PBXBuildFile; fileRef = CF40DB361B06E23200BF847A /* highscore.png */; };
 		CF51C7B91AD66EDF0024AC6B /* Information.m in Sources */ = {isa = PBXBuildFile; fileRef = CF51C7B81AD66EDF0024AC6B /* Information.m */; };
 		CF5C24B81AD4BF7F00390A50 /* Basket.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5C24B71AD4BF7F00390A50 /* Basket.m */; };
 		CF61D5501AD796B00062F223 /* NaviLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = CF61D54F1AD796B00062F223 /* NaviLayer.m */; };
@@ -316,6 +317,7 @@
 		CF1AC8131AE3B0A5001E02C9 /* MsgBoxLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgBoxLayer.m; sourceTree = "<group>"; };
 		CF1AC8191AE3B28A001E02C9 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		CF3635261AD4C17B00EFA58D /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		CF40DB361B06E23200BF847A /* highscore.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = highscore.png; sourceTree = "<group>"; };
 		CF51C7B71AD66EDF0024AC6B /* Information.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Information.h; sourceTree = "<group>"; };
 		CF51C7B81AD66EDF0024AC6B /* Information.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Information.m; sourceTree = "<group>"; };
 		CF5C24B61AD4BF7F00390A50 /* Basket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Basket.h; sourceTree = "<group>"; };
@@ -968,6 +970,7 @@
 		CFB85A4B1AE8DF7200C6E654 /* object */ = {
 			isa = PBXGroup;
 			children = (
+				CF40DB361B06E23200BF847A /* highscore.png */,
 				CFB437C01AFF00480092A160 /* boost.png */,
 				CFB85A601AE915A600C6E654 /* spark.png */,
 				CFB85A541AE8EA5900C6E654 /* basket_shadow.png */,
@@ -1253,6 +1256,7 @@
 				CFCFBC421B01ACC000AB2EC8 /* manual_02.png in Resources */,
 				CFB74D5A1AF1FE4D0084039C /* msgEffect.fnt in Resources */,
 				CFCFBC541B01ACD700AB2EC8 /* manual_en_06.png in Resources */,
+				CF40DB371B06E23200BF847A /* highscore.png in Resources */,
 				CFCFBC411B01ACC000AB2EC8 /* manual_01.png in Resources */,
 				B71F5917188484E7003F4D28 /* iPhone.png in Resources */,
 				CFB2B1A31AF35769000AF85F /* bg_01.png in Resources */,

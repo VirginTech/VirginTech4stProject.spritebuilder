@@ -259,7 +259,7 @@ CCLabelBMFont* ballCntLbl;
     
     //開始メッセージ
     MsgEffect* msg=[[MsgEffect alloc]initWithMsg:[NSString stringWithFormat:@"Lv.%d \nStart!",
-                                                            [GameManager getStageLevel]] nextFlg:false];
+                                                [GameManager getStageLevel]] nextFlg:false highScoreFlg:false];
     [self addChild:msg z:2];
     
     
@@ -854,10 +854,38 @@ CCLabelBMFont* ballCntLbl;
 //================================
 -(void)gameEnd:(bool)flg
 {
+    bool highScoreFlg=false;
+    
     [motionManager stopDeviceMotionUpdates];//ジャイロセンサー停止
     physicWorld.paused=YES;
     
-    if(flg){//ステージクリア
+    //ハイスコア保存
+    if([GameManager getPlayMode]==1)
+    {
+        if([GameManager load_High_Score_1]<[GameManager getScore]){
+            [GameManager save_High_Score_1:[GameManager getScore]];
+            [Information highScoreUpdata];
+            highScoreFlg=true;
+            
+            //GameCenterへ送信
+            [GameManager submit_Score_GameCenter:[GameManager load_High_Score_1] mode:1];
+        }
+    }
+    else
+    {
+        if([GameManager getScore]>[GameManager load_Stage_Score:[GameManager getStageLevel]]){//ハイスコア！
+            [GameManager save_Stage_Score:[GameManager getStageLevel] score:[GameManager getScore]];//ステージスコア保存
+            [GameManager save_High_Score_2:[GameManager load_Total_Score:75]];//全スコアをハイスコアへ保存
+            [Information highScoreUpdata];//ハイスコア更新
+            highScoreFlg=true;
+            
+            //GameCenterへ送信
+            [GameManager submit_Score_GameCenter:[GameManager load_High_Score_2] mode:2];
+        }
+    }
+    
+    //ステージクリア
+    if(flg){
         //ステージレヴェル保存
         if([GameManager getPlayMode]==1)
         {
@@ -871,11 +899,11 @@ CCLabelBMFont* ballCntLbl;
         }
         //ネクストステージへ
         if([GameManager getPlayMode]==1){
-            MsgEffect* msg=[[MsgEffect alloc]initWithMsg:@"   Stage\nComplete!" nextFlg:true];
+            MsgEffect* msg=[[MsgEffect alloc]initWithMsg:@"   Stage\nComplete!" nextFlg:true highScoreFlg:highScoreFlg];
             [self addChild:msg z:2];
         }else{
             if([GameManager getStageLevel]<75){
-                MsgEffect* msg=[[MsgEffect alloc]initWithMsg:@"   Stage\nComplete!" nextFlg:true];
+                MsgEffect* msg=[[MsgEffect alloc]initWithMsg:@"   Stage\nComplete!" nextFlg:true highScoreFlg:highScoreFlg];
                 [self addChild:msg z:2];
             }
             else//全ステージクリア！
@@ -902,28 +930,6 @@ CCLabelBMFont* ballCntLbl;
         //インターステイシャル広告表示
         [ImobileSdkAds showBySpotID:@"457103"];
     }
-    //ハイスコア保存
-    if([GameManager getPlayMode]==1)
-    {
-        if([GameManager load_High_Score_1]<[GameManager getScore]){
-            [GameManager save_High_Score_1:[GameManager getScore]];
-            [Information highScoreUpdata];
-            
-            //GameCenterへ送信
-            [GameManager submit_Score_GameCenter:[GameManager load_High_Score_1] mode:1];
-        }
-    }
-    else
-    {
-        if([GameManager getScore]>[GameManager load_Stage_Score:[GameManager getStageLevel]]){//ハイスコア！
-            [GameManager save_Stage_Score:[GameManager getStageLevel] score:[GameManager getScore]];//ステージスコア保存
-            [GameManager save_High_Score_2:[GameManager load_Total_Score:75]];//全スコアをハイスコアへ保存
-            [Information highScoreUpdata];//ハイスコア更新
-            
-            //GameCenterへ送信
-            [GameManager submit_Score_GameCenter:[GameManager load_High_Score_2] mode:2];
-        }
-    }
 }
 
 //================================
@@ -931,7 +937,8 @@ CCLabelBMFont* ballCntLbl;
 //================================
 -(void)onPauseClicked:(id)sender
 {
-    if(![[CCDirector sharedDirector]isPaused]){ //レイティングポーズ時はポーズしない(2重ポーズ防止)
+    //if(![[CCDirector sharedDirector]isPaused]){ //レイティングポーズ時はポーズしない(2重ポーズ防止)
+    if(![GameManager getPause]){ //レイティングポーズ時はポーズしない(2重ポーズ防止)
         [GameManager setPause:true];
         [motionManager stopDeviceMotionUpdates];//ジャイロセンサー停止
         physicWorld.paused=YES;//物理ワールド停止

@@ -16,6 +16,6 @@
 }
 
 + (MsgEffect *)scene;
-- (id)initWithMsg:(NSString*)str nextFlg:(bool)flg;
+- (id)initWithMsg:(NSString*)str nextFlg:(bool)flg highScoreFlg:(bool)highScoreFlg;
 
 @end
