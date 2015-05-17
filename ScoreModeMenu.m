@@ -11,6 +11,7 @@
 #import "GameManager.h"
 #import "TitleScene.h"
 #import "Information.h"
+#import "SoundManager.h"
 
 #import "IAdLayer.h"
 #import "IMobileLayer.h"
@@ -157,6 +158,9 @@ CCLabelBMFont* ticketLabel;
     //コンティニューチケット使用
     else if(procNum==1){
         if(btnNum==2){//Yes
+            //サウンドエフェクト
+            [SoundManager game_Start_Effect];
+            
             [GameManager setPlayMode:1];
             [GameManager setLifePoint:5];
             [GameManager setStageLavel:[GameManager load_Stage_Level_1]+1];
@@ -173,6 +177,9 @@ CCLabelBMFont* ticketLabel;
 
 - (void)onPlayClicked:(id)sender
 {
+    //サウンドエフェクト
+    [SoundManager game_Start_Effect];
+    
     [GameManager setPlayMode:1];
     [GameManager setLifePoint:5];
     [GameManager setStageLavel:1];
@@ -234,6 +241,9 @@ CCLabelBMFont* ticketLabel;
 
 - (void)onTitleClicked:(id)sender
 {
+    //サウンドエフェクト
+    [SoundManager btn_Click_Effect];
+    
     [[CCDirector sharedDirector] replaceScene:[TitleScene scene]
                                withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
     //インターステイシャル広告表示

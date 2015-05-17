@@ -11,6 +11,7 @@
 #import "GameManager.h"
 #import "StageScene.h"
 #import "StageModeMenu.h"
+#import "SoundManager.h"
 #import <Social/Social.h>
 
 #import "IAdLayer.h"
@@ -189,6 +190,9 @@ IAdLayer* iAdLayer;
 
 - (void)onTitleClicked:(id)sender
 {
+    //サウンドエフェクト
+    [SoundManager btn_Click_Effect];
+    
     //Ad非表示
     [self hideAdLayer];
     
@@ -200,6 +204,9 @@ IAdLayer* iAdLayer;
 
 - (void)onReplayClicked:(id)sender
 {
+    //サウンドエフェクト
+    [SoundManager game_Start_Effect];
+    
     //Ad非表示
     [self hideAdLayer];
     
@@ -213,6 +220,9 @@ IAdLayer* iAdLayer;
 
 - (void)onSelectClicked:(id)sender
 {
+    //サウンドエフェクト
+    [SoundManager btn_Click_Effect];
+    
     //Ad非表示
     [self hideAdLayer];
     
@@ -224,6 +234,9 @@ IAdLayer* iAdLayer;
 
 - (void)onPlayClicked:(id)sender
 {
+    //サウンドエフェクト
+    [SoundManager game_Start_Effect];
+    
     //Ad非表示
     [self hideAdLayer];
     
@@ -290,6 +303,9 @@ IAdLayer* iAdLayer;
         
     }else if(procNum==1){
         if(btnNum==2){//Yes
+            //サウンドエフェクト
+            [SoundManager game_Start_Effect];
+            
             [GameManager setLifePoint:5];
             [GameManager setStageLavel:[GameManager load_Stage_Level_1]+1];
             [GameManager setScore:[GameManager load_High_Score_1]];

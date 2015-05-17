@@ -9,6 +9,7 @@
 #import "MsgEffect.h"
 #import "GameManager.h"
 #import "StageScene.h"
+#import "SoundManager.h"
 
 #import "ImobileSdkAds/ImobileSdkAds.h"
 
@@ -64,16 +65,20 @@ CCSprite* spHighScore;
         msg.opacity+=0.01f;
     }else if(cnt>=150){
         msg.opacity-=0.01f;
+        spHighScore.opacity-=0.01f;
     }
     cnt++;
     
     //終了時のみ
     if(cnt==100 && nextFlg){
         //エンディング効果音
-        //[SoundManager endingEffect];
+        //[SoundManager game_Finish_Effect];
         
         //ハイスコア表示
         if(highScore){
+            //サウンドエフェクト
+            [SoundManager high_Score1_Effect];
+            
             spHighScore=[CCSprite spriteWithImageNamed:@"highscore.png"];
             spHighScore.position=ccp(winSize.width/2,winSize.height/2 +50);
             spHighScore.rotation=-20;
@@ -112,6 +117,9 @@ CCSprite* spHighScore;
             //インターステイシャル広告表示
             //[ImobileSdkAds showBySpotID:@"457103"];
             
+            //エンディング効果音
+            [SoundManager game_Finish_Effect];
+            
             //次ステージへ
             if([GameManager getPlayMode]==1){
                 [GameManager setStageLavel:[GameManager getStageLevel]+1];//ステージレヴェル設定
@@ -139,6 +147,9 @@ CCSprite* spHighScore;
     //spHighScore.rotation-=12.5;
     
     if(spHighScore.scale<=0.0){
+        //サウンドエフェクト
+        [SoundManager high_Score2_Effect];
+        
         spHighScore.scale=1.0;
         //spHighScore.rotation=-20;
         [self unschedule:@selector(high_Score_Schedule:)];

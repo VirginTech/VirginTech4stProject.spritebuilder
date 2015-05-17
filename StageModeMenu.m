@@ -11,6 +11,7 @@
 #import "GameManager.h"
 #import "StageScene.h"
 #import "Information.h"
+#import "SoundManager.h"
 
 #import "IAdLayer.h"
 #import "IMobileLayer.h"
@@ -158,6 +159,9 @@ CCScrollView* scrollView;
 
 - (void)onStageLevel:(id)sender
 {
+    //サウンドエフェクト
+    [SoundManager game_Start_Effect];
+    
     CCButton* button=(CCButton*)sender;
     int stageNum=[[button name]intValue];
     
@@ -176,6 +180,9 @@ CCScrollView* scrollView;
 
 - (void)onTitleClicked:(id)sender
 {
+    //サウンドエフェクト
+    [SoundManager btn_Click_Effect];
+    
     [[CCDirector sharedDirector] replaceScene:[TitleScene scene]
                                withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
     //インターステイシャル広告表示

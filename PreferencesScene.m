@@ -9,6 +9,7 @@
 #import "PreferencesScene.h"
 #import "TitleScene.h"
 #import "GameManager.h"
+#import "SoundManager.h"
 
 #import "IAdLayer.h"
 #import "IMobileLayer.h"
@@ -76,6 +77,9 @@ CGSize winSize;
 
 - (void)onTitleClicked:(id)sender
 {
+    //サウンドエフェクト
+    [SoundManager btn_Click_Effect];
+    
     [[CCDirector sharedDirector] replaceScene:[TitleScene scene]
                                withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
     //インターステイシャル広告表示

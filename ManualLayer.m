@@ -8,7 +8,7 @@
 
 #import "ManualLayer.h"
 #import "TitleScene.h"
-//#import "SoundManager.h"
+#import "SoundManager.h"
 #import "GameManager.h"
 
 #import "IAdLayer.h"
@@ -110,7 +110,9 @@ CCScrollView* scrollView;
 
 - (void)onTitleClicked:(id)sender
 {
-    //[SoundManager click_Effect];
+    //サウンドエフェクト
+    [SoundManager btn_Click_Effect];
+    
     [[CCDirector sharedDirector] replaceScene:[TitleScene scene]
                                withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
     //インターステイシャル広告表示

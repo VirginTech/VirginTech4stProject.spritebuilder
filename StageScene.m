@@ -920,6 +920,9 @@ CCLabelBMFont* ballCntLbl;
             }
         }
     }else{//ゲームオーバー
+        //サウンドエフェクト
+        [SoundManager game_Over_Effect];
+        
         [GameManager setPause:true];
         naviLayer.visible=true;
         naviLayer.gameOverLabel.string=@"Stage\nfailed!";

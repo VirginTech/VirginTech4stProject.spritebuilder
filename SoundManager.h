@@ -49,7 +49,15 @@
 +(void)ground_Ball_Effect;
 +(void)ball_Launch_Effect;
 
++(void)high_Score1_Effect;
++(void)high_Score2_Effect;
+
++(void)game_Finish_Effect;
++(void)game_Over_Effect;
+
 //UIエフェクト
-+(void)click_Effect;
++(void)mode_Btn_Click_Effect;
++(void)btn_Click_Effect;
++(void)game_Start_Effect;
 
 @end

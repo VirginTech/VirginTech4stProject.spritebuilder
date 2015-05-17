@@ -9,6 +9,7 @@
 #import "ShopScene.h"
 #import "TitleScene.h"
 #import "GameManager.h"
+#import "SoundManager.h"
 
 #import "IAdLayer.h"
 #import "IMobileLayer.h"
@@ -490,6 +491,9 @@ SKProduct* product05;
 
 - (void)onTitleClicked:(id)sender
 {
+    //サウンドエフェクト
+    [SoundManager btn_Click_Effect];
+    
     //プロダクトリクエストをキャンセル
     [productsRequest cancel];
     // インジケータを非表示にする

@@ -9,7 +9,7 @@
 #import "NoticeScene.h"
 #import "TitleScene.h"
 #import "GameManager.h"
-//#import "SoundManager.h"
+#import "SoundManager.h"
 
 #import "IAdLayer.h"
 #import "IMobileLayer.h"
@@ -267,7 +267,9 @@ MsgBoxLayer* msgBox;
 - (void)onTitleClicked:(id)sender
 {
     // back to intro scene with transition
-    //[SoundManager click_Effect];
+    //サウンドエフェクト
+    [SoundManager btn_Click_Effect];
+    
     [[CCDirector sharedDirector] replaceScene:[TitleScene scene]
                                withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
     //インターステイシャル広告表示

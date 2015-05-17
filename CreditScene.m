@@ -9,6 +9,7 @@
 #import "CreditScene.h"
 #import "TitleScene.h"
 #import "GameManager.h"
+#import "SoundManager.h"
 
 #import "ImobileSdkAds/ImobileSdkAds.h"
 
@@ -102,6 +103,9 @@ CCScrollView* scrollView;
 
 - (void)onTitleClicked:(id)sender
 {
+    //サウンドエフェクト
+    [SoundManager btn_Click_Effect];
+    
     [[CCDirector sharedDirector] replaceScene:[TitleScene scene]
                                withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
     //インターステイシャル広告表示

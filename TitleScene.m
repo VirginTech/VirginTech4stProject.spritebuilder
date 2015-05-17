@@ -20,6 +20,7 @@
 #import "Ground.h"
 #import "NoticeScene.h"
 #import "ManualLayer.h"
+#import "SoundManager.h"
 
 #import "IAdLayer.h"
 #import "IMobileLayer.h"
@@ -452,6 +453,9 @@ int boundCnt;
 
 - (void)onScoreModeClicked:(id)sender
 {
+    //サウンドエフェクト
+    [SoundManager mode_Btn_Click_Effect];
+    
     [scoreModeBtn.physicsBody setType:CCPhysicsBodyTypeDynamic];
     [scoreModeBtn.physicsBody applyImpulse:ccp(0,250)];
     //[scoreModeBtn.physicsBody applyForce:ccp(0,15000)];
@@ -464,6 +468,9 @@ int boundCnt;
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair cGround:(Ground*)cGround
                                                                     button01:(CCSprite*)button01
 {
+    //サウンドエフェクト
+    [SoundManager ground_Ball_Effect];
+    
     boundCnt++;
     if(boundCnt>2){
         boundCnt=0;
@@ -477,6 +484,9 @@ int boundCnt;
 
 - (void)onStageModeClicked:(id)sender
 {
+    //サウンドエフェクト
+    [SoundManager mode_Btn_Click_Effect];
+    
     [stageModeBtn.physicsBody setType:CCPhysicsBodyTypeDynamic];
     [stageModeBtn.physicsBody applyImpulse:ccp(0,250)];
     [stageModeBtn.physicsBody applyAngularImpulse:3000.f];
@@ -488,6 +498,9 @@ int boundCnt;
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair cGround:(Ground*)cGround
                                                                     button02:(CCSprite*)button02
 {
+    //サウンドエフェクト
+    [SoundManager ground_Ball_Effect];
+    
     boundCnt++;
     if(boundCnt>2){
         boundCnt=0;
@@ -558,24 +571,36 @@ int boundCnt;
 
 -(void)onGameCenterClicked:(id)sender
 {
+    //サウンドエフェクト
+    [SoundManager btn_Click_Effect];
+    
     gkc=[[GKitController alloc]init];
     [gkc showLeaderboard];
 }
 
 -(void)onTwitterClicked:(id)sender
 {
+    //サウンドエフェクト
+    [SoundManager btn_Click_Effect];
+    
     NSURL* url = [NSURL URLWithString:@"https://twitter.com/VirginTechLLC"];
     [[UIApplication sharedApplication]openURL:url];
 }
 
 -(void)onFacebookClicked:(id)sender
 {
+    //サウンドエフェクト
+    [SoundManager btn_Click_Effect];
+    
     NSURL* url = [NSURL URLWithString:@"https://www.facebook.com/pages/VirginTech-LLC/516907375075432"];
     [[UIApplication sharedApplication]openURL:url];
 }
 
 -(void)onInAppPurchaseClicked:(id)sender
 {
+    //サウンドエフェクト
+    [SoundManager btn_Click_Effect];
+    
     if (![SKPaymentQueue canMakePayments]){//ダメ
         //カスタムアラートメッセージ
         msgBox=[[MsgBoxLayer alloc]initWithTitle:NSLocalizedString(@"Error",NULL)
@@ -623,18 +648,27 @@ int boundCnt;
 
 -(void)onPreferencesButtonClicked:(id)sender
 {
+    //サウンドエフェクト
+    [SoundManager btn_Click_Effect];
+    
     [[CCDirector sharedDirector] replaceScene:[PreferencesScene scene]
                                withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
 }
 
 -(void)onCreditButtonClicked:(id)sender
 {
+    //サウンドエフェクト
+    [SoundManager btn_Click_Effect];
+    
     [[CCDirector sharedDirector] replaceScene:[CreditScene scene]
                                withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
 }
 
 -(void)onMoreAppClicked:(id)sender
 {
+    //サウンドエフェクト
+    [SoundManager btn_Click_Effect];
+    
     NSURL* url = [NSURL URLWithString:@"https://itunes.apple.com/jp/artist/virgintech-llc./id869207880"];
     [[UIApplication sharedApplication]openURL:url];
 }
@@ -646,12 +680,18 @@ int boundCnt;
 
 -(void)onHelpClicked:(id)sender
 {
+    //サウンドエフェクト
+    [SoundManager btn_Click_Effect];
+    
     [[CCDirector sharedDirector] replaceScene:[ManualLayer scene]
                                withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
 }
 
 -(void)onNoticeClicked:(id)sender
 {
+    //サウンドエフェクト
+    [SoundManager btn_Click_Effect];
+    
     //ネット接続できるか確認
     Reachability *internetReach = [Reachability reachabilityForInternetConnection];
     NetworkStatus netStatus = [internetReach currentReachabilityStatus];
