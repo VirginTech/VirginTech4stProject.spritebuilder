@@ -7,7 +7,7 @@
 //
 
 #import "MsgBoxLayer.h"
-//#import "SoundManager.h"
+#import "SoundManager.h"
 
 @implementation MsgBoxLayer
 
@@ -139,7 +139,9 @@ CGSize winSize;
 {
     if([self.delegate respondsToSelector:@selector(onMessageLayerBtnClocked:procNum:)])
     {
+        //サウンドエフェクト
         //[SoundManager click_Effect];
+        
         [self sendDelegate:2]; //2:YES
         [self removeFromParentAndCleanup:YES];
     }
@@ -149,7 +151,9 @@ CGSize winSize;
 {
     if([self.delegate respondsToSelector:@selector(onMessageLayerBtnClocked:procNum:)])
     {
-        //[SoundManager click_Effect];
+        //サウンドエフェクト
+        [SoundManager btn_Click_Effect];
+        
         [self sendDelegate:1]; //1:No
         [self removeFromParentAndCleanup:YES];
     }
@@ -159,7 +163,9 @@ CGSize winSize;
 {
     if([self.delegate respondsToSelector:@selector(onMessageLayerBtnClocked:procNum:)])
     {
-        //[SoundManager click_Effect];
+        //サウンドエフェクト
+        [SoundManager btn_Click_Effect];
+        
         [self sendDelegate:0]; //0:OK
         [self removeFromParentAndCleanup:YES];
     }

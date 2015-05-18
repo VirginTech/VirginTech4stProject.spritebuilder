@@ -190,6 +190,9 @@ CCLabelBMFont* ticketLabel;
 
 - (void)onContinueClicked:(id)sender
 {
+    //サウンドエフェクト
+    [SoundManager btn_Click_Effect];
+    
     if([GameManager load_Stage_Level_1]>0){
         if([GameManager load_Continue_Ticket]>0){
             //カスタムアラートメッセージ

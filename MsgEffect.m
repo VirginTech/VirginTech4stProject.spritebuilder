@@ -167,6 +167,9 @@ CCSprite* spHighScore;
 {
     if(procNum==1){
         if(btnNum==2){//YES
+            //サウンドエフェクト
+            [SoundManager btn_Click_Effect];
+            
             NSURL* url = [NSURL URLWithString:@"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=985536616&mt=8&type=Purple+Software"];
             [[UIApplication sharedApplication]openURL:url];
             //再開
