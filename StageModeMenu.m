@@ -40,6 +40,9 @@ CCScrollView* scrollView;
     CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.3f green:0.8f blue:0.8f alpha:1.0f]];
     [self addChild:background];
     
+    //BGM
+    [SoundManager playBGM:@"bgm.mp3"];
+    
     //インフォメーションレイヤー
     //Information* infoLayer=[[Information alloc]init];
     //[self addChild:infoLayer z:1];

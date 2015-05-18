@@ -118,6 +118,7 @@
 		CF7CC4D51AD3DF0E00D16EF9 /* Wall.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7CC4D41AD3DF0E00D16EF9 /* Wall.m */; };
 		CF7CC4D81AD3E23000D16EF9 /* Piston.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7CC4D71AD3E23000D16EF9 /* Piston.m */; };
 		CF7CC4DC1AD3E7C300D16EF9 /* GameManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7CC4DB1AD3E7C300D16EF9 /* GameManager.m */; };
+		CF8C0B581B09E95D00949594 /* bgm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CF8C0B571B09E95D00949594 /* bgm.mp3 */; };
 		CFAF84F71AD0D670009FB98F /* TitleScene.m in Sources */ = {isa = PBXBuildFile; fileRef = CFAF84F61AD0D670009FB98F /* TitleScene.m */; };
 		CFAF84FC1AD0D738009FB98F /* StageScene.m in Sources */ = {isa = PBXBuildFile; fileRef = CFAF84FB1AD0D738009FB98F /* StageScene.m */; };
 		CFB11D0A1ADCD25A0072B6CC /* CreditScene.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB11D091ADCD25A0072B6CC /* CreditScene.m */; };
@@ -356,6 +357,7 @@
 		CF7CC4D71AD3E23000D16EF9 /* Piston.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Piston.m; sourceTree = "<group>"; };
 		CF7CC4DA1AD3E7C300D16EF9 /* GameManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameManager.h; sourceTree = "<group>"; };
 		CF7CC4DB1AD3E7C300D16EF9 /* GameManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameManager.m; sourceTree = "<group>"; };
+		CF8C0B571B09E95D00949594 /* bgm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bgm.mp3; sourceTree = "<group>"; };
 		CFAF84F51AD0D670009FB98F /* TitleScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleScene.h; sourceTree = "<group>"; };
 		CFAF84F61AD0D670009FB98F /* TitleScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleScene.m; sourceTree = "<group>"; };
 		CFAF84FA1AD0D738009FB98F /* StageScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StageScene.h; sourceTree = "<group>"; };
@@ -892,6 +894,14 @@
 			name = Manager;
 			sourceTree = "<group>";
 		};
+		CF8C0B541B09E94C00949594 /* BGM */ = {
+			isa = PBXGroup;
+			children = (
+				CF8C0B571B09E95D00949594 /* bgm.mp3 */,
+			);
+			name = BGM;
+			sourceTree = "<group>";
+		};
 		CFB11D071ADCD1F60072B6CC /* OptionScene */ = {
 			isa = PBXGroup;
 			children = (
@@ -969,6 +979,7 @@
 		CFB83B3B1B04412200323F1C /* Sound */ = {
 			isa = PBXGroup;
 			children = (
+				CF8C0B541B09E94C00949594 /* BGM */,
 				CFFC4C811B0893AC00D78233 /* game_over.mp3 */,
 				CFFC4C7D1B08608900D78233 /* highscore1.mp3 */,
 				CFFC4C7E1B08608900D78233 /* highscore2.mp3 */,
@@ -1236,6 +1247,7 @@
 				CFB83B591B04A25400323F1C /* ball_launch.mp3 in Resources */,
 				CFCFBC521B01ACD700AB2EC8 /* manual_en_04.png in Resources */,
 				CFB85A551AE8EA5900C6E654 /* basket_shadow.png in Resources */,
+				CF8C0B581B09E95D00949594 /* bgm.mp3 in Resources */,
 				CFFC4C6A1B08361400D78233 /* pin_ball_21.mp3 in Resources */,
 				CF0C020A1AE3B98A00FFB854 /* Localizable.strings in Resources */,
 				CFB83B511B048D9000323F1C /* pin_ball_31.mp3 in Resources */,

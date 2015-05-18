@@ -54,6 +54,9 @@ int boundCnt;
     CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:1.0f green:0.07f blue:0.57f alpha:1.0f]];
     [self addChild:background];
     
+    //BGM
+    [SoundManager playBGM:@"bgm.mp3"];
+    
     //初期化
     boundCnt=0;
     

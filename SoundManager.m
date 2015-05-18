@@ -22,7 +22,7 @@ float effectValue;
 +(void)initSoundPreload
 {
     //BGM
-    //[[OALSimpleAudio sharedInstance]preloadBg:@"title_bgm.mp3"];
+    [[OALSimpleAudio sharedInstance]preloadBg:@"bgm.mp3"];
     
     //エフェクト
     [[OALSimpleAudio sharedInstance]preloadEffect:@"pin_ball_11.mp3"];
@@ -36,16 +36,15 @@ float effectValue;
     [[OALSimpleAudio sharedInstance]preloadEffect:@"catch_pin.mp3"];
     [[OALSimpleAudio sharedInstance]preloadEffect:@"ground_ball.mp3"];
     [[OALSimpleAudio sharedInstance]preloadEffect:@"ball_launch.mp3"];
-    [[OALSimpleAudio sharedInstance]preloadEffect:@"mode_btn_click.mp3"];
-    [[OALSimpleAudio sharedInstance]preloadEffect:@"btn_click.mp3"];
-    [[OALSimpleAudio sharedInstance]preloadEffect:@"game_start.mp3"];
     [[OALSimpleAudio sharedInstance]preloadEffect:@"game_finish.mp3"];
     [[OALSimpleAudio sharedInstance]preloadEffect:@"highscore1.mp3"];
     [[OALSimpleAudio sharedInstance]preloadEffect:@"highscore2.mp3"];
     [[OALSimpleAudio sharedInstance]preloadEffect:@"game_over.mp3"];
     
     //UI
-    //[[OALSimpleAudio sharedInstance]preloadEffect:@"click.mp3"];
+    [[OALSimpleAudio sharedInstance]preloadEffect:@"mode_btn_click.mp3"];
+    [[OALSimpleAudio sharedInstance]preloadEffect:@"btn_click.mp3"];
+    [[OALSimpleAudio sharedInstance]preloadEffect:@"game_start.mp3"];
     
     //スイッチ
     bgmSwitch=true;
@@ -110,7 +109,8 @@ float effectValue;
 +(void)playBGM:(NSString*)fileName
 {
     if(bgmSwitch){
-        if(![[OALSimpleAudio sharedInstance]bgPlaying]){
+        //BGMがプレイ中でなければ、もしくはポーズ中であれば
+        if(![[OALSimpleAudio sharedInstance]bgPlaying] || [[OALSimpleAudio sharedInstance]bgPaused]){
             [[OALSimpleAudio sharedInstance]setBgVolume:bgmValue];
             [[OALSimpleAudio sharedInstance]playBg:fileName loop:YES];
         }

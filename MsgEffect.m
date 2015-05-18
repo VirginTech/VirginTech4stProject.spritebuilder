@@ -122,7 +122,7 @@ CCSprite* spHighScore;
             //[ImobileSdkAds showBySpotID:@"457103"];
             
             //エンディング効果音
-            [SoundManager game_Finish_Effect];
+            //[SoundManager game_Finish_Effect];
             
             //次ステージへ
             if([GameManager getPlayMode]==1){

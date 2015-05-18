@@ -99,6 +99,9 @@ CCLabelBMFont* ballCntLbl;
     //CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.0f green:0.4f blue:0.0f alpha:1.0f]];
     //[self addChild:background];
 
+    //BGM
+    [SoundManager playBGM:@"bgm.mp3"];
+    
     //背景
     NSString* bgName=[NSString stringWithFormat:@"bg_%02d.png",((([GameManager getStageLevel]-1)/5)+1)%3];//5区切り
     CCSprite* bg=[CCSprite spriteWithImageNamed:bgName];
@@ -864,6 +867,9 @@ CCLabelBMFont* ballCntLbl;
     [motionManager stopDeviceMotionUpdates];//ジャイロセンサー停止
     physicWorld.paused=YES;
     
+    //BGM停止
+    //[SoundManager stopBGM];
+    
     //ハイスコア保存
     if([GameManager getPlayMode]==1)
     {
@@ -934,6 +940,9 @@ CCLabelBMFont* ballCntLbl;
             }
         }
     }else{//ゲームオーバー
+        //BGM停止
+        [SoundManager stopBGM];
+        
         //サウンドエフェクト
         [SoundManager game_Over_Effect];
         
@@ -960,6 +969,9 @@ CCLabelBMFont* ballCntLbl;
         [motionManager stopDeviceMotionUpdates];//ジャイロセンサー停止
         physicWorld.paused=YES;//物理ワールド停止
         
+        //BGMポーズ
+        [SoundManager pauseBGM];
+        
         //ポーズレイヤー表示
         naviLayer.visible=true;
         pauseBtn.visible=false;
@@ -978,6 +990,9 @@ CCLabelBMFont* ballCntLbl;
     [GameManager setPause:false];
     physicWorld.paused=NO;//物理ワールド再開
 
+    //BGMレジューム
+    [SoundManager resumeBGM];
+    
     //ジャイロセンサー再開
     NSOperationQueue *queueMotion = [[NSOperationQueue alloc] init];
     [motionManager startDeviceMotionUpdatesToQueue:queueMotion
