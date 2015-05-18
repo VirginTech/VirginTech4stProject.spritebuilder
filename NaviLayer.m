@@ -48,7 +48,11 @@ IAdLayer* iAdLayer;
         
     //ゲームオーバーラベル
     //gameOverLabel=[CCLabelTTF labelWithString:@"" fontName:@"Verdana-Bold" fontSize:30];
-    gameOverLabel=[CCLabelBMFont labelWithString:@"" fntFile:@"msgEffect.fnt"];
+    if([GameManager getLocale]==1){
+        gameOverLabel=[CCLabelBMFont labelWithString:@"" fntFile:@"msgEffect_jp.fnt"];
+    }else{
+        gameOverLabel=[CCLabelBMFont labelWithString:@"" fntFile:@"msgEffect_en.fnt"];
+    }
     gameOverLabel.position=ccp(winSize.width/2,winSize.height/2+70);
     [self addChild:gameOverLabel];
     

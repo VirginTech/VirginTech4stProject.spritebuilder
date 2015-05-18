@@ -50,6 +50,12 @@
 //ローカル通知
 "LocalNotification"="'windmill'で遊びませんか？";
 
+//メッセージエフェクト
+"Stage_Complete"="ステージ\nクリア！";
+"Stage_Lv"="レヴェル";
+"Stage_Start"="スタート！";
+"Stage_Failed"="ステージ\n   失敗";
+
 //レビュー誘導
 "Rate" = "評価して下さい";
 "RateItNow" = "今すぐ評価する";
@@ -69,6 +75,8 @@
 "Gift_Error"="特典IDが間違っています";
 "Gift_Not"="特典は、お１人様１回までです";
 
+//エンディングメッセージ
+"EndingMessage"="おめでとうございます。\n\n全ステージクリア達成です。\n\n最後までありがとうございました。";
 
 
 

@@ -50,6 +50,12 @@
 //ローカル通知
 "LocalNotification"="Why don't you play 'windmill'?";
 
+//メッセージエフェクト
+"Stage_Complete"="   Stage\nComplete!";
+"Stage_Lv"="Lv.";
+"Stage_Start"="Start!";
+"Stage_Failed"="Stage\nfailed!";
+
 //レビュー誘導
 "Rate" = "Rate";
 "RateItNow" = "Rate It Now";
@@ -68,6 +74,9 @@
 "Gift_Ticket"="Get! ";
 "Gift_Error"="ID for the exclusive offer \nis incorrect";
 "Gift_Not"="This exclusive offer is limited \nto one per customer";
+
+//エンディングメッセージ
+"EndingMessage"="Congratulations!\n\nClear all the stages\n\nThank you very much!";
 
 
 

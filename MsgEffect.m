@@ -43,7 +43,11 @@ CCSprite* spHighScore;
     highScore=highScoreFlg;
     
     //msg=[CCLabelTTF labelWithString:str fontName:@"Chalkduster" fontSize:40];
-    msg=[CCLabelBMFont labelWithString:str fntFile:@"msgEffect.fnt"];
+    if([GameManager getLocale]==1){
+        msg=[CCLabelBMFont labelWithString:str fntFile:@"msgEffect_jp.fnt"];
+    }else{
+        msg=[CCLabelBMFont labelWithString:str fntFile:@"msgEffect_en.fnt"];
+    }
     msg.position=ccp(winSize.width/2,winSize.height/2+50);
     msg.opacity=0.0f;
     //msg.color=[CCColor redColor];

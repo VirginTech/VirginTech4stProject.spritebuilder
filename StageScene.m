@@ -23,6 +23,7 @@
 #import "MsgEffect.h"
 //#import "BallShadow.h"
 #import "SoundManager.h"
+#import "EndingScene.h"
 
 #import "ImobileSdkAds/ImobileSdkAds.h"
 
@@ -258,8 +259,12 @@ CCLabelBMFont* ballCntLbl;
     resumeBtn.visible=false;
     
     //開始メッセージ
-    MsgEffect* msg=[[MsgEffect alloc]initWithMsg:[NSString stringWithFormat:@"Lv.%d \nStart!",
-                                                [GameManager getStageLevel]] nextFlg:false highScoreFlg:false];
+    MsgEffect* msg=[[MsgEffect alloc]initWithMsg:[NSString stringWithFormat:@"%@ %d \n%@",
+                                                NSLocalizedString(@"Stage_Lv",NULL),
+                                                [GameManager getStageLevel],
+                                                NSLocalizedString(@"Stage_Start",NULL)]
+                                                nextFlg:false
+                                                highScoreFlg:false];
     [self addChild:msg z:2];
     
     
@@ -899,20 +904,29 @@ CCLabelBMFont* ballCntLbl;
         }
         //ネクストステージへ
         if([GameManager getPlayMode]==1){
-            MsgEffect* msg=[[MsgEffect alloc]initWithMsg:@"   Stage\nComplete!" nextFlg:true highScoreFlg:highScoreFlg];
+            MsgEffect* msg=[[MsgEffect alloc]initWithMsg:NSLocalizedString(@"Stage_Complete",NULL)
+                                                        nextFlg:true highScoreFlg:highScoreFlg];
             [self addChild:msg z:2];
         }else{
             if([GameManager getStageLevel]<75){
-                MsgEffect* msg=[[MsgEffect alloc]initWithMsg:@"   Stage\nComplete!" nextFlg:true highScoreFlg:highScoreFlg];
+                MsgEffect* msg=[[MsgEffect alloc]initWithMsg:NSLocalizedString(@"Stage_Complete",NULL)
+                                                        nextFlg:true highScoreFlg:highScoreFlg];
                 [self addChild:msg z:2];
             }
             else//全ステージクリア！
             {
+                /*
                 [GameManager setPause:true];
                 naviLayer.visible=true;
                 naviLayer.gameOverLabel.string=@"Congratu\nlations!";
                 pauseBtn.visible=false;
                 resumeBtn.visible=false;
+                 */
+                
+                //エンディングシーンへ
+                [[CCDirector sharedDirector] replaceScene:[EndingScene scene]
+                                           withTransition:[CCTransition transitionCrossFadeWithDuration:3.0]];
+                
                 //Ad表示
                 [naviLayer dispAdLayer];
                 //インターステイシャル広告表示
@@ -925,7 +939,7 @@ CCLabelBMFont* ballCntLbl;
         
         [GameManager setPause:true];
         naviLayer.visible=true;
-        naviLayer.gameOverLabel.string=@"Stage\nfailed!";
+        naviLayer.gameOverLabel.string = NSLocalizedString(@"Stage_Failed",NULL);
         pauseBtn.visible=false;
         resumeBtn.visible=false;
         //Ad表示
