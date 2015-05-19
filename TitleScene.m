@@ -654,8 +654,11 @@ int boundCnt;
     //サウンドエフェクト
     [SoundManager btn_Click_Effect];
     
-    [[CCDirector sharedDirector] replaceScene:[PreferencesScene scene]
-                               withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
+    PreferencesScene* prefScene=[[PreferencesScene alloc]init];
+    [self addChild:prefScene z:3];
+    
+    //[[CCDirector sharedDirector] replaceScene:[PreferencesScene scene]
+    //                           withTransition:[CCTransition transitionCrossFadeWithDuration:0.5]];
 }
 
 -(void)onCreditButtonClicked:(id)sender

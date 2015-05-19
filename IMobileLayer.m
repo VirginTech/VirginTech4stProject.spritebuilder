@@ -86,7 +86,7 @@ CGSize winSize;
             [[[CCDirector sharedDirector]view]addSubview:viewCon.view];
             
             [ImobileSdkAds showBySpotID:@"457108" ViewController:viewCon
-                        Position:CGPointMake(-600,(winSize.height*2)/2-100) IconPrams:iconParams];
+                        Position:CGPointMake(-600,(winSize.height*2)/2-300) IconPrams:iconParams];
         }
         else
         {
@@ -109,7 +109,7 @@ CGSize winSize;
             [[[CCDirector sharedDirector]view]addSubview:viewCon.view];
 
             [ImobileSdkAds showBySpotID:@"457108" ViewController:viewCon
-                    Position:CGPointMake(-225,winSize.height/2-50) IconPrams:iconParams];
+                    Position:CGPointMake(-225,winSize.height/2-200) IconPrams:iconParams];
         }
     }
     

@@ -186,6 +186,8 @@
 		CFD35C611AF7552900CD91FF /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFD35C601AF7552900CD91FF /* Social.framework */; };
 		CFD35C681AF7711200CD91FF /* menu_default.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFD35C661AF7711200CD91FF /* menu_default.plist */; };
 		CFD35C691AF7711200CD91FF /* menu_default.png in Resources */ = {isa = PBXBuildFile; fileRef = CFD35C671AF7711200CD91FF /* menu_default.png */; };
+		CFD7178C1B0B185C0025444E /* config_default.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFD7178A1B0B185C0025444E /* config_default.plist */; };
+		CFD7178D1B0B185C0025444E /* config_default.png in Resources */ = {isa = PBXBuildFile; fileRef = CFD7178B1B0B185C0025444E /* config_default.png */; };
 		CFFC4C691B08361400D78233 /* pin_ball_11.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CFFC4C671B08361300D78233 /* pin_ball_11.mp3 */; };
 		CFFC4C6A1B08361400D78233 /* pin_ball_21.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CFFC4C681B08361300D78233 /* pin_ball_21.mp3 */; };
 		CFFC4C6C1B08386D00D78233 /* mode_btn_click.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CFFC4C6B1B08386D00D78233 /* mode_btn_click.mp3 */; };
@@ -439,6 +441,8 @@
 		CFD35C601AF7552900CD91FF /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		CFD35C661AF7711200CD91FF /* menu_default.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = menu_default.plist; sourceTree = "<group>"; };
 		CFD35C671AF7711200CD91FF /* menu_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_default.png; sourceTree = "<group>"; };
+		CFD7178A1B0B185C0025444E /* config_default.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config_default.plist; sourceTree = "<group>"; };
+		CFD7178B1B0B185C0025444E /* config_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = config_default.png; sourceTree = "<group>"; };
 		CFFC4C671B08361300D78233 /* pin_ball_11.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = pin_ball_11.mp3; sourceTree = "<group>"; };
 		CFFC4C681B08361300D78233 /* pin_ball_21.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = pin_ball_21.mp3; sourceTree = "<group>"; };
 		CFFC4C6B1B08386D00D78233 /* mode_btn_click.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mode_btn_click.mp3; sourceTree = "<group>"; };
@@ -836,6 +840,8 @@
 		CF61D5471AD7867E0062F223 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				CFD7178A1B0B185C0025444E /* config_default.plist */,
+				CFD7178B1B0B185C0025444E /* config_default.png */,
 				CF4BE2D51B09B43300A17F38 /* navi_default.plist */,
 				CF4BE2D61B09B43300A17F38 /* navi_default.png */,
 				CFCA6F031AFDF57600387563 /* title_default.plist */,
@@ -1286,10 +1292,12 @@
 				CFC1F8E41B01E8C700DF49CD /* Default-Landscape@2x~ipad.png in Resources */,
 				B71F591A188484E7003F4D28 /* Settings@2x.png in Resources */,
 				B71F5915188484E7003F4D28 /* iPhone-old.png in Resources */,
+				CFD7178D1B0B185C0025444E /* config_default.png in Resources */,
 				CFB2B1B71AF37579000AF85F /* bg_00.png in Resources */,
 				CFC1F8DF1B01E7F500DF49CD /* Default-Portrait~ipad.png in Resources */,
 				CFCFBC421B01ACC000AB2EC8 /* manual_02.png in Resources */,
 				CF4BE2D71B09B43300A17F38 /* navi_default.plist in Resources */,
+				CFD7178C1B0B185C0025444E /* config_default.plist in Resources */,
 				CFCFBC541B01ACD700AB2EC8 /* manual_en_06.png in Resources */,
 				CF40DB371B06E23200BF847A /* highscore.png in Resources */,
 				CFCFBC411B01ACC000AB2EC8 /* manual_01.png in Resources */,

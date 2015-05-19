@@ -38,8 +38,8 @@ CCScrollView* scrollView;
     
     //背景画像拡大
     UIImage *image = [UIImage imageNamed:@"bgLayer.png"];
-    UIGraphicsBeginImageContext(CGSizeMake(winSize.width,winSize.height));
-    [image drawInRect:CGRectMake(0, 0, winSize.width,winSize.height)];
+    UIGraphicsBeginImageContext(CGSizeMake(winSize.width,800));
+    [image drawInRect:CGRectMake(0, 0, winSize.width,800)];
     image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
@@ -77,7 +77,7 @@ CCScrollView* scrollView;
     
     //ロゴ
     CCSprite* logo=[CCSprite spriteWithImageNamed:@"virgintechLogo.png"];
-    logo.position=ccp(winSize.width/2,winSize.height-200);
+    logo.position=ccp(winSize.width/2,600);
     logo.scale=0.5;
     [bgSpLayer addChild:logo];
     
@@ -94,9 +94,69 @@ CCScrollView* scrollView;
     label.fontColor=[CCColor blackColor];
     [bgSpLayer addChild:label];
     
+    //マテリアル
+    label=[CCLabelTTF labelWithString:@"Material by" fontName:@"Verdana-Italic" fontSize:12];
+    label.position=ccp(winSize.width/2,logo.position.y-220);
+    label.fontColor=[CCColor blackColor];
+    [bgSpLayer addChild:label];
+    
+    label=[CCLabelTTF labelWithString:@"無料イラスト素材.com - www.無料イラスト素材.com" fontName:@"Verdana-Bold" fontSize:10];
+    label.position=ccp(winSize.width/2,logo.position.y-250);
+    label.fontColor=[CCColor blackColor];
+    [bgSpLayer addChild:label];
+    
+    label=[CCLabelTTF labelWithString:@"やじるし素材天国 - yajidesign.com" fontName:@"Verdana-Bold" fontSize:10];
+    label.position=ccp(winSize.width/2,logo.position.y-270);
+    label.fontColor=[CCColor blackColor];
+    [bgSpLayer addChild:label];
+    
+    label=[CCLabelTTF labelWithString:@"GATAG - free-illustrations.gatag.net" fontName:@"Verdana-Bold" fontSize:10];
+    label.position=ccp(winSize.width/2,logo.position.y-290);
+    label.fontColor=[CCColor blackColor];
+    [bgSpLayer addChild:label];
+    
+    label=[CCLabelTTF labelWithString:@"いらすとや - www.irasutoya.com" fontName:@"Verdana-Bold" fontSize:10];
+    label.position=ccp(winSize.width/2,logo.position.y-310);
+    label.fontColor=[CCColor blackColor];
+    [bgSpLayer addChild:label];
+    
+    label=[CCLabelTTF labelWithString:@"PremiumPixels - www.premiumpixels.com" fontName:@"Verdana-Bold" fontSize:10];
+    label.position=ccp(winSize.width/2,logo.position.y-330);
+    label.fontColor=[CCColor blackColor];
+    [bgSpLayer addChild:label];
+    
+    //サウンド
+    label=[CCLabelTTF labelWithString:@"Sound by" fontName:@"Verdana-Italic" fontSize:12];
+    label.position=ccp(winSize.width/2,logo.position.y-380);
+    label.fontColor=[CCColor blackColor];
+    [bgSpLayer addChild:label];
+    
+    label=[CCLabelTTF labelWithString:@"くらげ工匠 - www.kurage-kosho.info" fontName:@"Verdana-Bold" fontSize:10];
+    label.position=ccp(winSize.width/2,logo.position.y-410);
+    label.fontColor=[CCColor blackColor];
+    [bgSpLayer addChild:label];
+    
+    label=[CCLabelTTF labelWithString:@"効果音ラボ - soundeffect-lab.info" fontName:@"Verdana-Bold" fontSize:10];
+    label.position=ccp(winSize.width/2,logo.position.y-430);
+    label.fontColor=[CCColor blackColor];
+    [bgSpLayer addChild:label];
+    
+    label=[CCLabelTTF labelWithString:@"SoundLabel - www.snd-jpn.net" fontName:@"Verdana-Bold" fontSize:10];
+    label.position=ccp(winSize.width/2,logo.position.y-450);
+    label.fontColor=[CCColor blackColor];
+    [bgSpLayer addChild:label];
     
     
+    label=[CCLabelTTF labelWithString:@"Special Thanks! " fontName:@"Verdana-Italic" fontSize:20];
+    label.position=ccp(winSize.width/2,logo.position.y-500);
+    label.fontColor=[CCColor blackColor];
+    [bgSpLayer addChild:label];
     
+    label=[CCLabelTTF labelWithString:@"ありがとう! " fontName:@"Verdana-Italic" fontSize:20];
+    label.position=ccp(winSize.width/2,logo.position.y-530);
+    label.fontColor=[CCColor blackColor];
+    [bgSpLayer addChild:label];
+
     
     return self;
 }
