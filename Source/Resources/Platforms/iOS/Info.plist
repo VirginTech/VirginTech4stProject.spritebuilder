@@ -15,6 +15,13 @@
 		<string>Settings</string>
 		<string>iPhone</string>
 		<string>iPhone-old</string>
+		<string>Settings@2x</string>
+		<string>iPhone@2x</string>
+		<string>iPhone-old@2x</string>
+		<string>iPad</string>
+		<string>iPad@2x</string>
+		<string>iPad-old</string>
+		<string>iPad-old@2x</string>
 		<string>Icon.png</string>
 		<string>Icon@2x.png</string>
 		<string>Icon-72.png</string>

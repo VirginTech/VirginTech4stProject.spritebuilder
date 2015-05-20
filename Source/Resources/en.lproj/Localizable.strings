@@ -50,6 +50,10 @@
 //ローカル通知
 "LocalNotification"="Why don't you play 'windmill'?";
 
+//サウンド
+"Bgm"="BGM:";
+"Effect"="Effect:";
+
 //メッセージエフェクト
 "Stage_Complete"="   Stage\nComplete!";
 "Stage_Lv"="Lv.";

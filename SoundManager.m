@@ -26,10 +26,6 @@ float effectValue;
     
     //エフェクト
     [[OALSimpleAudio sharedInstance]preloadEffect:@"pin_ball_11.mp3"];
-    [[OALSimpleAudio sharedInstance]preloadEffect:@"pin_ball_12.mp3"];
-    [[OALSimpleAudio sharedInstance]preloadEffect:@"pin_ball_13.mp3"];
-    [[OALSimpleAudio sharedInstance]preloadEffect:@"pin_ball_14.mp3"];
-    [[OALSimpleAudio sharedInstance]preloadEffect:@"pin_ball_15.mp3"];
     [[OALSimpleAudio sharedInstance]preloadEffect:@"pin_ball_21.mp3"];
     [[OALSimpleAudio sharedInstance]preloadEffect:@"pin_ball_31.mp3"];
     [[OALSimpleAudio sharedInstance]preloadEffect:@"catch_ball.mp3"];

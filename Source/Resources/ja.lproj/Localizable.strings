@@ -50,6 +50,10 @@
 //ローカル通知
 "LocalNotification"="'windmill'で遊びませんか？";
 
+//サウンド
+"Bgm"="BGM:";
+"Effect"="ｴﾌｪｸﾄ:";
+
 //メッセージエフェクト
 "Stage_Complete"="ステージ\nクリア！";
 "Stage_Lv"="レヴェル";

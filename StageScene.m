@@ -969,6 +969,9 @@ CCLabelBMFont* ballCntLbl;
         [motionManager stopDeviceMotionUpdates];//ジャイロセンサー停止
         physicWorld.paused=YES;//物理ワールド停止
         
+        //サウンドエフェクト
+        [SoundManager btn_Click_Effect];
+        
         //BGMポーズ
         [SoundManager pauseBGM];
         
@@ -990,6 +993,9 @@ CCLabelBMFont* ballCntLbl;
     [GameManager setPause:false];
     physicWorld.paused=NO;//物理ワールド再開
 
+    //サウンドエフェクト
+    [SoundManager btn_Click_Effect];
+    
     //BGMレジューム
     [SoundManager resumeBGM];
     

@@ -116,7 +116,8 @@ CCButton* offEffectSwitch;
     [panel addChild:offBgmSwitch z:1];
     
     //BGMラベル
-    CCLabelTTF* bgmLabel=[CCLabelTTF labelWithString:@"BGM:" fontName:@"Verdana-Bold" fontSize:30.0];
+    CCLabelTTF* bgmLabel=[CCLabelTTF labelWithString:NSLocalizedString(@"Bgm",NULL)
+                                            fontName:@"Verdana-Bold" fontSize:30.0];
     bgmLabel.position=ccp(onBgmSwitch.position.x-(onBgmSwitch.contentSize.width*onBgmSwitch.scale)/2-bgmLabel.contentSize.width/2,onBgmSwitch.position.y);
     [panel addChild:bgmLabel];
     
@@ -162,7 +163,8 @@ CCButton* offEffectSwitch;
     [panel addChild:offEffectSwitch z:1];
     
     //Effectラベル
-    CCLabelTTF* effectLabel=[CCLabelTTF labelWithString:@"Effect:" fontName:@"Verdana-Bold" fontSize:30.0];
+    CCLabelTTF* effectLabel=[CCLabelTTF labelWithString:NSLocalizedString(@"Effect",NULL)
+                                               fontName:@"Verdana-Bold" fontSize:30.0];
     effectLabel.position=ccp(onEffectSwitch.position.x-(onEffectSwitch.contentSize.width*onEffectSwitch.scale)/2-effectLabel.contentSize.width/2,onEffectSwitch.position.y);
     [panel addChild:effectLabel];
     
