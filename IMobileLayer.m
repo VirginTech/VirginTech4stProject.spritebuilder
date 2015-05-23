@@ -149,10 +149,14 @@ CGSize winSize;
 //広告の表示が準備完了した際に呼ばれます
 - (void)imobileSdkAdsSpot:(NSString *)spotId didReadyWithValue:(ImobileSdkAdsReadyResult)value
 {
-    /*[UIView animateWithDuration:0.3 animations:^
+    if(!adViewFlg)
     {
-        adView.frame=CGRectOffset(adView.frame, 0,-adView.frame.size.height);
-    }];*/
+        [UIView animateWithDuration:0.3 animations:^
+         {
+             adView.frame=CGRectOffset(adView.frame, 0,-adView.frame.size.height);
+         }];
+        adViewFlg=true;
+    }
 }
 
 //広告の取得を失敗した際に呼ばれます
