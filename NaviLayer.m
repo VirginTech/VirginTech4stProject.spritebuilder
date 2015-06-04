@@ -99,10 +99,14 @@ IAdLayer* iAdLayer;
         CCButton* continueBtn=[CCButton buttonWithTitle:@""
                     spriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"continue01.png"]
                     highlightedSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"continue02.png"]
-                    disabledSpriteFrame:nil];
+                    disabledSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"continue03.png"]];
         continueBtn.scale=0.5;
         continueBtn.position=ccp(titleBtn.position.x+(titleBtn.contentSize.width*titleBtn.scale)/2+(continueBtn.contentSize.width*continueBtn.scale)/2,winSize.height/2-50);
         [continueBtn setTarget:self selector:@selector(onContinueClicked:)];
+        //レヴェル0ならボタン無効
+        if([GameManager load_Stage_Level_1]<=0){
+            continueBtn.enabled=false;
+        }
         [self addChild:continueBtn];
         
         //コティニューボタンラベル
