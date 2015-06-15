@@ -9,12 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "ImobileSdkAds/ImobileSdkAds.h"
-#import "ImobileSdkAds/ImobileSdkAdsIconParams.h"
+//#import "ImobileSdkAds/ImobileSdkAdsIconParams.h"
 
 @interface IMobileLayer : CCScene <IMobileSdkAdsDelegate>{
     
     UIView *adView;
-    UIViewController* viewCon;
+    //UIViewController* viewCon;
     bool adViewFlg;
 }
 

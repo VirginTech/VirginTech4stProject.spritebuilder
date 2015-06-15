@@ -147,7 +147,6 @@
 		CFB6C0071AFC7A4E00E4B50B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFB6C0061AFC7A4E00E4B50B /* SystemConfiguration.framework */; };
 		CFB6C0091AFC7A6200E4B50B /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFB6C0081AFC7A6200E4B50B /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		CFB6C00B1AFC7A7A00E4B50B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFB6C00A1AFC7A7A00E4B50B /* CoreLocation.framework */; };
-		CFB6C00D1AFC7AA400E4B50B /* ImobileSdkAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFB6C00C1AFC7AA300E4B50B /* ImobileSdkAds.framework */; };
 		CFB74D561AF1DF8C0084039C /* score.fnt in Resources */ = {isa = PBXBuildFile; fileRef = CFB74D541AF1DF8C0084039C /* score.fnt */; };
 		CFB74D571AF1DF8C0084039C /* score.png in Resources */ = {isa = PBXBuildFile; fileRef = CFB74D551AF1DF8C0084039C /* score.png */; };
 		CFB778451AF5C72C00A95168 /* titleLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = CFB778441AF5C72C00A95168 /* titleLogo.png */; };
@@ -194,6 +193,7 @@
 		CFD35C611AF7552900CD91FF /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFD35C601AF7552900CD91FF /* Social.framework */; };
 		CFD7178C1B0B185C0025444E /* config_default.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFD7178A1B0B185C0025444E /* config_default.plist */; };
 		CFD7178D1B0B185C0025444E /* config_default.png in Resources */ = {isa = PBXBuildFile; fileRef = CFD7178B1B0B185C0025444E /* config_default.png */; };
+		CFF92B331B2E6A330086CE83 /* ImobileSdkAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFF92B321B2E6A330086CE83 /* ImobileSdkAds.framework */; };
 		CFFC4C691B08361400D78233 /* pin_ball_11.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CFFC4C671B08361300D78233 /* pin_ball_11.mp3 */; };
 		CFFC4C6A1B08361400D78233 /* pin_ball_21.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CFFC4C681B08361300D78233 /* pin_ball_21.mp3 */; };
 		CFFC4C6C1B08386D00D78233 /* mode_btn_click.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CFFC4C6B1B08386D00D78233 /* mode_btn_click.mp3 */; };
@@ -403,7 +403,6 @@
 		CFB6C0061AFC7A4E00E4B50B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		CFB6C0081AFC7A6200E4B50B /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		CFB6C00A1AFC7A7A00E4B50B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		CFB6C00C1AFC7AA300E4B50B /* ImobileSdkAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImobileSdkAds.framework; path = ../../Library/Ad/iMobile/imobile_for_SP_app_iOS_SDK_2.0.8/lib/ImobileSdkAds.framework; sourceTree = "<group>"; };
 		CFB74D541AF1DF8C0084039C /* score.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = score.fnt; sourceTree = "<group>"; };
 		CFB74D551AF1DF8C0084039C /* score.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = score.png; sourceTree = "<group>"; };
 		CFB778441AF5C72C00A95168 /* titleLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = titleLogo.png; sourceTree = "<group>"; };
@@ -455,6 +454,7 @@
 		CFD35C601AF7552900CD91FF /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		CFD7178A1B0B185C0025444E /* config_default.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config_default.plist; sourceTree = "<group>"; };
 		CFD7178B1B0B185C0025444E /* config_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = config_default.png; sourceTree = "<group>"; };
+		CFF92B321B2E6A330086CE83 /* ImobileSdkAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImobileSdkAds.framework; path = ../../Library/Ad/iMobile/imobile_for_SP_app_iOS_SDK_2.0.10/lib/ImobileSdkAds.framework; sourceTree = "<group>"; };
 		CFFC4C671B08361300D78233 /* pin_ball_11.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = pin_ball_11.mp3; sourceTree = "<group>"; };
 		CFFC4C681B08361300D78233 /* pin_ball_21.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = pin_ball_21.mp3; sourceTree = "<group>"; };
 		CFFC4C6B1B08386D00D78233 /* mode_btn_click.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mode_btn_click.mp3; sourceTree = "<group>"; };
@@ -508,7 +508,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CFB6C00D1AFC7AA400E4B50B /* ImobileSdkAds.framework in Frameworks */,
+				CFF92B331B2E6A330086CE83 /* ImobileSdkAds.framework in Frameworks */,
 				CFB6C00B1AFC7A7A00E4B50B /* CoreLocation.framework in Frameworks */,
 				CFB6C0091AFC7A6200E4B50B /* AdSupport.framework in Frameworks */,
 				CFB6C0071AFC7A4E00E4B50B /* SystemConfiguration.framework in Frameworks */,
@@ -776,7 +776,7 @@
 		B77F1B3017B978D7009739AE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CFB6C00C1AFC7AA300E4B50B /* ImobileSdkAds.framework */,
+				CFF92B321B2E6A330086CE83 /* ImobileSdkAds.framework */,
 				CFB6C00A1AFC7A7A00E4B50B /* CoreLocation.framework */,
 				CFB6C0081AFC7A6200E4B50B /* AdSupport.framework */,
 				CFB6C0061AFC7A4E00E4B50B /* SystemConfiguration.framework */,
@@ -1761,6 +1761,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/virgintech/Documents/Library/Ad/iMobile/imobile_for_SP_app_iOS_SDK_2.0.8/lib,
+					/Users/virgintech/Documents/Library/Ad/iMobile/imobile_for_SP_app_iOS_SDK_2.0.10/lib,
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1800,6 +1801,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/virgintech/Documents/Library/Ad/iMobile/imobile_for_SP_app_iOS_SDK_2.0.8/lib,
+					/Users/virgintech/Documents/Library/Ad/iMobile/imobile_for_SP_app_iOS_SDK_2.0.10/lib,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Source/Prefix.pch;

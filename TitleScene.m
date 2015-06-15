@@ -448,7 +448,7 @@ int boundCnt;
     }
     //デイリーボーナス
     else if(procNum==4){
-        [GameManager save_Continue_Ticket:[GameManager load_Continue_Ticket]+3];
+        [GameManager save_Continue_Ticket:[GameManager load_Continue_Ticket]+5];
         [TitleScene ticket_Update];
         msgBox.delegate=nil;//デリゲート解除
     }

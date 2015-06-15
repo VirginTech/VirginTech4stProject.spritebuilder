@@ -45,7 +45,7 @@
 //ログインボーナス
 "BonusGet"="Got a bonus!";
 "FirstBonus"="Thank you for the very first \nlog-in. Free 30 Tickets \nare yours now!";
-"DailyBonus"="Free daily 3 Tickets !";
+"DailyBonus"="Free daily 5 Tickets !";
 
 //ローカル通知
 "LocalNotification"="Why don't you play 'windmill'?";

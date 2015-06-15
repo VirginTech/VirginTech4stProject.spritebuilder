@@ -63,7 +63,7 @@ CGSize winSize;
     
     //=================
     //アイコン
-    //=================
+    /*/=================
     if(iconFlg){
         if([GameManager getDevice]==1)//iPad
         {
@@ -111,7 +111,7 @@ CGSize winSize;
             [ImobileSdkAds showBySpotID:@"457108" ViewController:viewCon
                     Position:CGPointMake(-225,winSize.height/2-200) IconPrams:iconParams];
         }
-    }
+    }*/
     
     adViewFlg=false;
     
@@ -128,8 +128,8 @@ CGSize winSize;
     [adView removeFromSuperview];
     adView=nil;
     
-    [viewCon.view removeFromSuperview];
-    viewCon.view=nil;
+    //[viewCon.view removeFromSuperview];
+    //viewCon.view=nil;
 }
 
 -(void)removeLayer
@@ -142,8 +142,8 @@ CGSize winSize;
     [adView removeFromSuperview];
     adView=nil;
 
-    [viewCon.view removeFromSuperview];
-    viewCon.view=nil;
+    //[viewCon.view removeFromSuperview];
+    //viewCon.view=nil;
 }
 
 //広告の表示が準備完了した際に呼ばれます

@@ -45,7 +45,7 @@
 //ログインボーナス
 "BonusGet"="ボーナス・ゲット！";
 "FirstBonus"="初回起動ありがとうございます。\nチケット30枚プレゼント！";
-"DailyBonus"="１日１回 チケット3枚プレゼント！";
+"DailyBonus"="１日１回 チケット5枚プレゼント！";
 
 //ローカル通知
 "LocalNotification"="'windmill'で遊びませんか？";
