@@ -7,6 +7,7 @@
 //
 
 #import "GameManager.h"
+#import <GameKit/GameKit.h>
 
 @implementation GameManager
 

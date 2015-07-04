@@ -21,6 +21,7 @@
 #import "NoticeScene.h"
 #import "ManualLayer.h"
 #import "SoundManager.h"
+#import "GameCenterLayer.h"
 
 #import "IAdLayer.h"
 #import "IMobileLayer.h"
@@ -36,6 +37,8 @@ Ground* ground;
 CCButton* scoreModeBtn;
 CCButton* stageModeBtn;
 int boundCnt;
+
+GameCenterLayer* gkLayer;
 
 + (TitleScene *)scene
 {
@@ -102,6 +105,10 @@ int boundCnt;
         [self addChild:iAdLayer];
     }
 
+    //GameCenterレイヤー
+    gkLayer=[[GameCenterLayer alloc]init];
+    [self addChild:gkLayer];
+    
     //画像読み込み
     [[CCSpriteFrameCache sharedSpriteFrameCache]removeSpriteFrames];
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"title_default.plist"];
@@ -576,9 +583,7 @@ int boundCnt;
 {
     //サウンドエフェクト
     [SoundManager btn_Click_Effect];
-    
-    gkc=[[GKitController alloc]init];
-    [gkc showLeaderboard];
+    [gkLayer showLeaderboard];
 }
 
 -(void)onTwitterClicked:(id)sender

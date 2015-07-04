@@ -30,7 +30,7 @@
 #import <UIKit/UIKit.h>
 #import "CCDirectorIOS.h"
 
-#import "../../../../GKitController.h"
+//#import "../../../../GKitController.h"
 
 @class CCAppDelegate;
 @class CCScene;
@@ -39,8 +39,8 @@
 /** Just a plain, simple subclass of [UINavigationController](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UINavigationController_Class/index.html).
  It implements certain navigation controller methods mainly related to orientation and projection changes Cocos2D needs to know about. Other than that it is just a regular UINavigationController.
  */
-//@interface CCNavigationController : UINavigationController <CCDirectorDelegate> {
-@interface CCNavigationController : GKitController <CCDirectorDelegate> {
+@interface CCNavigationController : UINavigationController <CCDirectorDelegate> {
+//@interface CCNavigationController : GKitController <CCDirectorDelegate> {
 }
 @end
 

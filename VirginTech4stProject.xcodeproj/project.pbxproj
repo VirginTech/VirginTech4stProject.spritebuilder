@@ -132,7 +132,6 @@
 		CFB11D0A1ADCD25A0072B6CC /* CreditScene.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB11D091ADCD25A0072B6CC /* CreditScene.m */; };
 		CFB11D0D1ADCD51D0072B6CC /* PreferencesScene.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB11D0C1ADCD51D0072B6CC /* PreferencesScene.m */; };
 		CFB11D101ADCD6F00072B6CC /* ShopScene.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB11D0F1ADCD6F00072B6CC /* ShopScene.m */; };
-		CFB11D181ADD0B560072B6CC /* GKitController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB11D171ADD0B560072B6CC /* GKitController.m */; };
 		CFB11D1A1ADD0B830072B6CC /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFB11D191ADD0B830072B6CC /* GameKit.framework */; };
 		CFB2B1A31AF35769000AF85F /* bg_01.png in Resources */ = {isa = PBXBuildFile; fileRef = CFB2B1A21AF35769000AF85F /* bg_01.png */; };
 		CFB2B1A61AF35C90000AF85F /* bg_02.png in Resources */ = {isa = PBXBuildFile; fileRef = CFB2B1A41AF35C90000AF85F /* bg_02.png */; };
@@ -160,6 +159,7 @@
 		CFB85A461AE8B16C00C6E654 /* info_default.png in Resources */ = {isa = PBXBuildFile; fileRef = CFB85A441AE8B16C00C6E654 /* info_default.png */; };
 		CFB85A551AE8EA5900C6E654 /* basket_shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = CFB85A541AE8EA5900C6E654 /* basket_shadow.png */; };
 		CFB85A611AE915A600C6E654 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = CFB85A601AE915A600C6E654 /* spark.png */; };
+		CFB8AB491B47654100B3039C /* GameCenterLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB8AB481B47654100B3039C /* GameCenterLayer.m */; };
 		CFC0A2E31AFAF363005A3A25 /* virgintechLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = CFC0A2E21AFAF363005A3A25 /* virgintechLogo.png */; };
 		CFC107801AE687D700A9E04E /* BallShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC1077F1AE687D700A9E04E /* BallShadow.m */; };
 		CFC1F8DF1B01E7F500DF49CD /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = CFC1F8DE1B01E7F500DF49CD /* Default-Portrait~ipad.png */; };
@@ -384,8 +384,6 @@
 		CFB11D0C1ADCD51D0072B6CC /* PreferencesScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesScene.m; sourceTree = "<group>"; };
 		CFB11D0E1ADCD6F00072B6CC /* ShopScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopScene.h; sourceTree = "<group>"; };
 		CFB11D0F1ADCD6F00072B6CC /* ShopScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopScene.m; sourceTree = "<group>"; };
-		CFB11D161ADD0B560072B6CC /* GKitController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKitController.h; sourceTree = "<group>"; };
-		CFB11D171ADD0B560072B6CC /* GKitController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKitController.m; sourceTree = "<group>"; };
 		CFB11D191ADD0B830072B6CC /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		CFB2B1A21AF35769000AF85F /* bg_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_01.png; sourceTree = "<group>"; };
 		CFB2B1A41AF35C90000AF85F /* bg_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_02.png; sourceTree = "<group>"; };
@@ -417,6 +415,8 @@
 		CFB85A441AE8B16C00C6E654 /* info_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info_default.png; sourceTree = "<group>"; };
 		CFB85A541AE8EA5900C6E654 /* basket_shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basket_shadow.png; sourceTree = "<group>"; };
 		CFB85A601AE915A600C6E654 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		CFB8AB471B47654100B3039C /* GameCenterLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCenterLayer.h; sourceTree = "<group>"; };
+		CFB8AB481B47654100B3039C /* GameCenterLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameCenterLayer.m; sourceTree = "<group>"; };
 		CFC0A2E21AFAF363005A3A25 /* virgintechLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = virgintechLogo.png; sourceTree = "<group>"; };
 		CFC1077E1AE687D700A9E04E /* BallShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BallShadow.h; sourceTree = "<group>"; };
 		CFC1077F1AE687D700A9E04E /* BallShadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BallShadow.m; sourceTree = "<group>"; };
@@ -941,6 +941,8 @@
 				CFB11D0F1ADCD6F00072B6CC /* ShopScene.m */,
 				CF4BE2D01B099ECE00A17F38 /* EndingScene.h */,
 				CF4BE2D11B099ECE00A17F38 /* EndingScene.m */,
+				CFB8AB471B47654100B3039C /* GameCenterLayer.h */,
+				CFB8AB481B47654100B3039C /* GameCenterLayer.m */,
 			);
 			name = OptionScene;
 			sourceTree = "<group>";
@@ -950,8 +952,6 @@
 			children = (
 				CF0C020E1AE3BD7F00FFB854 /* Reachability.h */,
 				CF0C020F1AE3BD8000FFB854 /* Reachability.m */,
-				CFB11D161ADD0B560072B6CC /* GKitController.h */,
-				CFB11D171ADD0B560072B6CC /* GKitController.m */,
 			);
 			name = Lib;
 			sourceTree = "<group>";
@@ -1419,6 +1419,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFB8AB491B47654100B3039C /* GameCenterLayer.m in Sources */,
 				CF7CC4D81AD3E23000D16EF9 /* Piston.m in Sources */,
 				CFB11D0A1ADCD25A0072B6CC /* CreditScene.m in Sources */,
 				CF61D5501AD796B00062F223 /* NaviLayer.m in Sources */,
@@ -1443,7 +1444,6 @@
 				CF7CC4C81AD377F700D16EF9 /* Ball.m in Sources */,
 				CF7CC4D21AD3BF2A00D16EF9 /* Corner.m in Sources */,
 				5B121038197487F2004C1E1D /* AppDelegate.m in Sources */,
-				CFB11D181ADD0B560072B6CC /* GKitController.m in Sources */,
 				CFAF84F71AD0D670009FB98F /* TitleScene.m in Sources */,
 				CF0C02101AE3BD8000FFB854 /* Reachability.m in Sources */,
 				CF7CC4DC1AD3E7C300D16EF9 /* GameManager.m in Sources */,

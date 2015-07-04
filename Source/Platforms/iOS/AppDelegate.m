@@ -33,6 +33,7 @@
 #import "TitleScene.h"
 #import "GameManager.h"
 #import "SoundManager.h"
+#import <GameKit/GameKit.h>
 
 #import "ImobileSdkAds/ImobileSdkAds.h"
 
@@ -70,11 +71,12 @@
     GKLocalPlayer* localPlayer = [GKLocalPlayer localPlayer];
     if ([GameManager getOsVersion]>=6.0f)
     {
-        GKitController *gkc = (GKitController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+        UIViewController *uiView = (UIViewController*)[UIApplication sharedApplication].keyWindow.rootViewController;
+
         localPlayer.authenticateHandler = ^(UIViewController* viewController, NSError* error)
         {
             if(viewController!=nil){
-                [gkc presentViewController:viewController animated:YES completion:nil];
+                [uiView presentViewController:viewController animated:YES completion:nil];
             }
             if(error==nil) {
                 // ゲーム招待を処理するためのハンドラを設定する

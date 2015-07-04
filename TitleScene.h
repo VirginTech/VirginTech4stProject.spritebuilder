@@ -8,13 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-#import "GKitController.h"
 #import <StoreKit/StoreKit.h>
 #import "MsgBoxLayer.h"
 
 @interface TitleScene : CCScene <MsgLayerDelegate,CCPhysicsCollisionDelegate>
 {
-    GKitController* gkc;
+    
 }
 
 + (TitleScene *)scene;
